@@ -13,7 +13,7 @@ export interface ChatMessage {
 interface ChatPanelProps {
   messages: ChatMessage[];
   isLoading?: boolean;
-  onSendMessage?: (content: string) => void;
+  onSendMessage?: (content: string) => Promise<void> | void;
   onClearHistory?: () => void;
 }
 
@@ -46,6 +46,7 @@ export default function ChatPanel({
 }: ChatPanelProps) {
   const [input, setInput] = useState('');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to latest message
@@ -53,9 +54,17 @@ export default function ChatPanel({
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSend = () => {
-    if (input.trim() && !isLoading) {
-      onSendMessage?.(input.trim());
+  const handleSend = async () => {
+    if (input.trim() && !isLoading && !isProcessing) {
+      setIsProcessing(true);
+      try {
+        const result = onSendMessage?.(input.trim());
+        if (result instanceof Promise) {
+          await result;
+        }
+      } finally {
+        setIsProcessing(false);
+      }
       setInput('');
     }
   };
@@ -168,12 +177,12 @@ export default function ChatPanel({
               }
             }}
             placeholder="Type a message..."
-            disabled={isLoading}
+            disabled={isLoading || isProcessing}
             className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
           />
           <button
             onClick={handleSend}
-            disabled={!input.trim() || isLoading}
+            disabled={!input.trim() || isLoading || isProcessing}
             className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
           >
             <Send className="w-4 h-4" />

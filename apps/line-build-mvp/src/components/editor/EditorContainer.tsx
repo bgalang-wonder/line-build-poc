@@ -185,14 +185,57 @@ export default function EditorContainer({
   // ========== CHAT PANEL HANDLERS ==========
 
   const handleSendMessage = useCallback(
-    (content: string) => {
+    async (content: string) => {
       // Add user message to store
       addChatMessage('user', content);
 
-      // TODO: Integrate with CopilotKit to generate assistant response
-      // For now, this is a placeholder for chat integration
+      // Process message with chat integration service
+      try {
+        const { getChatIntegrationService } = await import('@/lib/copilotkit/chatIntegrationService');
+        const chatService = getChatIntegrationService();
+
+        // Set context for the service
+        if (currentBuild) {
+          chatService.setContext(currentBuild);
+        }
+
+        // Interpret the message
+        const interpretation = await chatService.interpretMessage(content);
+
+        // Generate and display assistant response
+        const assistantResponse = chatService.generateAssistantMessage(interpretation);
+        addChatMessage('assistant', assistantResponse);
+
+        // Preserve conversation in sourceConversations
+        if (currentBuild) {
+          const updatedBuild = {
+            ...currentBuild,
+            metadata: {
+              ...currentBuild.metadata,
+              sourceConversations: [
+                ...(currentBuild.metadata.sourceConversations || []),
+                `[USER] ${content}`,
+                `[ASSISTANT] ${assistantResponse}`,
+              ],
+            },
+          };
+          setBuild(updatedBuild);
+        }
+
+        // Apply suggested work units (if any)
+        // TODO: Integrate form actions to execute suggested actions
+        // For now, just provide feedback to user
+        if (interpretation.suggestedActions.length > 0 && interpretation.confidence !== 'low') {
+          const summaryMessage = `I've identified ${interpretation.suggestedActions.length} suggested action(s). Review them in the form panel.`;
+          addChatMessage('system', summaryMessage);
+        }
+      } catch (error) {
+        const errorMsg = error instanceof Error ? error.message : 'Failed to process message';
+        console.error('[EditorContainer] Chat processing error:', errorMsg);
+        addChatMessage('system', `Error: ${errorMsg}`);
+      }
     },
-    [addChatMessage]
+    [addChatMessage, currentBuild, setBuild]
   );
 
   const handleClearChatHistory = useCallback(() => {
