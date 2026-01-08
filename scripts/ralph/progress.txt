@@ -868,3 +868,87 @@ Patterns accumulate across iterations.
 - Responsive Navigation: Flex layout with gap, responsive text/icon display
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.11.2: Editor shell layout (Chat | DAG | Form + Validation)
+
+### What I Implemented:
+- Created EditorLayout component at `src/components/editor/EditorLayout.tsx` with 3-column design
+- Desktop layout: Chat (25%) | Divider | DAG (40%) | Divider | Form+Validation (35%)
+- Right column split vertically into Form (50%) and Validation (50%)
+- Draggable column dividers for resizing (mouse drag with visual feedback)
+- Responsive behavior: Stacks vertically on screens < 1200px (mobile/tablet)
+- ResizableDivider component handles mouse drag events with constraints
+- Placeholder components for development (ChatPanel, DAG, Form, Validation)
+- Updated editor page to use EditorLayout with query param detection
+- 60px header (navigation) + layout content fills remaining viewport
+- 16px padding around layout, 8px gaps between columns, 2px dividers
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/editor/EditorLayout.tsx` — Editor layout component (400+ lines)
+- `apps/line-build-mvp/src/app/editor/page.tsx` — Updated to use EditorLayout with placeholders
+
+### Learnings (for next iteration):
+- 3-column layout: Use flex with pixel widths for desktop, percentage fallback for responsive
+- Draggable dividers: Track isDragging state, use mousemove/mouseup listeners
+- Responsive breakpoint: Use containerWidth state to switch between 3-col and stacked
+- Column constraints: Min 300px per column, max grows to fill remaining space
+- Resizable logic: Calculate delta from mouse movement, clamp to min/max bounds
+- Responsive stacking: Same panels, different layout structure based on screen size
+- Placeholder components: Simple, visually distinct sections for development reference
+- Visual feedback: Divider changes cursor and bg on hover, shows grip icon
+- Container ref: Use useRef to measure actual container width vs. breakpoint
+- Flex layout: Use min-h-0 and overflow-auto for proper scrolling in columns
+
+### Codebase Patterns Discovered:
+- Resizable Layout: Custom draggable divider component with state management
+- State Management: Track column widths and container width separately
+- Responsive Breakpoints: Use containerWidth < 1200px to switch layouts
+- Mouse Event Handling: addEventListener in useEffect, cleanup on unmount
+- Flex Constraints: min-w-[300px] and flex-1 for responsive behavior
+- Placeholder Pattern: Separate components for Chat, DAG, Form, Validation
+- Gap/Padding: Consistent 16px padding, 8px gaps, 2px divider widths
+- Overflow Handling: overflow-auto for scrolling content, overflow-hidden for containers
+- Desktop vs Mobile: Conditional rendering of 3-col vs. stacked layouts
+- Visual Polish: Icon feedback on hover, smooth cursor changes, divider highlights
+
+---
+
+## Session Summary - Jan 8, 2026
+
+**Completed Tasks (6/6):**
+1. benchtop-x0c.7.1 ✅ - Structured validation evaluator (StructuredValidationEvaluator)
+2. benchtop-x0c.7.2 ✅ - Semantic validation via Gemini (SemanticValidationEvaluator)
+3. benchtop-x0c.6.1 ✅ - Validation checklist panel UI component
+4. benchtop-x0c.6.4 ✅ - Publish button with validation gating
+5. benchtop-x0c.11.1 ✅ - App routes (Dashboard, Editor, Rules) with Navigation
+6. benchtop-x0c.11.2 ✅ - Editor layout (3-column responsive with draggable dividers)
+
+**Architecture Milestones:**
+- Validation Engines: Both structured and semantic validators complete, ready for orchestration
+- Validation UI: Checklist panel + publish gating fully implemented
+- App Shell: Routes + navigation + editor layout established
+- Ready for: Load/save implementation, DAG visualization, chat/form integration
+
+**Key Implementations:**
+- StructuredValidationEvaluator: 5 operators (equals, in, notEmpty, greaterThan, lessThan)
+- SemanticValidationEvaluator: Gemini integration with JSON parsing and error handling
+- ValidationChecklistPanel: Grouped results, collapsible details, status badges
+- PublishButton: Draft/Active modes, validation gating, confirmation dialogs
+- EditorLayout: Responsive 3-column + stacked, draggable dividers, placeholders
+- Navigation: 3-route app with active highlighting and client-side navigation
+
+**Technical Patterns Discovered:**
+- Condition evaluation: Nested field access via dot notation path splitting
+- Graph traversal: Circular dependency detection with recursive hasDependencyPath
+- Gemini integration: Prompt building with context, JSON extraction, error handling
+- UI components: Modal dialogs, collapsible sections, status badges, loading states
+- Responsive design: containerWidth state management, breakpoint switching
+- Mouse interactions: Draggable dividers with boundary constraints and visual feedback
+
+**Next Iterations Focus:**
+- benchtop-x0c.11.3: Load/save line builds (open by id, persist JSON)
+- benchtop-x0c.11.4: DAG visualization component
+- benchtop-x0c.11.5: Validation orchestration (run both engines, store results)
+- Integration of all components into working editor
+
+---
