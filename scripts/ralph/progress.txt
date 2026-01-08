@@ -301,3 +301,43 @@ Patterns accumulate across iterations.
 - Dependency Validation: Detect circular dependencies using graph traversal before accepting updates
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.3.1: Implement form step list component (linear, collapsible)
+
+### What I Implemented:
+- Created StepList component at `src/components/form/StepList.tsx` with full acceptance criteria
+- Displays all WorkUnits from a LineBuild in vertical, scrollable list
+- Each step shows: ID badge, action type, target item name, dependencies badge
+- Collapsible/expandable section showing all WorkUnit tag details (time, phase, station, equipment, etc.)
+- Includes empty states for: no build loaded, build has no steps, and loading state
+- Step selection support (parent component handles selection for step editor integration)
+- Dependency visualization: shows "depends on X" and "blocks Y" badges
+- Full header showing menu item name and step count
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/form/StepList.tsx` — Complete step list component (250 lines)
+
+### Learnings (for next iteration):
+- Component structure: Use child component (StepListItem) for each step to keep logic organized
+- State management: Local expanded state via useState hook for collapsible sections
+- Dependency tracking: Calculate dependents by filtering all steps for dependsOn references
+- Empty states: Use flex centering pattern for loading, no-build, and no-steps states
+- Selection highlighting: Use border-left accent and bg color change for visual feedback
+- Scrolling: Flex layout with flex-1 overflow-y-auto on container, not children
+- Accessibility: Include aria-labels on buttons and semantic onClick handlers
+- Detail display: Show all WorkUnit tags in expanded section with proper formatting/spacing
+- Badge styling: Use subtle colored backgrounds (amber for depends, green for blocks) with borders
+- Lucide icons: Import ChevronDown/Up from lucide-react for expand/collapse
+
+### Codebase Patterns Discovered:
+- Component Structure: Use 'use client' directive for client-side components with hooks
+- Props Interface: Create detailed interface with optional handlers and state props
+- State Hooks: Local state for UI (expanded), parent props for data and selection
+- Conditional Rendering: Use shorthand (&&) for simple conditions, ternary for state-based rendering
+- Event Handling: Use stopPropagation on nested buttons to prevent parent handler firing
+- Styling Pattern: Tailwind classes with conditional cn() patterns for state-based styling
+- List Rendering: Always provide key prop, use semantic ul/li elements
+- Typography: Use font-mono for IDs, semantic sizing (text-sm for content), muted colors for secondary info
+- Spacing: Consistent px-4 py-3 padding, divide-y for list separators, mt-1 for related items
+
+---
