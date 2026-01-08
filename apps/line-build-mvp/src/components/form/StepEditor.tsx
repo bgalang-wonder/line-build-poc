@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { WorkUnit, ActionType, Phase, TimingMode, PrepType } from '@/lib/model/types';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import BOMAutocomplete from './BOMAutocomplete';
 
 interface StepEditorProps {
   step: WorkUnit | null;
@@ -136,53 +137,46 @@ export default function StepEditor({ step, isLoading = false, onChange }: StepEd
                 </select>
               </div>
 
-              {/* Target Item Name - Required */}
+              {/* Target Item - BOMAutocomplete */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Item Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={step.tags.target.name}
-                  onChange={(e) =>
+                <BOMAutocomplete
+                  selectedBomId={step.tags.target.bomId}
+                  onChange={(bomId, bomName) => {
                     handleChange({
                       ...step,
                       tags: {
                         ...step.tags,
-                        target: { ...step.tags.target, name: e.target.value },
+                        target: { ...step.tags.target, bomId, name: bomName },
                       },
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                  placeholder="e.g., Grilled Chicken"
+                    });
+                  }}
+                  filterByType={['40']} // Show consumables only
                 />
               </div>
 
-              {/* BOM ID - Optional */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  BOM Item ID
-                </label>
-                <input
-                  type="text"
-                  value={step.tags.target.bomId || ''}
-                  onChange={(e) =>
-                    handleChange({
-                      ...step,
-                      tags: {
-                        ...step.tags,
-                        target: {
-                          ...step.tags.target,
-                          bomId: e.target.value || undefined,
+              {/* Manual Item Name - For custom items without BOM */}
+              {!step.tags.target.bomId && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Custom Item Name <span className="text-gray-500 text-xs">(if no BOM match)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={step.tags.target.name}
+                    onChange={(e) =>
+                      handleChange({
+                        ...step,
+                        tags: {
+                          ...step.tags,
+                          target: { ...step.tags.target, name: e.target.value },
                         },
-                      },
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                  placeholder="e.g., 4001234"
-                />
-                <p className="text-xs text-gray-500 mt-1">40* for consumables, 80* for menu items</p>
-              </div>
+                      })
+                    }
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    placeholder="e.g., Grilled Chicken"
+                  />
+                </div>
+              )}
 
               {/* Equipment - Optional */}
               <div>
