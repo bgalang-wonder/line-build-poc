@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useEditorStore } from '@/lib/model/store/editorStore';
 import { useLineBuildLoader, useAutoSaveBuild } from '@/lib/hooks/useLineBuildLoader';
 import { EditorLayout } from './EditorLayout';
@@ -11,7 +11,9 @@ import DependenciesMultiSelect from '../form/DependenciesMultiSelect';
 import BOMAutocomplete from '../form/BOMAutocomplete';
 import { ValidationChecklistPanel } from '../validation/ValidationChecklistPanel';
 import { PublishButton } from '../validation/PublishButton';
-import { LineBuild, WorkUnit } from '@/lib/model/types';
+import { CheckMyWorkButton } from '../validation/CheckMyWorkButton';
+import { ToastContainer } from '../ui/Toast';
+import { LineBuild, WorkUnit, BuildValidationStatus } from '@/lib/model/types';
 
 interface EditorContainerProps {
   buildId?: string;
@@ -50,6 +52,14 @@ export default function EditorContainer({
   onBuildLoaded,
   onError,
 }: EditorContainerProps) {
+  // ========== TOAST STATE ==========
+  const [toasts, setToasts] = useState<Array<{
+    id: string;
+    type: 'success' | 'error' | 'info';
+    title: string;
+    message: string;
+  }>>([]);
+
   // ========== STORE ACCESS ==========
   const store = useEditorStore();
   const {
@@ -191,16 +201,29 @@ export default function EditorContainer({
 
   // ========== VALIDATION PANEL HANDLERS ==========
 
-  const handleRunValidation = useCallback(async () => {
-    if (!currentBuild) return;
+  const handleValidationComplete = useCallback(
+    (status: BuildValidationStatus) => {
+      // Validation results are already in store via useValidationRunner
+      // This callback allows CheckMyWorkButton to notify parent of completion
+    },
+    []
+  );
 
-    // TODO: Call validation orchestration service
-    // For now, this is a placeholder
-    // When implemented, this should:
-    // 1. Run both structured and semantic validators
-    // 2. Aggregate results
-    // 3. Call store.setValidationStatus(results)
-  }, [currentBuild, store]);
+  const handleAddToast = useCallback(
+    (toast: {
+      id: string;
+      type: 'success' | 'error' | 'info';
+      title: string;
+      message: string;
+    }) => {
+      setToasts((prev) => [...prev, toast]);
+    },
+    []
+  );
+
+  const handleDismissToast = useCallback((id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   const handlePublish = useCallback(
     async (buildWithNewStatus: LineBuild) => {
@@ -285,61 +308,69 @@ export default function EditorContainer({
 
   // ========== RENDER EDITOR LAYOUT ==========
   return (
-    <EditorLayout
-      chatPanel={
-        <ChatPanel
-          messages={chatMessages}
-          isLoading={validationSnapshot.isRunning}
-          onSendMessage={handleSendMessage}
-          onClearHistory={handleClearChatHistory}
-        />
-      }
-      dagPanel={
-        <div className="flex items-center justify-center h-full bg-blue-50 text-blue-600">
-          <p>DAG Visualization (Coming Soon)</p>
-        </div>
-      }
-      formPanel={
-        <div className="p-4 space-y-4 overflow-y-auto h-full">
-          {/* BOM Selector */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Menu Item
-            </label>
-            <div className="text-sm text-gray-600 px-3 py-2 bg-gray-50 rounded border border-gray-200">
-              {currentBuild.menuItemName}
+    <>
+      <EditorLayout
+        chatPanel={
+          <ChatPanel
+            messages={chatMessages}
+            isLoading={validationSnapshot.isRunning}
+            onSendMessage={handleSendMessage}
+            onClearHistory={handleClearChatHistory}
+          />
+        }
+        dagPanel={
+          <div className="flex items-center justify-center h-full bg-blue-50 text-blue-600">
+            <p>DAG Visualization (Coming Soon)</p>
+          </div>
+        }
+        formPanel={
+          <div className="p-4 space-y-4 overflow-y-auto h-full">
+            {/* BOM Selector */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Menu Item
+              </label>
+              <div className="text-sm text-gray-600 px-3 py-2 bg-gray-50 rounded border border-gray-200">
+                {currentBuild.menuItemName}
+              </div>
+            </div>
+
+            {/* Step List */}
+            <div className="border-t pt-4">
+              <StepList
+                build={currentBuild}
+                selectedStepId={selectedStepId || undefined}
+                onStepSelect={handleStepSelect}
+              />
             </div>
           </div>
-
-          {/* Step List */}
-          <div className="border-t pt-4">
-            <StepList
-              build={currentBuild}
-              selectedStepId={selectedStepId || undefined}
-              onStepSelect={handleStepSelect}
-            />
+        }
+        validationPanel={
+          <div className="flex flex-col h-full overflow-hidden">
+            <div className="flex-1 overflow-y-auto">
+              <ValidationChecklistPanel
+                validationStatus={validationSnapshot.status || undefined}
+                isLoading={validationSnapshot.isRunning}
+              />
+            </div>
+            <div className="border-t p-4 bg-gray-50 space-y-3">
+              <CheckMyWorkButton
+                build={currentBuild}
+                isRunning={validationSnapshot.isRunning}
+                onValidationComplete={handleValidationComplete}
+                onToast={handleAddToast}
+              />
+              <PublishButton
+                build={currentBuild}
+                validationStatus={validationSnapshot.status}
+                onPublish={handlePublish}
+                onDemote={handleDemote}
+              />
+            </div>
           </div>
-        </div>
-      }
-      validationPanel={
-        <div className="flex flex-col h-full overflow-hidden">
-          <div className="flex-1 overflow-y-auto">
-            <ValidationChecklistPanel
-              validationStatus={validationSnapshot.status || undefined}
-              isLoading={validationSnapshot.isRunning}
-              onRunValidation={handleRunValidation}
-            />
-          </div>
-          <div className="border-t p-4 bg-gray-50">
-            <PublishButton
-              build={currentBuild}
-              validationStatus={validationSnapshot.status}
-              onPublish={handlePublish}
-              onDemote={handleDemote}
-            />
-          </div>
-        </div>
-      }
-    />
+        }
+      />
+      <ToastContainer toasts={toasts} onDismiss={handleDismissToast} />
+    </>
   );
 }

@@ -1116,3 +1116,38 @@ Patterns accumulate across iterations.
 
 ---
 
+
+## Jan 8, 2026 - benchtop-x0c.11.5: Orchestrate validation runs + store last-check results
+
+### What I Implemented:
+- Created ValidationOrchestrator service that coordinates both structured and semantic validation
+- Implemented rule caching mechanism to avoid repeated file reads (5-minute TTL)
+- Built useValidationRunner hook to integrate validation orchestration into UI components
+- Extended LineBuildPersistence with saveLastCheckResult and loadLastCheckResult methods
+- Updated BuildValidationStatus type to support new orchestrator output format (passCount, failCount, isValid, allResults, failuresByRule, durationMs)
+- Added static getInstance methods to both LineBuildPersistence and ValidationRulesPersistence for singleton access
+
+### Files Changed:
+- `src/lib/validation/orchestrator.ts` — New ValidationOrchestrator service class
+- `src/lib/hooks/useValidationRunner.ts` — New useValidationRunner hook for UI integration
+- `src/lib/model/data/persistence.ts` — Added saveLastCheckResult, loadLastCheckResult, deleteLastCheckResult methods + getInstance static method
+- `src/lib/model/data/rulesPersistence.ts` — Added getInstance static method for consistency
+- `src/lib/model/types.ts` — Updated BuildValidationStatus to include orchestrator fields (passCount, failCount, totalCount, isValid, allResults, failuresByRule, lastCheckedAt, durationMs, error)
+- `src/components/validation/PublishButton.tsx` — Fixed type error with optional chaining on failureCount
+
+### Learnings (for next iteration):
+- Rule caching prevents repeated I/O overhead - cache with timestamp and TTL (5 minutes is reasonable)
+- Validation results are stored separately from builds (e.g., `build-123.json` vs `build-123.validation.json`) for quick retrieval
+- BuildValidationStatus needs both old fields (for backward compatibility) and new fields (for orchestrator output)
+- VertexAIClient constructor takes a config object, not separate positional arguments
+- ValidationRulesPersistence.loadAll returns LoadRulesResult with a .rules property, not a direct array
+- Optional chaining and nullish coalescing help with optional fields in type definitions
+
+### Codebase Patterns Discovered:
+- ValidationOrchestrator: Singleton instance management with getValidationOrchestrator() factory function
+- Rule Caching: Store timestamp, use TTL comparison, clear with clearRulesCache() for testing
+- Result Persistence: Separate files for build and validation results using `.validation.json` suffix
+- Hook Pattern: useValidationRunner manages orchestration, updates store, and handles persistence in one place
+- Type Union: BuildValidationStatus has optional fields for backward compatibility and new orchestrator fields
+
+---
