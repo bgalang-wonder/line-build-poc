@@ -748,3 +748,103 @@ time=2026-01-07T21:03:20.666-05:00 level=INFO msg="run 'bd init' to migrate to c
 time=2026-01-07T21:04:25.513-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
 time=2026-01-07T21:04:25.513-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
 time=2026-01-07T21:04:25.513-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T21:04:49.321-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T21:04:49.321-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T21:04:49.321-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T21:05:12.605-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T21:05:12.606-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T21:05:12.606-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T21:05:24.751-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T21:05:24.751-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T21:05:24.751-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T21:05:33.625-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T21:05:33.625-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T21:05:33.625-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T21:06:05.800-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T21:06:05.800-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T21:06:05.800-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T21:07:55.541-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T21:07:55.541-05:00 level=INFO msg="using database" path=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/beads.db
+time=2026-01-07T21:07:55.552-05:00 level=INFO msg="database opened" path=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/beads.db freshness_checking=true
+time=2026-01-07T21:07:55.552-05:00 level=INFO msg="upgrading .beads/.gitignore"
+time=2026-01-07T21:07:55.552-05:00 level=WARN msg="failed to upgrade .gitignore" error="open .beads/.gitignore: no such file or directory"
+time=2026-01-07T21:07:55.557-05:00 level=INFO msg="Repository fingerprint validated: %s" !BADKEY=dfa3b7ad
+time=2026-01-07T21:07:55.558-05:00 level=INFO msg="starting RPC server" socket=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/bd.sock
+time=2026-01-07T21:07:55.558-05:00 level=INFO msg="RPC server ready (socket listening)"
+time=2026-01-07T21:07:55.565-05:00 level=INFO msg="registered in global registry"
+time=2026-01-07T21:07:55.565-05:00 level=INFO msg="Starting %s..." !BADKEY="sync cycle"
+time=2026-01-07T21:07:55.578-05:00 level=INFO msg="Exported to JSONL"
+time=2026-01-07T21:07:55.627-05:00 level=INFO msg="Pull failed: %v" !BADKEY="git pull failed: exit status 128\nerror: cannot pull with rebase: You have unstaged changes.\nerror: additionally, your index contains uncommitted changes.\nerror: Please commit or stash them.\n"
+time=2026-01-07T21:07:55.627-05:00 level=INFO msg="monitoring parent process" pid=0
+time=2026-01-07T21:07:55.627-05:00 level=INFO msg="using event-driven mode"
+time=2026-01-07T21:07:55.628-05:00 level=INFO msg="Auto-pull disabled: use 'git pull' manually to sync remote changes"
+time=2026-01-07T21:07:56.052-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:07:57.332-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:07:57.332-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:07:57.333-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:08:00.954-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:01.576-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:02.093-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:03.110-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:08:03.114-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:08:03.117-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:08:06.065-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:07.174-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:08:07.175-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:08:07.176-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:08:16.850-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:18.023-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:08:18.023-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:08:18.024-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:08:25.890-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:27.097-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:08:27.097-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:08:27.102-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:08:30.897-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:32.008-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:08:32.010-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:08:32.011-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:08:32.827-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:34.220-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:08:34.220-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:08:34.223-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:08:35.907-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:08:37.018-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:08:37.018-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:08:37.019-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:10:35.518-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:10:36.109-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:10:36.520-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:10:36.521-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:10:36.522-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:10:37.485-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:10:37.485-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:10:37.486-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:10:41.129-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:10:42.231-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:10:42.232-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:10:42.236-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:10:58.565-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:10:59.730-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:10:59.731-05:00 level=INFO msg="Starting %s..." !BADKEY=auto-import
+time=2026-01-07T21:10:59.732-05:00 level=INFO msg="Skipping %s: JSONL content unchanged" !BADKEY=auto-import
+time=2026-01-07T21:11:07.368-05:00 level=INFO msg="Received signal %v, shutting down..." !BADKEY=terminated
+time=2026-01-07T21:11:29.945-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T21:11:29.946-05:00 level=INFO msg="using database" path=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/beads.db
+time=2026-01-07T21:11:29.955-05:00 level=INFO msg="database opened" path=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/beads.db freshness_checking=true
+time=2026-01-07T21:11:29.955-05:00 level=INFO msg="upgrading .beads/.gitignore"
+time=2026-01-07T21:11:29.955-05:00 level=WARN msg="failed to upgrade .gitignore" error="open .beads/.gitignore: no such file or directory"
+time=2026-01-07T21:11:29.968-05:00 level=INFO msg="Repository fingerprint validated: %s" !BADKEY=dfa3b7ad
+time=2026-01-07T21:11:29.968-05:00 level=INFO msg="starting RPC server" socket=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/bd.sock
+time=2026-01-07T21:11:29.969-05:00 level=INFO msg="RPC server ready (socket listening)"
+time=2026-01-07T21:11:29.975-05:00 level=INFO msg="registered in global registry"
+time=2026-01-07T21:11:29.975-05:00 level=INFO msg="Starting %s..." !BADKEY="sync cycle"
+time=2026-01-07T21:11:29.986-05:00 level=INFO msg="Exported to JSONL"
+time=2026-01-07T21:11:30.074-05:00 level=INFO msg="Pull failed: %v" !BADKEY="git pull failed: exit status 128\nerror: cannot pull with rebase: You have unstaged changes.\nerror: additionally, your index contains uncommitted changes.\nerror: Please commit or stash them.\n"
+time=2026-01-07T21:11:30.074-05:00 level=INFO msg="monitoring parent process" pid=0
+time=2026-01-07T21:11:30.074-05:00 level=INFO msg="using event-driven mode"
+time=2026-01-07T21:11:30.075-05:00 level=INFO msg="Auto-pull disabled: use 'git pull' manually to sync remote changes"
+time=2026-01-07T21:11:30.156-05:00 level=INFO msg="JSONL removed/renamed, re-establishing watch"
+time=2026-01-07T21:11:30.207-05:00 level=INFO msg="Successfully re-established JSONL watch after %v" !BADKEY=50ms
+time=2026-01-07T21:11:30.207-05:00 level=INFO msg="JSONL file created: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:11:30.265-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
