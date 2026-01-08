@@ -1,7 +1,7 @@
 {
-  "pid": 93217,
-  "parent_pid": 93213,
+  "pid": 96092,
+  "parent_pid": 96088,
   "database": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/benchtop.db",
   "version": "0.42.0",
-  "started_at": "2026-01-08T00:36:40.678658Z"
+  "started_at": "2026-01-08T00:38:34.039829Z"
 }

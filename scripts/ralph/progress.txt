@@ -175,3 +175,32 @@ Patterns accumulate across iterations.
 - Error Recovery: Three-tier strategy: primary file → recent backups → meaningful error message
 
 ---
+
+## Jan 7, 2026 - benchtop-x0c.1.5: Create mock BOM dataset (7-digit itemId + name)
+
+### What I Implemented:
+- Created mock BOM catalog with realistic 7-digit item IDs following Cookbook conventions
+- Defined items across all categories: menu items (80*), consumables (40*), ingredients (5*), packaged goods (88*), packaging (9*)
+- Implemented 8 realistic menu items with complete names: "Grilled Chicken Bowl", "Crispy Fish Tacos", etc.
+- Implemented 17 consumable items organized by type (proteins, vegetables, rice/noodles, sauces)
+- Created 8 BOM recipes mapping menu items to their consumable components with realistic quantities
+- Exported helper functions for easy access: getAllBOMItems, findBOMItem, getBOMRecipe, getItemTypeFromId
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/mockBom.ts` — Complete mock BOM dataset
+
+### Learnings (for next iteration):
+- Item ID prefixes are critical: 5* = ingredient, 40* = consumable, 80* = menu, 88* = packaged, 9* = packaging
+- BOM relationships are unidirectional: menu items (80*) reference consumable items (40*)
+- Consumable organization by category (proteins, vegetables, etc.) makes data more maintainable
+- Helper functions reduce boilerplate in other components (forms, validation, autocomplete)
+- Mock data should include realistic quantities and units (g, ml) for validator testing
+- Export the entire catalog as MOCK_BOM_CATALOG object for easy integration
+
+### Codebase Patterns Discovered:
+- Mock Data Export: Define data as const arrays, export individually AND as aggregate object
+- Helper Functions: Provide utility functions (findByID, getByType) for common queries
+- Type Organization: Use interfaces for item structure (BOMItem, BOMRecipe) at top of file
+- Naming: Use uppercase SNAKE_CASE for exported constants, lowercase camelCase for functions
+
+---
