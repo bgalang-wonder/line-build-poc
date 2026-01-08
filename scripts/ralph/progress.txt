@@ -144,3 +144,34 @@ Patterns accumulate across iterations.
 - Status Enums: Use literal unions for status fields instead of string enums (more flexible)
 
 ---
+
+## Jan 7, 2026 - benchtop-x0c.2.1: Implement JSON persistence for line builds
+
+### What I Implemented:
+- Created LineBuildPersistence class for save/load/delete operations on LineBuild objects
+- Implemented timestamped backup system to prevent data loss and conflicts
+- Added graceful error handling for corrupted JSON files with automatic recovery from backups
+- Support for both Node.js (fs module) and browser (localStorage) storage backends
+- Human-readable JSON formatting (2-space indent) for debugging and manual inspection
+- Factory functions for instance management (getPersistence singleton, createPersistence for testing)
+- Validation of LineBuild structure during load with meaningful error messages
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/persistence.ts` — Complete persistence implementation
+
+### Learnings (for next iteration):
+- Dual-environment persistence: Use dynamic imports (fs/promises, path) for Node.js detection
+- Backups saved with timestamp pattern: `filename.backup.YYYY-MM-DDTHH-mm-ss` for sorting
+- Corrupted file recovery: Try most recent backup first, skip to next on parse error
+- Type assertion workaround: Use `as unknown as LineBuild` for complex destructuring patterns
+- Directory creation: Use `fs.mkdir(..., { recursive: true })` for safe multi-path creation
+- Error messages should include the buildId and operation context for debugging
+
+### Codebase Patterns Discovered:
+- Persistence API: Class-based with async methods matching save/load/delete/exists operations
+- File Naming: Use buildId directly as filename (e.g., `build-123.json`)
+- Environment Detection: Check `typeof window === "undefined"` to distinguish server/client
+- Backup Storage: Keep backups in same directory with timestamp suffix for versioning
+- Error Recovery: Three-tier strategy: primary file → recent backups → meaningful error message
+
+---
