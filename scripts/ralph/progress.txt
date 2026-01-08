@@ -695,3 +695,42 @@ Patterns accumulate across iterations.
 - No External Dependencies: Pure function approach enables testing without mocks
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.7.2: Validation engine - semantic rules via Gemini
+
+### What I Implemented:
+- Created SemanticValidationEvaluator class at `src/lib/model/data/semanticValidationEvaluator.ts`
+- Evaluates SemanticValidationRules against LineBuild instances using Gemini AI
+- Builds rich WorkUnit context (action, equipment, timing, phase, station, dependencies) for Gemini prompts
+- Sends rule prompt + context + guidance to Gemini, receives structured JSON response
+- Parses Gemini response with robust JSON extraction (handles markdown-wrapped JSON)
+- Returns ValidationResult with pass, failures[], and reasoning fields from AI
+- Respects rule enablement and appliesTo action type filtering
+- Graceful error handling: API failures return failure result with error message (not thrown)
+- Includes helper functions: buildWorkUnitContext, parseGeminiResponse, summarizeResults
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/semanticValidationEvaluator.ts` — Complete semantic evaluator (250+ lines)
+
+### Learnings (for next iteration):
+- Gemini response format: Expect JSON with { pass, reasoning, failures } structure
+- JSON extraction: Use regex /\{[\s\S]*\}/ to extract JSON from responses (handles markdown wrapping)
+- Context building: Rich context (equipment, timing, dependencies) helps Gemini understand the work unit
+- System instruction: Use guidance field from rule, fallback to generic instruction emphasizing JSON format
+- Disabled/non-applicable rules: Return pass=true with explanatory reasoning
+- Error handling: Catch Gemini errors and return failure result (don't propagate exception)
+- Async pattern: Use async/await for AI calls, evaluateBuild iterates sequentially through WorkUnits
+- Reasoning field: Always include reasoning from AI for transparency, even for disabled rules
+- Response parsing: Validate parsed response has required fields (pass boolean) before returning
+
+### Codebase Patterns Discovered:
+- Semantic Evaluator: Similar interface to StructuredValidationEvaluator but async and uses external AI
+- Gemini Integration: Use VertexAIClient.generateContent(prompt, systemInstruction) for calls
+- Context Building: WorkUnit context string with all relevant fields, one per line, readable for Gemini
+- Response Parsing: Try-catch with JSON regex extraction, validate required fields
+- Error Handling: Return failure ValidationResult on API error (with error message in failures array)
+- Type Safety: Same ValidationResult return type as structured evaluator for UI consistency
+- Async Composition: evaluateBuild uses Promise chain, results collected in array
+- Reasoning Extraction: Always include AI reasoning in result for audit trail and user transparency
+
+---
