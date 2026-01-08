@@ -383,3 +383,44 @@ Patterns accumulate across iterations.
 - Time Object: Support adding/removing optional complex objects with add/remove buttons
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.3.3: Implement dependencies multi-select (explicit deps)
+
+### What I Implemented:
+- Created DependenciesMultiSelect component at `src/components/form/DependenciesMultiSelect.tsx`
+- Multi-select dropdown with all other steps (excludes current step and already selected)
+- Selected dependencies displayed as blue chips with remove button
+- Searchable autocomplete dropdown filtering by step ID or action type
+- Comprehensive validation: self-references, circular dependencies, already selected
+- Circular dependency detection using recursive graph traversal
+- Click-outside detection to close dropdown
+- Real-time updates via onChange callback
+- Dependency count badge in label
+- Info text explaining purpose
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/form/DependenciesMultiSelect.tsx` — Multi-select component (260 lines)
+
+### Learnings (for next iteration):
+- Circular dependency detection: Recursive hasDependencyPath function with visited set to prevent infinite loops
+- Graph traversal: When checking cycles, need to traverse transitive dependencies (A→B→C)
+- Search filtering: Support both ID and action type searches for better UX
+- Click-outside: Use useRef on container + useEffect with mousedown listener for clean dropdown closing
+- Chip removal: Provide X button on chips for easier removal than dragging to dropdown
+- Available steps: Filter out current step and already-selected steps to avoid confusion
+- Error states: Show contextual error messages (self-reference, circular, duplicate)
+- Dropdown positioning: Use absolute positioning with top-full for dropdown below trigger
+- Accessibility: Include aria-labels on remove buttons and focus management (autoFocus on input)
+- Empty state: Handle no available steps gracefully with appropriate message
+
+### Codebase Patterns Discovered:
+- Multi-select Pattern: Use chips for selected items + dropdown for additions
+- Circular Dependency: Recursive graph traversal with visited set to detect cycles
+- Click-outside Detection: useRef + useEffect with document.addEventListener('mousedown')
+- Search Integration: Filter list by input with multiple field support (ID, action)
+- Validation Messages: Show specific error context (e.g., what creates the cycle)
+- Dropdown UI: Search input at top, scrollable list, click-outside to close
+- State Management: isOpen, searchQuery, error managed in component state
+- Callbacks: onChange with updated array, validation before calling
+
+---
