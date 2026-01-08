@@ -52,11 +52,24 @@ export interface WorkUnit {
 // Line Build Types
 // ============================================================================
 
+export interface ComplexityScore {
+  overall: number; // 0-100 final score
+  factors: {
+    workVariety: number;
+    equipmentVariety: number;
+    stationChanges: number;
+    timeBreakdown: number;
+  };
+  reasoning: string;
+  timestamp: string; // ISO 8601
+}
+
 export interface LineBuild {
   id: string;
   menuItemId: string;
   menuItemName: string;
   workUnits: WorkUnit[];
+  complexity?: ComplexityScore; // Computed complexity score
   metadata: {
     author: string;
     version: number;

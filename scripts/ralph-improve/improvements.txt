@@ -1,0 +1,39 @@
+# Ralph Improve Log
+
+This file tracks spec-to-implementation improvements.
+
+## Reference
+
+- **PRD:** docs/PRD-FULL.md
+- **App:** apps/line-build-mvp/
+
+## PRD P1 Requirements Checklist
+
+- [ ] P1.1: Action types (PREP, HEAT, TRANSFER, ASSEMBLE, etc.)
+- [ ] P1.2: Target linking (BOM ID preferred, name fallback)
+- [ ] P1.3: Equipment + duration (required for HEAT actions)
+- [ ] P1.4: Cooking phase (PRE_COOK, COOK, POST_COOK, ASSEMBLY, PASS)
+- [ ] P1.5: Complexity scoring (auto-computed, displayed)
+- [ ] P1.6: Overlays/variants (conditional logic, no duplication)
+- [ ] P1.7: Natural language authoring (AI-assisted)
+- [ ] P1.8: Migration (95%+ auto-converts)
+- [ ] P1.9: Pre-service prep (prepType, storageLocation, bulkPrep)
+
+## Definition of Done Checklist
+
+- [ ] Schema documented and stable
+- [ ] Conversational input → structured output
+- [ ] Complexity scores match legacy spreadsheet
+- [ ] Overlays work for equipment/location scenarios
+- [ ] Cooking phases are structured data
+- [ ] Pre-service prep captured with storage locations
+- [ ] Complexity can be filtered (include prep, exclude prep, prep-only)
+- [ ] Validation overrides tracked with reasons
+- [ ] Source conversations preserved for audit
+- [ ] Gantt/timeline visualization available
+- [ ] 50+ items migrated as validation
+
+---
+
+## Improvements Log
+

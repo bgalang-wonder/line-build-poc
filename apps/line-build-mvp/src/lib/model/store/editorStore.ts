@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { LineBuild, WorkUnit, BuildValidationStatus } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import { stateSnapshotManager } from '@/lib/error/errorRecovery';
+import { scoreLineBuild } from '@/lib/scoring/complexityEngine';
 
 // ============================================================================
 // Chat Message Types (shared with ChatPanel)
@@ -80,6 +81,9 @@ export interface EditorStore {
   setValidationStatus: (status: BuildValidationStatus) => void;
   setValidationRunning: (running: boolean) => void;
   clearValidationResults: () => void;
+
+  // ========== COMPLEXITY SCORING ==========
+  updateComplexity: () => void; // Recompute and update complexity score
 
   // ========== UTIL ==========
   setLoading: (loading: boolean) => void;
@@ -442,6 +446,27 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
         status: null,
       },
     }));
+  },
+
+  // ========== COMPLEXITY SCORING ==========
+
+  updateComplexity: () => {
+    const { currentBuild } = get();
+    if (!currentBuild) {
+      return;
+    }
+
+    try {
+      const complexityScore = scoreLineBuild(currentBuild);
+      const updated: LineBuild = {
+        ...currentBuild,
+        complexity: complexityScore,
+      };
+      set({ currentBuild: updated });
+    } catch (error) {
+      // Silently fail - complexity scoring is non-critical
+      console.error('Failed to update complexity score:', error);
+    }
   },
 
   // ========== UTIL ACTIONS ==========
