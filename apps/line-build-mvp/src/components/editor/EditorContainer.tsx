@@ -13,6 +13,7 @@ import { ValidationChecklistPanel } from '../validation/ValidationChecklistPanel
 import { PublishButton } from '../validation/PublishButton';
 import { CheckMyWorkButton } from '../validation/CheckMyWorkButton';
 import { ToastContainer } from '../ui/Toast';
+import { DAGVisualization } from '../visualization/DAGVisualization';
 import { LineBuild, WorkUnit, BuildValidationStatus } from '@/lib/model/types';
 
 interface EditorContainerProps {
@@ -421,9 +422,11 @@ export default function EditorContainer({
           />
         }
         dagPanel={
-          <div className="flex items-center justify-center h-full bg-blue-50 text-blue-600">
-            <p>DAG Visualization (Coming Soon)</p>
-          </div>
+          <DAGVisualization
+            build={currentBuild}
+            selectedStepId={selectedStepId || undefined}
+            onSelectStep={handleStepSelect}
+          />
         }
         formPanel={
           <div className="p-4 space-y-4 overflow-y-auto h-full">
