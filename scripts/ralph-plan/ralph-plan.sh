@@ -32,7 +32,11 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   echo "═══ Plan Refinement Iteration $i of $MAX_ITERATIONS ═══"
   echo "═══════════════════════════════════════════════"
   echo ""
-  echo "⏳ Starting Claude (output will stream below)..."
+  
+  # Record start time
+  START_TIME=$(date +%s)
+  START_TIME_READABLE=$(date '+%H:%M:%S')
+  echo "⏳ Starting Claude at $START_TIME_READABLE (output will stream below)..."
   echo ""
   
   # Run Claude and stream output in real-time using tee
@@ -42,8 +46,22 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   CLAUDE_EXIT=$?
   set -e
   
+  # Record end time and calculate duration
+  END_TIME=$(date +%s)
+  END_TIME_READABLE=$(date '+%H:%M:%S')
+  DURATION=$((END_TIME - START_TIME))
+  MINUTES=$((DURATION / 60))
+  SECONDS=$((DURATION % 60))
+  
+  echo ""
+  echo "⏱️  Claude finished at $END_TIME_READABLE"
+  if [ $MINUTES -gt 0 ]; then
+    echo "⏱️  Duration: ${MINUTES}m ${SECONDS}s"
+  else
+    echo "⏱️  Duration: ${SECONDS}s"
+  fi
+  
   if [ $CLAUDE_EXIT -ne 0 ]; then
-    echo ""
     echo "⚠️ Claude exited with code $CLAUDE_EXIT"
   fi
   

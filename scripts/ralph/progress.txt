@@ -9,6 +9,21 @@ Started: 2026-01-07
 - Components: Use Radix UI / Shadcn UI patterns where applicable
 - Types: Export from `src/lib/model/types.ts`
 
+## Domain: Item Types & IDs (Cookbook)
+Items have 7-digit IDs where the first digit(s) signify the type:
+- **5\*** = Ingredients (raw, lowest-level, procured externally)
+- **3\*** = Benchtop recipes (R&D reference only, not production)
+- **80\*** = Commercial recipes (used in Spork for food production)
+- **88\*** = Packaged goods (items we produce)
+- **9\*** = Non-food (guest packaging, internal packaging, tracked non-food)
+
+## Domain: BOM Structure
+- All items except 5* and 9* have a Bill of Materials (BOM)
+- BOM contains: input item IDs, quantities, units of measure, output amounts
+- **Publishing Order**: Cannot publish if BOM contains draft items
+- **Cost Flow**: Costs roll up from base items
+- **Nutrition Flow**: Nutrition values flow through BOM hierarchy
+
 ## Key Files
 - apps/archive-benchtop-mvp/ (Reference for porting logic)
 - apps/archive-benchtop-mvp/src/lib/ai/vertex/client.ts (Vertex AI setup)
@@ -96,5 +111,35 @@ Patterns accumulate across iterations.
 - CopilotKit Setup: Install packages, create Provider wrapper component, import styles.css
 - Provider Pattern: Use 'use client' directive in provider component for client-side setup
 - API Route Pattern: Create route handler at src/app/api/[name]/route.ts for Next.js 15+
+
+---
+
+## Jan 7, 2026 - benchtop-x0c.1.4: Define core types (LineBuild, WorkUnit, Override, ValidationRule)
+
+### What I Implemented:
+- Created comprehensive types file at `src/lib/model/types.ts`
+- Defined LineBuild and WorkUnit types (based on reference implementation)
+- Defined Override type for form field overrides with audit trail
+- Defined ValidationRule types (StructuredValidationRule and SemanticValidationRule)
+- Defined ValidationResult and BuildValidationStatus types for validation output
+- All types follow TypeScript best practices with clear field descriptions
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/types.ts` — Complete type definitions for MVP
+
+### Learnings (for next iteration):
+- LineBuild uses status: "draft" | "active" (not "published" from reference)
+- ValidationRule split into two types: structured (condition-based) and semantic (Gemini-based)
+- StructuredValidationRule uses condition object with field/operator/value for rule logic
+- SemanticValidationRule uses prompt/guidance for Gemini evaluation
+- ValidationResult includes ruleType, reasoning field (for semantic rules), and timestamp
+- Override tracks original/overridden values with timestamps for audit trail
+- All date fields use ISO 8601 string format
+
+### Codebase Patterns Discovered:
+- Types: Export all types from src/lib/model/types.ts
+- Type Organization: Group related types with section headers (// ========)
+- Discriminated Unions: Use ValidationRuleType discriminator for rule type checking
+- Status Enums: Use literal unions for status fields instead of string enums (more flexible)
 
 ---
