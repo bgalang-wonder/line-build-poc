@@ -660,3 +660,38 @@ Patterns accumulate across iterations.
 - benchtop-x0c.7.2: Implement semantic validation using Gemini
 - These will complete the validation engine MVP
 
+
+## Jan 8, 2026 - benchtop-x0c.7.1: Validation engine - structured rules evaluator
+
+### What I Implemented:
+- Created StructuredValidationEvaluator class at `src/lib/model/data/structuredValidationEvaluator.ts`
+- Evaluates StructuredValidationRules against LineBuild instances using condition-based logic
+- Supports 5 condition operators: equals, in, notEmpty, greaterThan, lessThan
+- Respects rule enablement and appliesTo action type filtering
+- Returns ValidationResult objects conforming to normalized schema (from benchtop-x0c.7.4)
+- Includes helper functions for nested field access and condition evaluation
+- Provides summarizeResults utility for analyzing validation outputs
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/structuredValidationEvaluator.ts` — Complete structured evaluator (220+ lines)
+
+### Learnings (for next iteration):
+- Dot notation field access: Use split('.') to navigate nested objects like "tags.time.value"
+- Condition operators: Five operators cover common validation patterns (exact match, set membership, existence, numeric comparisons)
+- Rule filtering: Check rule.enabled and appliesTo before evaluating to avoid unnecessary processing
+- Disabled/non-applicable rules return pass=true (don't block validation)
+- Failure messages: Include expected vs. actual values for debugging (use JSON.stringify for complex types)
+- Error cases: Handle rule config errors gracefully (e.g., 'in' operator with non-array value)
+- Summary utility: Useful for UI display (pass count, fail count, failures grouped by WorkUnit)
+- Pure functions: No side effects, no async, easy to test and compose with other validators
+
+### Codebase Patterns Discovered:
+- Evaluator Pattern: Static class with evaluateRule(single), evaluateBuild(all), and summarizeResults methods
+- Condition Evaluation: Separate function for condition logic, returns { pass, failure? }
+- Nested Field Access: Helper function using path.split('.') with undefined-safe traversal
+- Rule Filtering: Check enabled and appliesTo before condition evaluation
+- Error Messages: Include ${field}, ${operator}, ${expected}, ${actual} for debugging
+- Type Safety: Return type is always ValidationResult, consistent schema across all evaluators
+- No External Dependencies: Pure function approach enables testing without mocks
+
+---
