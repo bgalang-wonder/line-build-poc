@@ -1,10 +1,11 @@
 'use client';
 
 import { create } from 'zustand';
-import { LineBuild, WorkUnit, BuildValidationStatus } from '../types';
+import { LineBuild, WorkUnit, BuildValidationStatus, ScenarioContext, ResolvedWorkUnit } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import { stateSnapshotManager } from '@/lib/error/errorRecovery';
 import { scoreLineBuild } from '@/lib/scoring/complexityEngine';
+import { resolveWorkUnits, diffScenarios } from '../resolver';
 
 // ============================================================================
 // Chat Message Types (shared with ChatPanel)
@@ -28,6 +29,17 @@ export interface ValidationSnapshot {
 }
 
 // ============================================================================
+// Resolver State Types
+// ============================================================================
+
+export interface ResolverState {
+  context: ScenarioContext | null; // Current scenario being previewed
+  baseResolved: ResolvedWorkUnit[] | null; // Current build resolved (baseline)
+  scenarioResolved: ResolvedWorkUnit[] | null; // Alternate scenario resolved
+  diffs: Record<string, any> | null; // Diff between base and scenario
+}
+
+// ============================================================================
 // Editor Store Interface (unified state for all 3 panels)
 // ============================================================================
 
@@ -41,6 +53,9 @@ export interface EditorStore {
 
   // ========== VALIDATION STATE ==========
   validationSnapshot: ValidationSnapshot;
+
+  // ========== RESOLVER STATE (P1.6 Overlays) ==========
+  resolverState: ResolverState;
 
   // ========== UI STATE ==========
   isLoading: boolean;
@@ -84,6 +99,11 @@ export interface EditorStore {
 
   // ========== COMPLEXITY SCORING ==========
   updateComplexity: () => void; // Recompute and update complexity score
+
+  // ========== RESOLVER ACTIONS (P1.6) ==========
+  setResolverContext: (context: ScenarioContext) => void; // Set active scenario for preview
+  resolveForScenario: (context: ScenarioContext) => void; // Resolve base and scenario, compute diffs
+  clearResolverState: () => void; // Clear resolver preview
 
   // ========== UTIL ==========
   setLoading: (loading: boolean) => void;
@@ -139,6 +159,12 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     timestamp: new Date().toISOString(),
     status: null,
     isRunning: false,
+  },
+  resolverState: {
+    context: null,
+    baseResolved: null,
+    scenarioResolved: null,
+    diffs: null,
   },
   isLoading: false,
   error: null,
@@ -502,6 +528,67 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     set({ error: null, lastErrorTime: undefined });
   },
 
+  // ========== RESOLVER ACTIONS (P1.6) ==========
+
+  setResolverContext: (context: ScenarioContext) => {
+    set((state) => ({
+      resolverState: {
+        ...state.resolverState,
+        context,
+      },
+    }));
+  },
+
+  resolveForScenario: (context: ScenarioContext) => {
+    const { currentBuild } = get();
+    if (!currentBuild) {
+      set({ error: 'No build loaded for resolution' });
+      return;
+    }
+
+    try {
+      // Resolve base scenario (current build with no overlays)
+      const baseContext: ScenarioContext = {
+        equipmentProfileId: '',
+        capabilities: [],
+        selectedCustomizationValueIds: [],
+        customizationCount: 0,
+      };
+      const baseResolved = resolveWorkUnits(currentBuild.workUnits, baseContext);
+
+      // Resolve alternate scenario
+      const scenarioResolved = resolveWorkUnits(currentBuild.workUnits, context);
+
+      // Compute diffs
+      const diffs = diffScenarios(baseResolved, scenarioResolved);
+
+      set((state) => ({
+        resolverState: {
+          ...state.resolverState,
+          context,
+          baseResolved,
+          scenarioResolved,
+          diffs,
+        },
+        error: null,
+      }));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to resolve scenario';
+      set({ error: `Resolver error: ${message}` });
+    }
+  },
+
+  clearResolverState: () => {
+    set({
+      resolverState: {
+        context: null,
+        baseResolved: null,
+        scenarioResolved: null,
+        diffs: null,
+      },
+    });
+  },
+
   reset: () => {
     set({
       currentBuild: null,
@@ -511,6 +598,12 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
         timestamp: new Date().toISOString(),
         status: null,
         isRunning: false,
+      },
+      resolverState: {
+        context: null,
+        baseResolved: null,
+        scenarioResolved: null,
+        diffs: null,
       },
       isLoading: false,
       error: null,

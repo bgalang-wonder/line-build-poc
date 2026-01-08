@@ -14,6 +14,7 @@ import { PublishButton } from '../validation/PublishButton';
 import { CheckMyWorkButton } from '../validation/CheckMyWorkButton';
 import { ToastContainer } from '../ui/Toast';
 import { DAGVisualization } from '../visualization/DAGVisualization';
+import { ScenarioPanel } from '../resolver/ScenarioPanel';
 import { LineBuild, WorkUnit, BuildValidationStatus } from '@/lib/model/types';
 
 interface EditorContainerProps {
@@ -60,6 +61,9 @@ export default function EditorContainer({
     title: string;
     message: string;
   }>>([]);
+
+  // ========== SCENARIO PANEL STATE (P1.6) ==========
+  const [scenarioPanelOpen, setScenarioPanelOpen] = useState(false);
 
   // ========== STORE ACCESS ==========
   const store = useEditorStore();
@@ -440,6 +444,16 @@ export default function EditorContainer({
               </div>
             </div>
 
+            {/* What-If Scenario Button (P1.6) */}
+            <div className="border-t pt-4">
+              <button
+                onClick={() => setScenarioPanelOpen(true)}
+                className="w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
+              >
+                🔄 What-If Scenario
+              </button>
+            </div>
+
             {/* Step List */}
             <div className="border-t pt-4">
               <StepList
@@ -475,6 +489,19 @@ export default function EditorContainer({
           </div>
         }
       />
+
+      {/* Scenario Panel Modal (P1.6) */}
+      {scenarioPanelOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-end">
+          <div className="bg-white w-full sm:w-96 h-full sm:h-auto sm:rounded-lg shadow-2xl sm:max-h-[90vh] flex flex-col">
+            <ScenarioPanel
+              isOpen={true}
+              onClose={() => setScenarioPanelOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+
       <ToastContainer toasts={toasts} onDismiss={handleDismissToast} />
     </>
   );
