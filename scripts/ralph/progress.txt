@@ -778,3 +778,47 @@ Patterns accumulate across iterations.
 - Loading State: Absolute overlay with backdrop-blur-sm for visual feedback
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.6.4: Validation gating - block Draft→Active if failures
+
+### What I Implemented:
+- Created PublishButton component at `src/components/validation/PublishButton.tsx`
+- Enforces validation gating: Draft→Active transition blocked if validation failures exist
+- Two modes: Draft mode with "Publish to Active" button, Active mode with "Demote to Draft" button
+- Publish button disabled with explanatory message if validation failures present
+- Shows specific reason why publish is blocked (structured/semantic failures, no validation run)
+- Demote button always enabled (Active→Draft allowed without validation checks)
+- Confirmation dialogs for both publish and demote actions
+- Loading states during transition processing
+- Visual feedback: icons, colors, messages showing validation status
+- Integrates with BuildStatusManager for transition logic
+- Shows validation issue count and guidance messages
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/validation/PublishButton.tsx` — Publish/demote UI component (350+ lines)
+
+### Learnings (for next iteration):
+- Conditional rendering: Two distinct UIs for draft vs. active status
+- Button state management: Disabled when no transitions possible or validation blocks publish
+- Confirmation dialog: Separate component for modal handling, reused for publish and demote
+- Validation gating: Use BuildStatusManager.canTransition() to check publish eligibility
+- Error messaging: Show specific BlockingReason from StatusTransitionResult
+- Guidance messages: Different messages for different scenarios (no validation, failures, ready, demoted)
+- State management: confirmAction track which action requires confirmation
+- Loading indicator: Show during async onPublish/onDemote callback
+- Icons: Use Lock/LockOpen to visually communicate edit vs. publish states
+- Responsive: Single button for each mode, not both at once
+
+### Codebase Patterns Discovered:
+- Conditional Mode UI: Branch on build.metadata.status to render draft or active UI
+- Confirmation Dialog: Separate component with isOpen, title, message, confirmText
+- Transition Logic: Use BuildStatusManager static methods for validation checks
+- Blocking Reasons: Display publishResult.reason when canPublish is false
+- Guidance Messages: Different text based on validationStatus.failureCount
+- Loading State: setIsProcessing during async callback, disable button
+- Icon Pairing: Use Lock for active (secure), LockOpen for draft (editable)
+- Dialog Backdrop: Fixed overlay with z-50 and black/50 background
+- Message Styling: Use different colors/icons for error/warning/success messages
+- Callback Pattern: onPublish and onDemote async callbacks for parent state management
+
+---
