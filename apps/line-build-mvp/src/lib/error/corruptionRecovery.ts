@@ -207,6 +207,7 @@ class CorruptionRecoveryManager {
           status: 'draft',
           version: 1,
           sourceConversations: [],
+          changelog: [], // Initialize empty audit trail
         },
       };
 

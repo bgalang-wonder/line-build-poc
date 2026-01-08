@@ -1,7 +1,7 @@
 'use client';
 
 import { create } from 'zustand';
-import { LineBuild, WorkUnit, BuildValidationStatus, ScenarioContext, ResolvedWorkUnit } from '../types';
+import { LineBuild, WorkUnit, BuildValidationStatus, ScenarioContext, ResolvedWorkUnit, ChangelogEntry } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import { stateSnapshotManager } from '@/lib/error/errorRecovery';
 import { scoreLineBuild } from '@/lib/scoring/complexityEngine';
@@ -66,7 +66,7 @@ export interface EditorStore {
   setBuild: (build: LineBuild) => void;
   setSelectedStepId: (id: string | null) => void;
 
-  // Form mutations
+  // Form mutations (all accept optional agentAssisted flag for changelog)
   addWorkUnit: (input: {
     action: string;
     targetItemName: string;
@@ -81,12 +81,13 @@ export interface EditorStore {
     storageLocation?: string;
     bulkPrep?: boolean;
     dependsOn?: string[];
-  }) => WorkUnit | null;
+  }, agentAssisted?: boolean) => WorkUnit | null;
 
-  editWorkUnit: (workUnitId: string, updates: Partial<WorkUnit>) => WorkUnit | null;
-  removeWorkUnit: (workUnitId: string) => boolean;
-  setDependencies: (workUnitId: string, dependsOn: string[]) => boolean;
-  changeBOM: (menuItemId: string, menuItemName: string) => boolean;
+  editWorkUnit: (workUnitId: string, updates: Partial<WorkUnit>, agentAssisted?: boolean) => WorkUnit | null;
+  removeWorkUnit: (workUnitId: string, agentAssisted?: boolean) => boolean;
+  reorderWorkUnits: (fromIndex: number, toIndex: number, agentAssisted?: boolean) => boolean;
+  setDependencies: (workUnitId: string, dependsOn: string[], agentAssisted?: boolean) => boolean;
+  changeBOM: (menuItemId: string, menuItemName: string, agentAssisted?: boolean) => boolean;
 
   // ========== CHAT ACTIONS ==========
   addChatMessage: (role: 'user' | 'assistant' | 'system', content: string) => ChatMessage;
@@ -122,6 +123,36 @@ export interface EditorStore {
 const isDraft = (build: LineBuild | null): boolean => {
   return build?.metadata?.status === 'draft';
 };
+
+/**
+ * Creates a changelog entry for audit trail
+ */
+const createChangelogEntry = (
+  action: string,
+  agentAssisted: boolean,
+  details?: string
+): ChangelogEntry => ({
+  id: uuidv4(),
+  timestamp: new Date().toISOString(),
+  userId: 'current-user', // TODO: Get from auth context when available
+  agentAssisted,
+  action,
+  details,
+});
+
+/**
+ * Appends a changelog entry to the build's metadata
+ */
+const appendChangelog = (
+  build: LineBuild,
+  entry: ChangelogEntry
+): LineBuild => ({
+  ...build,
+  metadata: {
+    ...build.metadata,
+    changelog: [...(build.metadata.changelog || []), entry],
+  },
+});
 
 const hasDependencyPath = (
   build: LineBuild,
@@ -179,7 +210,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     set({ selectedStepId: id });
   },
 
-  addWorkUnit: (input) => {
+  addWorkUnit: (input, agentAssisted = false) => {
     const { currentBuild } = get();
     if (!currentBuild) {
       set({ error: 'No build loaded' });
@@ -217,8 +248,15 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
       dependsOn: input.dependsOn || [],
     };
 
-    // Update state
-    const updated: LineBuild = {
+    // Create changelog entry
+    const changelogEntry = createChangelogEntry(
+      'added step',
+      agentAssisted,
+      `Added ${input.action} step: ${input.targetItemName}`
+    );
+
+    // Update state with changelog
+    let updated: LineBuild = {
       ...currentBuild,
       workUnits: [...currentBuild.workUnits, newStep],
       metadata: {
@@ -226,6 +264,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
         version: (currentBuild.metadata?.version || 0) + 1,
       },
     };
+    updated = appendChangelog(updated, changelogEntry);
 
     set({ currentBuild: updated, error: null });
     // Clear validation results on mutation (user must re-validate)
@@ -233,7 +272,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     return newStep;
   },
 
-  editWorkUnit: (workUnitId: string, updates: Partial<WorkUnit>) => {
+  editWorkUnit: (workUnitId: string, updates: Partial<WorkUnit>, agentAssisted = false) => {
     const { currentBuild } = get();
     if (!currentBuild) {
       set({ error: 'No build loaded' });
@@ -253,21 +292,30 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
       return null;
     }
 
+    const originalStep = currentBuild.workUnits[stepIndex];
+
     // Merge updates
     const updatedStep: WorkUnit = {
-      ...currentBuild.workUnits[stepIndex],
+      ...originalStep,
       ...updates,
       tags: {
-        ...currentBuild.workUnits[stepIndex].tags,
+        ...originalStep.tags,
         ...(updates.tags || {}),
       },
     };
+
+    // Create changelog entry with details about what changed
+    const changelogEntry = createChangelogEntry(
+      `edited step ${originalStep.tags.target.name || workUnitId}`,
+      agentAssisted,
+      `Modified step: ${originalStep.tags.action} ${originalStep.tags.target.name}`
+    );
 
     // Update state
     const newWorkUnits = [...currentBuild.workUnits];
     newWorkUnits[stepIndex] = updatedStep;
 
-    const updated: LineBuild = {
+    let updated: LineBuild = {
       ...currentBuild,
       workUnits: newWorkUnits,
       metadata: {
@@ -275,6 +323,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
         version: (currentBuild.metadata?.version || 0) + 1,
       },
     };
+    updated = appendChangelog(updated, changelogEntry);
 
     set({ currentBuild: updated, error: null });
     // Clear validation results on mutation
@@ -282,7 +331,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     return updatedStep;
   },
 
-  removeWorkUnit: (workUnitId: string) => {
+  removeWorkUnit: (workUnitId: string, agentAssisted = false) => {
     const { currentBuild } = get();
     if (!currentBuild) {
       set({ error: 'No build loaded' });
@@ -295,11 +344,19 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
       return false;
     }
 
-    // Check exists
-    if (!currentBuild.workUnits.find((s) => s.id === workUnitId)) {
+    // Check exists and get info for changelog
+    const removedStep = currentBuild.workUnits.find((s) => s.id === workUnitId);
+    if (!removedStep) {
       set({ error: 'Step not found' });
       return false;
     }
+
+    // Create changelog entry before removal
+    const changelogEntry = createChangelogEntry(
+      'deleted step',
+      agentAssisted,
+      `Removed step: ${removedStep.tags.action} ${removedStep.tags.target.name}`
+    );
 
     // Remove and clean up dependencies
     const newWorkUnits = currentBuild.workUnits
@@ -309,7 +366,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
         dependsOn: s.dependsOn.filter((dep) => dep !== workUnitId),
       }));
 
-    const updated: LineBuild = {
+    let updated: LineBuild = {
       ...currentBuild,
       workUnits: newWorkUnits,
       metadata: {
@@ -317,6 +374,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
         version: (currentBuild.metadata?.version || 0) + 1,
       },
     };
+    updated = appendChangelog(updated, changelogEntry);
 
     set({ currentBuild: updated, selectedStepId: null, error: null });
     // Clear validation results on mutation
@@ -324,7 +382,65 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     return true;
   },
 
-  setDependencies: (workUnitId: string, dependsOn: string[]) => {
+  reorderWorkUnits: (fromIndex: number, toIndex: number, agentAssisted = false) => {
+    const { currentBuild } = get();
+    if (!currentBuild) {
+      set({ error: 'No build loaded' });
+      return false;
+    }
+
+    // Precondition: must be draft
+    if (!isDraft(currentBuild)) {
+      set({ error: 'Cannot reorder steps in active build (demote first)' });
+      return false;
+    }
+
+    // Validate indices
+    const { workUnits } = currentBuild;
+    if (
+      fromIndex < 0 ||
+      fromIndex >= workUnits.length ||
+      toIndex < 0 ||
+      toIndex >= workUnits.length
+    ) {
+      set({ error: 'Invalid reorder indices' });
+      return false;
+    }
+
+    // No-op if same position
+    if (fromIndex === toIndex) {
+      return true;
+    }
+
+    // Reorder array: remove from old position, insert at new position
+    const newWorkUnits = [...workUnits];
+    const [movedItem] = newWorkUnits.splice(fromIndex, 1);
+    newWorkUnits.splice(toIndex, 0, movedItem);
+
+    // Create changelog entry
+    const changelogEntry = createChangelogEntry(
+      'reordered steps',
+      agentAssisted,
+      `Moved step from position ${fromIndex + 1} to ${toIndex + 1}`
+    );
+
+    let updated: LineBuild = {
+      ...currentBuild,
+      workUnits: newWorkUnits,
+      metadata: {
+        ...currentBuild.metadata,
+        version: (currentBuild.metadata?.version || 0) + 1,
+      },
+    };
+    updated = appendChangelog(updated, changelogEntry);
+
+    set({ currentBuild: updated, error: null });
+    // Clear validation results on mutation
+    get().clearValidationResults();
+    return true;
+  },
+
+  setDependencies: (workUnitId: string, dependsOn: string[], agentAssisted = false) => {
     const { currentBuild } = get();
     if (!currentBuild) {
       set({ error: 'No build loaded' });
@@ -366,6 +482,13 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
       }
     }
 
+    // Create changelog entry
+    const changelogEntry = createChangelogEntry(
+      'updated dependencies',
+      agentAssisted,
+      `Updated dependencies for step: ${step.tags.action} ${step.tags.target.name}`
+    );
+
     // Update step
     const stepIndex = currentBuild.workUnits.findIndex((s) => s.id === workUnitId);
     const newWorkUnits = [...currentBuild.workUnits];
@@ -374,7 +497,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
       dependsOn,
     };
 
-    const updated: LineBuild = {
+    let updated: LineBuild = {
       ...currentBuild,
       workUnits: newWorkUnits,
       metadata: {
@@ -382,6 +505,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
         version: (currentBuild.metadata?.version || 0) + 1,
       },
     };
+    updated = appendChangelog(updated, changelogEntry);
 
     set({ currentBuild: updated, error: null });
     // Clear validation results on mutation
@@ -389,7 +513,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     return true;
   },
 
-  changeBOM: (menuItemId: string, menuItemName: string) => {
+  changeBOM: (menuItemId: string, menuItemName: string, agentAssisted = false) => {
     const { currentBuild } = get();
     if (!currentBuild) {
       set({ error: 'No build loaded' });
@@ -402,8 +526,15 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
       return false;
     }
 
+    // Create changelog entry
+    const changelogEntry = createChangelogEntry(
+      'changed menu item',
+      agentAssisted,
+      `Changed menu item from "${currentBuild.menuItemName}" to "${menuItemName}"`
+    );
+
     // Update state: new BOM, clear steps, reset to draft
-    const updated: LineBuild = {
+    let updated: LineBuild = {
       ...currentBuild,
       menuItemId,
       menuItemName,
@@ -414,6 +545,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
         version: (currentBuild.metadata?.version || 0) + 1,
       },
     };
+    updated = appendChangelog(updated, changelogEntry);
 
     set({ currentBuild: updated, selectedStepId: null, error: null });
     // Clear validation results on BOM change

@@ -80,6 +80,7 @@ export default function EditorContainer({
     setSelectedStepId,
     editWorkUnit,
     removeWorkUnit,
+    reorderWorkUnits,
     setDependencies,
     changeBOM,
     addChatMessage,
@@ -141,10 +142,11 @@ export default function EditorContainer({
     [setSelectedStepId]
   );
 
+  // Form handlers pass agentAssisted=false (direct human edits via UI)
   const handleStepEdit = useCallback(
     (updates: Partial<WorkUnit>) => {
       if (!selectedStepId) return;
-      const success = editWorkUnit(selectedStepId, updates);
+      const success = editWorkUnit(selectedStepId, updates, false); // Direct human edit
       if (!success) {
         store.setError('Failed to edit step');
       }
@@ -154,7 +156,7 @@ export default function EditorContainer({
 
   const handleStepRemove = useCallback(
     (stepId: string) => {
-      const success = removeWorkUnit(stepId);
+      const success = removeWorkUnit(stepId, false); // Direct human edit
       if (!success) {
         store.setError('Failed to remove step');
       }
@@ -164,7 +166,7 @@ export default function EditorContainer({
 
   const handleSetDependencies = useCallback(
     (stepId: string, deps: string[]) => {
-      const success = setDependencies(stepId, deps);
+      const success = setDependencies(stepId, deps, false); // Direct human edit
       if (!success) {
         store.setError('Failed to update dependencies');
       }
@@ -174,7 +176,7 @@ export default function EditorContainer({
 
   const handleChangeBOM = useCallback(
     (menuItemId: string, menuItemName: string) => {
-      const success = changeBOM(menuItemId, menuItemName);
+      const success = changeBOM(menuItemId, menuItemName, false); // Direct human edit
       if (!success) {
         store.setError('Failed to change BOM');
       }
@@ -184,12 +186,22 @@ export default function EditorContainer({
 
   const handleAddStep = useCallback(
     (input: any) => {
-      const step = addWorkUnit(input);
+      const step = addWorkUnit(input, false); // Direct human edit
       if (!step) {
         store.setError('Failed to add step');
       }
     },
     [addWorkUnit, store]
+  );
+
+  const handleReorderSteps = useCallback(
+    (fromIndex: number, toIndex: number) => {
+      const success = reorderWorkUnits(fromIndex, toIndex, false); // Direct human edit
+      if (!success) {
+        store.setError('Failed to reorder steps');
+      }
+    },
+    [reorderWorkUnits, store]
   );
 
   // ========== CHAT PANEL HANDLERS ==========
@@ -234,11 +246,12 @@ export default function EditorContainer({
         }
 
         // Apply suggested work units automatically if confidence is high or medium
+        // These are agent-assisted changes (agentAssisted=true for changelog)
         if (interpretation.suggestedActions.length > 0 && interpretation.confidence !== 'low') {
           let buildAfterSuggestions = updatedBuild;
           let appliedCount = 0;
 
-          // Apply each suggestion in order
+          // Apply each suggestion in order (all marked as agent-assisted)
           for (const suggestion of interpretation.suggestedActions) {
             try {
               if (suggestion.action === 'add' && suggestion.workUnit) {
@@ -258,7 +271,7 @@ export default function EditorContainer({
                   bulkPrep: suggestion.workUnit.tags?.bulkPrep,
                   dependsOn: suggestion.workUnit.dependsOn || [],
                 };
-                const newUnit = addWorkUnit(input);
+                const newUnit = addWorkUnit(input, true); // Agent-assisted
                 if (newUnit) {
                   appliedCount++;
                   // Update build reference for next iteration
@@ -270,10 +283,10 @@ export default function EditorContainer({
                   }
                 }
               } else if (suggestion.action === 'edit' && suggestion.unitIdToModify && suggestion.workUnit) {
-                const success = editWorkUnit(suggestion.unitIdToModify, suggestion.workUnit);
+                const success = editWorkUnit(suggestion.unitIdToModify, suggestion.workUnit, true); // Agent-assisted
                 if (success) appliedCount++;
               } else if (suggestion.action === 'remove' && suggestion.unitIdToModify) {
-                const success = removeWorkUnit(suggestion.unitIdToModify);
+                const success = removeWorkUnit(suggestion.unitIdToModify, true); // Agent-assisted
                 if (success) appliedCount++;
               }
             } catch (err) {
@@ -470,6 +483,7 @@ export default function EditorContainer({
                   build={currentBuild}
                   selectedStepId={selectedStepId || undefined}
                   onStepSelect={handleStepSelect}
+                  onReorder={handleReorderSteps}
                 />
               </div>
             </div>

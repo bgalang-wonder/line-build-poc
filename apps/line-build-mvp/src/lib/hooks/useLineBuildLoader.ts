@@ -119,6 +119,7 @@ export function useLineBuildLoader(): UseLineBuildLoaderResult {
             version: 1,
             status: 'draft',
             sourceConversations: [],
+            changelog: [], // Initialize empty audit trail
           },
         };
 

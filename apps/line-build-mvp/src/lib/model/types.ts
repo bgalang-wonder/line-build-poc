@@ -122,6 +122,19 @@ export interface ComplexityScore {
   timestamp: string; // ISO 8601
 }
 
+/**
+ * Audit trail entry for tracking edits to a LineBuild
+ * Distinguishes between direct human edits and agent-assisted changes
+ */
+export interface ChangelogEntry {
+  id: string;
+  timestamp: string; // ISO 8601
+  userId: string; // Who triggered it (always a person)
+  agentAssisted: boolean; // Was this done via agent/chat or direct human edit?
+  action: string; // e.g., "added step", "edited step X", "deleted step"
+  details?: string; // Optional context about what changed
+}
+
 export interface LineBuild {
   id: string;
   menuItemId: string;
@@ -132,7 +145,8 @@ export interface LineBuild {
     author: string;
     version: number;
     status: "draft" | "active";
-    sourceConversations?: string[];
+    sourceConversations?: string[]; // Chat history that contributed to this build
+    changelog?: ChangelogEntry[]; // Audit trail of edits
   };
 }
 
