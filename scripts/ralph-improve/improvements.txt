@@ -7,47 +7,67 @@ This file tracks spec-to-implementation improvements.
 - **PRD:** docs/PRD-FULL.md
 - **App:** apps/line-build-mvp/
 
-## PRD P1 Requirements Checklist
+---
 
-- [x] P1.1: Action types (PREP, HEAT, TRANSFER, ASSEMBLE, etc.)
-- [x] P1.2: Target linking (BOM ID preferred, name fallback)
-- [x] P1.3: Equipment + duration (required for HEAT actions)
-- [x] P1.4: Cooking phase (PRE_COOK, COOK, POST_COOK, ASSEMBLY, PASS)
-- [x] P1.5: Complexity scoring (auto-computed, displayed)
-- [ ] P1.6: Overlays/variants (conditional logic, no duplication)
-- [ ] P1.7: Natural language authoring (AI-assisted)
-- [ ] P1.8: Migration (95%+ auto-converts)
-- [x] P1.9: Pre-service prep (prepType, storageLocation, bulkPrep)
+## AUDIT CORRECTION (Jan 8, 2026 - GPT 5.2 Review)
 
-## Definition of Done Checklist
+**Previous checklists were overly optimistic.** Key findings:
 
-- [ ] Schema documented and stable
-- [ ] Conversational input → structured output
-- [ ] Complexity scores match legacy spreadsheet
-- [ ] Overlays work for equipment/location scenarios
-- [ ] Cooking phases are structured data
-- [ ] Pre-service prep captured with storage locations
-- [ ] Complexity can be filtered (include prep, exclude prep, prep-only)
-- [ ] Validation overrides tracked with reasons
-- [ ] Source conversations preserved for audit
-- [ ] Gantt/timeline visualization available
-- [ ] 50+ items migrated as validation
+1. **Components exist but NOT wired into UI:**
+   - StepEditor imported but not rendered in EditorContainer
+   - BOMAutocomplete imported but not rendered in StepEditor
+   - DependenciesMultiSelect imported but not rendered
+   - useComplexityUpdater hook exists but not used
+
+2. **PRD asks for Gantt/timeline, we only have DAG:**
+   - DAGVisualization exists (React Flow)
+   - Gantt/timeline view is separate requirement - NOT implemented
+
+3. **Human confirm/deny missing:**
+   - PRD wants human gate before applying AI suggestions
+   - Current impl auto-applies on medium/high confidence
+
+4. **Rules Manager is placeholder:**
+   - /rules page has non-functional button
 
 ---
 
-## Definition of Done Checklist
+## PRD P1 Requirements Checklist (CORRECTED)
+
+- [x] P1.1: Action types (PREP, HEAT, TRANSFER, ASSEMBLE, etc.) - types.ts
+- [~] P1.2: Target linking - **Backend done, BOMAutocomplete NOT wired**
+- [~] P1.3: Equipment + duration - **Fields exist, rules not manageable**
+- [x] P1.4: Cooking phase (PRE_COOK, COOK, POST_COOK, ASSEMBLY, PASS)
+- [~] P1.5: Complexity scoring - **Engine done, NOT displayed in UI**
+- [~] P1.6: Overlays/variants - Preview works, authoring UI missing
+- [~] P1.7: Natural language - **Works but missing human confirm/deny**
+- [~] P1.8: Migration - Backend done, UI missing
+- [~] P1.9: Pre-service prep - **Fields exist, StepEditor NOT mounted**
+
+## Definition of Done Checklist (CORRECTED)
 
 - [x] Schema documented and stable
-- [ ] Conversational input → structured output
-- [x] Complexity scores match legacy spreadsheet (calibration-ready)
-- [ ] Overlays work for equipment/location scenarios
+- [~] Conversational input → structured output (**missing confirm/deny**)
+- [~] Complexity scores match legacy (**not displayed in UI**)
+- [~] Overlays work for equipment/location (**preview only, no authoring**)
 - [x] Cooking phases are structured data
-- [x] Pre-service prep captured with storage locations
+- [~] Pre-service prep captured (**StepEditor not mounted**)
 - [x] Complexity can be filtered (include prep, exclude prep, prep-only)
 - [ ] Validation overrides tracked with reasons
-- [ ] Source conversations preserved for audit
-- [ ] Gantt/timeline visualization available
+- [x] Source conversations preserved for audit
+- [~] Gantt/timeline visualization (**DAG exists, Gantt missing**)
 - [ ] 50+ items migrated as validation
+
+## P0 CRITICAL PATH (UI Wiring)
+
+These 4 beads would fix the "components exist but not wired" gap:
+
+| Bead | Title | Impact |
+|------|-------|--------|
+| benchtop-l5c | Wire StepEditor into EditorContainer | Unlocks form editing |
+| benchtop-tp2 | Wire BOMAutocomplete into StepEditor | Unlocks P1.2 UI |
+| benchtop-0m6 | Wire DependenciesMultiSelect into StepEditor | Unlocks dependency UI |
+| benchtop-rnq | Display complexity score in editor UI | Unlocks P1.5 UI |
 
 ---
 

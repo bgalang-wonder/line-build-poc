@@ -1,47 +1,27 @@
-# Beads to Implement
-# Generated: Wed Jan  7 19:15:51 EST 2026
-# This file persists even after beads are closed
-# Ralph will work through these in order as dependencies resolve
+# Beads to Implement - P0 Completion Sprint
+# Generated: Wed Jan  8 2026
+# Focus: Wire existing components into editor UI
+#
+# CONTEXT: Components exist but are NOT mounted in EditorContainer.
+# GPT 5.2 audit revealed StepEditor, BOMAutocomplete, DependenciesMultiSelect
+# are imported but never rendered. This sprint wires them up.
 
-benchtop-3v1
-benchtop-9jy
-benchtop-7ql
-benchtop-dsk
-benchtop-j4n
-benchtop-hj0
-benchtop-44m
-benchtop-x0c.11.5
-benchtop-x0c.11.4
-benchtop-x0c.11.3
-benchtop-x0c.11.2
-benchtop-x0c.11.1
-benchtop-x0c.7.4
-benchtop-x0c.7.2
-benchtop-x0c.7.1
-benchtop-x0c.6.4
-benchtop-x0c.6.2
-benchtop-x0c.6.1
-benchtop-x0c.5.4
-benchtop-x0c.5.2
-benchtop-x0c.5.1
-benchtop-x0c.3.5
-benchtop-x0c.3.3
-benchtop-x0c.3.2
-benchtop-x0c.3.1
-benchtop-x0c.2.3
-benchtop-x0c.2.2
-benchtop-x0c.2.1
-benchtop-x0c.1.5
-benchtop-x0c.1.4
-benchtop-x0c.1.3
-benchtop-x0c.1.2
-benchtop-x0c.1.1
-benchtop-oqi
-benchtop-u2x
-benchtop-ntj
-benchtop-x0c.9.5
-benchtop-x0c.9.4
-benchtop-x0c.9.3
-benchtop-x0c.9.2
-benchtop-x0c.9.1
-benchtop-x0c.8.3
+# === P0 CRITICAL PATH (Wire UI Components) ===
+# These 4 beads move us from ~60% to ~75% completion
+
+benchtop-l5c    # Wire StepEditor into EditorContainer (HIGHEST PRIORITY)
+benchtop-tp2    # Wire BOMAutocomplete into StepEditor target field
+benchtop-0m6    # Wire DependenciesMultiSelect into StepEditor
+benchtop-rnq    # Display complexity score in editor UI
+
+# === P0 EPICS TO CLOSE (after children done) ===
+# Check child tasks with: bd dep tree <epic-id>
+# Close when all children are closed
+
+benchtop-x0c.3  # Epic: Form Panel - close after l5c, tp2, 0m6
+benchtop-x0c.1  # Epic: Project Setup - all children done
+benchtop-x0c.2  # Epic: Data Layer - all children done
+benchtop-x0c.5  # Epic: Chat Panel - mostly done
+benchtop-x0c.6  # Epic: Validation Panel - all children done
+benchtop-x0c.7  # Epic: Validation Engine - all children done
+benchtop-x0c.11 # Epic: App Shell - all children done

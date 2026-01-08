@@ -1,29 +1,44 @@
 # Ralph Agent Instructions
 
+## CURRENT SPRINT: P0 UI Wiring
+
+**Context:** GPT 5.2 audit revealed components exist but are NOT rendered:
+- StepEditor imported but not mounted in EditorContainer
+- BOMAutocomplete imported but not wired in StepEditor
+- DependenciesMultiSelect imported but not wired
+- useComplexityUpdater hook exists but not called
+
+**Priority Order:**
+1. `benchtop-l5c` — Wire StepEditor into EditorContainer (HIGHEST)
+2. `benchtop-tp2` — Wire BOMAutocomplete into StepEditor target field
+3. `benchtop-0m6` — Wire DependenciesMultiSelect into StepEditor
+4. `benchtop-rnq` — Display complexity score in editor UI
+
 ## Your Task
 
-1. **Check filter context** (if `scripts/ralph/.filter-context.txt` exists):
-   - Read it to see which beads you should focus on
-   - Only work on beads listed there (if filtering is active)
+1. **Check `scripts/ralph/beads-to-implement.txt`** for the current sprint beads
+   - Work through them in order listed
+   - Skip beads already closed (check with `bd show <id>`)
 
-2. Run `bd ready --json` to get tasks ready to work on
-   - If filtering is active, prioritize beads from the filter list
-   - Otherwise, pick from all ready beads
+2. Read `scripts/ralph/progress.txt` (check Codebase Patterns first)
 
-3. Read `scripts/ralph/progress.txt` (check Codebase Patterns first)
-
-4. Pick the highest priority task (P0 > P1 > P2 > P3 > P4)
+3. Pick the next unclosed bead from the sprint list
    - Skip epics (issue_type: "epic") — work on tasks/features
-   - Skip beads that are already closed (status != "open")
-   - Use `bd show <id>` to check status and get full details
-   - **If filtering is active, only pick beads from the filter list**
+   - Use `bd show <id>` to get full details and verify status
 
-5. Run `bd update <id> --status in_progress`
+4. Run `bd update <id> --status in_progress`
+
+5. **For UI wiring tasks, the pattern is:**
+   - Find the component that's imported but not rendered
+   - Add JSX to render it in the appropriate location
+   - Connect props to store state and actions
+   - Handle selection state and callbacks
 
 6. Implement that ONE task
    - Write code
    - Follow patterns from progress.txt
-   - Check reference implementation in `apps/archive-benchtop-mvp/` if needed
+   - Components are in `apps/line-build-mvp/src/components/`
+   - Store is in `apps/line-build-mvp/src/lib/model/store/`
 
 7. Run typecheck and tests:
    ```bash
