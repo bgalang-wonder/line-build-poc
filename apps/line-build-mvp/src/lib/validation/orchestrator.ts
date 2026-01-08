@@ -219,7 +219,7 @@ export function getValidationOrchestrator(): ValidationOrchestrator {
     const aiClient = new VertexAIClient({
       project: process.env.VERTEX_AI_PROJECT || '',
       location: process.env.VERTEX_AI_LOCATION || 'us-central1',
-      model: process.env.VERTEX_AI_MODEL || 'gemini-2.5-flash',
+      model: process.env.VERTEX_AI_MODEL || 'gemini-3-flash-preview',
     });
 
     orchestratorInstance = new ValidationOrchestrator(

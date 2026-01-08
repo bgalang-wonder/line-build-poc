@@ -21,7 +21,7 @@ export class VertexAIClient {
       project: config.project,
       location: config.location,
     });
-    this.model = config.model || "gemini-2.5-flash";
+    this.model = config.model || "gemini-3-flash-preview";
   }
 
   /**
@@ -66,7 +66,7 @@ export class VertexAIClient {
 export function createVertexAIClient(): VertexAIClient {
   const project = process.env.VERTEX_AI_PROJECT;
   const location = process.env.VERTEX_AI_LOCATION || "us-central1";
-  const model = process.env.VERTEX_AI_MODEL || "gemini-2.5-flash";
+  const model = process.env.VERTEX_AI_MODEL || "gemini-3-flash-preview";
 
   if (!project) {
     throw new Error(
