@@ -1748,3 +1748,38 @@ Patterns accumulate across iterations.
 5. Test CopilotKit integration when API is ready
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.9.1: Dashboard line build list (status, last updated)
+
+### What I Implemented:
+- Created functional dashboard page displaying all line builds in a table format
+- Loads all line builds using persistence.loadAll() 
+- Displays columns: Menu Item name, Build ID, Status (badge), Version, Author, Edit action
+- Status badge shows draft (yellow) vs active (green) with color coding
+- Sorts builds by most recent first (using sourceConversations as sort key)
+- Shows empty state with "Create New Build" prompt when no builds exist
+- Loading state while fetching builds from persistence layer
+- Error state with meaningful error messages if load fails
+- "Create New Build" button in header and empty state linking to `/editor?new=true`
+- Edit links navigate to `/editor?id={buildId}` for drill-in
+- Uses Tailwind CSS for styling consistent with existing components (lucide-react icons)
+
+### Files Changed:
+- `apps/line-build-mvp/src/app/dashboard/page.tsx` — Complete dashboard implementation replacing placeholder
+
+### Learnings (for next iteration):
+- LineBuildPersistence.loadAll() retrieves all builds from JSON files/localStorage and handles corrupted files gracefully
+- Metadata.sourceConversations array can be used for sorting by recency (first item as timestamp proxy)
+- Dashboard uses client-side rendering ('use client') since persistence works in both server and client contexts
+- Build status is stored in metadata.status as either "draft" or "active"
+- Version field tracks metadata.version for display
+- Author stored in metadata.author for tracking creator
+
+### Codebase Patterns Discovered:
+- Dashboard uses table layout with hover states for better UX
+- Status badges use Tailwind badge pattern: inline-flex + rounded-full + text-xs font-medium
+- Navigation links use /page?id={param} pattern for passing route params in Next.js 16 app router
+- Empty states show contextual button to create first item
+- Loading/Error states handled in JSX with conditional rendering
+
+---
