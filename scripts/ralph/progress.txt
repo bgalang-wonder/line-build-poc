@@ -424,3 +424,45 @@ Patterns accumulate across iterations.
 - Callbacks: onChange with updated array, validation before calling
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.3.5: Implement BOM autocomplete (select by itemId)
+
+### What I Implemented:
+- Created BOMAutocomplete component at `src/components/form/BOMAutocomplete.tsx`
+- Searchable dropdown using mock BOM catalog (getAllBOMItems from mockBom)
+- Real-time filtering by item ID or item name
+- Minimum 2-character search threshold with helpful message
+- Display format: "itemId: itemName" with type label badge
+- Keyboard navigation: arrow keys, enter to select, escape to close
+- Click-outside detection for dropdown closure
+- Optional filtering by item type (e.g., [40*] for consumables only)
+- Graceful handling of no results and search threshold states
+- Highlighted current selection in dropdown
+- Type badges showing item classification (Ingredient, Consumable, etc.)
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/form/BOMAutocomplete.tsx` — Autocomplete component (250+ lines)
+
+### Learnings (for next iteration):
+- itemId vs id: Mock BOM uses itemId (not id), match interface to real data types
+- Null safety: getItemTypeFromId returns string | null, need (prefix && typeMap[prefix]) pattern
+- Search threshold: Require minimum 2 chars to prevent showing all 200+ items
+- Keyboard handling: Manage highlighted index state separately for arrow key navigation
+- Click-outside: Use useRef on container + mousedown listener (not click) to close dropdown
+- Type display: Extract type labels via getItemTypeFromId function from mockBom
+- Display format: Show both itemId and name with colon separator for clarity
+- Arrow key interaction: Update highlightedIndex without triggering selection
+- Enter key: Select current highlighted item when dropdown is open
+- Search efficiency: Filter available items once, then filter again by search for O(n) performance
+
+### Codebase Patterns Discovered:
+- Autocomplete Pattern: Trigger input, search threshold, filtered list, selection callback
+- Keyboard Navigation: Separate highlighted index state, handle arrow keys + enter
+- Click-outside Detection: useRef on container + useEffect with mousedown listener
+- Type Filtering: Optional filterByType prop enables reusable component for different item types
+- Display Format: Show "id: name" format with type badge for context
+- Search UI: Show helpful messages (type threshold, no results, no available items)
+- Highlighting: Use conditional className with highlightedIndex === index
+- Graceful Degradation: Handle null/invalid types with fallback 'Item' label
+
+---
