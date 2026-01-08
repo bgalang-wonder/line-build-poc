@@ -21,6 +21,57 @@ export type Phase = "PRE_COOK" | "COOK" | "POST_COOK" | "ASSEMBLY" | "PASS";
 export type TimingMode = "a_la_minute" | "sandbag" | "hot_hold";
 export type PrepType = "pre_service" | "order_execution";
 
+// ============================================================================
+// Overlay & Variant Types (P1.6)
+// ============================================================================
+
+export interface EquipmentProfile {
+  id: string;
+  label: string; // e.g., "Waterbath Kitchen", "Turbo Kitchen"
+  capabilities: string[]; // e.g., ["waterbath", "portion_scale"]
+}
+
+export interface CustomizationValue {
+  optionId: string;
+  valueId: string;
+  label: string;
+}
+
+export interface WorkUnitOverlay {
+  id: string;
+  predicate: {
+    equipmentProfileId?: string; // Match specific equipment profile
+    customizationValueIds?: string[]; // All must be present
+    minCustomizationCount?: number; // Minimum count of customizations
+  };
+  overrides: Partial<Pick<WorkUnit["tags"], "equipment" | "time" | "station">> & {
+    notes?: string;
+  };
+  priority: number; // Lower priority applied first (allows higher priority to override)
+}
+
+export interface FieldProvenance {
+  type: "inherited" | "manual" | "overlay" | "override";
+  sourceId?: string; // e.g., equipment profile ID, overlay ID, or BOM ID
+}
+
+export interface ScenarioContext {
+  equipmentProfileId: string;
+  capabilities: string[];
+  selectedCustomizationValueIds: string[];
+  customizationCount: number;
+}
+
+export interface ResolvedWorkUnit extends WorkUnit {
+  originalWorkUnitId: string;
+  provenance: {
+    equipment?: FieldProvenance;
+    time?: FieldProvenance;
+    station?: FieldProvenance;
+    notes?: FieldProvenance;
+  };
+}
+
 export interface ItemReference {
   bomId?: string;
   name: string;
@@ -46,6 +97,7 @@ export interface WorkUnit {
     bulkPrep?: boolean;
   };
   dependsOn: string[];
+  overlays?: WorkUnitOverlay[]; // Conditional overrides for equipment/location variants
   metadata?: {
     legacySourceId?: string; // Link to original legacy procedure
     extractionConfidence?: "high" | "medium" | "low";
