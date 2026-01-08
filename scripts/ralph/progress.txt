@@ -734,3 +734,47 @@ Patterns accumulate across iterations.
 - Reasoning Extraction: Always include AI reasoning in result for audit trail and user transparency
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.6.1: Validation UI - checklist panel (read-only status)
+
+### What I Implemented:
+- Created ValidationChecklistPanel component at `src/components/validation/ValidationChecklistPanel.tsx`
+- Displays validation results as a read-only checklist with overall build status
+- Shows per-rule pass/fail results grouped by WorkUnit with detailed failure reasons
+- Collapsible result items: expand to see full reasoning from semantic rules
+- Status badges: "All Clear" (green) vs. "N Issues" (red)
+- Semantic rule results marked with "AI" badge; structured rules unmarked
+- Draft vs. Active status indicator with publish readiness messaging
+- "Re-run" button for running validation again
+- Empty states: no results yet, no work units to validate
+- Loading state overlay while validation runs
+- Timestamp display for each result and last validation check time
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/validation/ValidationChecklistPanel.tsx` — Validation UI component (400+ lines)
+
+### Learnings (for next iteration):
+- Component structure: Separate helper components (ValidationResultItem) for better organization
+- Collapsible logic: Track expanded state by `ruleId-workUnitId` composite key
+- Result styling: Use getResultStyling helper to centralize pass/fail appearance
+- Grouping: Group results by workUnitId to organize checklist by step
+- Status badges: Use distinct colors (emerald/red) with opacity variants for easy scanning
+- Timestamp formatting: Use toLocaleTimeString() with try/catch for safety
+- Empty states: Provide helpful guidance when no results or no steps exist
+- Loading UI: Overlay with backdrop-blur-sm and centered spinner
+- Semantic vs. Structured: Differentiate with type badge (only for semantic)
+- Draft/Active messaging: Show different guidance based on validation status and publish readiness
+
+### Codebase Patterns Discovered:
+- Panel Component: Root container with header, scrollable content, loading overlay
+- Status Display: Badge + metadata text (last checked, draft/active status)
+- Result Item: Icon + label + failure list + collapsible details
+- Grouping Pattern: Object.entries().map() to iterate grouped results
+- Styling: Tailwind bg/border color variants (emerald/red/blue), opacity modifiers
+- Empty State: Flex centered container with icon, message, optional action button
+- Timestamp Display: Try/catch with toLocaleTimeString() for safety
+- Collapsible Pattern: Separate component with onClick toggle, expanded state check
+- Icon Handling: Lucide react icons (CheckCircle2, AlertCircle, ChevronUp/Down)
+- Loading State: Absolute overlay with backdrop-blur-sm for visual feedback
+
+---
