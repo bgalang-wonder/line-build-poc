@@ -594,3 +594,69 @@ Patterns accumulate across iterations.
 - CopilotKit Integration: useCopilotFormActions hook provides action functions for useAction registration
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.7.4: Define normalized validation result schema
+
+### What I Implemented:
+- Created comprehensive validation result schema documentation at `src/lib/model/data/validationResultSchema.ts`
+- Documents ValidationResult interface (already defined in types.ts) with detailed field descriptions
+- Shows normalized schema for both structured and semantic validation results
+- Provides concrete JSON examples for different validation scenarios (pass/fail, with/without reasoning)
+- Defines ValidationEngine interface that all validators must implement
+- Documents aggregation schemas: ValidationResultSet and BuildValidationStatus
+- Explains how validation results are used: Draft→Active transition gating, UI display, aggregation
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/validationResultSchema.ts` — Schema documentation (180 lines)
+
+### Learnings (for next iteration):
+- ValidationResult schema has both structured and semantic fields but reasoning is optional
+- failures array is always present but empty when pass is true
+- reasoning field is only populated for semantic rules (structured rules don't need it)
+- ValidationResultSet aggregates results from a single validation run
+- BuildValidationStatus is the aggregated view used for Draft→Active gating decision
+- Both engines (structured and semantic) must produce same schema for consistent UI
+- Timestamp on each result enables tracking when validation was performed
+- workUnitId in result enables per-step feedback in UI
+
+### Codebase Patterns Discovered:
+- Schema Documentation: Create .ts file with interfaces, examples, and usage context
+- Result Format: {ruleId, ruleName, ruleType, workUnitId, pass, failures[], reasoning?, timestamp}
+- Failures Array: Always present, empty when pass is true, contains multiple reasons if applicable
+- Reasoning Field: Optional, only for semantic rules, provides AI explanation
+- Aggregation: Use BuildValidationStatus to summarize overall build validation state
+- Engine Contract: ValidationEngine interface defines methods both validators implement
+- Type Re-exports: Re-export from types.ts for convenience in schema file
+
+---
+
+---
+
+## Session Summary - Jan 8, 2026
+
+**Completed Tasks (3/5 ready):**
+1. benchtop-x0c.5.2 ✅ - Chat inline cards component with single/multi-select modes
+2. benchtop-x0c.5.4 ✅ - CopilotKit form actions with Zustand store and FormActionExecutor
+3. benchtop-x0c.7.4 ✅ - Validation result schema documentation
+
+**Still Ready (2 tasks):**
+- benchtop-x0c.7.1 - Structured rules evaluator (P0)
+- benchtop-x0c.7.2 - Semantic rules via Gemini (P0)
+
+**Architecture Progress:**
+- Chat layer: ChatPanel → InlineCard (options selection)
+- Form layer: Form components → CopilotKit actions → FormActionExecutor → Zustand store
+- Validation layer: Schema defined, ready for evaluator implementations
+
+**Key Implementations:**
+- Zustand store pattern for form state management
+- FormActionExecutor with 5 form mutations (add/edit/remove steps, set dependencies, change BOM)
+- Circular dependency detection algorithm
+- CopilotKit hooks for easy action integration
+- Normalized ValidationResult schema with examples
+
+**Next Session Focus:**
+- benchtop-x0c.7.1: Implement structured validation rule evaluator
+- benchtop-x0c.7.2: Implement semantic validation using Gemini
+- These will complete the validation engine MVP
+
