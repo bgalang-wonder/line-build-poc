@@ -204,3 +204,35 @@ Patterns accumulate across iterations.
 - Naming: Use uppercase SNAKE_CASE for exported constants, lowercase camelCase for functions
 
 ---
+
+## Jan 7, 2026 - benchtop-x0c.2.3: Implement JSON persistence for validation rules
+
+### What I Implemented:
+- Created ValidationRulesPersistence class for managing ValidationRule objects (both structured and semantic)
+- Implemented full CRUD operations: saveRule, saveRules, loadAll, loadRule, loadRulesByType, updateRule, deleteRule
+- Added backup and corruption recovery mechanisms (same pattern as LineBuildPersistence)
+- Rules persisted as collection in single JSON file with metadata wrapper
+- Type validation distinguishes between structured rules (with condition) and semantic rules (with prompt)
+- Support for both server (fs) and client (localStorage) storage backends
+- Singleton and test instance factory functions (getRulesPersistence, createRulesPersistence)
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/rulesPersistence.ts` — Complete rules persistence implementation
+
+### Learnings (for next iteration):
+- Rules collection pattern: Store all rules in single file (validation-rules.json) rather than per-rule files
+- Metadata wrapper: Use {rules: [...], _metadata: {...}} pattern to include save timestamp and rule count
+- Type guards: Use discriminated unions (type: "structured" | "semantic") to validate rule types
+- Update merging: Use `as ValidationRule` type assertion after spreading to resolve complex union issues
+- localStorage key prefix: Use "valrules:" prefix to avoid conflicts with other persistence layers
+- Backup naming: Timestamp backups enable easy recovery of specific versions
+- Load handling: Support both direct array [] and wrapped {rules: [...]} formats for flexibility
+
+### Codebase Patterns Discovered:
+- Rules Storage: Single collection file is better than per-rule files for managing relationships
+- Type Validation: Discriminated union types (type field) enable clean type narrowing
+- Error Recovery: Same three-tier strategy as LineBuildPersistence (primary → backup → error)
+- localStorage Strategy: Use domain-specific prefixes (valrules:, linebuild:) to organize data
+- Metadata Tracking: Include savedAt, version, and entity count in metadata for debugging
+
+---
