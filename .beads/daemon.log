@@ -688,3 +688,18 @@ time=2026-01-07T20:48:56.060-05:00 level=INFO msg="run 'bd init' to migrate to c
 time=2026-01-07T20:49:02.871-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
 time=2026-01-07T20:49:02.871-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
 time=2026-01-07T20:49:02.871-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T20:50:41.341-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T20:50:41.341-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T20:50:41.341-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T20:50:48.943-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T20:50:48.944-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T20:50:48.944-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T20:50:57.153-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T20:50:57.154-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T20:50:57.154-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T20:51:10.236-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T20:51:10.236-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T20:51:10.236-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
+time=2026-01-07T20:51:18.451-05:00 level=INFO msg="Daemon started (interval: %v, auto-commit: %v, auto-push: %v)" !BADKEY=5s !BADKEY=false !BADKEY=false
+time=2026-01-07T20:51:18.452-05:00 level=ERROR msg="non-canonical database name" name=benchtop.db expected=beads.db
+time=2026-01-07T20:51:18.452-05:00 level=INFO msg="run 'bd init' to migrate to canonical name"
