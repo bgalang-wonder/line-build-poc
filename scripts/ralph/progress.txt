@@ -1192,3 +1192,32 @@ Patterns accumulate across iterations.
 - Icon Pattern: Use Lucide React icons consistently (CheckCircle2 for success, AlertCircle for errors)
 
 ---
+
+## Jan 7, 2026 - benchtop-x0c.6.3: Validation UI - last-checked timestamp + relative time display
+
+### What I Implemented:
+- Enhanced ValidationChecklistPanel to show last-checked timestamp with relative time (e.g., "5 minutes ago")
+- Created getRelativeTime helper function that calculates time differences in human-readable format
+- Displays both absolute time (toLocaleTimeString) and relative time in the header section
+- Relative time formatted as: "just now", "X minutes ago", "X hours ago", "X days ago"
+- Removed stale indicator feature (would require tracking build modification timestamps)
+
+### Files Changed:
+- `src/components/validation/ValidationChecklistPanel.tsx` — Added getRelativeTime helper, updated timestamp display (50 lines changed)
+
+### Learnings (for next iteration):
+- Relative time calculation: Compare Date objects with getTime() for millisecond precision
+- Graceful degradation: Use try/catch in time helpers to handle invalid date strings
+- Feature scope: Stale indicator requires tracking build.metadata.updatedAt which isn't currently part of LineBuild type
+- Time display: Show both absolute (toLocaleTimeString) and relative time for context
+- Pluralization: Check count !== 1 for proper "minute" vs "minutes" display
+- Clean up old features: Removed onRunValidation prop from props interface (moved to CheckMyWorkButton)
+
+### Codebase Patterns Discovered:
+- Time Formatting: Separate helpers for absolute (formatTimestamp) and relative (getRelativeTime) time display
+- Helper Organization: Group time-related helpers together at top of component
+- Relative Time Calculation: Use Math.floor for integer division, check < instead of >= for cleaner logic
+- Error Handling: Try/catch on Date parsing with meaningful fallback ("unknown time")
+- Feature Coupling: Future stale detection would need to add updatedAt field to LineBuild.metadata
+
+---
