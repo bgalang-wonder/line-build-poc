@@ -3,14 +3,15 @@
 
 FILTER_FILE=${1:-"scripts/ralph/beads-to-implement.txt"}
 
-echo "📋 Generating filter file from ready beads..."
+echo "📋 Generating filter file from all open non-epic beads..."
 echo ""
 
-# Get all ready non-epic beads
-READY_BEADS=$(bd ready --json 2>/dev/null | jq -r '.[] | select(.issue_type != "epic") | .id')
+# Get all open non-epic beads (not just ready ones)
+# This way Ralph can work through them as dependencies resolve
+ALL_BEADS=$(bd list --status open --json 2>/dev/null | jq -r '.[] | select(.issue_type != "epic") | .id')
 
-if [ -z "$READY_BEADS" ]; then
-  echo "❌ No ready beads found"
+if [ -z "$ALL_BEADS" ]; then
+  echo "❌ No open non-epic beads found"
   exit 1
 fi
 
@@ -19,19 +20,19 @@ cat > "$FILTER_FILE" << EOF
 # Beads to Implement
 # Generated: $(date)
 # This file persists even after beads are closed
-# Ralph will work through these in order until complete
+# Ralph will work through these in order as dependencies resolve
 
 EOF
 
-echo "$READY_BEADS" | while read -r bead_id; do
+echo "$ALL_BEADS" | while read -r bead_id; do
   echo "$bead_id" >> "$FILTER_FILE"
 done
 
-COUNT=$(echo "$READY_BEADS" | wc -l | tr -d ' ')
+COUNT=$(echo "$ALL_BEADS" | wc -l | tr -d ' ')
 echo "✅ Generated $FILTER_FILE with $COUNT beads"
 echo ""
-echo "📋 Beads in filter:"
-echo "$READY_BEADS" | head -10
+echo "📋 Beads in filter (first 10):"
+echo "$ALL_BEADS" | head -10
 if [ "$COUNT" -gt 10 ]; then
   echo "... and $((COUNT - 10)) more"
 fi

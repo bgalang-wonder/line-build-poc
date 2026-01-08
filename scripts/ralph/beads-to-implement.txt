@@ -1,0 +1,47 @@
+# Beads to Implement
+# Generated: Wed Jan  7 19:15:51 EST 2026
+# This file persists even after beads are closed
+# Ralph will work through these in order as dependencies resolve
+
+benchtop-3v1
+benchtop-9jy
+benchtop-7ql
+benchtop-dsk
+benchtop-j4n
+benchtop-hj0
+benchtop-44m
+benchtop-x0c.11.5
+benchtop-x0c.11.4
+benchtop-x0c.11.3
+benchtop-x0c.11.2
+benchtop-x0c.11.1
+benchtop-x0c.7.4
+benchtop-x0c.7.2
+benchtop-x0c.7.1
+benchtop-x0c.6.4
+benchtop-x0c.6.2
+benchtop-x0c.6.1
+benchtop-x0c.5.4
+benchtop-x0c.5.2
+benchtop-x0c.5.1
+benchtop-x0c.3.5
+benchtop-x0c.3.3
+benchtop-x0c.3.2
+benchtop-x0c.3.1
+benchtop-x0c.2.3
+benchtop-x0c.2.2
+benchtop-x0c.2.1
+benchtop-x0c.1.5
+benchtop-x0c.1.4
+benchtop-x0c.1.3
+benchtop-x0c.1.2
+benchtop-x0c.1.1
+benchtop-oqi
+benchtop-u2x
+benchtop-ntj
+benchtop-x0c.9.5
+benchtop-x0c.9.4
+benchtop-x0c.9.3
+benchtop-x0c.9.2
+benchtop-x0c.9.1
+benchtop-x0c.8.3
