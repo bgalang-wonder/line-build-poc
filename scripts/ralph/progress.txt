@@ -1910,3 +1910,42 @@ Patterns accumulate across iterations.
 - Optional buildId pattern in container components for conditional loading
 
 ---
+
+## Jan 8, 2026 - benchtop-oqi: Error handling: app-level recovery (state, persistence, API)
+
+### What I Implemented:
+- Created comprehensive error recovery service (ErrorRecoveryManager, ErrorLogger, StateSnapshotManager)
+- Implemented retry logic with exponential backoff (100ms → 5s) for transient failures
+- Added state corruption recovery via last-known-good snapshots
+- Created React Error Boundary component with recovery UI
+- Implemented CopilotKit connection monitoring and error tracking
+- Built enhanced persistence hooks with retry and error handling
+- Extended EditorStore with error recovery methods (restoreFromSnapshot, clearError)
+- Integrated ErrorBoundary into root layout for app-wide error catching
+
+### Files Changed:
+- `src/lib/error/errorRecovery.ts` — Core error recovery service with logging, snapshots, and retry logic
+- `src/components/error/ErrorBoundary.tsx` — React Error Boundary with recovery UI
+- `src/lib/hooks/usePersistenceWithErrorHandling.ts` — Persistence layer with retry wrapper
+- `src/lib/hooks/useCopilotKitErrorHandling.ts` — CopilotKit connection monitoring and error handling
+- `src/lib/model/store/editorStore.ts` — Added restoreFromSnapshot, clearError, lastErrorTime tracking
+- `src/app/layout.tsx` — Wrapped app with ErrorBoundary for global error handling
+
+### Learnings (for next iteration):
+- Error logging to localStorage provides debugging visibility without UI impact (persist last 100 errors)
+- State snapshots should be saved before risky operations (save/load) to enable recovery
+- Exponential backoff prevents overwhelming servers during outages (backoff multiplier: 2x)
+- CopilotKit errors need separate tracking because they're external; track consecutive errors to detect persistent connection issues
+- React Error Boundary can't catch async errors; use window.addEventListener('unhandledrejection') for those
+- Return cleanup functions (not values) from useEffect to avoid TypeScript errors
+- Error recovery should offer both "Recover from Backup" and "Refresh Page" buttons for user choice
+
+### Codebase Patterns Discovered:
+- Error Recovery Pattern: Create snapshot before risky ops → catch errors → offer recovery UI with fallback to refresh
+- Retry Pattern: Wrap async calls with withRetry() for automatic exponential backoff (config: maxAttempts, initialDelay, maxDelay)
+- Error Logging: Use errorLogger.log() to track errors to localStorage for debugging (scope by component name)
+- CopilotKit Error Handling: Track consecutive errors; set connected=false after maxConsecutiveErrors
+- Persistence Error Handling: Use usePersistenceWithErrorHandling hook instead of direct persistence calls
+- Error Boundary: Wrap at layout level (src/app/layout.tsx) to catch rendering errors in all pages
+
+---
