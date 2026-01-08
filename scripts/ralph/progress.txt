@@ -546,3 +546,51 @@ Patterns accumulate across iterations.
 - State Patterns: selectedIds array managed in component, passed to parent via onSubmit
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.5.4: Implement CopilotKit actions to update form/steps
+
+### What I Implemented:
+- Created Zustand store at `src/lib/model/store/formStore.ts` for global form state management
+  - Manages currentBuild, selectedStepId, and isLoading
+  - Implements all 5 form actions: addWorkUnit, editWorkUnit, removeWorkUnit, setDependencies, changeBOM
+  - Built-in circular dependency detection using recursive graph traversal
+  - Precondition checks for draft status, self-references, and invalid operations
+- Created FormActionExecutor at `src/lib/model/data/formActionExecutor.ts` 
+  - Pure function executor following formActionsContract
+  - Returns ActionResult with status, message, updatedBuild (on success), reason (on error)
+  - Comprehensive validation: draft status, field existence, circular dependencies, type safety
+  - Creates new immutable LineBuild objects (no mutations)
+  - Version increment on every mutation for conflict detection
+- Created CopilotKit hooks at `src/lib/copilotkit/formActions.ts`
+  - useCopilotFormActions hook for easy integration with CopilotKit useAction
+  - Wraps FormActionExecutor calls with loading state management
+  - Auto-persists to LineBuildPersistence after successful mutations
+  - Graceful error handling with fallback to in-memory state
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/store/formStore.ts` — Zustand store for form state (340 lines)
+- `apps/line-build-mvp/src/lib/model/data/formActionExecutor.ts` — Action executor (390 lines)
+- `apps/line-build-mvp/src/lib/copilotkit/formActions.ts` — CopilotKit hooks (150 lines)
+
+### Learnings (for next iteration):
+- Zustand store pattern: create({ state, actions }) where actions use (set, get) to access/update state
+- FormActionExecutor: Pure functions make testing easy, no side effects, return ActionResult for UI feedback
+- Circular dependency detection: Recursive traversal with visited Set to prevent infinite loops
+- Immutable updates: Always create new objects with spread operators, never mutate build.workUnits directly
+- Error-first validation: Check preconditions (draft status, field existence) before attempting mutations
+- Metadata versioning: Increment version on every mutation for conflict detection and undo/redo support
+- Type safety: Use discriminated unions (type field) for FormActionInput to enable TypeScript narrowing
+- Persistence integration: Call getPersistence().save() after mutations, but don't block on errors
+- Loading states: Use store.setLoading during async operations to disable UI while persisting
+
+### Codebase Patterns Discovered:
+- State Management: Zustand store with (set, get) pattern, no Redux complexity
+- Action Pattern: Execute function returns ActionResult {status, message, updatedBuild?, reason?}
+- Preconditions: Check isDraft, field existence, dependency validity BEFORE mutating
+- Immutability: Spread {...build, workUnits: [...workUnits]} to create new objects
+- Validation: Circular dependency detection with recursive hasDependencyPath function
+- Persistence: Async save after mutations, fallback to in-memory if storage fails
+- Error Handling: Return ActionResult with clear error messages, keep form state unchanged on failure
+- CopilotKit Integration: useCopilotFormActions hook provides action functions for useAction registration
+
+---
