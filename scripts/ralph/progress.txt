@@ -1814,3 +1814,38 @@ Patterns accumulate across iterations.
 - Sidebar styling uses width constraint (w-96) + border-l for visual separation
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.9.3: Agent tools: search line builds by tags/fields
+
+### What I Implemented:
+- Created searchTools.ts module with 6 search/filter functions for line builds
+- searchLineBuilds() - text search by menu item name, ID, or build ID (partial matches)
+- filterLineBuildsByStatus() - filter by draft or active status
+- filterLineBuildsbyAction() - filter by cooking action type (PREP, HEAT, etc)
+- filterLineBuildsbyPhase() - filter by cooking phase (PRE_COOK, COOK, etc)
+- filterLineBuildsbyAuthor() - filter by creator/author name
+- getSearchFacets() - returns available filters with counts for UI
+- LineBuildsSearchResult interface for consistent result format
+- Updated CopilotKit API route to handle tool execution requests
+- Tool definitions expose search capabilities for agent integration
+- All functions return faceted results with build details (id, name, status, version, author, workUnitCount, actions, phases)
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/copilotkit/searchTools.ts` — New search tools module
+- `apps/line-build-mvp/src/app/api/copilotkit/route.ts` — Integrated search tools with API
+
+### Learnings (for next iteration):
+- Search functions support partial matching for flexibility (useful for fuzzy search)
+- Facets calculated server-side with counts per filter value, enabling smart UI
+- Each search returns flat array of build summaries (not full LineBuild objects for performance)
+- Action and Phase arrays in results come from aggregating workUnits
+- getSearchFacets useful for showing available options before user searches
+- API route handles both tool definition discovery and tool execution
+
+### Codebase Patterns Discovered:
+- Search functions use filter() + some() for flexible matching across arrays
+- Map-based facet counting avoids duplicates while tracking counts
+- All search results include query string for UX context ("search:foo" vs "status:draft")
+- Result aggregation uses Set + Array.from pattern for unique values
+
+---
