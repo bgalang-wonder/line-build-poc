@@ -1783,3 +1783,34 @@ Patterns accumulate across iterations.
 - Loading/Error states handled in JSX with conditional rendering
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.9.2: Dashboard CopilotKit agent chat (primary search UX)
+
+### What I Implemented:
+- Added CopilotKit agent chat sidebar to dashboard page
+- Toggle button ("Show Chat" / "Hide Chat") to show/hide the sidebar (uses MessageCircle icon from lucide-react)
+- Integrated CopilotSidebar component from @copilotkit/react-ui to provide chat interface
+- Updated dashboard layout to use flex layout with main content area and collapsible sidebar
+- Sidebar appears on the right with w-96 width and border-l styling
+- Updated description to mention chat panel for search functionality
+- Imports CopilotSidebar and useCopilotAction from CopilotKit packages (hooks prepared for future actions)
+- Chat panel ready for future integration with agent tools (benchtop-x0c.9.3)
+
+### Files Changed:
+- `apps/line-build-mvp/src/app/dashboard/page.tsx` — Enhanced with CopilotKit chat sidebar and layout restructuring
+
+### Learnings (for next iteration):
+- CopilotSidebar from @copilotkit/react-ui provides out-of-the-box chat interface
+- Dashboard uses flex h-screen overflow-hidden to create split-pane layout with main content + sidebar
+- Toggle state manages sidebar visibility, allowing users to focus on list or chat
+- Sidebar width w-96 provides good visibility without overwhelming the main table
+- useCopilotAction hook is imported but not yet used (available for defining agent tools)
+- CopilotSidebar with defaultOpen=true shows when visible (can be configured)
+
+### Codebase Patterns Discovered:
+- Toggle buttons use consistent styling: px-4 py-2 + color variant + hover states
+- Split-pane layout: flex-1 overflow-y-auto for main content + conditional sidebar rendering
+- Lucide icons added: MessageCircle for chat toggle button
+- Sidebar styling uses width constraint (w-96) + border-l for visual separation
+
+---
