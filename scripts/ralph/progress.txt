@@ -25,3 +25,23 @@ Started: 2026-01-07
 ---
 Ralph appends after each story.
 Patterns accumulate across iterations.
+
+## Jan 7, 2026 - benchtop-x0c.1.1: Scaffold new Next.js app (apps/line-build-mvp)
+
+### What I Implemented:
+- Created new Next.js 15 app in `apps/line-build-mvp` using create-next-app
+- Configured with TypeScript, Tailwind CSS, ESLint, App Router, and src-dir structure
+- Imported alias set to @/* for cleaner imports
+
+### Files Changed:
+- `apps/line-build-mvp/` — Complete new Next.js application scaffold
+
+### Learnings (for next iteration):
+- create-next-app with `--app --src-dir --import-alias '@/*'` creates the base structure needed
+- Foundation ready for subsequent tasks (Vertex AI, CopilotKit, types, etc.)
+- The app is now ready for dependency installations
+
+### Codebase Patterns Discovered:
+- Next.js setup: Use create-next-app with --app, --src-dir, --import-alias, --typescript, --tailwind flags
+
+---
