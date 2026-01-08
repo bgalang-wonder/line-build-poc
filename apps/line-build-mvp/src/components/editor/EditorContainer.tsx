@@ -207,8 +207,9 @@ export default function EditorContainer({
         addChatMessage('assistant', assistantResponse);
 
         // Preserve conversation in sourceConversations
+        let updatedBuild = currentBuild;
         if (currentBuild) {
-          const updatedBuild = {
+          updatedBuild = {
             ...currentBuild,
             metadata: {
               ...currentBuild.metadata,
@@ -222,12 +223,70 @@ export default function EditorContainer({
           setBuild(updatedBuild);
         }
 
-        // Apply suggested work units (if any)
-        // TODO: Integrate form actions to execute suggested actions
-        // For now, just provide feedback to user
+        // Apply suggested work units automatically if confidence is high or medium
         if (interpretation.suggestedActions.length > 0 && interpretation.confidence !== 'low') {
-          const summaryMessage = `I've identified ${interpretation.suggestedActions.length} suggested action(s). Review them in the form panel.`;
-          addChatMessage('system', summaryMessage);
+          let buildAfterSuggestions = updatedBuild;
+          let appliedCount = 0;
+
+          // Apply each suggestion in order
+          for (const suggestion of interpretation.suggestedActions) {
+            try {
+              if (suggestion.action === 'add' && suggestion.workUnit) {
+                // Convert WorkUnit suggestion to addWorkUnit input format
+                const input = {
+                  action: suggestion.workUnit.tags?.action || 'PREP',
+                  targetItemName: suggestion.workUnit.tags?.target?.name || '',
+                  bomId: suggestion.workUnit.tags?.target?.bomId,
+                  equipment: suggestion.workUnit.tags?.equipment,
+                  time: suggestion.workUnit.tags?.time,
+                  phase: suggestion.workUnit.tags?.phase,
+                  station: suggestion.workUnit.tags?.station,
+                  timingMode: suggestion.workUnit.tags?.timingMode,
+                  requiresOrder: suggestion.workUnit.tags?.requiresOrder,
+                  prepType: suggestion.workUnit.tags?.prepType,
+                  storageLocation: suggestion.workUnit.tags?.storageLocation,
+                  bulkPrep: suggestion.workUnit.tags?.bulkPrep,
+                  dependsOn: suggestion.workUnit.dependsOn || [],
+                };
+                const newUnit = addWorkUnit(input);
+                if (newUnit) {
+                  appliedCount++;
+                  // Update build reference for next iteration
+                  if (buildAfterSuggestions) {
+                    buildAfterSuggestions = {
+                      ...buildAfterSuggestions,
+                      workUnits: [...buildAfterSuggestions.workUnits, newUnit],
+                    };
+                  }
+                }
+              } else if (suggestion.action === 'edit' && suggestion.unitIdToModify && suggestion.workUnit) {
+                const success = editWorkUnit(suggestion.unitIdToModify, suggestion.workUnit);
+                if (success) appliedCount++;
+              } else if (suggestion.action === 'remove' && suggestion.unitIdToModify) {
+                const success = removeWorkUnit(suggestion.unitIdToModify);
+                if (success) appliedCount++;
+              }
+            } catch (err) {
+              console.warn(`[EditorContainer] Failed to apply suggestion ${suggestion.index}:`, err);
+              // Continue with other suggestions
+            }
+          }
+
+          // Provide feedback about applied suggestions
+          if (appliedCount > 0) {
+            const feedbackMsg = appliedCount === 1
+              ? `✓ Applied 1 suggestion to your workflow.`
+              : `✓ Applied ${appliedCount} of ${interpretation.suggestedActions.length} suggestions.`;
+            addChatMessage('system', feedbackMsg);
+          }
+
+          if (appliedCount < interpretation.suggestedActions.length && interpretation.confidence === 'medium') {
+            const skippedCount = interpretation.suggestedActions.length - appliedCount;
+            const clarifyMsg = skippedCount === 1
+              ? `⚠️ 1 suggestion needs clarification. Check the form.`
+              : `⚠️ ${skippedCount} suggestions need clarification. Check the form.`;
+            addChatMessage('system', clarifyMsg);
+          }
         }
       } catch (error) {
         const errorMsg = error instanceof Error ? error.message : 'Failed to process message';
@@ -235,7 +294,7 @@ export default function EditorContainer({
         addChatMessage('system', `Error: ${errorMsg}`);
       }
     },
-    [addChatMessage, currentBuild, setBuild]
+    [addChatMessage, currentBuild, setBuild, addWorkUnit, editWorkUnit, removeWorkUnit]
   );
 
   const handleClearChatHistory = useCallback(() => {
