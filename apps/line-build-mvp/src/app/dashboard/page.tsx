@@ -13,7 +13,16 @@ import { LineBuild } from '@/lib/model/types';
 import { Plus, ChevronRight, MessageCircle, X } from 'lucide-react';
 import { useCopilotAction } from '@copilotkit/react-core';
 import { CopilotSidebar } from '@copilotkit/react-ui';
-import type { LineBuildsSearchResult } from '@/lib/copilotkit/searchTools';
+import {
+  searchLineBuilds,
+  filterLineBuildsByStatus,
+  filterLineBuildsbyAction,
+  filterLineBuildsbyPhase,
+  filterLineBuildsbyAuthor,
+  getSearchFacets,
+  type LineBuildsSearchResult,
+} from '@/lib/copilotkit/searchTools';
+import type { ActionType, Phase } from '@/lib/model/types';
 
 export default function DashboardPage() {
   const [builds, setBuilds] = useState<LineBuild[]>([]);
@@ -22,6 +31,132 @@ export default function DashboardPage() {
   const [showChat, setShowChat] = useState(false);
   const [searchResults, setSearchResults] = useState<LineBuildsSearchResult | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  // CopilotKit Actions for search functionality
+  useCopilotAction({
+    name: "searchLineBuilds",
+    description: "Search line builds by menu item name, menu item ID, or build ID. Use this for general text searches like 'find chicken' or 'search for burger'.",
+    parameters: [
+      {
+        name: "query",
+        type: "string",
+        description: "The search query - can be a menu item name, menu item ID, or build ID",
+        required: true,
+      },
+    ],
+    handler: async ({ query }) => {
+      const results = await searchLineBuilds(query);
+      setSearchResults(results);
+      setSearchQuery(query);
+      return `Found ${results.total} line build${results.total !== 1 ? 's' : ''} matching "${query}"`;
+    },
+  });
+
+  useCopilotAction({
+    name: "filterByStatus",
+    description: "Filter line builds by their status - either 'draft' (work in progress) or 'active' (finalized and ready for use). Use this when user asks for 'all draft builds' or 'active builds'.",
+    parameters: [
+      {
+        name: "status",
+        type: "string",
+        description: "The status to filter by: 'draft' or 'active'",
+        required: true,
+        enum: ["draft", "active"],
+      },
+    ],
+    handler: async ({ status }) => {
+      const results = await filterLineBuildsByStatus(status as 'draft' | 'active');
+      setSearchResults(results);
+      setSearchQuery(`status:${status}`);
+      return `Found ${results.total} ${status} line build${results.total !== 1 ? 's' : ''}`;
+    },
+  });
+
+  useCopilotAction({
+    name: "filterByAction",
+    description: "Filter line builds that contain work units with a specific action type. Action types are: PREP (preparation), HEAT (cooking/heating), TRANSFER (moving items), ASSEMBLE (putting together), PORTION (dividing/measuring), PLATE (final presentation), FINISH (final touches), QUALITY_CHECK (verification).",
+    parameters: [
+      {
+        name: "actionType",
+        type: "string",
+        description: "The action type to filter by",
+        required: true,
+        enum: ["PREP", "HEAT", "TRANSFER", "ASSEMBLE", "PORTION", "PLATE", "FINISH", "QUALITY_CHECK"],
+      },
+    ],
+    handler: async ({ actionType }) => {
+      const results = await filterLineBuildsbyAction(actionType as ActionType);
+      setSearchResults(results);
+      setSearchQuery(`action:${actionType}`);
+      return `Found ${results.total} line build${results.total !== 1 ? 's' : ''} with ${actionType} steps`;
+    },
+  });
+
+  useCopilotAction({
+    name: "filterByPhase",
+    description: "Filter line builds that contain work units in a specific cooking phase. Phases are: PRE_COOK (before cooking starts), COOK (active cooking), POST_COOK (after cooking), ASSEMBLY (putting components together), PASS (final handoff/expediting).",
+    parameters: [
+      {
+        name: "phase",
+        type: "string",
+        description: "The cooking phase to filter by",
+        required: true,
+        enum: ["PRE_COOK", "COOK", "POST_COOK", "ASSEMBLY", "PASS"],
+      },
+    ],
+    handler: async ({ phase }) => {
+      const results = await filterLineBuildsbyPhase(phase as Phase);
+      setSearchResults(results);
+      setSearchQuery(`phase:${phase}`);
+      return `Found ${results.total} line build${results.total !== 1 ? 's' : ''} with ${phase} steps`;
+    },
+  });
+
+  useCopilotAction({
+    name: "filterByAuthor",
+    description: "Filter line builds by the author who created them. Supports partial name matching (case-insensitive).",
+    parameters: [
+      {
+        name: "author",
+        type: "string",
+        description: "The author name to filter by (partial match supported)",
+        required: true,
+      },
+    ],
+    handler: async ({ author }) => {
+      const results = await filterLineBuildsbyAuthor(author);
+      setSearchResults(results);
+      setSearchQuery(`author:${author}`);
+      return `Found ${results.total} line build${results.total !== 1 ? 's' : ''} by "${author}"`;
+    },
+  });
+
+  useCopilotAction({
+    name: "getAvailableFilters",
+    description: "Get all available filter options (facets) for searching line builds. Returns counts of builds by status, action types, phases, and authors. Use this to help users understand what filters are available or to suggest filter options.",
+    parameters: [],
+    handler: async () => {
+      const facets = await getSearchFacets();
+      const summary = [
+        `Statuses: ${facets.statuses.map(s => `${s.value} (${s.count})`).join(', ')}`,
+        `Actions: ${facets.actions.map(a => `${a.value} (${a.count})`).join(', ')}`,
+        `Phases: ${facets.phases.map(p => `${p.value} (${p.count})`).join(', ')}`,
+        `Authors: ${facets.authors.map(a => `${a.value} (${a.count})`).join(', ')}`,
+      ].join('\n');
+      return `Available filters:\n${summary}`;
+    },
+  });
+
+  useCopilotAction({
+    name: "clearSearch",
+    description: "Clear the current search results and show all line builds again. Use this when user wants to reset the view or see all builds.",
+    parameters: [],
+    handler: async () => {
+      setSearchResults(null);
+      setSearchQuery('');
+      return "Search cleared. Now showing all line builds.";
+    },
+  });
 
   useEffect(() => {
     const loadBuilds = async () => {
