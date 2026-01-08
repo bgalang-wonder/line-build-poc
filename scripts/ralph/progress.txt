@@ -269,3 +269,35 @@ Patterns accumulate across iterations.
 - Possible Actions: getPossibleTransitions enables UI to show only valid action buttons
 
 ---
+
+## Jan 8, 2026 - benchtop-7ql: Design form actions contract for chat integration
+
+### What I Implemented:
+- Created comprehensive form actions contract document at `src/lib/model/data/formActionsContract.ts`
+- Defined 5 CopilotKit-exposed form operations: addWorkUnit, editWorkUnit, removeWorkUnit, setDependencies, changeBOM
+- For each action, specified: inputs with detailed field documentation, preconditions for safety, state changes, outputs, and error cases
+- Created standard ActionResult interface for consistent response format across all actions
+- Documented integration points: state refresh requirements, data persistence, validation integration, error handling
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/formActionsContract.ts` — Complete form actions contract with 5 action definitions
+
+### Learnings (for next iteration):
+- Action preconditions are critical: all form operations require draft status (active builds must be demoted first)
+- State changes should be immutable: create new builds rather than mutating existing ones
+- Clearing validation results after mutations ensures consistent revalidation workflow
+- Error cases should be exhaustive: include status checks, existence checks, circular dependency detection, invalid field validation
+- Cascade updates are necessary: when removing steps, cleanup dependsOn arrays in dependent steps automatically
+- Menu item changes (changeBOM) require clearing all steps since new BOMs have different component structures
+- Version increment needed for conflict detection and audit trails (important for multi-user scenarios)
+
+### Codebase Patterns Discovered:
+- Form Actions: Define as discriminated union type with { type: "actionName" } + inputs for type-safe dispatch
+- Action Results: Standardized interface with status, message, updatedBuild (on success), reason (on error)
+- Preconditions: Always check build status first, then resource existence, then logical validity
+- Error Messages: Should be specific ("Cannot add step to active build (demote first)") not generic
+- State Safety: Keep form state unchanged on error—no partial updates or rollback needed
+- Integration with Validation: Clear cached results on mutations so user sees "needs validation" state
+- Dependency Validation: Detect circular dependencies using graph traversal before accepting updates
+
+---
