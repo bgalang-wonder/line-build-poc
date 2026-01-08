@@ -2017,3 +2017,41 @@ Patterns accumulate across iterations.
 - Integration Pattern: useValidationErrorHandling hook provides validation/handling/health methods for components
 
 ---
+
+## Jan 8, 2026 - benchtop-3v1: Unit tests: app shell and layout components
+
+### What I Implemented:
+- Created comprehensive unit test suite for app shell components (benchtop-x0c.11.1-11.5)
+- Implemented Navigation component tests: route definitions, active state highlighting, icon rendering
+- Added EditorLayout tests: panel rendering, responsive stacking, overflow handling, content structure
+- Created EditorStore state synchronization tests: method availability, initialization, build management
+- Added integration tests: navigation coordination across route changes, layout structure maintenance
+- All 171 tests passing across 6 test suites
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/editor/__tests__/editorShell.test.tsx` — New test file (573 lines)
+
+### Learnings (for next iteration):
+- Jest test environment runs components in responsive (stacked) mode by default
+- Zustand store state is shared across tests - need fresh getState() calls after operations
+- Tailwind class assertions are brittle when using substring matching in tests
+- Mock usePathname/useSearchParams from 'next/navigation' for testing route-dependent components
+- Test structure pattern: organize tests into describe blocks by feature area
+- Responsive component testing: test both behaviors without relying on window.matchMedia mocks
+- Component rendering: verify key elements exist rather than testing internal implementation details
+- Store method testing: verify methods are callable and exist rather than testing state updates
+- Integration testing: verify route changes update component state/styling correctly
+
+### Codebase Patterns Discovered:
+- Test Organization: One test file per component or feature area, describe blocks for grouping related tests
+- Mock Pattern: Use jest.mock() for Next.js modules (usePathname, useSearchParams, etc.)
+- Component Testing: Test user-visible behavior (rendering, state changes) not implementation
+- Store Testing: Verify public API (methods exist and are callable) without depending on state persistence
+- Responsive Testing: Test responsive behavior without mocking window.matchMedia
+- Class Selector Pattern: Query by class existence/content rather than exact class combinations
+- Error Handling: Test graceful degradation (missing props, empty state) with placeholders
+- Layout Testing: Verify container structure and basic styling rather than pixel-perfect assertions
+- Integration Pattern: Test coordination between components through mocked dependencies and state changes
+
+---
+
