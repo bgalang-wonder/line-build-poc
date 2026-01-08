@@ -8,6 +8,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { getPersistence } from '@/lib/model/data/persistence';
 import { LineBuild } from '@/lib/model/types';
 import { Plus, ChevronRight, MessageCircle, X } from 'lucide-react';
@@ -24,6 +25,8 @@ import {
 } from '@/lib/copilotkit/searchTools';
 import { useBulkEditActions } from '@/lib/copilotkit/useBulkEditActions';
 import type { ActionType, Phase } from '@/lib/model/types';
+import { MenuItemSelector } from '@/components/MenuItemSelector';
+import { BOMItem } from '@/lib/model/data/mockBom';
 
 // Design system components
 import { Button } from '@/components/ui/Button';
@@ -45,6 +48,9 @@ export default function DashboardPage() {
   const [showChat, setShowChat] = useState(false);
   const [searchResults, setSearchResults] = useState<LineBuildsSearchResult | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showMenuItemSelector, setShowMenuItemSelector] = useState(false);
+
+  const router = useRouter();
 
   // Register bulk edit actions with CopilotKit (enables find/propose/apply workflow)
   useBulkEditActions();
@@ -175,6 +181,35 @@ export default function DashboardPage() {
     },
   });
 
+  // Handler for menu item selection - creates new LineBuild and navigates to editor
+  const handleMenuItemSelect = async (menuItem: BOMItem) => {
+    // Generate unique ID
+    const generateId = () => `lb-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+    // Create new LineBuild
+    const newBuild: LineBuild = {
+      id: generateId(),
+      menuItemId: menuItem.itemId,
+      menuItemName: menuItem.name,
+      workUnits: [],
+      metadata: {
+        author: 'User', // Could be from auth later
+        version: 1,
+        status: 'draft',
+        sourceConversations: [],
+        changelog: [],
+      },
+    };
+
+    // Save to persistence
+    const persistence = getPersistence();
+    await persistence.save(newBuild);
+
+    // Close modal and navigate to editor
+    setShowMenuItemSelector(false);
+    router.push(`/editor?id=${newBuild.id}`);
+  };
+
   useEffect(() => {
     const loadBuilds = async () => {
       try {
@@ -244,14 +279,13 @@ export default function DashboardPage() {
                 >
                   {showChat ? 'Hide' : 'Show'} Chat
                 </Button>
-                <Link href="/editor?new=true">
-                  <Button
-                    variant="primary"
-                    leftIcon={<Plus className="w-4 h-4" />}
-                  >
-                    Create New Build
-                  </Button>
-                </Link>
+                <Button
+                  variant="primary"
+                  onClick={() => setShowMenuItemSelector(true)}
+                  leftIcon={<Plus className="w-4 h-4" />}
+                >
+                  Create New Build
+                </Button>
               </div>
             </div>
 
@@ -298,14 +332,13 @@ export default function DashboardPage() {
                     ? 'Try a different search query.'
                     : 'Create a new line build to get started.'}
                 </p>
-                <Link href="/editor?new=true">
-                  <Button
-                    variant="primary"
-                    leftIcon={<Plus className="w-4 h-4" />}
-                  >
-                    Create New Build
-                  </Button>
-                </Link>
+                <Button
+                  variant="primary"
+                  onClick={() => setShowMenuItemSelector(true)}
+                  leftIcon={<Plus className="w-4 h-4" />}
+                >
+                  Create New Build
+                </Button>
               </Card>
             ) : (
               <Card variant="default" padding="none" className="overflow-hidden">
@@ -389,6 +422,13 @@ export default function DashboardPage() {
           defaultOpen={true}
         />
       )}
+
+      {/* Menu Item Selector Modal */}
+      <MenuItemSelector
+        isOpen={showMenuItemSelector}
+        onClose={() => setShowMenuItemSelector(false)}
+        onSelect={handleMenuItemSelect}
+      />
     </div>
   );
 }
