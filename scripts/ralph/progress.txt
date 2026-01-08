@@ -466,3 +466,83 @@ Patterns accumulate across iterations.
 - Graceful Degradation: Handle null/invalid types with fallback 'Item' label
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.5.1: Implement chat UI with message history
+
+### What I Implemented:
+- Created ChatPanel component at `src/components/chat/ChatPanel.tsx`
+- Message feed displaying user/assistant/system bubbles with distinct styling
+- Auto-scroll to latest message using useRef and useEffect
+- Message timestamps shown below each message
+- Clear history button with confirmation dialog (prevents accidental deletion)
+- Input field with send button (both keyboard and button submission)
+- Loading state with animated dots while waiting for AI response
+- Empty state messaging when no messages exist
+- Support for Shift+Enter for new lines, Enter to send
+- All messages ready for persistence in LineBuild.metadata.sourceConversations[]
+- Disabled input/button while loading
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/chat/ChatPanel.tsx` — Chat UI component (260 lines)
+
+### Learnings (for next iteration):
+- Auto-scroll: Use useRef on end element + useEffect with { behavior: 'smooth' }
+- Message styling: Different bg colors for user (blue), assistant (green), system (gray)
+- Confirmation dialog: Show modal for destructive actions (clear history)
+- Loading state: Animate dots with staggered animation-delay for bouncing effect
+- Timestamp formatting: Use toLocaleTimeString with specific options for consistent format
+- Input handling: Check for trim() before calling callback, clear on send
+- Keyboard shortcuts: Enter to send, Shift+Enter for new line in input
+- Empty state: Show in flex center container with helpful message
+- Disabled state: Disable input and button while isLoading to prevent duplicate sends
+- Message structure: id, role, content, timestamp (ISO 8601) for persistence
+
+### Codebase Patterns Discovered:
+- Message Bubble: Separate component with avatar, content, timestamp
+- Role-based Styling: Different bg/text colors per role (user/assistant/system)
+- Avatar: Short letter (U/A/S) in colored circle, positioned by role
+- Auto-scroll: useRef on end element, call scrollIntoView in useEffect
+- Confirmation Dialog: Modal with backdrop, separate clear confirm state
+- Input Validation: Check trim() before send, disable while loading
+- Loading Animation: Bouncing dots with staggered delays using CSS animation-delay
+- Timestamp Display: Only show if successfully parsed, use try/catch
+- Accessible Buttons: aria labels, disabled state, hover effects
+- Message Persistence: Structure ready for sourceConversations[] array in metadata
+
+---
+
+## Jan 8, 2026 - benchtop-x0c.5.2: Implement chat inline cards (interactive option selectors)
+
+### What I Implemented:
+- Created InlineCard component at `src/components/chat/InlineCard.tsx` with full interactivity
+- CardOption interface with id, label, value, and optional description
+- Single-select mode: clicking an option auto-submits immediately
+- Multi-select mode: clicking toggles options in array, explicit submit button required
+- Visual feedback: selected options highlighted with blue ring and filled circle indicator
+- Responsive design with card layout, proper spacing, and mobile-friendly buttons
+- Loading state disables all interactions with opacity feedback
+- Selection counter shows how many items selected (multi-select) or confirms submission (single-select)
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/chat/InlineCard.tsx` — Complete inline card component (170 lines)
+
+### Learnings (for next iteration):
+- Single vs Multi-select behavior: Single-select auto-submits on click, multi-select requires explicit submit button
+- Selection indicator: Blue-filled circle (not checkbox) gives cleaner appearance and better UX
+- Click handlers: Use disabled prop to gate interaction, set opacity-50 for visual feedback
+- Callback pattern: onSubmit receives array of selectedIds, letting parent handle integration
+- State management: Keep selectedIds in component state, don't mutate parent state directly
+- Responsive: Use w-full for buttons, max-w-lg on card, ensure touch targets are >=44px
+- Role attributes: Use role="group" and aria-label on container for accessibility
+- Feedback: Show selection counter at bottom to confirm choices made
+
+### Codebase Patterns Discovered:
+- Card Component: Use border + shadow-sm + hover:shadow-md for interactive visual feedback
+- Selection UI: Blue accent color (blue-500/blue-600) matches form inputs and primary actions
+- Option Buttons: Full-width for touch targets, text-left alignment for left-to-right reading
+- Disabled State: opacity-50 + cursor-not-allowed + prevent onClick handler execution
+- Multi-line Text: Use description field with text-xs gray-600 for secondary info
+- Loading State: Show "Loading..." text and disable all controls until complete
+- State Patterns: selectedIds array managed in component, passed to parent via onSubmit
+
+---
