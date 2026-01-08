@@ -1,6 +1,8 @@
 # Line Build Redesign PRD
 
-> **⚠️ This is a reference document. The PRD lives in Confluence and is the source of truth.**
+> **⚠️ For AI agents:** Use `docs/PRD-FULL.md` — it contains the full PRD content.
+> 
+> **For humans:** The canonical PRD lives in Confluence (linked below).
 
 ---
 

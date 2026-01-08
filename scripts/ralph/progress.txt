@@ -1646,3 +1646,105 @@ Patterns accumulate across iterations.
 5. Add performance testing for large datasets
 
 ---
+
+## Jan 8, 2026 - benchtop-9jy: Unit tests for chat components
+
+### What I Implemented:
+- Created comprehensive unit test suite for chat panel components
+- Implemented 31 passing tests across 3 test groups
+- Tests cover message rendering, user interactions, card selections, and workflows
+- Added JSDOM compatibility fixes for browser APIs
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/chat/__tests__/chatComponents.test.tsx` — Complete test suite (530+ lines)
+
+### Test Coverage:
+
+**ChatPanel Component (13 tests):**
+- Empty message list rendering
+- Message styling by role (user/assistant/system)
+- Message timestamps display
+- Sending messages via button and Enter key
+- Loading state and disabled inputs
+- Clear history button and confirmation dialog
+- Input clearing after send
+- Empty state rendering
+- Auto-scroll to latest message
+- Input trimming before send
+- Shift+Enter for multiline messages
+- Message rendering with different roles
+
+**InlineCard Component (13 tests):**
+- Card rendering with title and description
+- All options rendered as clickable buttons
+- Single-select mode with highlighting
+- Multi-select mode with multiple selections
+- Auto-submit on selection (single mode)
+- Explicit submit requirement (multi mode)
+- Loading state display
+- Disabled options while loading
+- Option descriptions display
+- Mobile responsiveness
+- Empty options handling
+- Option toggling in multi-select
+- Selection count display
+
+**Integration Tests (3 tests):**
+- Chat panel rendering inline cards
+- Inline card submitting through chat
+- Full chat workflow (send message + display card)
+
+### Total Test Results:
+- Chat Components: 31/31 passing
+- Full Test Suite: 141/141 passing
+- Test Infrastructure: 5 test suites
+
+### Learnings (for next iteration):
+- JSDOM doesn't implement scrollIntoView() - must mock with jest.fn()
+- Message role distinction (user/assistant/system) requires visual testing
+- Loading states should disable interactions (input.disabled or aria-disabled)
+- Card selection modes have different behaviors:
+  - Single-select: auto-submit on click
+  - Multi-select: require explicit submit button
+- Button finding requires flexible selectors (aria-label, textContent, aria-role)
+- Shift+Enter vs Enter requires keyboard event handling
+- Integration tests benefit from simple component composition
+
+### Codebase Patterns Discovered:
+- Chat Message: {id, role, content, timestamp} with ISO 8601 timestamps
+- Card Option: {id, label, value, description?} format
+- Chat Callbacks: onSendMessage(content), onClearHistory()
+- Card Callbacks: onSubmit(selectedIds[]) receives array of IDs
+- Loading Props: isLoading disables all interactions and shows visual feedback
+- Mode Prop: mode='single'|'multi' controls selection and submission behavior
+- JSDOM Mocks: window.HTMLElement.prototype.scrollIntoView = jest.fn()
+
+### Testing Challenges Resolved:
+1. **scrollIntoView not in JSDOM**: Added global mock at test setup
+2. **Button finding**: Used find() on getAllByRole instead of strict getByRole
+3. **Message role styling**: Rendered all three role types to verify styling differences
+4. **Loading state testing**: Verified disabled attribute and visual indicators
+5. **Card submission modes**: Different tests for auto-submit vs explicit submit
+
+### Test Infrastructure Improvements:
+- ✅ JSDOM compatibility mocks for browser APIs
+- ✅ Flexible button/select finding strategies
+- ✅ Message fixture with role variations
+- ✅ Card option fixture factory
+- ✅ Integration test patterns for component composition
+
+### Code Quality:
+- All tests passing (31/31 in chat tests)
+- Full suite: 141/141 tests passing (100% success rate)
+- TypeScript strict mode enabled
+- No console errors or warnings
+- All browser compatibility issues resolved
+
+### Next Steps for Team:
+1. Implement tests for App Shell + Routing components
+2. Add component snapshot tests for visual regression
+3. Create E2E tests for complete user workflows
+4. Add performance tests for message list rendering with large datasets
+5. Test CopilotKit integration when API is ready
+
+---

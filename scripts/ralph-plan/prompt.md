@@ -4,9 +4,11 @@ You are in **PLANNING MODE**. Your job is to improve the beads plan, NOT impleme
 
 ## Step 1: Understand the Context
 
-1. Read `README.md` and `AGENTS.md` (if they exist) to understand the project
-2. Read `docs/PRD.md` to understand requirements  
+1. Read `docs/PRD-FULL.md` **THOROUGHLY** — this is the source of truth for requirements
+2. Read `docs/schema/SPEC-TECHNICAL.md` for technical schema details
 3. Read `scripts/ralph-plan/refinements.txt` to see what's already been refined
+
+**CRITICAL:** The PRD contains Must-Have requirements (P1), acceptance criteria, and domain knowledge. Every bead should trace back to PRD requirements.
 
 ## Step 2: Analyze the Beads
 
@@ -14,6 +16,7 @@ Use these commands to understand the current plan:
 
 ```bash
 bd list --status open              # All open beads
+bd list --status closed            # Already implemented beads
 bd show <id>                       # Full bead details  
 bd dep tree <id>                   # Visualize dependencies
 bd ready                           # What's unblocked
@@ -21,20 +24,95 @@ bd ready                           # What's unblocked
 
 Focus on the epic `benchtop-x0c` and its children.
 
-## Step 3: Analyze Each Bead
+## Step 3: THREE Key Tasks
+
+### Task A: Audit Already-Implemented Beads
+
+Some beads were implemented WITHOUT full PRD context. For each **closed** bead:
+
+1. Check if the implementation likely aligns with PRD requirements
+2. If there's a gap (missing field, wrong behavior, incomplete feature), create an **audit bead**:
+
+```bash
+bd create --title "Audit: [Original Title] - [Gap Description]" \
+  --type task \
+  --priority P1 \
+  --label "audit,prd-alignment" \
+  --description "## PRD Alignment Check
+
+### Original Bead: [id]
+[What was implemented]
+
+### PRD Requirement:
+[Quote the relevant PRD section]
+
+### Potential Gap:
+[What might be missing or misaligned]
+
+### Acceptance Criteria:
+- [ ] Verify [specific thing]
+- [ ] Fix if needed: [specific fix]
+"
+```
+
+**Common gaps to look for:**
+- Missing `prepType`, `storageLocation`, `bulkPrep` fields (PRD P1.9)
+- Missing `cookingPhase` / `phase` field (PRD P1.4)
+- Override UI without reason capture (PRD validation philosophy)
+- Complexity scoring not computed/displayed (PRD P1.5)
+
+### Task B: Enrich Open Beads
+
+For each **open** bead that lacks a description:
+
+1. Write a clear description with context
+2. Add explicit acceptance criteria
+3. Reference PRD requirements where applicable
+
+```bash
+bd update <id> --description "## [Feature Name]
+
+Per PRD [section]: [Quote or summarize requirement]
+
+### Context
+[What this feature does and why it matters]
+
+### Acceptance Criteria
+- [ ] [Specific, testable criterion]
+- [ ] [Another criterion]
+- [ ] [Edge case handling]
+
+### Technical Notes
+[Any implementation hints]
+"
+```
+
+### Task C: Create Missing Beads
+
+Review the PRD and check if any requirements are NOT covered by existing beads:
+
+**PRD Must-Haves to verify:**
+- P1.1: Work types (action field) ✓
+- P1.2: BOM linking (target field) ✓
+- P1.3: Equipment + duration ✓
+- P1.4: Cooking phase (PRE_COOK, COOK, POST_COOK, etc.)
+- P1.5: Complexity scoring display
+- P1.6: Overlays/variants
+- P1.7: Natural language authoring ✓
+- P1.9: Pre-service prep tags
+
+## Step 4: Analyze Each Bead
 
 For EACH bead, ask yourself:
 
-1. **Clarity** — Is the title and description crystal clear? Could an agent implement this without asking questions?
-2. **Scope** — Is this bead small enough for one context window? Should it be split?
-3. **Dependencies** — Are the dependencies correct? Is anything blocked that shouldn't be?
-4. **Acceptance Criteria** — Are there explicit, testable criteria? If not, add them.
-5. **Testing** — Is there a corresponding test bead? Unit tests? E2E tests?
-6. **Architecture** — Does this fit well with the overall system design?
-7. **Missing Beads** — Are there gaps? Things we need but haven't captured?
-8. **Order** — Is the priority/sequencing optimal?
+1. **PRD Alignment** — Does this trace to a PRD requirement? Which one?
+2. **Clarity** — Is the title and description crystal clear?
+3. **Scope** — Is this bead small enough for one context window?
+4. **Dependencies** — Are the dependencies correct?
+5. **Acceptance Criteria** — Are there explicit, testable criteria?
+6. **Testing** — Is there a corresponding test bead?
 
-## Step 4: Make Improvements
+## Step 5: Make Improvements
 
 Use `bd` commands to refine beads:
 
@@ -42,71 +120,56 @@ Use `bd` commands to refine beads:
 # Update a bead's description
 bd update <id> --description "New clearer description"
 
-# Change priority (0=highest, 4=lowest)
-bd update <id> --priority 1
+# Change priority (P0=highest, P4=lowest)
+bd update <id> --priority P1
 
 # Add a new bead
-bd create "Title" -t task -p 0 --description "Details"
+bd create --title "Title" --type task --priority P0 --description "Details"
 
 # Add dependency (child depends on parent)
 bd dep add <child-id> <parent-id>
 
 # Add labels
-bd update <id> --labels "test,e2e"
+bd update <id> --label "test,e2e,audit"
 ```
 
-## Step 5: CRITICAL — Log Your Changes with Context
+## Step 6: CRITICAL — Log Your Changes with Context
 
 **YOU MUST append your changes to `scripts/ralph-plan/refinements.txt`**
-
-This log is how learnings persist across iterations. The next iteration will read this to understand:
-- What you changed and **WHY**
-- What patterns or insights you discovered
-- What still needs attention
-- Your reasoning so improvements compound
-
-Use this command to append:
 
 ```bash
 cat >> scripts/ralph-plan/refinements.txt << 'EOF'
 
 ## Iteration [N] - [Date]
 
-### What I Analyzed:
-- [Which beads/epics you focused on]
-- [What you were looking for]
+### PRD Requirements Reviewed:
+- [Which PRD sections you analyzed]
 
-### Changes Made (with reasoning):
-1. **[bead-id]**: [What changed]
-   - *Why*: [Your reasoning — why is this better?]
-   
-2. **[bead-id]**: [What changed]
-   - *Why*: [Your reasoning]
-
-### New Beads Added:
+### Audit Beads Created:
 - **[new-id]**: [Title]
-  - *Rationale*: [Why this was missing and why it matters]
+  - *Gap found*: [What was missing]
+  - *PRD ref*: [P1.x]
 
-### Patterns & Insights Discovered:
-- [Architectural patterns you noticed]
-- [Recurring issues across beads]
-- [Dependencies that weren't obvious]
+### Beads Enriched:
+- **[bead-id]**: Added description + acceptance criteria
+  - *PRD alignment*: [Which requirement this supports]
 
-### Still Needs Work (for next iteration):
-- [ ] [Specific bead or area that needs more refinement]
-- [ ] [Another area to focus on]
+### New Beads Created:
+- **[new-id]**: [Title]
+  - *Rationale*: [Why this was missing]
+  - *PRD ref*: [P1.x]
+
+### Patterns & Insights:
+- [What you noticed about the plan]
+
+### Still Needs Work:
+- [ ] [Specific area needing attention]
 
 ### Confidence Level: [Low/Medium/High]
-[Explain what would need to change to increase confidence]
 
 ---
 EOF
 ```
-
-**Why this matters:**
-- Each iteration builds on previous learnings
-- Without context, the next iteration starts from scratch
-- Good reasoning helps catch mistakes in later passes
 
 ## Rules
 
@@ -117,19 +180,19 @@ EOF
 - ❌ Make changes without logging them
 
 ### DO:
-- ✅ Add testing beads (unit tests, e2e tests, logging)
-- ✅ Split large beads into smaller, focused ones
-- ✅ Add missing acceptance criteria
-- ✅ Fix dependency ordering issues
-- ✅ Add architectural detail where vague
-- ✅ Think deeply about edge cases and error handling
+- ✅ Create audit beads for closed features that may not align with PRD
+- ✅ Enrich open beads with descriptions and acceptance criteria
+- ✅ Add missing beads for PRD requirements not yet covered
+- ✅ Reference PRD section numbers (P1.x, P2.x) in descriptions
+- ✅ Add testing beads where missing
 - ✅ **Always log changes to refinements.txt**
 
 ## Stop Condition
 
 If after careful analysis you find:
-- No meaningful improvements to make
-- Plan is well-structured and implementation-ready
+- All closed beads have been audited (or audit beads created)
+- All open beads have descriptions and acceptance criteria
+- All PRD P1 requirements have corresponding beads
 - Confidence is HIGH
 
 Then:
@@ -141,5 +204,7 @@ Otherwise, make your improvements, log them, and end normally.
 ## Remember
 
 > "Planning tokens are cheaper than implementation tokens."
+> 
+> Features implemented without PRD context may need rework. Audit beads catch this early.
 
 Take your time. Think deeply. A refined plan now saves massive debugging later.
