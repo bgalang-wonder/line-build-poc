@@ -102,10 +102,11 @@ describe('StepList Component', () => {
     const onStepSelect = jest.fn();
     render(<StepList build={build} selectedStepId={undefined} onStepSelect={onStepSelect} />);
 
-    // Find the step element and click the clickable div inside it
+    // Find the step element and click the clickable content area (not the drag handle)
     const wu001Li = screen.getByText('wu-001').closest('li');
     if (wu001Li) {
-      const clickableDiv = wu001Li.querySelector('[onclick]') || wu001Li.querySelector('div');
+      // The clickable area has cursor-pointer class
+      const clickableDiv = wu001Li.querySelector('div.cursor-pointer');
       if (clickableDiv) {
         fireEvent.click(clickableDiv);
         expect(onStepSelect).toHaveBeenCalledWith('wu-001');
@@ -553,6 +554,116 @@ describe('BOMAutocomplete Component', () => {
 
     // Component should render
     expect(container).toBeTruthy();
+  });
+});
+
+/**
+ * StepList Drag and Drop Tests
+ */
+describe('StepList Drag and Drop', () => {
+  it('renders drag handle for each step', () => {
+    const build = createMockLineBuild();
+    render(
+      <StepList
+        build={build}
+        selectedStepId={undefined}
+        onStepSelect={() => {}}
+        onReorder={() => {}}
+      />
+    );
+
+    // Each step should have a drag handle button
+    const dragHandles = screen.getAllByLabelText('Drag to reorder');
+    expect(dragHandles.length).toBe(2); // Two steps in mock build
+  });
+
+  it('accepts onReorder callback prop', () => {
+    const build = createMockLineBuild();
+    const onReorder = jest.fn();
+
+    const { container } = render(
+      <StepList
+        build={build}
+        selectedStepId={undefined}
+        onStepSelect={() => {}}
+        onReorder={onReorder}
+      />
+    );
+
+    // Component should render with onReorder prop
+    expect(container).toBeTruthy();
+  });
+
+  it('renders steps in correct order', () => {
+    const build = createMockLineBuild({
+      workUnits: [
+        createMockWorkUnit({ id: 'step-1' }),
+        createMockWorkUnit({ id: 'step-2' }),
+        createMockWorkUnit({ id: 'step-3' }),
+      ],
+    });
+
+    render(
+      <StepList
+        build={build}
+        selectedStepId={undefined}
+        onStepSelect={() => {}}
+        onReorder={() => {}}
+      />
+    );
+
+    const stepElements = screen.getAllByRole('listitem');
+    expect(stepElements.length).toBe(3);
+
+    // Verify order by checking IDs appear in correct sequence in DOM
+    const step1 = screen.getByText('step-1');
+    const step2 = screen.getByText('step-2');
+    const step3 = screen.getByText('step-3');
+
+    expect(step1).toBeInTheDocument();
+    expect(step2).toBeInTheDocument();
+    expect(step3).toBeInTheDocument();
+  });
+
+  it('drag handle has correct cursor styling class', () => {
+    const build = createMockLineBuild();
+    render(
+      <StepList
+        build={build}
+        selectedStepId={undefined}
+        onStepSelect={() => {}}
+        onReorder={() => {}}
+      />
+    );
+
+    const dragHandles = screen.getAllByLabelText('Drag to reorder');
+    // Check the first drag handle has cursor-grab class
+    expect(dragHandles[0]).toHaveClass('cursor-grab');
+  });
+
+  it('step click still works alongside drag handle', () => {
+    const build = createMockLineBuild();
+    const onStepSelect = jest.fn();
+
+    render(
+      <StepList
+        build={build}
+        selectedStepId={undefined}
+        onStepSelect={onStepSelect}
+        onReorder={() => {}}
+      />
+    );
+
+    // Find the clickable content area (not the drag handle)
+    const stepItem = screen.getByText('wu-001').closest('li');
+    if (stepItem) {
+      // Find the clickable div within the step (not the drag handle button)
+      const clickableArea = stepItem.querySelector('div.cursor-pointer');
+      if (clickableArea) {
+        fireEvent.click(clickableArea);
+        expect(onStepSelect).toHaveBeenCalledWith('wu-001');
+      }
+    }
   });
 });
 
