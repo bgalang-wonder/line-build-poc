@@ -236,3 +236,36 @@ Patterns accumulate across iterations.
 - Metadata Tracking: Include savedAt, version, and entity count in metadata for debugging
 
 ---
+
+## Jan 7, 2026 - benchtop-x0c.2.2: Implement draft/active status model + transitions
+
+### What I Implemented:
+- Created BuildStatusManager class for enforcing state transitions with validation constraints
+- Implemented transition rules: Active→Draft always allowed (demote without restriction), Draft→Active requires validation with zero failures
+- Added canTransition for pre-flight checks and transitionTo for actual transitions with detailed blocking reasons
+- Implemented applyTransition to safely apply status changes to LineBuild objects and persist in metadata
+- Added UI helper functions: getStatusLabel, getStatusDescription, isEditableStatus, getSuggestedAction
+- Implemented getPossibleTransitions to show available actions from current status
+- Status persists in LineBuild.metadata.status (already supported by LineBuildPersistence)
+- Validation constraints: requires BuildValidationStatus with !hasStructuredFailures && !hasSemanticFailures
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/statusManager.ts` — Complete status transition manager
+
+### Learnings (for next iteration):
+- Transition rules: Always provide detailed blocking reasons in StatusTransitionResult.reason field
+- Validation coupling: Draft→Active transition depends on BuildValidationStatus, need to run validation first
+- Metadata persistence: Status in LineBuild.metadata is persisted by LineBuildPersistence automatically
+- UI helpers: Helper functions (getStatusLabel, getStatusDescription, getSuggestedAction) enable consistent UI display
+- Immutability: Use spread operators to create new builds rather than mutating existing ones
+- Type safety: BuildStatus = "draft" | "active" literal union is cleaner than enums for this two-state model
+- Demotion rule: Active→Draft always succeeds enables users to revert and edit without validation concerns
+
+### Codebase Patterns Discovered:
+- Status Manager: Static class pattern with pure functions enables easy testing and composability
+- Transition Results: Include success, newStatus, reason, and timestamp for complete audit trail
+- Helper Functions: Static methods for formatting (getStatusLabel) and suggestions (getSuggestedAction)
+- Validation Integration: Status manager accepts optional BuildValidationStatus to enforce constraints
+- Possible Actions: getPossibleTransitions enables UI to show only valid action buttons
+
+---
