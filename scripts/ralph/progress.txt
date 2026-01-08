@@ -45,3 +45,28 @@ Patterns accumulate across iterations.
 - Next.js setup: Use create-next-app with --app, --src-dir, --import-alias, --typescript, --tailwind flags
 
 ---
+
+## Jan 7, 2026 - benchtop-x0c.1.2: Integrate Vertex AI client (Gemini)
+
+### What I Implemented:
+- Created Vertex AI client wrapper in `src/lib/ai/vertex/client.ts`
+- Installed @google/genai package for Vertex AI/Gemini integration
+- Implemented VertexAIClient class with generateContent method
+- Added createVertexAIClient factory function with environment variable support
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/ai/vertex/client.ts` — Vertex AI client wrapper
+- `apps/line-build-mvp/package.json` — Added @google/genai dependency
+
+### Learnings (for next iteration):
+- Use generateContentStream() instead of generateContent() for streaming responses (fixes async iterator type issues)
+- Environment variables needed: VERTEX_AI_PROJECT, VERTEX_AI_LOCATION (default: us-central1), VERTEX_AI_MODEL (default: gemini-2.5-flash)
+- GOOGLE_APPLICATION_CREDENTIALS environment variable handles authentication automatically
+- The GoogleGenAI SDK handles Vertex AI routing automatically with vertexai: true flag
+
+### Codebase Patterns Discovered:
+- AI Integration: Use @google/genai with GoogleGenAI class and generateContentStream() for Vertex AI
+- Config Pattern: Read environment variables with sensible defaults
+- Error Handling: Wrap try/catch around AI calls with meaningful error messages
+
+---
