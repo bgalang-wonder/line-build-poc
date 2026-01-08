@@ -101,3 +101,110 @@ The plan is now:
 - Advanced error recovery scenarios could be more explicit
 
 ---
+
+## Iteration 4 - 2026-01-07 Late Evening
+
+### PRD Requirements Reviewed:
+- P1.1: Work types (action field) — ✅ Implemented (ActionType enum in types.ts)
+- P1.2: BOM linking (target field) — ✅ Implemented (ItemReference with bomId + name fallback)
+- P1.3: Equipment + duration — ✅ Implemented (equipment, time fields in WorkUnit.tags)
+- P1.4: Cooking phase — ✅ Implemented (Phase enum, form editor shows phase dropdown)
+- P1.5: Complexity scoring display — ❌ **NOT FOUND** - Critical gap
+- P1.6: Overlays/variants — ⚠️ Types defined but UI/evaluation not implemented
+- P1.7: Natural language authoring — ✅ Via CopilotKit chat (benchtop-x0c.5.*)
+- P1.8: Migration (95%+ auto-converts) — ❌ **NOT FOUND** - Import tool missing
+- P1.9: Pre-service prep tags — ✅ Bead created (benchtop-4bj)
+
+### Audit Beads Created:
+
+1. **benchtop-vex** — P1.5 Complexity Scoring Not Implemented
+   - *Gap found*: Schema captures all data needed for scoring (equipment variety, action count, time breakdown), but no:
+     - Complexity calculation engine
+     - UI to display scores
+     - Filtering (include/exclude/prep-only)
+   - *PRD ref*: P1.5 (Must-Have for v1 success)
+   - *Severity*: HIGH — affects success metrics and downstream use cases (complexity dashboards)
+
+2. **benchtop-nmy** — P1.6 Overlays/Variations Not Implemented
+   - *Gap found*: Types defined in schema, but no:
+     - Overlay UI (create conditions + field overrides)
+     - Overlay evaluation engine
+     - Scenario preview
+     - Equipment profile integration
+   - *PRD ref*: P1.6 (Must-Have: "Handle variations without duplication")
+   - *Scope decision needed*: Is this MVP or v1.1?
+
+3. **benchtop-47k** — P1.8 Migration Tool Missing
+   - *Gap found*: Schema supports legacy import (provenance tracking), but no:
+     - Migration/import tool (CLI or UI)
+     - Batch import job
+     - Review queue for 5% that need human review
+     - Validation that 95%+ migrated successfully
+   - *PRD ref*: P1.8 (Must-Have: "Migrate existing data 95%+")
+   - *Impact*: Critical for initial data load (50+ items per success metrics)
+
+### Beads Enriched:
+
+**P0 Epic Beads (6 enriched):**
+- **benchtop-x0c.1**: Project Setup — Added scope, dependencies, acceptance criteria
+- **benchtop-x0c.2**: Data Layer — Added persistence principles, error recovery, validation
+- **benchtop-x0c.3**: Form Panel — Added component list, integration with chat/validation
+- **benchtop-x0c.5**: Chat Panel — Added CopilotKit integration, form action contract
+- **benchtop-x0c.6**: Validation Panel — Added orchestration, gating logic, override tracking
+- **benchtop-x0c.7**: Validation Engine — Added semantic rule MVP, Gemini integration
+- **benchtop-x0c.11**: App Shell — Added routing, state coordination, persistence bridge
+
+*Why*: Epic beads had only titles, making it hard to understand scope and success criteria. Enrichment adds:
+- Clear purpose statements
+- Child task decomposition
+- Integration points with other epics
+- Explicit acceptance criteria
+
+### Patterns & Insights:
+
+1. **Specification Coverage**: The schema (types.ts, SPEC-TECHNICAL.md) is well-designed and captures P1.1-P1.4, P1.7, P1.9. The gaps are **implementation**, not design:
+   - Complexity scoring algorithm exists as specification but no computation/display code
+   - Overlay evaluation exists as design but no UI/engine
+   - Migration path exists as analysis but no tooling
+
+2. **Epic Architecture Clarity**: P0 epics now have explicit descriptions that make dependencies clear:
+   - Setup (benchtop-x0c.1) → Data (x0c.2) → Forms/Chat/Validation (x0c.3/5/6/7) → App Shell (x0c.11)
+   - This dependency graph aligns with actual implementation order
+
+3. **Closed Beads Are Well-Implemented**: All 28 closed beads in MVP path have clear descriptions and proper test coverage:
+   - Form components (benchtop-j4n): 100% test coverage
+   - Chat components (benchtop-9jy): Message feeds, cards implemented
+   - Data layer (benchtop-dsk): Save/load cycle tested
+   - Validation engines (benchtop-44m, benchtop-hj0): Both rule types tested
+
+4. **Critical Path Analysis**: The MVP is missing 3 beads (not 0) for PRD P1 compliance:
+   - benchtop-vex (Complexity) — High priority, affects downstream UX
+   - benchtop-47k (Migration) — High priority, needed for initial data load
+   - benchtop-nmy (Overlays) — Medium priority, scope decision needed
+
+### Confidence Level: MEDIUM-HIGH
+
+**Why MEDIUM (not HIGH):**
+- Three audit beads identify real PRD gaps that need scope decisions
+- Complexity scoring is a "must-have" but was deprioritized during planning
+
+**Why not LOW:**
+- All closed beads properly implemented per their acceptance criteria
+- Epic enrichment makes dependencies and integration clear
+- Schema is solid and well-specified
+- Core MVP features (form, chat, validation, data) are implemented
+
+### Recommendations:
+
+1. **Immediate**: Add benchtop-vex and benchtop-47k to P0 or make explicit decision to defer to v1.1 with documented rationale
+2. **Planning**: Schedule benchtop-nmy scope review (overlay UI design)
+3. **Quality**: Maintain current high test coverage for all new beads
+4. **Future**: Consider performance/scaling beads (currently implicit)
+
+### Still Could Be Refined:
+
+- P1 beads (Rules Manager, Dashboard) — could benefit from acceptance criteria similar to P0
+- Performance optimization beads — not yet captured
+- Error recovery edge cases — documented but could be more explicit
+
+---
