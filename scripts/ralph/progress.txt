@@ -1310,3 +1310,138 @@ Patterns accumulate across iterations.
 - Fixtures can be reused in test suites
 - Focus on integration scenarios (form → validation → toast)
 
+
+## Jan 7, 2026 - benchtop-44m: Unit tests for structured rules evaluator
+
+### What I Implemented:
+- Set up Jest testing framework for Next.js project
+- Created jest.config.js with Next.js integration and TypeScript support
+- Added jest.setup.js with @testing-library/jest-dom setup
+- Implemented 32 comprehensive unit tests for StructuredValidationEvaluator
+- Tests cover all 5 condition operators: equals, in, notEmpty, greaterThan, lessThan
+- Tests for rule enablement, action type filtering, and nested field access
+- Tests for edge cases: deeply nested fields, missing fields, special characters
+- Performance test: validates 1000 rules efficiently (< 500ms)
+
+### Files Changed:
+- `apps/line-build-mvp/jest.config.js` — Jest configuration for Next.js + TS
+- `apps/line-build-mvp/jest.setup.js` — Testing library setup
+- `apps/line-build-mvp/package.json` — Added test/test:watch/test:coverage scripts
+- `apps/line-build-mvp/src/lib/model/data/__tests__/structuredValidationEvaluator.test.ts` — 32 unit tests (350+ lines)
+
+### Learnings (for next iteration):
+- Jest configuration for Next.js is straightforward with nextJest wrapper
+- @testing-library/jest-dom provides HTML assertion methods automatically
+- Fixture factories (createWorkUnit, createRule, createBuild) reduce test boilerplate
+- ESM modules need transformIgnorePatterns for compatibility
+- Type fixtures should match actual domain structure exactly
+- Performance testing with large datasets validates scalability
+- Test suites organized by feature (operator type, rule filtering, etc.)
+
+### Codebase Patterns Discovered:
+- Test Organization: Describe blocks grouped by feature, with factory fixtures at top
+- Fixture Pattern: Reusable createX functions with Partial<T> overrides
+- Mock Pattern: Jest fixtures can be simple (JSON responses) or complex (function calls)
+- Test Structure: Arrange → Act → Assert with clear separation
+- Edge Case Testing: Include missing fields, wrong types, boundary values
+- Performance Testing: Use performance.now() to measure execution time
+
+---
+
+## Jan 7, 2026 - benchtop-hj0: Integration tests for semantic validation + Gemini
+
+### What I Implemented:
+- Implemented 24 comprehensive integration tests for SemanticValidationEvaluator
+- Mocked VertexAIClient without importing real @google/genai (avoiding ESM issues)
+- Tests cover Gemini API integration: prompt building, response parsing, error handling
+- Tests various JSON response formats: standard, markdown-wrapped, plaintext with JSON
+- Tests rule enablement and action type filtering (same as structured validator)
+- Tests evaluateBuild with multiple rules and work units (sequential evaluation)
+- Tests for reasoning extraction and failure aggregation
+- Tests realistic scenarios with multi-step validation workflows
+- Tests graceful error handling: API timeouts, malformed JSON, network errors
+
+### Files Changed:
+- `apps/line-build-mvp/jest.config.js` — Updated with transformIgnorePatterns for ESM
+- `apps/line-build-mvp/src/lib/model/data/__tests__/semanticValidationEvaluator.test.ts` — 24 integration tests (500+ lines)
+
+### Learnings (for next iteration):
+- Mocking ESM modules in Jest can be complex; use type-only mocks instead of jest.mock()
+- Mock type pattern: define type interface matching the real API, use jest.fn() for methods
+- Gemini responses need robust JSON extraction: handles markdown, plaintext, standard JSON
+- Response parsing should be lenient (missing fields use defaults)
+- AI integration testing: mock the external service, focus on contract not implementation
+- Sequential evaluation allows testing error recovery without stopping evaluation
+- Average reasoning length tracking useful for monitoring AI output quality
+- Fixture patterns reduce test code even more with semantic evaluator tests
+
+### Codebase Patterns Discovered:
+- Mock Type Pattern: type MockService = {method: jest.Mock, ...} instead of jest.mock()
+- JSON Extraction: regex /\{[\s\S]*\}/ extracts JSON from any response format
+- Response Validation: always check required fields before using response
+- Error Handling: return ValidationResult with error message instead of throwing
+- Sequential Processing: async evaluateBuild iterates one rule at a time
+- Graceful Degradation: disabled rules return pass=true with explanatory reasoning
+- Test Organization: same patterns as structured validator tests for consistency
+
+---
+
+## Session Summary - Ralph Agent Session 4 (Jan 7, 2026)
+
+**Completed Tasks (2/2 in session):**
+1. benchtop-44m ✅ - Unit tests for structured rules evaluator (32 tests)
+2. benchtop-hj0 ✅ - Integration tests for semantic validation with Gemini (24 tests)
+
+**Session Statistics:**
+- Total tests written: 56 (32 structured + 24 semantic)
+- Test coverage: 100% pass rate
+- Lines of test code: ~850
+- Files created: 2 (jest.config.js, jest.setup.js, 2 test files)
+- Files modified: 2 (package.json, jest.config.js)
+- Commits: 2
+
+**Testing Infrastructure Established:**
+- ✅ Jest configuration for Next.js + TypeScript
+- ✅ Test scripts: test, test:watch, test:coverage
+- ✅ Test fixtures and factory functions established
+- ✅ Mock patterns for both pure functions and AI integration
+- ✅ ESM module handling for @google/genai package
+
+**Test Coverage:**
+- Structured validator: equals, in, notEmpty, greaterThan, lessThan operators
+- Rule enablement and action type filtering
+- Nested field access via dot notation
+- Semantic validator: Gemini integration, JSON parsing, error handling
+- Result aggregation and summarization
+- Edge cases and performance scenarios
+
+**Key Technical Patterns:**
+1. Fixture Factory: reusable createX(overrides) functions reduce boilerplate
+2. Type-Only Mocks: define interface instead of jest.mock() to avoid ESM issues
+3. JSON Response Parsing: regex /\{[\s\S]*\}/ handles multiple formats
+4. Error Handling: return error ValidationResult instead of throwing
+5. Sequential Evaluation: supports error recovery and result collection
+6. Test Organization: consistent structure (describe → it → expect)
+7. Performance Testing: validates scalability with large datasets
+
+**Code Quality:**
+- All 56 tests passing
+- TypeScript strict mode enabled
+- ESM compatibility handled
+- Error handling tested thoroughly
+- Edge cases covered
+- Performance validated
+
+**Ready for Next Session:**
+- benchtop-dsk - Data persistence round-trip tests (JSON save/load)
+- benchtop-3v1 - Unit tests for app shell components
+- benchtop-9jy - Unit tests for chat components
+- benchtop-j4n - Unit tests for form components
+
+**Recommendations for Next Phase:**
+- Continue with data persistence tests (benchtop-dsk)
+- Establish component testing patterns with @testing-library/react
+- Use established fixture patterns for component test data
+- Focus on integration tests (form → store → validation flow)
+- Build test utilities library for reusable mock builders
+
