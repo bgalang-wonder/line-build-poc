@@ -1849,3 +1849,64 @@ Patterns accumulate across iterations.
 - Result aggregation uses Set + Array.from pattern for unique values
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.9.4: Dashboard render agent search results + drill-in
+
+### What I Implemented:
+- Added search results state management (searchResults, searchQuery) to dashboard
+- Created displayedBuilds computed from either searchResults or all builds (for conditional rendering)
+- Added search results info banner showing count and query with clear button
+- Updated page subtitle to show "Search results for: {query}" when searching
+- Enhanced table to handle both LineBuild objects and search result objects (different structure)
+- All rows have "Edit" link that drills into /editor?id={buildId}
+- Added "Steps" column showing workUnitCount from both object types
+- Empty state adapts to show "No results found" or "No Line Builds Yet" based on context
+- Clear Search button resets searchResults and searchQuery to null
+- Search results banner uses blue styling (bg-blue-50, border-blue-200) for visual distinction
+
+### Files Changed:
+- `apps/line-build-mvp/src/app/dashboard/page.tsx` — Added search results display infrastructure
+
+### Learnings (for next iteration):
+- Search result objects have different structure than LineBuild (no metadata, no workUnits)
+- Type guard pattern: 'workUnits' in item ? LineBuild : SearchResultItem
+- displayedBuilds pattern enables code reuse between normal and search views
+- Clear Search button good UX for returning to full list view
+- Info banner with result count helps users understand search scope
+- Drill-in uses /editor?id={buildId} pattern for navigation
+
+### Codebase Patterns Discovered:
+- Conditional subtitle + title provides context for current view state
+- Search banner styling: bg-{color}-50 + border-{color}-200 + border for subtle highlight
+- Clear button pattern: icon + label in consistent button style
+- Drill-in links use consistent styling across table rows
+
+---
+
+## Jan 8, 2026 - benchtop-x0c.9.5: Routing - navigate dashboard to editor (by id)
+
+### What I Implemented:
+- Dashboard already implements routing to editor with query parameters
+- "Create New Build" buttons navigate to /editor?new=true
+- "Edit" action links in dashboard table navigate to /editor?id={buildId}
+- Editor page.tsx already supports these query params via useSearchParams()
+- buildId extracted from search params and passed to EditorContainer
+- Routing enables full drill-in workflow: dashboard search → click edit → load build in editor
+- Editor handles both new builds (no id param) and existing builds (id param provided)
+
+### Files Changed:
+- None - routing already implemented in previously created dashboard and editor files
+
+### Learnings (for next iteration):
+- Dashboard already has complete routing infrastructure for editor navigation
+- Query param pattern ?id={buildId} and ?new=true supports both workflows
+- useSearchParams() hook enables query param extraction in Next.js app router
+- EditorContainer designed to accept optional buildId for loading existing builds
+- Routing is declarative through Link components and href props
+
+### Codebase Patterns Discovered:
+- Link href with query params: /editor?id={value} for parameter passing
+- useSearchParams() for accessing query parameters in 'use client' components
+- Optional buildId pattern in container components for conditional loading
+
+---
