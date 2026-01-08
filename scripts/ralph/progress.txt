@@ -1445,3 +1445,110 @@ Patterns accumulate across iterations.
 - Focus on integration tests (form → store → validation flow)
 - Build test utilities library for reusable mock builders
 
+
+## Jan 7, 2026 - benchtop-dsk: Data persistence round-trip tests
+
+### What I Implemented:
+- Implemented 18 comprehensive integration tests for LineBuildPersistence
+- Tests cover end-to-end save/load round-trip with full data integrity verification
+- Tests all field types: primitives, nested objects, arrays, timestamps
+- Tests special characters, Unicode, newlines and whitespace preservation
+- Tests file I/O operations: save, load, delete, exists, loadAll
+- Tests validation result persistence separate from main build data
+- Tests error handling: non-existent files, graceful degradation
+- Tests data integrity over multiple save/load cycles
+- Tests performance with large builds (100 work units, 50 conversation messages)
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/data/__tests__/persistence.test.ts` — 18 integration tests (600+ lines)
+
+### Learnings (for next iteration):
+- File system isolation in Jest tests requires careful beforeEach/afterEach cleanup
+- Test directory isolation crucial when tests run in parallel or consecutively
+- Better to test behavior (can load what we saved) than implementation details (file format)
+- LineBuildPersistence may use mocked file operations or abstractions that hide real FS
+- Unicode and special characters need explicit tests to prevent data loss
+- Timestamp preservation critical for audit trails and cache invalidation
+- Large dataset tests validate scalability (100 items, 50 messages handled efficiently)
+- Empty arrays/null values must round-trip correctly (common source of data loss bugs)
+- Validation result persistence separate from build allows quick retrieval without full validation run
+
+### Codebase Patterns Discovered:
+- Test Fixture Pattern: createTestLineBuild with Partial overrides for variation
+- Cleanup Pattern: beforeEach in each describe block for test isolation
+- Graceful Degradation: loadAll skips corrupted files instead of failing entirely
+- Separation of Concerns: validation results stored separately from builds
+- Data Preservation: ISO timestamps, deep nesting, complex arrays all preserved
+- Error Handling: load non-existent returns error, exists returns false gracefully
+- Performance Testing: use performance.now() to validate scalability thresholds
+
+---
+
+## Session 4 Update - Three Tasks Completed
+
+**Completed Tasks (3/3):**
+1. benchtop-44m ✅ - Unit tests: structured validator (32 tests)
+2. benchtop-hj0 ✅ - Integration tests: semantic validator with Gemini (24 tests)
+3. benchtop-dsk ✅ - Integration tests: data persistence round-trip (18 tests)
+
+**Total Test Suite Statistics:**
+- Total tests: 74 passing (100% pass rate)
+- Test files: 3 test suites
+- Lines of test code: ~1,450
+- Test organization: Describe blocks by feature
+- Fixture patterns: Factory functions with Partial overrides
+- Mock patterns: Type-based mocks, mocked responses, jest.fn()
+- Test isolation: beforeEach/afterEach cleanup for each describe block
+
+**Test Infrastructure:**
+- ✅ Jest + TypeScript configured for Next.js
+- ✅ Test scripts: test, test:watch, test:coverage
+- ✅ ESM module handling (transformIgnorePatterns)
+- ✅ @testing-library/jest-dom setup
+- ✅ Fixture factory pattern established
+- ✅ Mock patterns for pure functions and API integration
+- ✅ Performance testing framework
+
+**Testing Patterns Established:**
+1. **Fixture Factory:** createX(overrides: Partial<T>) pattern
+2. **Test Organization:** Describe → nested Describe → It blocks
+3. **Mock Strategies:** Type-based mocks, jest.fn(), resolved/rejected promises
+4. **Error Testing:** expect().rejects.toThrow(), error objects
+5. **Data Testing:** Round-trip verification, field preservation, type checking
+6. **Edge Cases:** Empty arrays, null values, missing fields, special characters
+7. **Performance:** performance.now() for timing, < threshold assertions
+8. **Test Isolation:** beforeEach cleanup, no shared state between tests
+
+**Code Quality Achieved:**
+- ✅ All tests passing (74/74)
+- ✅ Full TypeScript type safety
+- ✅ ESM compatibility handled
+- ✅ Error handling tested thoroughly
+- ✅ Edge cases and special scenarios covered
+- ✅ Performance validated
+- ✅ Data integrity verified
+- ✅ Mock patterns consistent
+
+**Remaining Tasks in Filter:**
+- benchtop-j4n - Unit tests: form components (step list, editor, deps)
+- benchtop-3v1 - Unit tests: app shell components (layout, responsiveness, state)
+- benchtop-9jy - Unit tests: chat components (message feed, cards)
+
+**Key Insights for Component Testing:**
+- Factory fixtures reduce boilerplate significantly
+- Mock pattern (type interface + jest.fn) avoids ESM import issues
+- Test organization by feature (describe blocks) improves readability
+- beforeEach cleanup essential for file-based integration tests
+- Both positive (pass/success) and negative (error/edge case) scenarios needed
+- Performance testing catches scalability issues early
+- Special character/Unicode tests prevent subtle data loss bugs
+
+**Recommended Next Steps:**
+1. Apply established patterns to component testing (benchtop-j4n, benchtop-3v1, benchtop-9jy)
+2. Use @testing-library/react for component testing
+3. Create shared test utilities (fixtures, mocks, assertions)
+4. Consider test utility library for reusable mock builders
+5. Establish component snapshot testing or visual regression testing
+6. Add integration tests for form → store → validation flow
+7. Add end-to-end tests for key user workflows
+
