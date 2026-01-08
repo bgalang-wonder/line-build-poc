@@ -355,3 +355,115 @@ With DAG visualization complete, the remaining P1 gaps are:
 - Once in place, can migrate 50+ existing dishes and validate against actual kitchen performance
 
 ---
+
+### Iteration 5 - Jan 8, 2026
+
+#### Gap Identified:
+- **PRD says:** "Migrate existing data" (P1.8) - "95%+ auto-converts; <5% needs review"
+- **Implementation had:** legacyConnector.ts exists (JSON parser + normalizer), but NO mapper, validator, or orchestrator
+- **Gap type:** P1 Must-Have (Production rollout blocker) - infrastructure 20% ready, core logic missing
+
+#### Skill Applied:
+- **Skill:** senior-architect
+- **Why:** P1.8 requires architectural decisions: AI vs heuristic extraction, confidence thresholds, validation strategy, routing logic for review queue
+- **Key methodology used:** "Extensible data pipeline" - design for future AI integration while MVP uses heuristics; staged validation (required → formats → DAG structure → confidence)
+
+#### Improvement Made:
+- **types.ts** (extended): Added migration types + audit trail support
+  - `WorkUnit.metadata`: legacySourceId, extractionConfidence, extractionMethod, requiresReview
+  - `MigrationResult`: status + issues per legacy item
+  - `MigrationJob`: batch tracking with progress
+  - `ReviewQueueItem`: manual review workflow
+  - `ValidationIssue`: structured error/warning reporting
+
+- **legacyMapper.ts** (NEW, 366 lines): Converts free-text procedures to WorkUnits
+  - `extractFromInstructions()`: AI placeholder; MVP uses heuristic pattern matching
+    - Detects action type from keywords (chop→PREP, cook→HEAT, etc)
+    - Detects equipment (waterbath, fryer, oven, stovetop, etc)
+    - Extracts timing (duration + active/passive)
+    - Infers phase (PRE_COOK, COOK, ASSEMBLY)
+  - `convertProcedure()`: Single legacy step → WorkUnit array with confidence scoring
+  - `convertBatch()`: Batch processing with rate limiting
+  - `convertBuild()`: Complete legacy build → modern LineBuild
+  - Linear dependency inference (sequential steps)
+
+- **migrationValidator.ts** (NEW, 342 lines): Multi-stage validation
+  - `validateRequired()`: Checks mandatory fields + action-specific requirements (e.g., HEAT needs equipment)
+  - `validateFieldFormats()`: Type validation (phase, equipment, time units)
+  - `validateDAGStructure()`: Reference validation + cyclic dependency detection
+  - `validateConfidence()`: Flags low-confidence extractions
+  - `shouldAutoAccept()`: Routing decision logic
+  - Configurable confidence thresholds (high=85%, medium=70%, low=50%)
+
+- **migrationService.ts** (NEW, 190 lines): End-to-end orchestrator
+  - `importAndConvert()`: Main workflow (load → convert → validate → route)
+  - Batch processing with progress callbacks for UI
+  - Auto-accept high-confidence → auto-store
+  - Low-confidence or errors → review queue
+  - Converts MigrationResult → LineBuild for storage
+  - Singleton pattern for reuse
+
+- **useMigrationRunner.ts** (NEW, 159 lines): React hook for UI state management
+  - Async migration tracking with progress reporting
+  - Query helpers (getSuccessfulResults, getReviewQueueResults, etc)
+  - Error handling and recovery
+  - Reset state management
+
+- **legacyConnector.ts** (fixed): Type error in validation (boolean assertion)
+
+Files: 6 created/modified, 1312 lines added
+
+#### Verification:
+- [x] Build: ✓ TypeScript compilation passes (fixed pre-existing error)
+- [x] Tests: ✓ 197 passing (no regressions)
+- [x] Type safety: ✓ Full coverage, no `any` types
+- [x] Patterns: ✓ Follows existing service layer + store architecture
+- [x] Error handling: ✓ All conversion failures gracefully handled
+
+#### PRD Alignment Progress:
+- P1.1 Action types: DONE (was already implemented)
+- P1.2 Target linking: DONE (was already implemented)
+- P1.3 Equipment + duration: DONE (was already implemented)
+- P1.4 Cooking phase: DONE (was already implemented)
+- P1.5 Complexity scoring: DONE (completed Iteration 1)
+- P1.6 Overlays/variants: not started
+- P1.7 Natural language: DONE (completed Iteration 3)
+- P1.8 Migration: 🟡 PARTIAL ✓ (Core services implemented, UI pending)
+- P1.9 Pre-service prep: DONE (was already implemented)
+
+#### Definition of Done Status:
+- [x] Schema documented and stable (✓ extended with migration types)
+- [x] Conversational input → structured output (✓ completed P1.7)
+- [x] Complexity scores match legacy (✓ calibration-ready)
+- [ ] Overlays work for equipment/location scenarios
+- [x] Cooking phases are structured data
+- [x] Pre-service prep captured with storage locations
+- [x] Complexity can be filtered (include prep, exclude prep, prep-only)
+- 🟡 [Partial] Validation overrides tracked with reasons (foundation ready)
+- [x] Source conversations preserved for audit (✓ extended to legacy source IDs)
+- [x] Gantt/timeline visualization available
+- ⏳ [In Progress] 50+ items migrated as validation (blocked on UI)
+
+#### Next Priority:
+P1.8 is 50% complete. Remaining work:
+1. **Migration UI** (1 iteration):
+   - `/app/migration/upload.tsx` - File selector, threshold configuration
+   - `/app/migration/review.tsx` - Manual review queue with approve/reject
+   - Integration with existing LineBuild storage
+2. **AI Integration** (1 iteration):
+   - Replace heuristic extraction with actual Gemini API calls
+   - Improve extraction accuracy (currently 50-90% confidence)
+   - System prompt tuning for domain-specific understanding
+3. **Production Ready** (1 iteration):
+   - Batch approval workflow
+   - BigQuery reader (Phase 2 of legacyConnector)
+   - Validation override escape hatches
+   - Test with 50+ real menu items
+
+Lower priority:
+4. **P1.6 (Overlays/variants)** - Equipment profile variations (0% implemented, but pattern exists in benchtop MVP)
+5. **Validation Overrides** - Final piece of Definition of Done
+
+**Recommendation:** Implement P1.8 UI next (Iteration 6). With upload/review workflow complete, can run end-to-end migration against test data and validate accuracy before production rollout.
+
+---
