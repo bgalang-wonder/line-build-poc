@@ -1983,3 +1983,37 @@ Patterns accumulate across iterations.
 - Type Safety: Ensure LineBuild type matches when creating empty builds (metadata fields only)
 
 ---
+
+## Jan 8, 2026 - benchtop-ntj: Error handling: validation engine (timeouts, API failures, malformed rules)
+
+### What I Implemented:
+- Created validation error handling module with timeout/rate limit detection
+- Implemented rule definition validation before execution
+- Added validation engine health monitoring with error tracking
+- Built user-facing error component for validation panel
+- Created integration hook for validation error handling
+- Added graceful error result creation for consistent error reporting
+
+### Files Changed:
+- `src/lib/error/validationErrorHandling.ts` — Core validation error handling (detection, validation, recovery, health monitoring)
+- `src/lib/hooks/useValidationErrorHandling.ts` — Hook for error handling and engine health in components
+- `src/components/validation/ValidationErrorPanel.tsx` — UI component for displaying validation errors with recovery options
+
+### Learnings (for next iteration):
+- Timeout detection: Check for 'timeout', 'deadline exceeded', 'timed out' keywords in error messages
+- Rate limiting: Detect 429 status code and 'rate limit'/'quota' messages
+- Rule validation: Check field completeness (id, name, enabled, condition/prompt) before evaluation
+- Health monitoring: Track error types separately (timeout, rate-limit, unknown) for diagnostic insight
+- Graceful degradation: Return ValidationResult with pass=false for errors (don't throw, let UI handle)
+- Error UI: Show error type in title + actionable recovery message + retry button for transient errors
+- Retry strategy: Only retry timeout/rate-limit errors, not malformed rule errors
+
+### Codebase Patterns Discovered:
+- Error Type Discrimination: Use error.type field (timeout, api-error, malformed-rule, circular-dependency, unknown)
+- Rule Validation Pattern: Call validateRuleDefinition() before eval; catches malformed rules early
+- Health Monitoring: ValidationEngineHealthMonitor tracks counts (errors, timeouts, rateLimits) for diagnostics
+- Error Result Pattern: createValidationErrorResult() converts errors to proper ValidationResult with failures array
+- UI Error Pattern: ValidationErrorPanel shows contextual message based on error.type and offers retry for transient errors
+- Integration Pattern: useValidationErrorHandling hook provides validation/handling/health methods for components
+
+---
