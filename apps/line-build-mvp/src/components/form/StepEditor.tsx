@@ -4,11 +4,14 @@ import React, { useState } from 'react';
 import { WorkUnit, ActionType, Phase, TimingMode, PrepType } from '@/lib/model/types';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import BOMAutocomplete from './BOMAutocomplete';
+import DependenciesMultiSelect from './DependenciesMultiSelect';
 
 interface StepEditorProps {
   step: WorkUnit | null;
   isLoading?: boolean;
   onChange?: (updatedStep: Partial<WorkUnit>) => void;
+  allSteps?: WorkUnit[]; // For dependencies multi-select
+  onSetDependencies?: (stepId: string, deps: string[]) => void; // For dependencies updates
 }
 
 interface ExpandedSections {
@@ -56,7 +59,7 @@ const TIME_UNITS = ['sec', 'min'] as const;
  * ✓ Show empty state when no step selected
  * ✓ Loading state
  */
-export default function StepEditor({ step, isLoading = false, onChange }: StepEditorProps) {
+export default function StepEditor({ step, isLoading = false, onChange, allSteps = [], onSetDependencies }: StepEditorProps) {
   const [expanded, setExpanded] = useState<ExpandedSections>({
     timing: true,
     phase: false,
@@ -521,6 +524,20 @@ export default function StepEditor({ step, isLoading = false, onChange }: StepEd
               </label>
             </div>
           </CollapsibleSection>
+
+          {/* Dependencies Section */}
+          {allSteps.length > 1 && (
+            <div>
+              <DependenciesMultiSelect
+                currentStepId={step.id}
+                currentDependencies={step.dependsOn || []}
+                allSteps={allSteps}
+                onChange={(updatedDeps) => {
+                  onSetDependencies?.(step.id, updatedDeps);
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

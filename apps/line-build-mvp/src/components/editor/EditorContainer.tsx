@@ -472,6 +472,8 @@ export default function EditorContainer({
                 step={selectedStepId ? currentBuild.workUnits.find((wu) => wu.id === selectedStepId) || null : null}
                 isLoading={false}
                 onChange={handleStepEdit}
+                allSteps={currentBuild.workUnits}
+                onSetDependencies={handleSetDependencies}
               />
             </div>
           </div>
