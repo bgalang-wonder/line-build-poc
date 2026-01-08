@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { CopilotKitProvider } from "@/components/CopilotKitProvider";
+import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 import { Navigation } from "@/components/Navigation";
 import "./globals.css";
 
@@ -30,8 +31,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CopilotKitProvider>
-          <Navigation />
-          {children}
+          <ErrorBoundary>
+            <Navigation />
+            {children}
+          </ErrorBoundary>
         </CopilotKitProvider>
       </body>
     </html>

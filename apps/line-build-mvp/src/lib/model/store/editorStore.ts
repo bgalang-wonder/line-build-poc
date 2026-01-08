@@ -3,6 +3,7 @@
 import { create } from 'zustand';
 import { LineBuild, WorkUnit, BuildValidationStatus } from '../types';
 import { v4 as uuidv4 } from 'uuid';
+import { stateSnapshotManager } from '@/lib/error/errorRecovery';
 
 // ============================================================================
 // Chat Message Types (shared with ChatPanel)
@@ -43,6 +44,7 @@ export interface EditorStore {
   // ========== UI STATE ==========
   isLoading: boolean;
   error: string | null;
+  lastErrorTime?: string; // Track when error occurred for recovery UI
 
   // ========== FORM ACTIONS ==========
   setBuild: (build: LineBuild) => void;
@@ -83,6 +85,10 @@ export interface EditorStore {
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   reset: () => void;
+
+  // ========== ERROR RECOVERY ACTIONS ==========
+  restoreFromSnapshot: () => boolean; // Returns true if restored, false if no snapshot
+  clearError: () => void;
 }
 
 // ============================================================================
@@ -445,7 +451,30 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
   },
 
   setError: (error: string | null) => {
-    set({ error });
+    set({ 
+      error,
+      lastErrorTime: error ? new Date().toISOString() : undefined,
+    });
+  },
+
+  // ========== ERROR RECOVERY ACTIONS ==========
+
+  restoreFromSnapshot: () => {
+    const snapshot = stateSnapshotManager.getSnapshot();
+    if (snapshot) {
+      set({
+        currentBuild: snapshot.build,
+        error: null,
+        lastErrorTime: undefined,
+      });
+      stateSnapshotManager.clear();
+      return true;
+    }
+    return false;
+  },
+
+  clearError: () => {
+    set({ error: null, lastErrorTime: undefined });
   },
 
   reset: () => {
@@ -460,6 +489,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
       },
       isLoading: false,
       error: null,
+      lastErrorTime: undefined,
     });
   },
 }));
