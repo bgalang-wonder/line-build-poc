@@ -2067,3 +2067,78 @@ time=2026-01-07T21:55:27.740-05:00 level=INFO msg="Skipping %s: in backoff perio
 time=2026-01-07T21:55:30.098-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
 time=2026-01-07T21:55:31.222-05:00 level=INFO msg="Import triggered by file change"
 time=2026-01-07T21:55:31.225-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:55:43.749-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:43.984-05:00 level=INFO msg="JSONL removed/renamed, re-establishing watch"
+time=2026-01-07T21:55:44.036-05:00 level=INFO msg="Successfully re-established JSONL watch after %v" !BADKEY=50ms
+time=2026-01-07T21:55:44.036-05:00 level=INFO msg="JSONL file created: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:44.650-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:45.166-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:46.332-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:55:46.337-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:55:46.858-05:00 level=INFO msg="Mutation detected: %s %s" status=benchtop-u2x
+time=2026-01-07T21:55:47.359-05:00 level=INFO msg="Export triggered by mutation events"
+time=2026-01-07T21:55:47.359-05:00 level=INFO msg="Starting %s..." !BADKEY=export
+time=2026-01-07T21:55:47.396-05:00 level=INFO msg="Exported to JSONL"
+time=2026-01-07T21:55:47.396-05:00 level=INFO msg="Export complete"
+time=2026-01-07T21:55:47.397-05:00 level=INFO msg="JSONL removed/renamed, re-establishing watch"
+time=2026-01-07T21:55:47.451-05:00 level=INFO msg="Successfully re-established JSONL watch after %v" !BADKEY=50ms
+time=2026-01-07T21:55:47.451-05:00 level=INFO msg="JSONL file created: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:47.528-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:48.031-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:49.155-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:55:49.167-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:55:49.670-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:50.820-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:55:50.821-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:55:55.351-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:56.576-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:55:56.578-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:55:57.707-05:00 level=INFO msg="Mutation detected: %s %s" status=benchtop-ntj
+time=2026-01-07T21:55:58.207-05:00 level=INFO msg="Export triggered by mutation events"
+time=2026-01-07T21:55:58.207-05:00 level=INFO msg="Starting %s..." !BADKEY=export
+time=2026-01-07T21:55:58.210-05:00 level=INFO msg="Pre-export validation failed: %v" !BADKEY="refusing to export: JSONL content has changed since last import (import first to avoid data loss)"
+time=2026-01-07T21:55:58.430-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:55:59.435-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:55:59.510-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:56:00.356-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:56:01.468-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:56:01.469-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:56:41.203-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:56:42.356-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:56:42.358-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:56:49.806-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:56:50.953-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:56:50.954-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:56:59.318-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:00.461-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:00.463-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:03.616-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:04.354-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:05.738-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:05.738-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:09.331-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:10.416-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:10.417-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:12.692-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:13.934-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:13.935-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:14.318-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:15.003-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:15.435-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:15.435-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:16.007-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:16.017-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:16.017-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:16.658-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:17.168-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:18.177-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:18.178-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:19.331-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:20.430-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:20.430-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:22.053-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:23.063-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:23.064-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import
+time=2026-01-07T21:57:24.348-05:00 level=INFO msg="File change detected: %s" !BADKEY=/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/issues.jsonl
+time=2026-01-07T21:57:25.439-05:00 level=INFO msg="Import triggered by file change"
+time=2026-01-07T21:57:25.440-05:00 level=INFO msg="Skipping %s: in backoff period" !BADKEY=auto-import

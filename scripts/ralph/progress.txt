@@ -1949,3 +1949,37 @@ Patterns accumulate across iterations.
 - Error Boundary: Wrap at layout level (src/app/layout.tsx) to catch rendering errors in all pages
 
 ---
+
+## Jan 8, 2026 - benchtop-u2x: Error handling: graceful JSON corruption recovery
+
+### What I Implemented:
+- Created corruption recovery manager with backup restoration and manual reset options
+- Implemented corruption detection by analyzing error messages for JSON/parse patterns
+- Added corruption event logging to localStorage for debugging and compliance
+- Built recovery dialog UI component with user-friendly options
+- Created useCorruptionRecovery hook for integration into components
+- Added corruption history tracking per build for transparency
+
+### Files Changed:
+- `src/lib/error/corruptionRecovery.ts` — CorruptionRecoveryManager with backup/reset logic
+- `src/components/error/CorruptionRecoveryDialog.tsx` — UI for corruption recovery (backup vs reset options)
+- `src/lib/hooks/useCorruptionRecovery.ts` — Hook for detecting and handling corruption
+
+### Learnings (for next iteration):
+- Corruption detection should check for JSON/parse/corrupt keywords (not just exact error types)
+- Backup filenames use timestamp format (replace colons with dashes) for sorting and recovery
+- Recovery should offer two clear options: (1) restore from backup, (2) reset to empty draft
+- Corruption events should be logged with full context: filename, error message, recovery status
+- Persistence layer already has backup creation and recovery - just needed UI layer on top
+- Manual reset is important fallback when no backup exists (user can start fresh)
+- Corruption history should be queryable per build for debugging specific issues
+
+### Codebase Patterns Discovered:
+- Corruption Detection: isCorruptionError() checks message.includes('json|parse|corrupt|unexpected token')
+- Recovery Pattern: Try backup first → if fails, offer reset to empty draft
+- Event Logging: Store corruption events with metadata (buildId, filename, recovery status, source)
+- Dialog Pattern: Show clear options with descriptions; include help text about automatic backups
+- Hook Pattern: Hook handles detection + recovery methods; component uses hook for UI
+- Type Safety: Ensure LineBuild type matches when creating empty builds (metadata fields only)
+
+---
