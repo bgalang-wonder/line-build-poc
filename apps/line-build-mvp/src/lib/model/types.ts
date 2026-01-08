@@ -142,11 +142,22 @@ export interface ValidationResultSet {
 // ============================================================================
 
 export interface BuildValidationStatus {
-  buildId: string;
-  isDraft: boolean;
-  hasStructuredFailures: boolean;
-  hasSemanticFailures: boolean;
-  failureCount: number;
+  buildId?: string; // Optional for standalone validation results
+  isDraft?: boolean;
+  hasStructuredFailures?: boolean;
+  hasSemanticFailures?: boolean;
+  failureCount?: number;
   lastChecked?: string; // ISO 8601
-  results: ValidationResult[];
+  results?: ValidationResult[]; // Original fields for backward compatibility
+  
+  // New fields from ValidationOrchestrator
+  passCount?: number;
+  failCount?: number;
+  totalCount?: number;
+  isValid?: boolean;
+  allResults?: ValidationResult[];
+  failuresByRule?: Record<string, ValidationResult[]>;
+  lastCheckedAt?: string; // ISO 8601 - when validation was run
+  durationMs?: number; // How long the validation took
+  error?: string; // Error message if validation failed
 }

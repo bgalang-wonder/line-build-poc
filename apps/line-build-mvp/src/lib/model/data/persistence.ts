@@ -4,6 +4,7 @@
  */
 
 import { LineBuild } from "../types";
+import type { BuildValidationStatus } from "../types";
 
 // ============================================================================
 // Types
@@ -40,6 +41,13 @@ export class LineBuildPersistence {
   constructor(options: PersistenceOptions = {}) {
     this.dataDir = options.dataDir || "data/line-builds";
     this.autoBackup = options.autoBackup !== false;
+  }
+
+  /**
+   * Get or create the shared persistence instance (static method)
+   */
+  static getInstance(): LineBuildPersistence {
+    return getPersistence();
   }
 
   /**
@@ -182,6 +190,74 @@ export class LineBuildPersistence {
       return true;
     } catch {
       return false;
+    }
+  }
+
+  /**
+   * Save the last validation check result for a build
+   * Stores validation results separately from the build itself
+   * Allows quick retrieval of latest validation without re-running
+   */
+  async saveLastCheckResult(
+    buildId: string,
+    validationResult: BuildValidationStatus
+  ): Promise<void> {
+    try {
+      const filename = `${buildId}.validation.json`;
+      const persistedData = {
+        buildId,
+        validationResult,
+        savedAt: new Date().toISOString(),
+      };
+
+      const jsonContent = JSON.stringify(persistedData, null, 2);
+      await this.writeFile(filename, jsonContent);
+    } catch (error) {
+      throw new Error(
+        `Failed to save validation result for ${buildId}: ${String(error)}`
+      );
+    }
+  }
+
+  /**
+   * Load the last validation check result for a build
+   * Returns null if no prior validation exists
+   */
+  async loadLastCheckResult(
+    buildId: string
+  ): Promise<BuildValidationStatus | null> {
+    try {
+      const filename = `${buildId}.validation.json`;
+      const jsonContent = await this.readFile(filename);
+      const data = JSON.parse(jsonContent);
+
+      if (
+        data &&
+        typeof data === "object" &&
+        "validationResult" in data
+      ) {
+        return data.validationResult as BuildValidationStatus;
+      }
+
+      return null;
+    } catch {
+      // File doesn't exist or is invalid, return null
+      return null;
+    }
+  }
+
+  /**
+   * Delete the last validation check result for a build
+   */
+  async deleteLastCheckResult(buildId: string): Promise<void> {
+    try {
+      const filename = `${buildId}.validation.json`;
+      await this.deleteFile(filename);
+    } catch (error) {
+      console.warn(
+        `Failed to delete validation result for ${buildId}: ${String(error)}`
+      );
+      // Non-fatal error - continue anyway
     }
   }
 

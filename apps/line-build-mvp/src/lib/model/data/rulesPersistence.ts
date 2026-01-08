@@ -47,6 +47,13 @@ export class ValidationRulesPersistence {
   }
 
   /**
+   * Get or create the shared rules persistence instance (static method)
+   */
+  static getInstance(): ValidationRulesPersistence {
+    return getRulesPersistence();
+  }
+
+  /**
    * Save a single ValidationRule to the rules collection
    */
   async saveRule(rule: ValidationRule): Promise<SaveRuleResult> {

@@ -1065,3 +1065,54 @@ Patterns accumulate across iterations.
 - Ready for team code review and next iteration
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.11.4: Shared state store (form ↔ chat ↔ validation)
+
+### What I Implemented:
+- Created EditorStore using Zustand for unified state management across all 3 editor panels
+- Integrated form mutations (addWorkUnit, editWorkUnit, removeWorkUnit, setDependencies, changeBOM)
+- Added chat message state management with add/clear operations
+- Implemented validation state with timestamp, status, and isRunning flag
+- Created EditorContainer component that coordinates all sub-components and manages data flow
+- Wired load/save persistence into container with useLineBuildLoader and useAutoSaveBuild hooks
+- Integrated all panels (form, chat, DAG placeholder, validation) with store-connected handlers
+
+### Files Changed:
+- `apps/line-build-mvp/src/lib/model/store/editorStore.ts` — Unified state store (340 lines)
+- `apps/line-build-mvp/src/components/editor/EditorContainer.tsx` — Panel coordinator (345 lines)
+- `apps/line-build-mvp/src/app/editor/page.tsx` — Updated to use EditorContainer
+
+### Learnings (for next iteration):
+- EditorStore extends formStore pattern: similar action interfaces but with validation + chat state
+- Form mutations now auto-clear validation results (user must re-validate after edits)
+- useLineBuildLoader hook returns LoaderState directly, not wrapped in result object (different pattern from expected)
+- Auto-save debouncing: Use useAutoSaveBuild hook's triggerSave on 1s timeout
+- Type consistency: Components expect `string | undefined` not `string | null` for optional props
+- ValidationSnapshot pattern: Tracks { timestamp, status, isRunning } for UI feedback
+- EditorContainer is the glue layer: bridges persistence hooks, store, and component props
+
+### Codebase Patterns Discovered:
+- Unified Store Pattern: Single EditorStore with all form/chat/validation state
+- State Mutation Flow: Form action → store update → clear validation → trigger auto-save
+- Auto-save Integration: setTimeout + triggerSave hook for debounced persistence
+- Component Communication: Props-based handlers passed to sub-components (no callback chains)
+- Error Handling: Store.setError() for centralized error display in container
+- Type Conversion: Convert null → undefined for optional props (TS stricter than expected)
+- Validation State: Separate from form state, survives form mutations until re-validation
+
+### Architecture Milestones:
+- ✅ Editor State: All 3 panels now share unified store
+- ✅ Data Flow: Form → Store → Persist; Load → Store → Render
+- ✅ Chat Ready: State management in place, CopilotKit integration next
+- ✅ Validation Ready: Status stored separately, orchestration needed next
+- ⏳ DAG Integration: Currently placeholder, ready for visjs/dagre
+- ⏳ CopilotKit Actions: formActions.ts ready, need useAction() registration
+
+### Next Steps:
+1. Implement DAG visualization component (benchtop-x0c.9.x) to show dependency graph
+2. Wire CopilotKit useAction() hooks to call store form mutations
+3. Implement validation orchestration to run both engines on demand
+4. Test end-to-end: chat action → form update → DAG re-render → validation
+
+---
+

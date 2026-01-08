@@ -224,7 +224,7 @@ export function PublishButton({
             )}
 
             {/* Validation info */}
-            {validationStatus && validationStatus.failureCount > 0 && (
+            {validationStatus && (validationStatus.failureCount ?? 0) > 0 && (
               <p className="mt-2 text-xs text-amber-600 flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                 <span>
