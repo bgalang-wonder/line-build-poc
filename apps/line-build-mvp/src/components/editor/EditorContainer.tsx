@@ -433,33 +433,45 @@ export default function EditorContainer({
           />
         }
         formPanel={
-          <div className="p-4 space-y-4 overflow-y-auto h-full">
-            {/* BOM Selector */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Menu Item
-              </label>
-              <div className="text-sm text-gray-600 px-3 py-2 bg-gray-50 rounded border border-gray-200">
-                {currentBuild.menuItemName}
+          <div className="h-full flex flex-col overflow-hidden">
+            {/* Top section: BOM, Scenario button, Step List */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 border-b border-gray-200">
+              {/* BOM Selector */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Menu Item
+                </label>
+                <div className="text-sm text-gray-600 px-3 py-2 bg-gray-50 rounded border border-gray-200">
+                  {currentBuild.menuItemName}
+                </div>
+              </div>
+
+              {/* What-If Scenario Button (P1.6) */}
+              <div>
+                <button
+                  onClick={() => setScenarioPanelOpen(true)}
+                  className="w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
+                >
+                  🔄 What-If Scenario
+                </button>
+              </div>
+
+              {/* Step List */}
+              <div>
+                <StepList
+                  build={currentBuild}
+                  selectedStepId={selectedStepId || undefined}
+                  onStepSelect={handleStepSelect}
+                />
               </div>
             </div>
 
-            {/* What-If Scenario Button (P1.6) */}
-            <div className="border-t pt-4">
-              <button
-                onClick={() => setScenarioPanelOpen(true)}
-                className="w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
-              >
-                🔄 What-If Scenario
-              </button>
-            </div>
-
-            {/* Step List */}
-            <div className="border-t pt-4">
-              <StepList
-                build={currentBuild}
-                selectedStepId={selectedStepId || undefined}
-                onStepSelect={handleStepSelect}
+            {/* Bottom section: Step Editor */}
+            <div className="flex-1 overflow-hidden border-t border-gray-200">
+              <StepEditor
+                step={selectedStepId ? currentBuild.workUnits.find((wu) => wu.id === selectedStepId) || null : null}
+                isLoading={false}
+                onChange={handleStepEdit}
               />
             </div>
           </div>
