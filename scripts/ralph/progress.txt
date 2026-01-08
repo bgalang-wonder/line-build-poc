@@ -341,3 +341,45 @@ Patterns accumulate across iterations.
 - Spacing: Consistent px-4 py-3 padding, divide-y for list separators, mt-1 for related items
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.3.2: Implement step editor form for WorkUnit tags
+
+### What I Implemented:
+- Created StepEditor component at `src/components/form/StepEditor.tsx` with full form for editing WorkUnit properties
+- Core section: action type dropdown, target item name field, BOM ID field, equipment field
+- Collapsible timing section: duration value + unit selector, active/passive toggle, add/remove time capability
+- Collapsible phase & timing section: phase dropdown, timing mode dropdown, prep type dropdown
+- Collapsible station & storage section: station field, storage location field
+- Collapsible flags section: requiresOrder and bulkPrep checkboxes
+- Real-time state updates via onChange callback
+- Loading and empty states
+- Field validation (required action, positive duration values)
+- Built-in CollapsibleSection helper component for consistent collapsible patterns
+
+### Files Changed:
+- `apps/line-build-mvp/src/components/form/StepEditor.tsx` — Complete step editor component (400+ lines)
+
+### Learnings (for next iteration):
+- Enum values: Define const arrays at top (ACTION_TYPES, PHASES, etc.) for use in both dropdowns and type definitions
+- Optional time object: Support add/remove time button since time is optional on WorkUnit
+- State immutability: Use spread operators to create new objects rather than mutating (matches LineBuild pattern)
+- Collapsible state: Use string keys in object for multiple independent sections
+- Number validation: Use min="0" on numeric inputs and parseInt with >= 0 check to prevent negative values
+- Toggle buttons: Use conditional className with ternary for active/inactive styling
+- Select with empty option: Include `<option value="">No [Field]</option>` for optional dropdowns
+- Partial updates: Pass Partial<WorkUnit> to onChange, letting parent handle merging with existing data
+- BOM ID note: Document in placeholder that 40* = consumables, 80* = menu items
+- Boolean flags: Use undefined instead of false to keep JSON clean (no storing false values)
+
+### Codebase Patterns Discovered:
+- Form Structure: Organize into logical sections with collapsible helpers for advanced fields
+- Collapsible Pattern: Create reusable CollapsibleSection component with title, toggle handler, children
+- Enum Handling: Define const arrays and use in both type definitions and dropdown rendering
+- Optional Fields: Use `field || undefined` pattern to exclude false boolean values from updates
+- Partial Updates: Parent component handles merging partial updates with full object state
+- Number Fields: Validate with parseInt and >= 0 check before updating state
+- Callback Pattern: Use onChange(updates) for parent to handle state merge and persistence
+- Loading/Empty: Consistent patterns for loading spinner and empty state messaging
+- Time Object: Support adding/removing optional complex objects with add/remove buttons
+
+---
