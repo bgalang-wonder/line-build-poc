@@ -5,9 +5,63 @@
 
 'use client';
 
-import React from 'react';
-import { Pencil, Trash2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Pencil, Trash2, AlertTriangle } from 'lucide-react';
 import { ValidationRule } from '@/lib/model/types';
+
+// ============================================================================
+// Delete Confirmation Modal
+// ============================================================================
+
+interface DeleteConfirmModalProps {
+  ruleName: string;
+  isOpen: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+}
+
+function DeleteConfirmModal({ ruleName, isOpen, onConfirm, onCancel }: DeleteConfirmModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/50"
+        onClick={onCancel}
+        onKeyDown={(e) => e.key === 'Escape' && onCancel()}
+      />
+      {/* Modal */}
+      <div className="relative bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+        <div className="flex items-start gap-4">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+            <AlertTriangle className="w-5 h-5 text-red-600" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold text-gray-900">Delete Rule</h3>
+            <p className="mt-2 text-sm text-gray-600">
+              Are you sure you want to delete &quot;{ruleName}&quot;? This action cannot be undone.
+            </p>
+          </div>
+        </div>
+        <div className="mt-6 flex justify-end gap-3">
+          <button
+            onClick={onCancel}
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 interface RulesTableProps {
   rules: ValidationRule[];
@@ -103,13 +157,15 @@ interface RuleRowProps {
 }
 
 function RuleRow({ rule, onEdit, onDelete, onToggleEnabled }: RuleRowProps) {
-  const [isDeleting, setIsDeleting] = React.useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const handleDelete = async () => {
-    if (!confirm(`Are you sure you want to delete "${rule.name}"?`)) {
-      return;
-    }
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  };
 
+  const handleDeleteConfirm = async () => {
+    setShowDeleteModal(false);
     setIsDeleting(true);
     try {
       await onDelete();
@@ -118,11 +174,15 @@ function RuleRow({ rule, onEdit, onDelete, onToggleEnabled }: RuleRowProps) {
     }
   };
 
-  // Format appliesTo display
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+  };
+
+  // Format appliesTo display - handle empty arrays as 'All'
   const appliesToDisplay =
     rule.appliesTo === 'all'
       ? 'All'
-      : Array.isArray(rule.appliesTo)
+      : Array.isArray(rule.appliesTo) && rule.appliesTo.length > 0
         ? rule.appliesTo.length > 2
           ? `${rule.appliesTo.slice(0, 2).join(', ')} +${rule.appliesTo.length - 2}`
           : rule.appliesTo.join(', ')
@@ -189,7 +249,7 @@ function RuleRow({ rule, onEdit, onDelete, onToggleEnabled }: RuleRowProps) {
             <Pencil className="w-4 h-4" />
           </button>
           <button
-            onClick={handleDelete}
+            onClick={handleDeleteClick}
             disabled={isDeleting}
             className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors disabled:opacity-50"
             title="Delete rule"
@@ -198,6 +258,14 @@ function RuleRow({ rule, onEdit, onDelete, onToggleEnabled }: RuleRowProps) {
           </button>
         </div>
       </td>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmModal
+        ruleName={rule.name}
+        isOpen={showDeleteModal}
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+      />
     </tr>
   );
 }

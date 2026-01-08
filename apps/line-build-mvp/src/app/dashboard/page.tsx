@@ -22,6 +22,7 @@ import {
   getSearchFacets,
   type LineBuildsSearchResult,
 } from '@/lib/copilotkit/searchTools';
+import { useBulkEditActions } from '@/lib/copilotkit/useBulkEditActions';
 import type { ActionType, Phase } from '@/lib/model/types';
 
 export default function DashboardPage() {
@@ -31,6 +32,9 @@ export default function DashboardPage() {
   const [showChat, setShowChat] = useState(false);
   const [searchResults, setSearchResults] = useState<LineBuildsSearchResult | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  // Register bulk edit actions with CopilotKit (enables find/propose/apply workflow)
+  useBulkEditActions();
 
   // CopilotKit Actions for search functionality
   useCopilotAction({
