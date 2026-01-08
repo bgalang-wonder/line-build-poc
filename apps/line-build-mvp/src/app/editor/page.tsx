@@ -8,40 +8,32 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { EditorLayout, ChatPanelPlaceholder, DAGPanelPlaceholder, FormPanelPlaceholder, ValidationPanelPlaceholder } from '@/components/editor/EditorLayout';
 
 function EditorContent() {
   const searchParams = useSearchParams();
   const buildId = searchParams.get('id');
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="p-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Editor</h1>
-        {buildId && (
-          <p className="text-gray-600">
-            Editing build: <code className="bg-gray-200 px-2 py-1 rounded">{buildId}</code>
-          </p>
-        )}
-        {!buildId && (
+  if (!buildId) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="p-6">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Editor</h1>
           <p className="text-gray-600">
             No build selected. Use the dashboard to open a build.
           </p>
-        )}
-
-        {/* Placeholder content - will be implemented in benchtop-x0c.11.2 */}
-        <div className="mt-8 bg-white rounded-lg shadow p-8 text-center">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            Editor Layout
-          </h2>
-          <p className="text-gray-600 mb-6">
-            3-column layout: Chat | DAG | Form + Validation
-          </p>
-          <p className="text-sm text-gray-500">
-            This layout will be implemented in the next iteration (benchtop-x0c.11.2)
-          </p>
         </div>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <EditorLayout
+      chatPanel={<ChatPanelPlaceholder />}
+      dagPanel={<DAGPanelPlaceholder />}
+      formPanel={<FormPanelPlaceholder />}
+      validationPanel={<ValidationPanelPlaceholder />}
+    />
   );
 }
 

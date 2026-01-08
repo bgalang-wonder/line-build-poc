@@ -822,3 +822,49 @@ Patterns accumulate across iterations.
 - Callback Pattern: onPublish and onDemote async callbacks for parent state management
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.11.1: App routes (Dashboard, Editor, Rules)
+
+### What I Implemented:
+- Created three main route pages: /dashboard, /editor, /rules
+- Dashboard page: Lists line builds (placeholder for now, ready for next iteration)
+- Editor page: Main editing interface with query param support (?id=[buildId])
+- Rules page: Validation rules management (placeholder)
+- Created Navigation component with active route highlighting
+- Navigation shows 3 main sections with icons (LayoutGrid, Edit3, Settings)
+- Added Navigation to root layout for sticky header across all pages
+- Wrapped useSearchParams in Suspense boundary for proper Next.js handling
+- Routes properly defined and generating static pages at build time
+
+### Files Changed:
+- `apps/line-build-mvp/src/app/dashboard/page.tsx` — Dashboard page (25 lines)
+- `apps/line-build-mvp/src/app/editor/page.tsx` — Editor page with query param support (50 lines)
+- `apps/line-build-mvp/src/app/rules/page.tsx` — Rules management page (25 lines)
+- `apps/line-build-mvp/src/components/Navigation.tsx` — Navigation component (55 lines)
+- `apps/line-build-mvp/src/app/layout.tsx` — Updated to include Navigation
+
+### Learnings (for next iteration):
+- Route organization: Place page.tsx directly in route directory (app/[route]/page.tsx)
+- Query params: Use useSearchParams() for route-specific state (e.g., ?id=[buildId])
+- Suspense requirement: useSearchParams must be wrapped in Suspense for static generation
+- Navigation component: Use usePathname() to determine active route and highlight accordingly
+- Route structure: Dashboard (list/create), Editor (main work), Rules (config)
+- Active route detection: Use pathname.startsWith() for multi-level routes
+- Static vs. dynamic: Dashboard/Rules are static, Editor uses dynamic query param
+- Icon selection: Use small icons (w-4 h-4) for navigation to keep text-focused
+- Navigation styling: Use active highlight color (bg-blue-100 text-blue-700) for current page
+- Layout nesting: Navigation in root layout means it appears on all pages
+
+### Codebase Patterns Discovered:
+- Page Components: Simple .tsx files in route directory, export default component
+- Client Components: Use 'use client' for interactivity (route detection, params)
+- Suspense Wrapping: Required for useSearchParams in client components
+- Navigation Component: Custom component with usePathname() and Link navigation
+- Query Parameters: Passed via searchParams from useSearchParams(), nullable
+- Route Navigation: Use Next.js Link component with href for client-side navigation
+- Placeholder Pages: Simple structure ready for implementation in next iterations
+- Icon Integration: Lucide icons for visual consistency across navigation
+- Active State Detection: Compare pathname with href using startsWith()
+- Responsive Navigation: Flex layout with gap, responsive text/icon display
+
+---
