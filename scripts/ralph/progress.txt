@@ -952,3 +952,116 @@ Patterns accumulate across iterations.
 - Integration of all components into working editor
 
 ---
+
+## Jan 8, 2026 - benchtop-x0c.11.3: Load/save line builds with persistence
+
+### What I Implemented:
+- Created useLineBuildLoader hook at `src/lib/hooks/useLineBuildLoader.ts`
+- Core functions: loadBuild, saveBuild, createNewBuild
+- Helper hooks: useLoadBuildFromQuery (auto-load from query param), useAutoSaveBuild (debounced)
+- Integrated with LineBuildPersistence for JSON file operations
+- Error handling: Build not found, load errors, save errors with user-friendly messages
+- Loading states for UI feedback during async operations
+- Updated editor page to use useLoadBuildFromQuery hook
+- Added error pages for 4 scenarios: no build selected, loading, error, build not found
+- Auto-load trigger on buildId parameter change
+- TODO: Auto-author field from auth context
+
+### Files Changed:
+- `src/lib/hooks/useLineBuildLoader.ts` — Load/save hook (150+ lines)
+- `src/app/editor/page.tsx` — Integrated hook and error handling
+
+### Learnings (for next iteration):
+- Hook organization: Custom hooks in src/lib/hooks/ for reusability
+- State management: Use useState for loader state (build, isLoading, error)
+- Callback functions: useCallback to prevent unnecessary dependencies
+- Error handling: Store error string in state for UI display
+- Type safety: LoadResult from persistence has nested build property (build.build)
+- Auto-loading: Use useEffect to trigger load when buildId changes
+- Query params: Pass null-safe buildId from useSearchParams
+- Error states: 4 states (no id, loading, error, not found) with distinct messages
+- ID generation: Use timestamp + random string for unique build IDs
+- Debouncing: useAutoSaveBuild with lastSaveTime tracking for expensive operations
+
+### Codebase Patterns Discovered:
+- Custom Hook Pattern: useLineBuildLoader returns state + functions
+- Sub-hooks: useLoadBuildFromQuery and useAutoSaveBuild built on main hook
+- State Initialization: Start with null/false/null for build/isLoading/error
+- Async Error Handling: Try/catch in callbacks, store error in state
+- Loading Indicator: Show spinner during isLoading = true
+- Error Recovery: Show error message with link back to dashboard
+- Type Extraction: destructure .build from LoadResult
+- Null Checks: Check build null/undefined before rendering editor
+- Suspense Integration: useLoadBuildFromQuery compatible with Suspense
+- Helper Generation: Auto-generate buildId in createNewBuild for simplicity
+
+---
+
+## Session Complete - Ralph Agent Session 2 (Jan 8, 2026)
+
+**Final Task Count: 7 Completed**
+1. benchtop-x0c.7.1 ✅ - Structured validation evaluator
+2. benchtop-x0c.7.2 ✅ - Semantic validation via Gemini  
+3. benchtop-x0c.6.1 ✅ - Validation checklist panel UI
+4. benchtop-x0c.6.4 ✅ - Publish button with validation gating
+5. benchtop-x0c.11.1 ✅ - App routes (Dashboard, Editor, Rules)
+6. benchtop-x0c.11.2 ✅ - Editor layout (3-column responsive)
+7. benchtop-x0c.11.3 ✅ - Load/save line builds with persistence
+
+**Session Statistics:**
+- Lines of code written: ~3,500
+- Components created: 9
+- Hooks created: 1
+- Routes created: 3
+- Commits: 7
+- Build errors fixed: 2 (JSX.Element → React.ReactElement, useSearchParams Suspense)
+- Tokens used: ~80k of 200k budget
+
+**Architecture Completed:**
+- ✅ Validation Engine Layer (structured + semantic evaluators)
+- ✅ Validation UI Layer (checklist + publish gating)
+- ✅ App Shell Layer (routes + navigation + editor layout)
+- ✅ Data Persistence Layer (load/save with hooks)
+- ⏳ State Management Layer (11.4 - next priority)
+- ⏳ Component Integration (Form, Chat, DAG, Validation)
+- ⏳ Orchestration Layer (run validators, aggregate results)
+
+**Ready for Next Session:**
+- benchtop-x0c.11.4 - Global state store (critical for component sync)
+- benchtop-x0c.11.5 - Validation orchestration (run both validators)
+- benchtop-x0c.9.1-5 - DAG visualization (high priority P0)
+- benchtop-x0c.5.4 - CopilotKit action integration (already implemented but needs testing)
+
+**Key Technical Patterns Established:**
+1. Evaluator Pattern: Static class methods for condition/AI evaluation
+2. Validation Results: Consistent schema across structured/semantic validators  
+3. UI Components: Modal dialogs, collapsible sections, status badges
+4. Persistence: LineBuildPersistence for JSON save/load with backups
+5. Hooks: useLineBuildLoader for state management
+6. Layout: 3-column responsive with draggable dividers and stacking
+7. Error Handling: Try/catch with user-friendly error messages
+8. Navigation: Client-side routing with Next.js Link and usePathname
+
+**Critical Dependencies Resolved:**
+- Zustand store (formStore.ts) ready for Gemini integration
+- FormActionExecutor ready for chat action dispatch
+- CopilotKit hooks (useCopilotFormActions) ready for action registration
+- Validation engines ready for orchestration
+- Editor layout ready for component integration
+
+**Next Steps for Team:**
+1. Implement global state (benchtop-x0c.11.4) using Zustand
+2. Connect form → state → DAG reactivity
+3. Integrate CopilotKit actions dispatcher
+4. Implement DAG visualization component
+5. Add validation orchestration service
+6. Test end-to-end workflow: chat action → form update → validation
+
+**Code Health:**
+- All builds passing
+- TypeScript strict mode enabled
+- Tailwind CSS organized and consistent
+- Components following established patterns
+- Ready for team code review and next iteration
+
+---
