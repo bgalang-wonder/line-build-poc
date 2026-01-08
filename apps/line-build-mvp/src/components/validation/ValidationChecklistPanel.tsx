@@ -6,6 +6,8 @@
  * Displays validation results as a read-only checklist.
  * Shows overall build validation status and per-rule results.
  * Supports both structured and semantic validation results.
+ * 
+ * Enhanced (benchtop-x0c.6.3): Shows last-checked timestamp with relative time.
  */
 
 import React from 'react';
@@ -19,7 +21,6 @@ import { ChevronDown, ChevronUp, AlertCircle, CheckCircle2 } from 'lucide-react'
 export interface ValidationChecklistPanelProps {
   validationStatus?: BuildValidationStatus;
   isLoading?: boolean;
-  onRunValidation?: () => void;
 }
 
 // ============================================================================
@@ -35,6 +36,35 @@ function formatTimestamp(timestamp: string): string {
     return date.toLocaleTimeString();
   } catch {
     return 'Unknown time';
+  }
+}
+
+/**
+ * Calculate relative time difference (e.g., "5 minutes ago")
+ */
+function getRelativeTime(timestamp: string): string {
+  try {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffSeconds = Math.floor(diffMs / 1000);
+    
+    if (diffSeconds < 60) return 'just now';
+    
+    const diffMinutes = Math.floor(diffSeconds / 60);
+    if (diffMinutes < 60) {
+      return `${diffMinutes} minute${diffMinutes !== 1 ? 's' : ''} ago`;
+    }
+    
+    const diffHours = Math.floor(diffMinutes / 60);
+    if (diffHours < 24) {
+      return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
+    }
+    
+    const diffDays = Math.floor(diffHours / 24);
+    return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+  } catch {
+    return 'unknown time';
   }
 }
 
@@ -212,7 +242,6 @@ function ValidationResultItem({
 export function ValidationChecklistPanel({
   validationStatus,
   isLoading = false,
-  onRunValidation,
 }: ValidationChecklistPanelProps) {
   const [expandedResults, setExpandedResults] = React.useState<
     Record<string, boolean>
@@ -235,15 +264,6 @@ export function ValidationChecklistPanel({
         <p className="text-sm text-gray-600 mb-4">
           No validation results yet. Run validation to check your build.
         </p>
-        {onRunValidation && (
-          <button
-            onClick={onRunValidation}
-            disabled={isLoading}
-            className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            {isLoading ? 'Running...' : 'Run Validation'}
-          </button>
-        )}
       </div>
     );
   }
@@ -272,15 +292,6 @@ export function ValidationChecklistPanel({
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-bold text-gray-900">Validation</h2>
-          {onRunValidation && (
-            <button
-              onClick={onRunValidation}
-              disabled={isLoading}
-              className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {isLoading ? 'Running...' : 'Re-run'}
-            </button>
-          )}
         </div>
 
         {/* Status badge */}
@@ -288,11 +299,14 @@ export function ValidationChecklistPanel({
           {statusText}
         </div>
 
-        {/* Last checked time */}
+        {/* Last checked time with relative time */}
         {validationStatus.lastChecked && (
-          <p className="mt-2 text-xs text-gray-500">
-            Last checked: {formatTimestamp(validationStatus.lastChecked)}
-          </p>
+          <div className="mt-3 text-xs text-gray-600">
+            <p className="flex items-center gap-2">
+              <span>Last checked: {formatTimestamp(validationStatus.lastChecked)}</span>
+              <span className="text-gray-500">({getRelativeTime(validationStatus.lastChecked)})</span>
+            </p>
+          </div>
         )}
 
         {/* Draft/Active status */}

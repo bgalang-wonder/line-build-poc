@@ -1151,3 +1151,44 @@ Patterns accumulate across iterations.
 - Type Union: BuildValidationStatus has optional fields for backward compatibility and new orchestrator fields
 
 ---
+
+## Jan 7, 2026 - benchtop-x0c.6.2: Validation UI - 'Check my work' button + run status
+
+### What I Implemented:
+- Created CheckMyWorkButton component at `src/components/validation/CheckMyWorkButton.tsx`
+- Button labeled "Check my work" with CheckCircle2 icon
+- Disabled state when validation already running or no build loaded
+- Shows spinner animation while validation runs
+- Integrates with useValidationRunner hook to trigger validation orchestrator
+- On completion, displays success/error toast with result counts
+- Toast shows: "All Clear!" for valid builds, or failure count + pass count summary
+- Created reusable Toast component system at `src/components/ui/Toast.tsx`
+- Toast component with type variants (success/error/info)
+- ToastContainer for rendering multiple toasts in fixed position (bottom-right)
+- Updated EditorContainer to manage toast state and coordinate button/toast interaction
+
+### Files Changed:
+- `src/components/validation/CheckMyWorkButton.tsx` — New button component (100 lines)
+- `src/components/ui/Toast.tsx` — New toast system with Toast + ToastContainer (75 lines)
+- `src/components/editor/EditorContainer.tsx` — Integrated button, toast management, removed dead handleRunValidation code (70 lines changed)
+
+### Learnings (for next iteration):
+- Button component pattern: Accept isRunning, build, and two callbacks (onValidationComplete, onToast)
+- Toast system: Keep toasts array in state, auto-dismiss after 5s by default, manual dismiss with X button
+- Spinner animation: Use Tailwind `animate-spin` on div with border styling, or custom loader
+- Result messaging: Different messages for valid (0 failures) vs invalid (>0 failures) states
+- Hook coordination: CheckMyWorkButton uses useValidationRunner internally, passes results via callback
+- Type consistency: BuildValidationStatus fields are optional (isValid, passCount, failCount, error)
+- Layout: Place "Check my work" button above PublishButton in validation panel footer (space-y-3 gap)
+- EditorContainer now purely manages state coordination; validation logic delegated to hooks
+
+### Codebase Patterns Discovered:
+- Button Pattern: Specialized button component with icon, disabled state, loading spinner
+- Toast Pattern: Lightweight notification system with auto-dismiss, fixed positioning
+- Callback Coordination: Parent (EditorContainer) → Child (CheckMyWorkButton) via props, Child → Parent via callbacks
+- Hook Usage: Components delegate async work to custom hooks (useValidationRunner)
+- Result Messaging: Differentiate messaging based on result.isValid and failure counts
+- State Management: Toast state separate from store state (local React state for UI)
+- Icon Pattern: Use Lucide React icons consistently (CheckCircle2 for success, AlertCircle for errors)
+
+---
