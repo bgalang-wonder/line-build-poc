@@ -3,6 +3,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useEditorStore } from '@/lib/model/store/editorStore';
 import { useLineBuildLoader, useAutoSaveBuild } from '@/lib/hooks/useLineBuildLoader';
+import { useComplexityUpdater } from '@/lib/hooks/useComplexityUpdater';
 import { EditorLayout } from './EditorLayout';
 import ChatPanel from '../chat/ChatPanel';
 import StepList from '../form/StepList';
@@ -15,6 +16,7 @@ import { CheckMyWorkButton } from '../validation/CheckMyWorkButton';
 import { ToastContainer } from '../ui/Toast';
 import { DAGVisualization } from '../visualization/DAGVisualization';
 import { ScenarioPanel } from '../resolver/ScenarioPanel';
+import { ComplexityScoreDisplay } from '../scoring/ComplexityScoreDisplay';
 import { LineBuild, WorkUnit, BuildValidationStatus } from '@/lib/model/types';
 
 interface EditorContainerProps {
@@ -87,6 +89,9 @@ export default function EditorContainer({
   // ========== PERSISTENCE HOOKS ==========
   const { loadBuild, saveBuild } = useLineBuildLoader();
   const { triggerSave } = useAutoSaveBuild(currentBuild);
+
+  // ========== AUTO-UPDATE COMPLEXITY SCORE ==========
+  useComplexityUpdater();
 
   // ========== LOAD BUILD FROM PERSISTENCE ==========
   useEffect(() => {
@@ -445,6 +450,9 @@ export default function EditorContainer({
                   {currentBuild.menuItemName}
                 </div>
               </div>
+
+              {/* Complexity Score Display */}
+              <ComplexityScoreDisplay complexity={currentBuild.complexity} />
 
               {/* What-If Scenario Button (P1.6) */}
               <div>
