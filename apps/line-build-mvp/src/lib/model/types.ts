@@ -46,6 +46,12 @@ export interface WorkUnit {
     bulkPrep?: boolean;
   };
   dependsOn: string[];
+  metadata?: {
+    legacySourceId?: string; // Link to original legacy procedure
+    extractionConfidence?: "high" | "medium" | "low";
+    extractionMethod?: "manual" | "ai" | "validated";
+    requiresReview?: boolean;
+  };
 }
 
 // ============================================================================
@@ -162,7 +168,7 @@ export interface BuildValidationStatus {
   failureCount?: number;
   lastChecked?: string; // ISO 8601
   results?: ValidationResult[]; // Original fields for backward compatibility
-  
+
   // New fields from ValidationOrchestrator
   passCount?: number;
   failCount?: number;
@@ -173,4 +179,54 @@ export interface BuildValidationStatus {
   lastCheckedAt?: string; // ISO 8601 - when validation was run
   durationMs?: number; // How long the validation took
   error?: string; // Error message if validation failed
+}
+
+// ============================================================================
+// Migration Types (P1.8)
+// ============================================================================
+
+export interface ValidationIssue {
+  type:
+    | "missing_required_field"
+    | "low_confidence_extraction"
+    | "ambiguous_instruction"
+    | "invalid_reference"
+    | "schema_mismatch";
+  field: string;
+  message: string;
+  severity: "error" | "warning";
+  suggestedValue?: any;
+}
+
+export interface MigrationResult {
+  legacyItemId: string;
+  itemName: string;
+  status: "success" | "review_needed" | "failed";
+  workUnits: WorkUnit[];
+  issues: ValidationIssue[];
+  createdLineBuildId?: string;
+  processedAt: string; // ISO 8601
+}
+
+export interface MigrationJob {
+  id: string;
+  legacyBuildCount: number;
+  convertedCount: number;
+  reviewQueueCount: number;
+  failedCount: number;
+  status: "pending" | "in_progress" | "complete" | "failed";
+  startedAt: string; // ISO 8601
+  completedAt?: string; // ISO 8601
+  results: MigrationResult[];
+  error?: string;
+}
+
+export interface ReviewQueueItem {
+  id: string;
+  migrationResult: MigrationResult;
+  createdAt: string; // ISO 8601
+  assignedTo?: string;
+  status: "pending" | "approved" | "needs_revision" | "rejected";
+  reviewNotes?: string;
+  approvedAt?: string; // ISO 8601
 }
