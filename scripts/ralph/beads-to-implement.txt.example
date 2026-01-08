@@ -1,0 +1,10 @@
+# Beads to Implement
+# One bead ID per line
+# Lines starting with # are ignored
+# Empty lines are ignored
+
+# Example: Only implement these specific beads
+# benchtop-x0c.1.1
+# benchtop-x0c.1.2
+# benchtop-x0c.1.3
+

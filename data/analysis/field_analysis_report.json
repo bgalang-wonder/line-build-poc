@@ -1,0 +1,569 @@
+{
+  "summary": {
+    "total_rows": 10000,
+    "unique_items": 208,
+    "unique_line_builds": 287
+  },
+  "field_coverage": {
+    "item_number": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "8000220",
+        "8000220",
+        "8000220",
+        "8000324",
+        "8000324"
+      ]
+    },
+    "item_version_id": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "95f58bb2-e7c1-4f9b-accd-be916fbe0ef6",
+        "95f58bb2-e7c1-4f9b-accd-be916fbe0ef6",
+        "95f58bb2-e7c1-4f9b-accd-be916fbe0ef6",
+        "53c0334c-a4e2-4118-8c23-9b8a88488b2b",
+        "53c0334c-a4e2-4118-8c23-9b8a88488b2b"
+      ]
+    },
+    "item_name": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "Kids' Mac & Cheese",
+        "Kids' Mac & Cheese",
+        "Kids' Mac & Cheese",
+        "Shishito Peppers, The Mainstay",
+        "Shishito Peppers, The Mainstay"
+      ]
+    },
+    "object_type": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "MENU",
+        "MENU",
+        "MENU",
+        "MENU",
+        "MENU"
+      ]
+    },
+    "line_build_id": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "55e42500-ec96-4e93-9f2c-546f3b5a5843",
+        "55e42500-ec96-4e93-9f2c-546f3b5a5843",
+        "55e42500-ec96-4e93-9f2c-546f3b5a5843",
+        "fb82015b-dd1f-44e9-91ab-d992fc8d3526",
+        "fb82015b-dd1f-44e9-91ab-d992fc8d3526"
+      ]
+    },
+    "status": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "LINE_BUILD_CREATED",
+        "LINE_BUILD_CREATED",
+        "LINE_BUILD_CREATED",
+        "PENDING_UPDATE",
+        "PENDING_UPDATE"
+      ]
+    },
+    "service_start_time": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "2024-04-24T04:00:00",
+        "2024-04-24T04:00:00",
+        "2024-04-24T04:00:00",
+        "2025-12-03T05:00:00",
+        "2025-12-03T05:00:00"
+      ]
+    },
+    "service_end_time": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "2100-01-01T04:59:59",
+        "2100-01-01T04:59:59",
+        "2100-01-01T04:59:59",
+        "2026-01-14T05:00:00",
+        "2026-01-14T05:00:00"
+      ]
+    },
+    "is_hot_hold_eligible_selected": {
+      "count": 9960,
+      "percentage": 99.6,
+      "examples": [
+        "true",
+        "false",
+        "false",
+        "false",
+        "false"
+      ]
+    },
+    "show_hot_hold": {
+      "count": 8578,
+      "percentage": 85.78,
+      "examples": [
+        "false",
+        "false",
+        "false",
+        "false",
+        "false"
+      ]
+    },
+    "is_multiple_version": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "false",
+        "false",
+        "false",
+        "false",
+        "false"
+      ]
+    },
+    "is_multiple_usage": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "false",
+        "false",
+        "false",
+        "false",
+        "false"
+      ]
+    },
+    "procedures_step_order": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "1",
+        "2",
+        "3",
+        "1",
+        "2"
+      ]
+    },
+    "procedures_activity": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "COOK",
+        "GARNISH",
+        "COMPLETE",
+        "COOK",
+        "GARNISH"
+      ]
+    },
+    "procedures_appliance": {
+      "count": 3521,
+      "percentage": 35.21,
+      "examples": [
+        "WATER_BATH",
+        "TURBO_OVEN",
+        "TURBO_OVEN",
+        "TURBO_OVEN",
+        "TURBO_OVEN"
+      ]
+    },
+    "procedures_cooking_phase": {
+      "count": 10,
+      "percentage": 0.1,
+      "examples": [
+        "COOKING",
+        "COOKING",
+        "COOKING",
+        "COOKING",
+        "COOKING"
+      ]
+    },
+    "procedures_batch_limit": {
+      "count": 3846,
+      "percentage": 38.46,
+      "examples": [
+        "4",
+        "4",
+        "10",
+        "10",
+        "10"
+      ]
+    },
+    "sub_steps_order": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    },
+    "sub_steps_id": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "a4339ddb-84c5-30a9-2963-c276e2d8c2a5",
+        "0e7fed23-889a-9572-c532-92cc0363699a",
+        "2cfdd82e-a391-4306-a59f-15756fb7075b",
+        "050a669a-3e2f-77d0-4999-e848a93b5c2f",
+        "f720ffe0-0f42-a87c-9b2f-cd330c65b1ca"
+      ]
+    },
+    "sub_steps_title": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "(2 Bag) Macaroni & Cheese, Nestle",
+        "(2 Bag) Macaroni & Cheese, Nestle- 16oz Pulp Square",
+        "Place in Bag",
+        "Shishito Pepper [Pouch] - Perforated Black Mat",
+        "Shishito Peppers - 16oz Pulp Square"
+      ]
+    },
+    "sub_steps_related_item_number": {
+      "count": 1658,
+      "percentage": 16.58,
+      "examples": [
+        "8806256",
+        "4000548",
+        "9000039",
+        "9000041",
+        "4000521"
+      ]
+    },
+    "sub_steps_related_item_version_id": {
+      "count": 1658,
+      "percentage": 16.58,
+      "examples": [
+        "16c47f9e-cb1a-41e8-8efd-9d9e340fb6cb",
+        "ecf89bf9-d3be-4397-b8c4-8b5e301cd707",
+        "6ad116e5-ca12-463b-b6dc-07f222abc44e",
+        "f094dc4b-bf5e-4432-9414-60bf99b27db8",
+        "8d3fc913-1e3b-4c8f-84cd-e1aaf290c9b8"
+      ]
+    },
+    "sub_steps_display_types": {
+      "count": 44,
+      "percentage": 0.44,
+      "examples": [
+        "[\"NORMAL_STEP\"]",
+        "[\"NORMAL_STEP\"]",
+        "[\"NORMAL_STEP\"]",
+        "[\"NORMAL_STEP\"]",
+        "[\"NORMAL_STEP\"]"
+      ]
+    },
+    "sub_steps_image_key": {
+      "count": 4552,
+      "percentage": 45.52,
+      "examples": [
+        "recipe-site/procedure/19e1177b-049e-4ce5-87fa-c4acf6befc6a.jpg",
+        "recipe-site/procedure/43adbee9-f85b-49c1-89d4-3f21d9470515.jpg",
+        "recipe-site/procedure/791cd4a1-e0af-4235-89f2-06e8ffc3529e.jpg",
+        "recipe-site/procedure/752ec588-f4df-4d2c-94b6-af35e914d0e5.jpeg",
+        "recipe-site/procedure/a603a625-a024-4df4-8e85-4337d9470049.jpeg"
+      ]
+    },
+    "step_time": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "15:15",
+        "00:15",
+        "00:30",
+        "02:45",
+        "00:30"
+      ]
+    },
+    "cooking_time": {
+      "count": 3521,
+      "percentage": 35.21,
+      "examples": [
+        "15:00",
+        "02:30",
+        "02:00",
+        "02:00",
+        "04:30"
+      ]
+    },
+    "operator": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "Shin Izumi",
+        "Shin Izumi",
+        "Shin Izumi",
+        "recipe system",
+        "recipe system"
+      ]
+    },
+    "created_by": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "recipe-site",
+        "recipe-site",
+        "recipe-site",
+        "recipe-site",
+        "recipe-site"
+      ]
+    },
+    "created_time": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "2020-07-16T22:16:45.325000",
+        "2020-07-16T22:16:45.325000",
+        "2020-07-16T22:16:45.325000",
+        "2020-08-20T20:22:16.556000",
+        "2020-08-20T20:22:16.556000"
+      ]
+    },
+    "updated_by": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "Shin Izumi",
+        "Shin Izumi",
+        "Shin Izumi",
+        "recipe system (MD-16959)",
+        "recipe system (MD-16959)"
+      ]
+    },
+    "updated_time": {
+      "count": 10000,
+      "percentage": 100.0,
+      "examples": [
+        "2024-11-05T21:26:57.236000",
+        "2024-11-05T21:26:57.236000",
+        "2024-11-05T21:26:57.236000",
+        "2025-12-12T06:09:51.806000",
+        "2025-12-12T06:09:51.806000"
+      ]
+    },
+    "pending_update_info_list": {
+      "count": 9959,
+      "percentage": 99.59,
+      "examples": [
+        "[]",
+        "[]",
+        "[]",
+        "[{\"id\":\"0a24d708-8896-4f80-aa1e-f62244bd3f93\",\"header\":\"The following item(s) has been affected, Please update the line build or click \u201cIssue Resolved\u201d to remove this warning\",\"item_number\":\"8000324\",\"reason_for_change\":null,\"jira_link\":null,\"bom_effect_start_date\":\"2025-12-03T05:00:00\",\"created_time\":\"2025-11-19T12:27:46.371000\",\"type\":\"UPDATE_BOM\"}]",
+        "[{\"id\":\"0a24d708-8896-4f80-aa1e-f62244bd3f93\",\"header\":\"The following item(s) has been affected, Please update the line build or click \u201cIssue Resolved\u201d to remove this warning\",\"item_number\":\"8000324\",\"reason_for_change\":null,\"jira_link\":null,\"bom_effect_start_date\":\"2025-12-03T05:00:00\",\"created_time\":\"2025-11-19T12:27:46.371000\",\"type\":\"UPDATE_BOM\"}]"
+      ]
+    },
+    "procedures_step_dependency": {
+      "count": 1373,
+      "percentage": 13.73,
+      "examples": [
+        "1",
+        "2",
+        "1",
+        "1",
+        "1"
+      ]
+    },
+    "hold_time": {
+      "count": 1370,
+      "percentage": 13.7,
+      "examples": [
+        "00:00",
+        "30:00",
+        "00:00",
+        "00:00",
+        "30:00"
+      ]
+    },
+    "sub_steps_option_id": {
+      "count": 4926,
+      "percentage": 49.26,
+      "examples": [
+        "e560d967-ef29-4018-bd9e-c33f58519eeb",
+        "e560d967-ef29-4018-bd9e-c33f58519eeb",
+        "3f3ef987-bda6-4a61-b19f-e0dbf19703c2",
+        "fbe2815a-84ca-40ec-aad6-ef73efbaf44a",
+        "9fc30731-c918-4908-bf99-b112979bb634"
+      ]
+    },
+    "sub_steps_option_name": {
+      "count": 4926,
+      "percentage": 49.26,
+      "examples": [
+        "Herb Remoulade",
+        "Cabbage Slaw",
+        "Scallions",
+        "Cocktail Sauce",
+        "Crumbled Sausage"
+      ]
+    },
+    "sub_steps_option_type": {
+      "count": 4926,
+      "percentage": 49.26,
+      "examples": [
+        "OPTIONAL_SUBTRACTION",
+        "OPTIONAL_SUBTRACTION",
+        "OPTIONAL_SUBTRACTION",
+        "EXTRA_REQUESTS",
+        "OPTIONAL_SUBTRACTION"
+      ]
+    },
+    "sub_steps_option_value_id": {
+      "count": 4926,
+      "percentage": 49.26,
+      "examples": [
+        "d1e2a1e5-7e6c-4e0e-8b8f-f6d793a87a7c",
+        "de7ae021-6786-4502-b7ba-ead40b2b73b9",
+        "5110f058-7d90-4445-be95-4c9e042c87ae",
+        "fa6dc8e9-5f59-49e1-8bef-a714c2ed8676",
+        "-eff85650-292a-445e-a932-c5c247fa76b6"
+      ]
+    },
+    "sub_steps_option_value_name": {
+      "count": 4926,
+      "percentage": 49.26,
+      "examples": [
+        "No Herb Remoulade",
+        "No Cabbage Slaw",
+        "No Scallions",
+        "Extra Cocktail Sauce",
+        "Keep Crumbled Sausage"
+      ]
+    },
+    "restaurant_id": {
+      "count": 7717,
+      "percentage": 77.17,
+      "examples": [
+        "c23de73a-8de6-4b73-ace5-b9f9f7b71b82",
+        "8f376299-d792-4f60-90c3-ee5e04a4afb4",
+        "5df801af-419a-46e6-8f60-5b1836593cbf",
+        "eeb39663-8fea-4773-a1ff-f5ac0f4c1525",
+        "b7afaefa-7ad5-4251-94a3-67c561b21f09"
+      ]
+    },
+    "procedures_option_type": {
+      "count": 347,
+      "percentage": 3.47,
+      "examples": [
+        "OPTIONAL_SUBTRACTION",
+        "OPTIONAL_SUBTRACTION",
+        "OPTIONAL_SUBTRACTION",
+        "OPTIONAL_SUBTRACTION",
+        "OPTIONAL_SUBTRACTION"
+      ]
+    },
+    "procedures_option_id": {
+      "count": 347,
+      "percentage": 3.47,
+      "examples": [
+        "9fc30731-c918-4908-bf99-b112979bb634",
+        "9fc30731-c918-4908-bf99-b112979bb634",
+        "9fc30731-c918-4908-bf99-b112979bb634",
+        "9fc30731-c918-4908-bf99-b112979bb634",
+        "9fc30731-c918-4908-bf99-b112979bb634"
+      ]
+    },
+    "procedures_option_name": {
+      "count": 347,
+      "percentage": 3.47,
+      "examples": [
+        "Crumbled Sausage",
+        "Crumbled Sausage",
+        "Crumbled Sausage",
+        "Crumbled Sausage",
+        "Crumbled Sausage"
+      ]
+    },
+    "procedures_option_value_id": {
+      "count": 347,
+      "percentage": 3.47,
+      "examples": [
+        "-eff85650-292a-445e-a932-c5c247fa76b6",
+        "-eff85650-292a-445e-a932-c5c247fa76b6",
+        "-eff85650-292a-445e-a932-c5c247fa76b6",
+        "-eff85650-292a-445e-a932-c5c247fa76b6",
+        "-eff85650-292a-445e-a932-c5c247fa76b6"
+      ]
+    },
+    "procedures_option_value_name": {
+      "count": 347,
+      "percentage": 3.47,
+      "examples": [
+        "Keep Crumbled Sausage",
+        "Keep Crumbled Sausage",
+        "Keep Crumbled Sausage",
+        "Keep Crumbled Sausage",
+        "Keep Crumbled Sausage"
+      ]
+    },
+    "apply_option_id": {
+      "count": 1365,
+      "percentage": 13.65,
+      "examples": [
+        "4d96d244-347d-404f-a4d1-4c6f25334423",
+        "4d96d244-347d-404f-a4d1-4c6f25334423",
+        "4d96d244-347d-404f-a4d1-4c6f25334423",
+        "4d96d244-347d-404f-a4d1-4c6f25334423",
+        "4d96d244-347d-404f-a4d1-4c6f25334423"
+      ]
+    },
+    "apply_option_value_id": {
+      "count": 357,
+      "percentage": 3.57,
+      "examples": [
+        "98aa6f67-6a0e-4845-a356-ce44d1b5778f",
+        "98aa6f67-6a0e-4845-a356-ce44d1b5778f",
+        "98aa6f67-6a0e-4845-a356-ce44d1b5778f",
+        "98aa6f67-6a0e-4845-a356-ce44d1b5778f",
+        "98aa6f67-6a0e-4845-a356-ce44d1b5778f"
+      ]
+    },
+    "apply_option_value_amount_from": {
+      "count": 1008,
+      "percentage": 10.08,
+      "examples": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    }
+  },
+  "proposed_mapping": {
+    "container_level": {
+      "line_build_id": "Groups steps into a single line build variant",
+      "item_number": "Links to menu item",
+      "restaurant_id": "Restaurant-specific override (variant)",
+      "apply_option_id": "Customization option (variant)",
+      "status": "Line build status",
+      "service_start_time": "When this variant is active",
+      "service_end_time": "When this variant expires"
+    },
+    "procedure_level": {
+      "procedures_step_order": "Main step sequence",
+      "procedures_activity": "Activity type (COOK, GARNISH, COMPLETE, VEND)",
+      "procedures_appliance": "Equipment used (TURBO_OVEN, FRYER, etc.)",
+      "procedures_cooking_phase": "Cooking phase (PRECOOK, COOKING, etc.)",
+      "procedures_batch_limit": "Batch size limit",
+      "procedures_holding_location": "Where item is held"
+    },
+    "step_level": {
+      "sub_steps_order": "Sub-step sequence within procedure",
+      "sub_steps_title": "FREE TEXT - The instruction (99.99% populated)",
+      "sub_steps_related_item_number": "BOM reference (10.6% populated)",
+      "sub_steps_option_id": "Step-level customization",
+      "sub_steps_display_types": "How step is displayed"
+    },
+    "timing": {
+      "step_time": "Total step time",
+      "cooking_time": "Cooking duration",
+      "resting_time": "Resting duration",
+      "hold_time": "Hold duration"
+    }
+  }
+}

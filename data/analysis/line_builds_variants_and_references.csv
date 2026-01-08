@@ -1,0 +1,1001 @@
+item_number,item_name,line_build_id,procedures_step_order,sub_steps_order,procedures_activity,procedures_appliance,sub_steps_title,sub_steps_related_item_number,apply_option_id,apply_option_value_id,restaurant_id
+8000220,Kids' Mac & Cheese,55e42500-ec96-4e93-9f2c-546f3b5a5843,1,1,COOK,WATER_BATH,"(2 Bag) Macaroni & Cheese, Nestle",8806256,,,
+8000324,"Shishito Peppers, The Mainstay",fb82015b-dd1f-44e9-91ab-d992fc8d3526,1,1,COOK,TURBO_OVEN,Shishito Pepper [Pouch] - Perforated Black Mat,4000548,,,
+8000324,"Shishito Peppers, The Mainstay",fb82015b-dd1f-44e9-91ab-d992fc8d3526,3,1,COMPLETE,,Place in Bag,9000039,,,
+8000326,"Crispy Leaf & Feta Salad, The Mainstay",8c521f78-e719-4ff7-8b4e-1f618718292c,4,1,COMPLETE,,Crispy Leaf & Feta Salad,9000041,,,
+8001650,"Brown Butter Corn, Bankside",85460153-7d78-4e39-9a74-681dc5caa591,1,1,COOK,TURBO_OVEN,Brown Butter Corn [Pouch] - in Tin,,,,
+8001650,"Brown Butter Corn, Bankside",85460153-7d78-4e39-9a74-681dc5caa591,1,2,COOK,TURBO_OVEN,"(1) Shake Salt, Mix",4000521,,,
+8001650,"Brown Butter Corn, Bankside",85460153-7d78-4e39-9a74-681dc5caa591,3,1,COMPLETE,,Brown Butter Corn,9001903,,,
+8001679,"Crispy Fish Sandwich, Bankside",e11c217d-78cb-4d23-90ea-95962765e9f8,1,1,COOK,TURBO_OVEN,Crispy Fish [Kit] - Small Black Mat,,,,
+8001679,"Crispy Fish Sandwich, Bankside",e11c217d-78cb-4d23-90ea-95962765e9f8,3,2,GARNISH,,(8 Pt) Herb Remoulade - Each Bun,4000277,,,
+8001679,"Crispy Fish Sandwich, Bankside",e11c217d-78cb-4d23-90ea-95962765e9f8,3,4,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,
+8001679,"Crispy Fish Sandwich, Bankside",e11c217d-78cb-4d23-90ea-95962765e9f8,5,1,COMPLETE,,Crispy Fish Sandwich,9001638,,,
+8001697,"Lobster Roll, Bankside",972cb83e-7d37-4a54-aaaf-f2309ff500ea,1,1,COOK,PRESS,Butter - Martin's Split Top Bun,,,,
+8001697,"Lobster Roll, Bankside",972cb83e-7d37-4a54-aaaf-f2309ff500ea,1,2,COOK,PRESS,Toast - Martin's Split Top Bun,,,,
+8001697,"Lobster Roll, Bankside",972cb83e-7d37-4a54-aaaf-f2309ff500ea,3,1,COMPLETE,,Lobster Roll,9000624,,,
+8001711,"Peri-Peri Roasted Chicken, Bankside",c6575ddc-adaf-4ac4-8790-6a54aaa793c0,1,1,COOK,WATER_BATH,Roasted Half Chicken [Pouch],,,,
+8001711,"Peri-Peri Roasted Chicken, Bankside",c6575ddc-adaf-4ac4-8790-6a54aaa793c0,2,1,COOK,TURBO_OVEN,Collard Greens [Kit],,,,
+8001711,"Peri-Peri Roasted Chicken, Bankside",c6575ddc-adaf-4ac4-8790-6a54aaa793c0,2,2,COOK,TURBO_OVEN,Foil Sheet - Cover,,,,
+8001711,"Peri-Peri Roasted Chicken, Bankside",c6575ddc-adaf-4ac4-8790-6a54aaa793c0,3,1,COOK,TURBO_OVEN,Roasted Half Chicken [Pouch] - Small Black Mat,,,,
+8001711,"Peri-Peri Roasted Chicken, Bankside",c6575ddc-adaf-4ac4-8790-6a54aaa793c0,3,2,COOK,TURBO_OVEN,(4 Shakes) Peri-Peri Rub,,,,
+8001711,"Peri-Peri Roasted Chicken, Bankside",c6575ddc-adaf-4ac4-8790-6a54aaa793c0,3,3,COOK,TURBO_OVEN,(1) Peri Peri Sauce,,,,
+8001711,"Peri-Peri Roasted Chicken, Bankside",c6575ddc-adaf-4ac4-8790-6a54aaa793c0,5,1,VEND,,(1 Portion Cup) Peri-Peri Sauce,4000487,,,
+8001711,"Peri-Peri Roasted Chicken, Bankside",c6575ddc-adaf-4ac4-8790-6a54aaa793c0,6,1,COMPLETE,,Peri-Peri Chicken,9000173,,,
+8001715,"Peri-Peri Salmon, Bankside",be17eea9-b5d1-4ffb-989f-03608dc8833d,1,1,COOK,TURBO_OVEN,Seared Salmon [Kit],,,,
+8001715,"Peri-Peri Salmon, Bankside",be17eea9-b5d1-4ffb-989f-03608dc8833d,1,2,COOK,TURBO_OVEN,(4 Shakes) Peri-Peri Rub,,,,
+8001715,"Peri-Peri Salmon, Bankside",be17eea9-b5d1-4ffb-989f-03608dc8833d,1,3,COOK,TURBO_OVEN,(1) Peri Peri Sauce,,,,
+8001715,"Peri-Peri Salmon, Bankside",be17eea9-b5d1-4ffb-989f-03608dc8833d,1,4,COOK,TURBO_OVEN,"Salmon, Spatula Place - Small Black Mat",,,,
+8001715,"Peri-Peri Salmon, Bankside",be17eea9-b5d1-4ffb-989f-03608dc8833d,2,1,COOK,TURBO_OVEN,Collard Greens [Kit],,,,
+8001715,"Peri-Peri Salmon, Bankside",be17eea9-b5d1-4ffb-989f-03608dc8833d,2,2,COOK,TURBO_OVEN,Foil Sheet - Cover,,,,
+8001715,"Peri-Peri Salmon, Bankside",be17eea9-b5d1-4ffb-989f-03608dc8833d,4,1,VEND,,(1 Portion Cup) Peri-Peri Sauce,4000487,,,
+8001715,"Peri-Peri Salmon, Bankside",be17eea9-b5d1-4ffb-989f-03608dc8833d,5,1,COMPLETE,,Peri-Peri Salmon,9000270,,,
+8001723,"Southern Red Beans & Rice, Bankside",106e5a62-ae2b-48d7-90f4-5a1be07f563d,1,1,COOK,WATER_BATH,Red Beans [Pouch],4000492,,,
+8001723,"Southern Red Beans & Rice, Bankside",106e5a62-ae2b-48d7-90f4-5a1be07f563d,2,1,COOK,WATER_BATH,White Rice [Pouch],4000491,,,
+8001723,"Southern Red Beans & Rice, Bankside",106e5a62-ae2b-48d7-90f4-5a1be07f563d,3,3,GARNISH,,Scallions,4000430,,,
+8001723,"Southern Red Beans & Rice, Bankside",106e5a62-ae2b-48d7-90f4-5a1be07f563d,4,1,COMPLETE,,Southern Red Beans & Rice,9001903,,,
+8002008,"Peel & Eat Shrimp, Bankside",10346f17-d89f-49eb-a997-599c16a04150,1,1,COOK,TURBO_OVEN,Grilled Shell-On Shrimp [Pouch] - Tin,,,,
+8002008,"Peel & Eat Shrimp, Bankside",10346f17-d89f-49eb-a997-599c16a04150,1,2,COOK,TURBO_OVEN,5 (Pt) Black Lime Chili Sauce,,,,
+8002008,"Peel & Eat Shrimp, Bankside",10346f17-d89f-49eb-a997-599c16a04150,1,3,COOK,TURBO_OVEN,Mix,,,,
+8002008,"Peel & Eat Shrimp, Bankside",10346f17-d89f-49eb-a997-599c16a04150,2,1,COMPLETE,,Place in Bag,9002138,,,
+8002008,"Peel & Eat Shrimp, Bankside",10346f17-d89f-49eb-a997-599c16a04150,2,1,GARNISH,,(1 Portion Cup) Cocktail Sauce - Place Inside 16 oz Pulp Square,4000510,,,
+8002008,"Peel & Eat Shrimp, Bankside",10346f17-d89f-49eb-a997-599c16a04150,3,1,COMPLETE,,Peel & Eat Shrimp ,9000039,,,
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,1,GARNISH,,"16"" Round Pizza Crust",,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,2,GARNISH,,(4 Portion Cup) Panna,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,3,GARNISH,,Grated Parmesan,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,4,GARNISH,,6oz Broccoli Rabe,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,5,GARNISH,,(2x) Diced Mozzarella,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,1,GARNISH,,"16"" Round Pizza Crust",,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,2,GARNISH,,(4 Portion Cup) Panna,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,3,GARNISH,,Grated Parmesan,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,4,GARNISH,,8oz Broccoli Rabe,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,5,GARNISH,,(2x) Diced Mozzarella,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,2,6,GARNISH,,No Crumbled Sausage,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,3,1,COOK,PIZZA_CONVEYOR_OVEN,Broccoli Rabe & Sausage Round,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,1,GARNISH,,Large Square Pizza Box + Liner,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,2,GARNISH,,Slice,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,3,GARNISH,,Grated Parmesan,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,4,GARNISH,,(5 Spiral Pour) Olive Oil,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,4,6,GARNISH,,No Basil,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,5,1,VEND,,(2 ea) Chili Flake Packets,,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,b7afaefa-7ad5-4251-94a3-67c561b21f09
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,24044196-482d-46c5-aecf-ee308bdb9381
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,8f376299-d792-4f60-90c3-ee5e04a4afb4
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,d0364a86-7047-429b-8d0e-60ee42072246
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,c1afe552-9800-4926-837f-859a28de0eca
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,823d7bf0-837e-4857-a64d-5fa0a4a5ee24
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,c23de73a-8de6-4b73-ace5-b9f9f7b71b82
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,f7995295-e83b-4fa8-9554-e845839e732d
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,62bbb259-829b-4792-8c3a-f5cff6043c7e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,b3f5cb04-8643-4c8a-a17b-c65f7f8ef50e
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,eeb39663-8fea-4773-a1ff-f5ac0f4c1525
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,5df801af-419a-46e6-8f60-5b1836593cbf
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,c3576957-2cf4-4895-86ee-94ccb330ff32
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",59982bbf-86ee-4d44-9465-568921d45226,6,1,COMPLETE,,Place in Bag,9001246,,,afe3c868-b749-4e12-a353-349829cf0bd7
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",b32d97a0-c3a1-409b-b196-6caaee603e63,1,6,GARNISH,,6oz Crumbled Sausage,4000530,,,
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",b32d97a0-c3a1-409b-b196-6caaee603e63,3,1,COOK,TURBO_OVEN,Broccoli Rabe & Sausage Round,,,,
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",b32d97a0-c3a1-409b-b196-6caaee603e63,4,5,GARNISH,,"(10-12 ea) Basil Leaves, Tear & Sprinkle",4000504,,,
+8002212,"Broccoli Rabe & Sausage Round Pizza, Di Fara 3.0",b32d97a0-c3a1-409b-b196-6caaee603e63,6,1,COMPLETE,,Place in Bag,9001246,,,
+8002223,"Beet & Citrus Salad, Bankside",97929696-2b00-4788-840e-122a751cc58b,1,1,GARNISH,,Beet & Citrus Salad [Kit],8805836,,,
+8002223,"Beet & Citrus Salad, Bankside",97929696-2b00-4788-840e-122a751cc58b,1,6,GARNISH,, Peri Cashews,4000261,,,
+8002223,"Beet & Citrus Salad, Bankside",97929696-2b00-4788-840e-122a751cc58b,2,1,COMPLETE,,Beet & Citrus Salad,9000061,,,
+8002611,"Peri Peri Chicken Sandwich, Bankside",8f3e71a7-8c4f-4b63-ba95-4a32fc1f6fe1,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,
+8002611,"Peri Peri Chicken Sandwich, Bankside",8f3e71a7-8c4f-4b63-ba95-4a32fc1f6fe1,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,
+8002611,"Peri Peri Chicken Sandwich, Bankside",8f3e71a7-8c4f-4b63-ba95-4a32fc1f6fe1,1,3,COOK,FRYER,No Peri Peri Sauce,,,,
+8002611,"Peri Peri Chicken Sandwich, Bankside",8f3e71a7-8c4f-4b63-ba95-4a32fc1f6fe1,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,
+8002611,"Peri Peri Chicken Sandwich, Bankside",8f3e71a7-8c4f-4b63-ba95-4a32fc1f6fe1,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,1,COOK,FRYER,"(1 ea) Chicken Filet, Breaded",,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,2,COOK,FRYER,POST COOK: Chicken + (3 Pt) Peri Peri Sauce,4000487,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,1,3,COOK,FRYER,No Peri Peri Sauce,,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,2,1,GARNISH,,Branded Greasepaper - 36oz Pulp Rectangle,,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,1,GARNISH,,TOAST: Martin's Roll,,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,2,GARNISH,,(2 Pinch) Cabbage Slaw - Bottom Bun,4000291,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,3,GARNISH,,No Cabbage Slaw,,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,4,GARNISH,,Fried Chicken Filet,,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,5,GARNISH,,Top Bun,,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,6,GARNISH,,Peri Peri Chicken Sandwich - Left Side,,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,3,7,GARNISH,,(1 Bag) Potato Chips - Right Side,,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,b5c1ff90-3261-416d-93ca-b1974308fd79
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,91338d59-1267-4db7-aaa7-fa028b13abd9
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,b330c9fd-a5fa-49b5-b249-375f4823d0b5
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,c6ac6116-b56c-4eea-a434-98a461c75344
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,b7ba2f40-fcc7-420b-91ea-38a053d79a28
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,44fad46a-9d93-45b8-8e42-70a00ac03cca
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,6688bcad-3add-408c-965c-ae1ecd0d9586
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,9188819b-fd03-4fec-948c-b216d1bfcb5f
+8002611,"Peri Peri Chicken Sandwich, Bankside",f5312c6c-b64c-4ec3-8b7d-670ffc4961f5,4,1,COMPLETE,,Peri Peri Chicken Sandwich,9001638,,,f9c0980c-1e58-4c90-9859-5b7d4747ba18
+8003543,"Salmon con Pisto Manchego, Jota",7cc1c402-b133-4785-bbe6-631b9234d2ac,1,1,COOK,TURBO_OVEN,Place Salmon - Black Mat: Skin Side Down,,,,
+8003543,"Salmon con Pisto Manchego, Jota",7cc1c402-b133-4785-bbe6-631b9234d2ac,2,1,COOK,TURBO_OVEN,Broccolini - Place Left Side of Tin,,,,
+8003543,"Salmon con Pisto Manchego, Jota",7cc1c402-b133-4785-bbe6-631b9234d2ac,2,2,COOK,TURBO_OVEN,Pisto Manchego - Place Right Side of Tin ,,,,
+8003543,"Salmon con Pisto Manchego, Jota",7cc1c402-b133-4785-bbe6-631b9234d2ac,4,1,COMPLETE,,Salmon con Pisto Manchego,9000173,,,
+8004518,"16"" White Pizza, Di Fara, Wonder Works",056b3742-77c1-494c-85e6-a1c15eedd84a,1,1,COOK,TURBO_OVEN,Cook Step ,8806442,,,
+8004518,"16"" White Pizza, Di Fara, Wonder Works",056b3742-77c1-494c-85e6-a1c15eedd84a,2,1,GARNISH,,"Basil, EVOO, & Parm ",8806442,,,
+8004518,"16"" White Pizza, Di Fara, Wonder Works",056b3742-77c1-494c-85e6-a1c15eedd84a,3,1,COMPLETE,,Cutting ,8806442,,,
+8004520,"16” Pepperoni Pizza, Di Fara, Wonder Works",ca0b21f3-95f4-4ea1-b916-9aa111cd5176,1,1,COOK,TURBO_OVEN,Remove from shrink wrap and cook.,8806440,,,
+8004520,"16” Pepperoni Pizza, Di Fara, Wonder Works",ca0b21f3-95f4-4ea1-b916-9aa111cd5176,2,1,GARNISH,,"Basil, parmesan, and EVOO",8806440,,,
+8004520,"16” Pepperoni Pizza, Di Fara, Wonder Works",ca0b21f3-95f4-4ea1-b916-9aa111cd5176,3,1,COMPLETE,,Place on pizza platter and cut into 8ths.,8806440,,,
+8004521,"16” Cheese Pizza, Di Fara, Wonder Works",2477d988-f6cc-4700-bf4d-4e07583de2dc,1,1,COOK,TURBO_OVEN,Cook Step 4:30,8806438,,,
+8004521,"16” Cheese Pizza, Di Fara, Wonder Works",2477d988-f6cc-4700-bf4d-4e07583de2dc,2,1,GARNISH,,"Basil, EVOO, & Parm ",8806438,,,
+8004521,"16” Cheese Pizza, Di Fara, Wonder Works",2477d988-f6cc-4700-bf4d-4e07583de2dc,3,1,COMPLETE,,Cutting ,8806438,,,
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,1,1,COOK,PRESS,"Large Tortilla, Fold in Half - Panini Press",,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,2,1,GARNISH,,18x18 Foil,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,3,1,COOK,RICE_COOKER,Brown Rice,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,4,1,COOK,RICE_COOKER,White Rice,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,5,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,6,1,COOK,TURBO_OVEN,Extra: Fajita Vegetables,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,7,1,COOK,TURBO_OVEN,Fajita Vegetables,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,8,1,COOK,WATER_BATH,Pinto Beans,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,9,1,COOK,WATER_BATH,Black Beans,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,10,1,COOK,TURBO_OVEN,Adobo Steak,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,11,1,COOK,TURBO_OVEN,Extra: Adobo Steak,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,12,1,COOK,TURBO_OVEN,Adobo Chicken,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,13,1,COOK,TURBO_OVEN,Extra: Adobo Chicken,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,14,1,COOK,MICROWAVE,Spiced Tofu,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,15,1,COOK,MICROWAVE,Extra Spiced: Tofu,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,16,1,COOK,MICROWAVE,Carnitas,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,17,1,COOK,MICROWAVE,Extra: Carnitas,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,378fd512-7b11-4435-b8c4-8b3feb6c8228
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,ffbdfdac-386a-4c97-8b26-a112c585a479
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,bb0d7ffd-553f-40fb-a94b-61ec631a4345
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,5bd779ff-652f-4eb9-a06e-d64e80c87335
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,d9c2a7d5-46ca-4275-add9-b3e73761d396
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,80c098a1-2836-4c0b-88ea-d6aa9ed6a291
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,9f6ff6c3-c6eb-4756-9130-efe518d7b963
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,cbc46539-86cb-46ec-af3f-05fc0d7b3495
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,6d20ef4a-470d-40f1-9ed5-29073d1175d0
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,e42a44bb-9119-405e-a545-ef70e64b1f5b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,18a2db60-cd8a-4bbb-ad0a-7560b0b13f38
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,21c672fb-c4d3-4edc-84de-61ef6ad994fd
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,bb28f767-3cda-4865-9c65-1fdc0aff54cc
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,899334d9-14be-4976-9c01-966d8ab80d0c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,fdfe198d-7678-4121-907b-bde344469313
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,3ee40ffd-12ac-4c43-be13-4f11af0aa115
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,72892b02-6079-4724-81aa-e47fd42a03e7
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,c3303cd4-0c3d-472b-a5e5-08d77e69af47
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,18,1,COOK,MICROWAVE,Barbacoa,,,,ce91c4d5-481d-4a1f-bf07-0b359bccbbd9
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,03158d04-8ba4-4230-85c8-f9f4ce4b200c
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,dec1807c-26bb-4b28-8311-08fdb9a68422
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,70a6c40d-310d-4097-814d-15d42c7d5c1b
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,35096a97-510c-485a-b160-c8ecf96a8d98
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,be6ee657-c6da-434b-b4a1-f1f2e2abc2b4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,4bc41e5f-e75b-4bc7-9b04-53093250015d
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,f54a0b83-50d6-43bb-b7d2-5c3f94af79a1
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,94410985-baef-49ad-97ce-75116e0e6aba
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,50c80294-6a20-41f3-901a-8238ece6244f
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,ba6162bb-1d84-47d2-aeef-0ee560a7cfd4
+8004637,"Burrito (BYO), Limesalt",86516038-cd3e-413a-8f37-4291ad98d301,19,1,COOK,MICROWAVE,Extra: Barbacoa,,,,fdfe198d-7678-4121-907b-bde344469313

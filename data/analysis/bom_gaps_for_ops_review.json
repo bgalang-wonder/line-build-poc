@@ -1,0 +1,48 @@
+{
+  "summary": "BOM coverage gaps identified during line build reverse engineering",
+  "generated": "2025-12-19",
+  "total_affected_rows": 139,
+  "gaps": [
+    {
+      "menu_item": "8004955",
+      "menu_name": "Beef Souvlaki & Kalamata Salad, Yasas",
+      "missing_ingredient": "Green Goddess (dressing)",
+      "affected_rows": 82,
+      "line_build_step": "Green Goddess",
+      "activity": "GARNISH",
+      "notes": "BOM contains Tzatziki, Eggplant Spread, and Souvlaki Sauce but no Green Goddess dressing. Likely a BOM oversight."
+    },
+    {
+      "menu_item": "8010459",
+      "menu_name": "BYO Greens Bowl, Royal Greens BOWLDER",
+      "missing_ingredient": "Roasted Brussel Sprouts",
+      "affected_rows": 29,
+      "line_build_step": "Roasted Brussel Sprouts",
+      "activity": "GARNISH",
+      "notes": "BOM only contains packaging (labels, lids, cups). This is a BYO item - the BOM model may not capture dynamic ingredient options."
+    },
+    {
+      "menu_item": "8006859",
+      "menu_name": "Taco - Camaron Baja (Roasted), Barrio",
+      "missing_ingredient": "Red Chili Salsa",
+      "affected_rows": 16,
+      "line_build_step": "Red Chili Salsa",
+      "activity": "VEND",
+      "notes": "BOM contains Pico de Gallo and Lime but no Red Chili Salsa. May be named differently in the system or missing from BOM."
+    },
+    {
+      "menu_item": "8010473",
+      "menu_name": "BYO Poke Bowl, Hanu Poke BOWLDER",
+      "missing_ingredient": "N/A - Category marker",
+      "affected_rows": 12,
+      "line_build_step": "PREMIUM",
+      "activity": "GARNISH",
+      "notes": "This is not an ingredient but a customization tier marker. BYO items use 'PREMIUM' to indicate customer selected a premium protein option. This is a schema limitation, not a BOM gap."
+    }
+  ],
+  "recommendations": [
+    "Review items 8004955 and 8006859 for potential missing BOM components",
+    "Consider a different BOM model for BYO items (ingredient pool vs fixed list)",
+    "The 'PREMIUM' marker may need to be handled as a customization attribute rather than a line build step"
+  ]
+}

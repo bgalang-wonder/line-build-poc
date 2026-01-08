@@ -1,0 +1,27 @@
+# Ralph Progress Log
+Started: 2026-01-07
+
+## Codebase Patterns
+- App Router: Use `src/app` structure with Next.js 15
+- Styling: Tailwind CSS
+- AI: Gemini 2.5 Flash via Vertex AI (@google/genai)
+- Persistence: JSON files in `src/lib/model/data`
+- Components: Use Radix UI / Shadcn UI patterns where applicable
+- Types: Export from `src/lib/model/types.ts`
+
+## Key Files
+- apps/archive-benchtop-mvp/ (Reference for porting logic)
+- apps/archive-benchtop-mvp/src/lib/ai/vertex/client.ts (Vertex AI setup)
+- apps/archive-benchtop-mvp/src/lib/model/types.ts (Type definitions)
+- docs/PRD.md (Main reference for requirements)
+
+## BD Commands
+- `bd ready --json` — Get tasks ready to work on
+- `bd show <id>` — Full issue details
+- `bd update <id> --status in_progress` — Claim task
+- `bd close <id>` — Mark complete
+- `bd dep tree <id>` — Visualize dependencies
+
+---
+Ralph appends after each story.
+Patterns accumulate across iterations.

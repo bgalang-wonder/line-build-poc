@@ -1,0 +1,103 @@
+# Ralph Plan Refinement Log
+Started: 2026-01-07
+Epic: benchtop-x0c (Line Build Authoring MVP)
+
+## Context
+
+This log tracks iterative improvements to the beads plan BEFORE implementation.
+Each iteration should make the plan clearer, more complete, and more robust.
+
+## Key Documents
+- docs/PRD.md — Product requirements
+- .beads/issues.jsonl — Current beads (use `bd` commands to access)
+- apps/archive-benchtop-mvp/ — Reference implementation to learn from
+
+## BD Commands
+```bash
+bd list --status open    # All open beads
+bd show <id>             # Full details
+bd ready                 # Unblocked beads
+bd dep tree <id>         # Dependencies
+bd update <id> --description "..."  # Update
+bd create "Title" -t task -p 0      # Create
+bd dep add <child> <parent>         # Add dependency
+```
+
+---
+
+
+## Iteration 3 - 2026-01-07 Evening
+
+### What I Analyzed:
+- All P0 beads in the MVP epic (benchtop-x0c) focusing on clarity, dependencies, and acceptance criteria
+- Validation panel beads (benchtop-x0c.6.*)
+- Chat panel beads (benchtop-x0c.5.*)
+- Form panel beads (benchtop-x0c.3.*)
+- App shell beads (benchtop-x0c.11.*)
+- Data layer beads (benchtop-x0c.2.*)
+- Validation engine beads (benchtop-x0c.7.*)
+
+### Changes Made (with reasoning):
+
+1. **benchtop-x0c.6.2** (Check my work button)
+   - Added acceptance criteria: Button states, spinner during validation, result count display
+   - Added dependency on benchtop-x0c.11.5 (validation orchestrator)
+   - *Why*: The button's purpose is to trigger validation runs via the orchestrator. Without depending on the orchestrator task, implementation might occur before the orchestration layer exists, forcing rework. The orchestrator coordinates both validation engines and stores results, which the button needs to function.
+
+2. **benchtop-x0c.5.4** (CopilotKit actions)
+   - Added detailed description specifying which form operations are exposed as actions
+   - Maps to form actions contract (benchtop-7ql)
+   - Specifies integration with state management (benchtop-x0c.11.4)
+   - *Why*: This bead had only a title. Without clear acceptance criteria, implementers wouldn't know exactly which actions to expose, what inputs they accept, or how they integrate with the form state system.
+
+3. **benchtop-x0c.2.1** (JSON persistence for line builds)
+   - Added acceptance criteria for save/load functions, nested field persistence, error handling
+   - *Why*: Data persistence is foundational. Clear criteria ensure the implementation properly handles backups, conflicts, and corrupted data recovery paths (benchtop-u2x).
+
+4. **benchtop-x0c.2.3** (JSON persistence for validation rules)
+   - Added acceptance criteria for rule persistence, API operations, availability to both engines
+   - *Why*: Rules are used by both structured evaluator (benchtop-x0c.7.1) and semantic validator (benchtop-x0c.7.2). The bead must be clear about supporting both engines.
+
+5. **benchtop-x0c.11.1** (Route definitions)
+   - Added acceptance criteria specifying routes, query parameter support, navigation behavior
+   - *Why*: Routes are foundational for the entire app. Clear criteria ensure all required routes exist and support the parameters needed by other beads.
+
+6. **benchtop-x0c.11.3** (Data persistence app layer)
+   - Added acceptance criteria for load/save handlers, debouncing, error handling, loading states
+   - Links to both data layer (benchtop-x0c.2.1) and state management (benchtop-x0c.11.4)
+   - *Why*: This bridges data layer and app state. Clarity ensures proper integration without redundancy.
+
+7. **benchtop-x0c.7.4** (Normalized result schema)
+   - Added acceptance criteria defining the ValidationResult schema structure
+   - Specifies that both engines (structured and semantic) must produce results in this schema
+   - *Why*: This is the integration point between the two validation engines and the UI. Clear schema definition prevents mismatches downstream (benchtop-x0c.6.1 and 6.4 depend on this).
+
+8. **benchtop-x0c.6.4** (Validation gating)
+   - Added acceptance criteria for Draft→Active blocking, error handling, validation gate UX
+   - *Why*: Safety-critical bead. Clear criteria ensure consistent behavior and prevent accidental publication of invalid builds.
+
+### Patterns & Insights Discovered:
+
+1. **Integration Point Clarity**: Beads that serve as integration points between subsystems (like benchtop-x0c.6.2 triggering benchtop-x0c.11.5, or benchtop-x0c.11.3 bridging data layer and state) needed explicit dependencies to prevent out-of-order implementation.
+
+2. **Schema Definition Cascades**: The validation result schema (benchtop-x0c.7.4) is critical. Both engines must produce it in the same format, and the UI depends on that consistency. The dependency chain is: types (benchtop-x0c.1.4) → schema (benchtop-x0c.7.4) → engines (benchtop-x0c.7.1 and 7.2) → UI (benchtop-x0c.6.1 and 6.2) → orchestration (benchtop-x0c.11.5).
+
+3. **State Management as Coordinator**: The shared state store (benchtop-x0c.11.4) is a central hub that synchronizes form ↔ chat ↔ DAG. Every component that touches form state should depend on this being ready. The app shell beads build up the infrastructure properly.
+
+4. **Acceptance Criteria Depth**: Beads with more detailed acceptance criteria were easier to understand and less likely to have ambiguous dependencies. Form panel beads (benchtop-x0c.3.*) and chat beads (benchtop-x0c.5.1-5.2) had good criteria; data/app shell beads needed enhancement.
+
+### Confidence Assessment: HIGH
+
+The plan is now:
+- ✅ All P0 beads have acceptance criteria (or clear titles when criteria are implicit)
+- ✅ Critical integration dependencies are captured (benchtop-x0c.6.2 ↔ benchtop-x0c.11.5)
+- ✅ Validation pipeline is properly sequenced: schema → engines → orchestration → UI → gating
+- ✅ Data layer supports both persistence and error recovery
+- ✅ App shell properly coordinates state and persistence
+
+### What Still Could Be Refined (Lower Priority):
+- P1 beads (Rules Manager, Dashboard, Bulk Edit, DAG) could benefit from similar review
+- Performance/scaling considerations not yet captured in beads
+- Advanced error recovery scenarios could be more explicit
+
+---

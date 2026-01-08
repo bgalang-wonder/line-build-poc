@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "generated_at": "2025-12-19T13:42:23.706494",
+    "model": "gemini-2.5-flash",
+    "total_steps": 0,
+    "batch_size": 25
+  },
+  "stats": {
+    "total": 0,
+    "high_confidence": 0,
+    "medium_confidence": 0,
+    "low_confidence": 0,
+    "action_families": {},
+    "tools_found": 0,
+    "equipment_found": 0,
+    "quantity_found": 0,
+    "targets_found": 0
+  },
+  "results": []
+}

@@ -1,0 +1,2522 @@
+[
+  {
+    "type": "container",
+    "count": 5613,
+    "examples": [
+      {
+        "value": "Bag",
+        "original_title": "Place in Bag"
+      },
+      {
+        "value": "Bag",
+        "original_title": "Place in Bag"
+      },
+      {
+        "value": "Bag",
+        "original_title": "Place in Bag"
+      },
+      {
+        "value": "Bag",
+        "original_title": "Place in Bag"
+      },
+      {
+        "value": "Bag",
+        "original_title": "Place in Bag"
+      }
+    ]
+  },
+  {
+    "type": "modifier",
+    "count": 2657,
+    "examples": [
+      {
+        "value": "extra",
+        "original_title": "Extra: Fajita Vegetables"
+      },
+      {
+        "value": "extra",
+        "original_title": "Extra: Fajita Vegetables"
+      },
+      {
+        "value": "extra",
+        "original_title": "Extra: Fajita Vegetables"
+      },
+      {
+        "value": "extra",
+        "original_title": "Extra: Fajita Vegetables"
+      },
+      {
+        "value": "extra",
+        "original_title": "Extra: Fajita Vegetables"
+      }
+    ]
+  },
+  {
+    "type": "timing",
+    "count": 1928,
+    "examples": [
+      {
+        "value": "post cook",
+        "original_title": "POST COOK: Wings"
+      },
+      {
+        "value": "post cook",
+        "original_title": "POST COOK: Wings"
+      },
+      {
+        "value": "post cook",
+        "original_title": "POST COOK: Wings"
+      },
+      {
+        "value": "post cook",
+        "original_title": "POST COOK: Wings"
+      },
+      {
+        "value": "post cook",
+        "original_title": "POST COOK: Wings"
+      }
+    ]
+  },
+  {
+    "type": "condition",
+    "count": 1666,
+    "examples": [
+      {
+        "value": "drained",
+        "original_title": "Carnitas, Drained"
+      },
+      {
+        "value": "drained",
+        "original_title": "Carnitas, Drained"
+      },
+      {
+        "value": "drained",
+        "original_title": "Carnitas, Drained"
+      },
+      {
+        "value": "drained",
+        "original_title": "Carnitas, Drained"
+      },
+      {
+        "value": "drained",
+        "original_title": "Carnitas, Drained"
+      }
+    ]
+  },
+  {
+    "type": "preparation",
+    "count": 1452,
+    "examples": [
+      {
+        "value": "shredded",
+        "original_title": "Shredded Mozzarella & Provolone"
+      },
+      {
+        "value": "shredded",
+        "original_title": "Shredded Mozzarella & Provolone"
+      },
+      {
+        "value": "shredded",
+        "original_title": "Shredded Mozzarella & Provolone"
+      },
+      {
+        "value": "shredded",
+        "original_title": "Shredded Mozzarella & Provolone"
+      },
+      {
+        "value": "shredded",
+        "original_title": "Shredded Mozzarella & Provolone"
+      }
+    ]
+  },
+  {
+    "type": "container_type",
+    "count": 1175,
+    "examples": [
+      {
+        "value": "Large Branded",
+        "original_title": "Wing Paper - Large Branded Box"
+      },
+      {
+        "value": "Large Branded",
+        "original_title": "Wing Paper - Large Branded Box"
+      },
+      {
+        "value": "Large Branded",
+        "original_title": "Wing Paper - Large Branded Box"
+      },
+      {
+        "value": "Large Branded",
+        "original_title": "Wing Paper - Large Branded Box"
+      },
+      {
+        "value": "Large Branded",
+        "original_title": "Wing Paper - Large Branded Box"
+      }
+    ]
+  },
+  {
+    "type": "orientation",
+    "count": 718,
+    "examples": [
+      {
+        "value": "bottom half",
+        "original_title": "(2) Shredded Cheese - bottom half"
+      },
+      {
+        "value": "bottom half",
+        "original_title": "(2) Shredded Cheese - bottom half"
+      },
+      {
+        "value": "bottom half",
+        "original_title": "(2) Shredded Cheese - bottom half"
+      },
+      {
+        "value": "bottom half",
+        "original_title": "(2) Shredded Cheese - bottom half"
+      },
+      {
+        "value": "bottom half",
+        "original_title": "(2) Shredded Cheese - bottom half"
+      }
+    ]
+  },
+  {
+    "type": "type",
+    "count": 672,
+    "examples": [
+      {
+        "value": "zhough",
+        "original_title": "(1) Zhough"
+      },
+      {
+        "value": "zhough",
+        "original_title": "(1) Zhough"
+      },
+      {
+        "value": "zhough",
+        "original_title": "(1) Zhough"
+      },
+      {
+        "value": "zhough",
+        "original_title": "(1) Zhough"
+      },
+      {
+        "value": "zhough",
+        "original_title": "(1) Zhough"
+      }
+    ]
+  },
+  {
+    "type": "flavor",
+    "count": 655,
+    "examples": [
+      {
+        "value": "lemon caesar",
+        "original_title": "Lemon Caesar Dressing"
+      },
+      {
+        "value": "lemon caesar",
+        "original_title": "Lemon Caesar Dressing"
+      },
+      {
+        "value": "lemon caesar",
+        "original_title": "Lemon Caesar Dressing"
+      },
+      {
+        "value": "lemon caesar",
+        "original_title": "Lemon Caesar Dressing"
+      },
+      {
+        "value": "lemon caesar",
+        "original_title": "Lemon Caesar Dressing"
+      }
+    ]
+  },
+  {
+    "type": "item_for_container",
+    "count": 576,
+    "examples": [
+      {
+        "value": "Breaded Chicken Tender",
+        "original_title": "Breaded Chicken Tender - Bellies Clamshell"
+      },
+      {
+        "value": "Breaded Chicken Tender",
+        "original_title": "Breaded Chicken Tender - Bellies Clamshell"
+      },
+      {
+        "value": "Breaded Chicken Tender",
+        "original_title": "Breaded Chicken Tender - Bellies Clamshell"
+      },
+      {
+        "value": "Breaded Chicken Tender",
+        "original_title": "Breaded Chicken Tender - Bellies Clamshell"
+      },
+      {
+        "value": "Breaded Chicken Tender",
+        "original_title": "Breaded Chicken Tender - Bellies Clamshell"
+      }
+    ]
+  },
+  {
+    "type": "descriptor",
+    "count": 538,
+    "examples": [
+      {
+        "value": "Kit",
+        "original_title": "Pizza Tartufo & Funghi [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Pizza Tartufo & Funghi [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Pizza Tartufo & Funghi [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Pizza Tartufo & Funghi [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Pizza Tartufo & Funghi [Kit]"
+      }
+    ]
+  },
+  {
+    "type": "previous_appliance",
+    "count": 534,
+    "examples": [
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: Fries - Small Branded Clamshell"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: Fries - Small Branded Clamshell"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: Fries - Small Branded Clamshell"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: Fries - Small Branded Clamshell"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: Fries - Small Branded Clamshell"
+      }
+    ]
+  },
+  {
+    "type": "size",
+    "count": 521,
+    "examples": [
+      {
+        "value": "Large",
+        "original_title": "Large Tortilla - Foil Sheet"
+      },
+      {
+        "value": "Large",
+        "original_title": "Large Tortilla - Foil Sheet"
+      },
+      {
+        "value": "Large",
+        "original_title": "Large Tortilla - Foil Sheet"
+      },
+      {
+        "value": "Large",
+        "original_title": "Large Tortilla - Foil Sheet"
+      },
+      {
+        "value": "Large",
+        "original_title": "Large Tortilla - Foil Sheet"
+      }
+    ]
+  },
+  {
+    "type": "appliance",
+    "count": 518,
+    "examples": [
+      {
+        "value": "WATER_BATH",
+        "original_title": "Carnitas, Drained"
+      },
+      {
+        "value": "WATER_BATH",
+        "original_title": "Carnitas, Drained"
+      },
+      {
+        "value": "WATER_BATH",
+        "original_title": "Carnitas, Drained"
+      },
+      {
+        "value": "WATER_BATH",
+        "original_title": "Carnitas, Drained"
+      },
+      {
+        "value": "WATER_BATH",
+        "original_title": "Carnitas, Drained"
+      }
+    ]
+  },
+  {
+    "type": "cut_style",
+    "count": 437,
+    "examples": [
+      {
+        "value": "6 Piece",
+        "original_title": "Pizza- 6 Piece Cut"
+      },
+      {
+        "value": "6 Piece",
+        "original_title": "Pizza- 6 Piece Cut"
+      },
+      {
+        "value": "6 Piece",
+        "original_title": "Pizza- 6 Piece Cut"
+      },
+      {
+        "value": "6 Piece",
+        "original_title": "Pizza- 6 Piece Cut"
+      },
+      {
+        "value": "6 Piece",
+        "original_title": "Pizza- 6 Piece Cut"
+      }
+    ]
+  },
+  {
+    "type": "component_with",
+    "count": 304,
+    "examples": [
+      {
+        "value": "Wings",
+        "original_title": "POST COOK (2) Buffalo Sauce + Wings, Toss - Bowl"
+      },
+      {
+        "value": "Wings",
+        "original_title": "POST COOK (2) Buffalo Sauce + Wings, Toss - Bowl"
+      },
+      {
+        "value": "Wings",
+        "original_title": "POST COOK (2) Buffalo Sauce + Wings, Toss - Bowl"
+      },
+      {
+        "value": "Wings",
+        "original_title": "POST COOK (2) Buffalo Sauce + Wings, Toss - Bowl"
+      },
+      {
+        "value": "Wings",
+        "original_title": "POST COOK (2) Buffalo Sauce + Wings, Toss - Bowl"
+      }
+    ]
+  },
+  {
+    "type": "shape",
+    "count": 276,
+    "examples": [
+      {
+        "value": "12 inch round",
+        "original_title": "12\" Round Pizza Crust"
+      },
+      {
+        "value": "12 inch round",
+        "original_title": "12\" Round Pizza Crust"
+      },
+      {
+        "value": "12 inch round",
+        "original_title": "12\" Round Pizza Crust"
+      },
+      {
+        "value": "12 inch round",
+        "original_title": "12\" Round Pizza Crust"
+      },
+      {
+        "value": "12 inch round",
+        "original_title": "12\" Round Pizza Crust"
+      }
+    ]
+  },
+  {
+    "type": "exclusion",
+    "count": 275,
+    "examples": [
+      {
+        "value": "No",
+        "original_title": "No Pickle"
+      },
+      {
+        "value": "No",
+        "original_title": "No Pickle"
+      },
+      {
+        "value": "No",
+        "original_title": "No Pickle"
+      },
+      {
+        "value": "No",
+        "original_title": "No Pickle"
+      },
+      {
+        "value": "No",
+        "original_title": "No Pickle"
+      }
+    ]
+  },
+  {
+    "type": "packaging",
+    "count": 266,
+    "examples": [
+      {
+        "value": "Pouch",
+        "original_title": "Jasmine Rice [Pouch]"
+      },
+      {
+        "value": "Pouch",
+        "original_title": "Jasmine Rice [Pouch]"
+      },
+      {
+        "value": "Pouch",
+        "original_title": "Jasmine Rice [Pouch]"
+      },
+      {
+        "value": "Pouch",
+        "original_title": "Jasmine Rice [Pouch]"
+      },
+      {
+        "value": "Pouch",
+        "original_title": "Jasmine Rice [Pouch]"
+      }
+    ]
+  },
+  {
+    "type": "container_size",
+    "count": 258,
+    "examples": [
+      {
+        "value": "large",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "large",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "large",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "large",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "large",
+        "original_title": "Large Square Pizza Box + Liner"
+      }
+    ]
+  },
+  {
+    "type": "restriction",
+    "count": 253,
+    "examples": [
+      {
+        "value": "no basil",
+        "original_title": "No Basil"
+      },
+      {
+        "value": "no basil",
+        "original_title": "No Basil"
+      },
+      {
+        "value": "no basil",
+        "original_title": "No Basil"
+      },
+      {
+        "value": "no basil",
+        "original_title": "No Basil"
+      },
+      {
+        "value": "no basil",
+        "original_title": "No Basil"
+      }
+    ]
+  },
+  {
+    "type": "form",
+    "count": 234,
+    "examples": [
+      {
+        "value": "crushed",
+        "original_title": "Spread, Calabrian Crushed Chili Peppers"
+      },
+      {
+        "value": "crushed",
+        "original_title": "Spread, Calabrian Crushed Chili Peppers"
+      },
+      {
+        "value": "crushed",
+        "original_title": "Spread, Calabrian Crushed Chili Peppers"
+      },
+      {
+        "value": "crushed",
+        "original_title": "Spread, Calabrian Crushed Chili Peppers"
+      },
+      {
+        "value": "crushed",
+        "original_title": "Spread, Calabrian Crushed Chili Peppers"
+      }
+    ]
+  },
+  {
+    "type": "fill_level",
+    "count": 220,
+    "examples": [
+      {
+        "value": "to line",
+        "original_title": "Spring Mix- Fill to Line"
+      },
+      {
+        "value": "to line",
+        "original_title": "Spring Mix- Fill to Line"
+      },
+      {
+        "value": "to line",
+        "original_title": "Spring Mix- Fill to Line"
+      },
+      {
+        "value": "to line",
+        "original_title": "Spring Mix- Fill to Line"
+      },
+      {
+        "value": "to line",
+        "original_title": "Spring Mix- Fill to Line"
+      }
+    ]
+  },
+  {
+    "type": "measurement_guide",
+    "count": 220,
+    "examples": [
+      {
+        "value": "line",
+        "original_title": "Romaine- Fill to Line"
+      },
+      {
+        "value": "line",
+        "original_title": "Romaine- Fill to Line"
+      },
+      {
+        "value": "line",
+        "original_title": "Romaine- Fill to Line"
+      },
+      {
+        "value": "line",
+        "original_title": "Romaine- Fill to Line"
+      },
+      {
+        "value": "line",
+        "original_title": "Romaine- Fill to Line"
+      }
+    ]
+  },
+  {
+    "type": "item_being_placed",
+    "count": 188,
+    "examples": [
+      {
+        "value": "Pizza",
+        "original_title": "Pizza- Round Metal Pan"
+      },
+      {
+        "value": "Pizza",
+        "original_title": "Pizza- Round Metal Pan"
+      },
+      {
+        "value": "Pizza",
+        "original_title": "Pizza- Round Metal Pan"
+      },
+      {
+        "value": "Pizza",
+        "original_title": "Pizza- Round Metal Pan"
+      },
+      {
+        "value": "Pizza",
+        "original_title": "Pizza- Round Metal Pan"
+      }
+    ]
+  },
+  {
+    "type": "component",
+    "count": 171,
+    "examples": [
+      {
+        "value": "liner",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "liner",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "liner",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "liner",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "liner",
+        "original_title": "Large Square Pizza Box + Liner"
+      }
+    ]
+  },
+  {
+    "type": "color",
+    "count": 157,
+    "examples": [
+      {
+        "value": "Amber",
+        "original_title": "Amber Lid"
+      },
+      {
+        "value": "Amber",
+        "original_title": "Amber Lid"
+      },
+      {
+        "value": "Amber",
+        "original_title": "Amber Lid"
+      },
+      {
+        "value": "Amber",
+        "original_title": "Amber Lid"
+      },
+      {
+        "value": "Amber",
+        "original_title": "Amber Lid"
+      }
+    ]
+  },
+  {
+    "type": "dimension",
+    "count": 131,
+    "examples": [
+      {
+        "value": "1/2\u201d",
+        "original_title": "(white wheel) Cut Quesadilla 1/2\u201d - 36oz Pulp Rectangle"
+      },
+      {
+        "value": "1/2\u201d",
+        "original_title": "(white wheel) Cut Quesadilla 1/2\u201d - 36oz Pulp Rectangle"
+      },
+      {
+        "value": "1/2\u201d",
+        "original_title": "(white wheel) Cut Quesadilla 1/2\u201d - 36oz Pulp Rectangle"
+      },
+      {
+        "value": "1/2\u201d",
+        "original_title": "(white wheel) Cut Quesadilla 1/2\u201d - 36oz Pulp Rectangle"
+      },
+      {
+        "value": "1/2\u201d",
+        "original_title": "(white wheel) Cut Quesadilla 1/2\u201d - 36oz Pulp Rectangle"
+      }
+    ]
+  },
+  {
+    "type": "location",
+    "count": 128,
+    "examples": [
+      {
+        "value": "on mat",
+        "original_title": "(3 Pt) Canola Oil - on Mat "
+      },
+      {
+        "value": "on mat",
+        "original_title": "(3 Pt) Canola Oil - on Mat "
+      },
+      {
+        "value": "on mat",
+        "original_title": "(3 Pt) Canola Oil - on Mat "
+      },
+      {
+        "value": "on mat",
+        "original_title": "(3 Pt) Canola Oil - on Mat "
+      },
+      {
+        "value": "on mat",
+        "original_title": "(3 Pt) Canola Oil - on Mat "
+      }
+    ]
+  },
+  {
+    "type": "brand",
+    "count": 120,
+    "examples": [
+      {
+        "value": "Street Bird",
+        "original_title": "M's Chicka Shake Fried Chicken Wings, Street Bird"
+      },
+      {
+        "value": "Street Bird",
+        "original_title": "M's Chicka Shake Fried Chicken Wings, Street Bird"
+      },
+      {
+        "value": "Street Bird",
+        "original_title": "M's Chicka Shake Fried Chicken Wings, Street Bird"
+      },
+      {
+        "value": "Street Bird",
+        "original_title": "M's Chicka Shake Fried Chicken Wings, Street Bird"
+      },
+      {
+        "value": "Street Bird",
+        "original_title": "M's Chicka Shake Fried Chicken Wings, Street Bird"
+      }
+    ]
+  },
+  {
+    "type": "application_style",
+    "count": 111,
+    "examples": [
+      {
+        "value": "spiral",
+        "original_title": "(5 Spiral Pour) Olive Oil"
+      },
+      {
+        "value": "spiral",
+        "original_title": "(5 Spiral Pour) Olive Oil"
+      },
+      {
+        "value": "spiral",
+        "original_title": "(5 Spiral Pour) Olive Oil"
+      },
+      {
+        "value": "spiral",
+        "original_title": "(5 Spiral Pour) Olive Oil"
+      },
+      {
+        "value": "spiral",
+        "original_title": "(5 Spiral Pour) Olive Oil"
+      }
+    ]
+  },
+  {
+    "type": "container_shape",
+    "count": 110,
+    "examples": [
+      {
+        "value": "square",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "square",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "square",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "square",
+        "original_title": "Large Square Pizza Box + Liner"
+      },
+      {
+        "value": "square",
+        "original_title": "Large Square Pizza Box + Liner"
+      }
+    ]
+  },
+  {
+    "type": "lid_type",
+    "count": 110,
+    "examples": [
+      {
+        "value": "AMBER",
+        "original_title": "AMBER Lid"
+      },
+      {
+        "value": "AMBER",
+        "original_title": "AMBER Lid"
+      },
+      {
+        "value": "AMBER",
+        "original_title": "AMBER Lid"
+      },
+      {
+        "value": "AMBER",
+        "original_title": "AMBER Lid"
+      },
+      {
+        "value": "AMBER",
+        "original_title": "AMBER Lid"
+      }
+    ]
+  },
+  {
+    "type": "venting",
+    "count": 109,
+    "examples": [
+      {
+        "value": "vented",
+        "original_title": "POST COOK: Large Vented Clamshell - Fries"
+      },
+      {
+        "value": "vented",
+        "original_title": "POST COOK: Large Vented Clamshell - Fries"
+      },
+      {
+        "value": "vented",
+        "original_title": "POST COOK: Large Vented Clamshell - Fries"
+      },
+      {
+        "value": "vented",
+        "original_title": "POST COOK: Large Vented Clamshell - Fries"
+      },
+      {
+        "value": "vented",
+        "original_title": "POST COOK: Large Vented Clamshell - Fries"
+      }
+    ]
+  },
+  {
+    "type": "style",
+    "count": 99,
+    "examples": [
+      {
+        "value": "Detroit Brick",
+        "original_title": "POST COOK: Detroit Brick Sticker"
+      },
+      {
+        "value": "Detroit Brick",
+        "original_title": "POST COOK: Detroit Brick Sticker"
+      },
+      {
+        "value": "Detroit Brick",
+        "original_title": "POST COOK: Detroit Brick Sticker"
+      },
+      {
+        "value": "Detroit Brick",
+        "original_title": "POST COOK: Detroit Brick Sticker"
+      },
+      {
+        "value": "Detroit Brick",
+        "original_title": "POST COOK: Detroit Brick Sticker"
+      }
+    ]
+  },
+  {
+    "type": "placement",
+    "count": 99,
+    "examples": [
+      {
+        "value": "On Steak",
+        "original_title": "Au Poivre Sauce [Pouch]- On Steak"
+      },
+      {
+        "value": "On Steak",
+        "original_title": "Au Poivre Sauce [Pouch]- On Steak"
+      },
+      {
+        "value": "On Steak",
+        "original_title": "Au Poivre Sauce [Pouch]- On Steak"
+      },
+      {
+        "value": "On Steak",
+        "original_title": "Au Poivre Sauce [Pouch]- On Steak"
+      },
+      {
+        "value": "On Steak",
+        "original_title": "Au Poivre Sauce [Pouch]- On Steak"
+      }
+    ]
+  },
+  {
+    "type": "origin",
+    "count": 91,
+    "examples": [
+      {
+        "value": "Kit",
+        "original_title": "Burger Pizza [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Burger Pizza [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Burger Pizza [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Burger Pizza [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Burger Pizza [Kit]"
+      }
+    ]
+  },
+  {
+    "type": "component_tossed_with",
+    "count": 90,
+    "examples": [
+      {
+        "value": "Wings",
+        "original_title": "POST COOK: (2) Sweet & Sticky Sauce + Wings, Toss - Bowl"
+      },
+      {
+        "value": "Wings",
+        "original_title": "POST COOK: (2) Sweet & Sticky Sauce + Wings, Toss - Bowl"
+      },
+      {
+        "value": "Wings",
+        "original_title": "POST COOK: (2) Sweet & Sticky Sauce + Wings, Toss - Bowl"
+      },
+      {
+        "value": "Wings",
+        "original_title": "POST COOK: (2) Sweet & Sticky Sauce + Wings, Toss - Bowl"
+      },
+      {
+        "value": "Wings",
+        "original_title": "POST COOK: (2) Sweet & Sticky Sauce + Wings, Toss - Bowl"
+      }
+    ]
+  },
+  {
+    "type": "appliance_context",
+    "count": 86,
+    "examples": [
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: (1 Shake) Paprika Pimenton, Toss"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: (1 Shake) Paprika Pimenton, Toss"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: (1 Shake) Paprika Pimenton, Toss"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: (1 Shake) Paprika Pimenton, Toss"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POST COOK: (1 Shake) Paprika Pimenton, Toss"
+      }
+    ]
+  },
+  {
+    "type": "format",
+    "count": 80,
+    "examples": [
+      {
+        "value": "Kit",
+        "original_title": "Branzino [Kit] - Skinny Black Mat"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Branzino [Kit] - Skinny Black Mat"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Branzino [Kit] - Skinny Black Mat"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Branzino [Kit] - Skinny Black Mat"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Branzino [Kit] - Skinny Black Mat"
+      }
+    ]
+  },
+  {
+    "type": "preparation_state",
+    "count": 58,
+    "examples": [
+      {
+        "value": "Roasted",
+        "original_title": "Roasted Brussel Sprouts"
+      },
+      {
+        "value": "Roasted",
+        "original_title": "Roasted Brussel Sprouts"
+      },
+      {
+        "value": "Roasted",
+        "original_title": "Roasted Brussel Sprouts"
+      },
+      {
+        "value": "Roasted",
+        "original_title": "Roasted Brussel Sprouts"
+      },
+      {
+        "value": "Roasted",
+        "original_title": "Roasted Brussel Sprouts"
+      }
+    ]
+  },
+  {
+    "type": "container_qty",
+    "count": 53,
+    "examples": [
+      {
+        "value": 2.0,
+        "original_title": "(2 oz Portion Cup) Sriracha Mayo"
+      },
+      {
+        "value": 2.0,
+        "original_title": "(2 oz Portion Cup) Sriracha Mayo"
+      },
+      {
+        "value": 2.0,
+        "original_title": "(2 oz Portion Cup) Sriracha Mayo"
+      },
+      {
+        "value": 2.0,
+        "original_title": "(2 oz Portion Cup) Sriracha Mayo"
+      },
+      {
+        "value": 2.0,
+        "original_title": "(2 oz Portion Cup) Sriracha Mayo"
+      }
+    ]
+  },
+  {
+    "type": "doneness",
+    "count": 52,
+    "examples": [
+      {
+        "value": "RARE",
+        "original_title": "RARE"
+      },
+      {
+        "value": "RARE",
+        "original_title": "RARE"
+      },
+      {
+        "value": "RARE",
+        "original_title": "RARE"
+      },
+      {
+        "value": "RARE",
+        "original_title": "RARE"
+      },
+      {
+        "value": "RARE",
+        "original_title": "RARE"
+      }
+    ]
+  },
+  {
+    "type": "distribution",
+    "count": 50,
+    "examples": [
+      {
+        "value": "each buns",
+        "original_title": "(6 Pt) Spicy Mayo  - Each Buns"
+      },
+      {
+        "value": "each buns",
+        "original_title": "(6 Pt) Spicy Mayo  - Each Buns"
+      },
+      {
+        "value": "each buns",
+        "original_title": "(6 Pt) Spicy Mayo  - Each Buns"
+      },
+      {
+        "value": "each buns",
+        "original_title": "(6 Pt) Spicy Mayo  - Each Buns"
+      },
+      {
+        "value": "each buns",
+        "original_title": "(6 Pt) Spicy Mayo  - Each Buns"
+      }
+    ]
+  },
+  {
+    "type": "container_description",
+    "count": 49,
+    "examples": [
+      {
+        "value": "7\" Round Black and Gold",
+        "original_title": "Brava Sauce, Pour & Spread - 7\" Round Black and Gold"
+      },
+      {
+        "value": "7\" Round Black and Gold",
+        "original_title": "Brava Sauce, Pour & Spread - 7\" Round Black and Gold"
+      },
+      {
+        "value": "7\" Round Black and Gold",
+        "original_title": "Brava Sauce, Pour & Spread - 7\" Round Black and Gold"
+      },
+      {
+        "value": "7\" Round Black and Gold",
+        "original_title": "Brava Sauce, Pour & Spread - 7\" Round Black and Gold"
+      },
+      {
+        "value": "7\" Round Black and Gold",
+        "original_title": "Brava Sauce, Pour & Spread - 7\" Round Black and Gold"
+      }
+    ]
+  },
+  {
+    "type": "texture",
+    "count": 48,
+    "examples": [
+      {
+        "value": "crispy",
+        "original_title": "Crispy Shallots"
+      },
+      {
+        "value": "crispy",
+        "original_title": "Crispy Shallots"
+      },
+      {
+        "value": "crispy",
+        "original_title": "Crispy Shallots"
+      },
+      {
+        "value": "crispy",
+        "original_title": "Crispy Shallots"
+      },
+      {
+        "value": "crispy",
+        "original_title": "Crispy Shallots"
+      }
+    ]
+  },
+  {
+    "type": "spice",
+    "count": 47,
+    "examples": [
+      {
+        "value": "togarashi",
+        "original_title": "POST COOK: 3 Shakes Togarashi + Wings, Toss - Bowl"
+      },
+      {
+        "value": "togarashi",
+        "original_title": "POST COOK: 3 Shakes Togarashi + Wings, Toss - Bowl"
+      },
+      {
+        "value": "togarashi",
+        "original_title": "POST COOK: 3 Shakes Togarashi + Wings, Toss - Bowl"
+      },
+      {
+        "value": "togarashi",
+        "original_title": "POST COOK: 3 Shakes Togarashi + Wings, Toss - Bowl"
+      },
+      {
+        "value": "togarashi",
+        "original_title": "POST COOK: 3 Shakes Togarashi + Wings, Toss - Bowl"
+      }
+    ]
+  },
+  {
+    "type": "attribute",
+    "count": 46,
+    "examples": [
+      {
+        "value": "Branded",
+        "original_title": "Place Fries - Small Branded Clamshell"
+      },
+      {
+        "value": "Branded",
+        "original_title": "Place Fries - Small Branded Clamshell"
+      },
+      {
+        "value": "Branded",
+        "original_title": "Place Fries - Small Branded Clamshell"
+      },
+      {
+        "value": "Branded",
+        "original_title": "Place Fries - Small Branded Clamshell"
+      },
+      {
+        "value": "Branded",
+        "original_title": "Place Fries - Small Branded Clamshell"
+      }
+    ]
+  },
+  {
+    "type": "status",
+    "count": 43,
+    "examples": [
+      {
+        "value": "pass",
+        "original_title": "POST COOK: add temp stick to steak and PASS"
+      },
+      {
+        "value": "pass",
+        "original_title": "POST COOK: add temp stick to steak and PASS"
+      },
+      {
+        "value": "pass",
+        "original_title": "POST COOK: add temp stick to steak and PASS"
+      },
+      {
+        "value": "pass",
+        "original_title": "POST COOK: add temp stick to steak and PASS"
+      },
+      {
+        "value": "pass",
+        "original_title": "POST COOK: add temp stick to steak and PASS"
+      }
+    ]
+  },
+  {
+    "type": "source",
+    "count": 43,
+    "examples": [
+      {
+        "value": "Kit",
+        "original_title": "Pineapple Fried Rice [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Pineapple Fried Rice [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Pineapple Fried Rice [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "(Kit) Pineapple"
+      },
+      {
+        "value": "Kit",
+        "original_title": "(Kit) Pineapple"
+      }
+    ]
+  },
+  {
+    "type": "portion_size",
+    "count": 40,
+    "examples": [
+      {
+        "value": "2oz",
+        "original_title": "(2) (2oz Portion) Truffle Aioli"
+      },
+      {
+        "value": "2oz",
+        "original_title": "(2) (2oz Portion) Truffle Aioli"
+      },
+      {
+        "value": "2oz",
+        "original_title": "(2) (2oz Portion) Truffle Aioli"
+      },
+      {
+        "value": "2oz",
+        "original_title": "(2) (2oz Portion) Truffle Aioli"
+      },
+      {
+        "value": "2oz",
+        "original_title": "(2) (2oz Portion) Truffle Aioli"
+      }
+    ]
+  },
+  {
+    "type": "doneness_level",
+    "count": 32,
+    "examples": [
+      {
+        "value": "MEDIUM RARE",
+        "original_title": "MEDIUM RARE"
+      },
+      {
+        "value": "MEDIUM RARE",
+        "original_title": "MEDIUM RARE"
+      },
+      {
+        "value": "MEDIUM RARE",
+        "original_title": "MEDIUM RARE"
+      },
+      {
+        "value": "MEDIUM RARE",
+        "original_title": "MEDIUM RARE"
+      },
+      {
+        "value": "MEDIUM RARE",
+        "original_title": "MEDIUM RARE"
+      }
+    ]
+  },
+  {
+    "type": "container_detail",
+    "count": 30,
+    "examples": [
+      {
+        "value": "White Lid",
+        "original_title": "POST COOK: 1 Shake Togarashi Seasoning (White Lid)"
+      },
+      {
+        "value": "White Lid",
+        "original_title": "POST COOK: 1 Shake Togarashi Seasoning (White Lid)"
+      },
+      {
+        "value": "White Lid",
+        "original_title": "POST COOK: 1 Shake Togarashi Seasoning (White Lid)"
+      },
+      {
+        "value": "White Lid",
+        "original_title": "POST COOK: 1 Shake Togarashi Seasoning (White Lid)"
+      },
+      {
+        "value": "White Lid",
+        "original_title": "POST COOK: 1 Shake Togarashi Seasoning (White Lid)"
+      }
+    ]
+  },
+  {
+    "type": "state",
+    "count": 29,
+    "examples": [
+      {
+        "value": "Drained",
+        "original_title": "Extra: Carnitas, Drained"
+      },
+      {
+        "value": "Drained",
+        "original_title": "Extra: Carnitas, Drained"
+      },
+      {
+        "value": "Drained",
+        "original_title": "Extra: Carnitas, Drained"
+      },
+      {
+        "value": "Drained",
+        "original_title": "Extra: Carnitas, Drained"
+      },
+      {
+        "value": "Drained",
+        "original_title": "Extra: Carnitas, Drained"
+      }
+    ]
+  },
+  {
+    "type": "context",
+    "count": 27,
+    "examples": [
+      {
+        "value": "Each Bun",
+        "original_title": "(6 Pt) Chick'n'Dip'n Sauce - Each Bun"
+      },
+      {
+        "value": "Each Bun",
+        "original_title": "(6 Pt) Chick'n'Dip'n Sauce - Each Bun"
+      },
+      {
+        "value": "Each Bun",
+        "original_title": "(6 Pt) Chick'n'Dip'n Sauce - Each Bun"
+      },
+      {
+        "value": "On Bread",
+        "original_title": "Cheesesteak - On Bread"
+      },
+      {
+        "value": "On Bread",
+        "original_title": "Cheesesteak - On Bread"
+      }
+    ]
+  },
+  {
+    "type": "ingredient_added",
+    "count": 26,
+    "examples": [
+      {
+        "value": "",
+        "original_title": "POST COOK: 3 Shakes Lemon Pepper + Wings, Toss - Bowl"
+      },
+      {
+        "value": "",
+        "original_title": "POST COOK: 3 Shakes Lemon Pepper + Wings, Toss - Bowl"
+      },
+      {
+        "value": "",
+        "original_title": "POST COOK: 3 Shakes Lemon Pepper + Wings, Toss - Bowl"
+      },
+      {
+        "value": "",
+        "original_title": "POST COOK: 3 Shakes Lemon Pepper + Wings, Toss - Bowl"
+      },
+      {
+        "value": "",
+        "original_title": "POST COOK: 3 Shakes Lemon Pepper + Wings, Toss - Bowl"
+      }
+    ]
+  },
+  {
+    "type": "packaging_type",
+    "count": 26,
+    "examples": [
+      {
+        "value": "Branded Clamshell",
+        "original_title": "Streetbird Paper - Large Branded Clamshell"
+      },
+      {
+        "value": "Branded Clamshell",
+        "original_title": "Streetbird Paper - Large Branded Clamshell"
+      },
+      {
+        "value": "Branded Clamshell",
+        "original_title": "Streetbird Paper - Large Branded Clamshell"
+      },
+      {
+        "value": "Branded Clamshell",
+        "original_title": "Streetbird Paper - Large Branded Clamshell"
+      },
+      {
+        "value": "Branded Clamshell",
+        "original_title": "Streetbird Paper - Large Branded Clamshell"
+      }
+    ]
+  },
+  {
+    "type": "target_container",
+    "count": 26,
+    "examples": [
+      {
+        "value": "48oz Pulp Bowl",
+        "original_title": "(4oz Portion Cup) Chipotle Caesar Dressing - Place Inside 48oz Pulp Bowl"
+      },
+      {
+        "value": "48oz Pulp Bowl",
+        "original_title": "(2 Portion Cups) Whole Grain Mustard Vinaigrette  - Place Inside 48oz Pulp Bowl"
+      },
+      {
+        "value": "Mushroom Tin",
+        "original_title": "Pellet Mashed Potato [Pouch] - Mushroom Tin"
+      },
+      {
+        "value": "16oz Black and Gold Rectangle",
+        "original_title": "Spread Potatoes - 16oz Black and Gold Rectangle"
+      },
+      {
+        "value": "22oz Black & Gold Rectangle",
+        "original_title": "Salmon, Spatula Place - 22oz Black & Gold Rectangle"
+      }
+    ]
+  },
+  {
+    "type": "context_appliance",
+    "count": 25,
+    "examples": [
+      {
+        "value": "FRYER",
+        "original_title": "POSTCOOK: (3) Shakes Chicka Spice + Toss"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POSTCOOK: (3) Shakes Chicka Spice + Toss"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POSTCOOK: (3) Shakes Chicka Spice + Toss"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POSTCOOK: (3) Shakes Chicka Spice + Toss"
+      },
+      {
+        "value": "FRYER",
+        "original_title": "POSTCOOK: (3) Shakes Chicka Spice + Toss"
+      }
+    ]
+  },
+  {
+    "type": "serving_style",
+    "count": 24,
+    "examples": [
+      {
+        "value": "On The Side",
+        "original_title": "(1 Portion Cup) Horseradish Sauce - On The Side"
+      },
+      {
+        "value": "On The Side",
+        "original_title": "(1 Portion Cup) Horseradish Sauce - On The Side"
+      },
+      {
+        "value": "On The Side",
+        "original_title": "(1 Portion Cup) Horseradish Sauce - On The Side"
+      },
+      {
+        "value": "On The Side",
+        "original_title": "(1 Portion Cup) Horseradish Sauce - On The Side"
+      },
+      {
+        "value": "On The Side",
+        "original_title": "(1 Portion Cup) Horseradish Sauce - On The Side"
+      }
+    ]
+  },
+  {
+    "type": "material",
+    "count": 22,
+    "examples": [
+      {
+        "value": "Foil",
+        "original_title": "Small Foil - Fred's Clamshell"
+      },
+      {
+        "value": "Foil",
+        "original_title": "Small Foil - Fred's Clamshell"
+      },
+      {
+        "value": "Foil",
+        "original_title": "Small Foil - Fred's Clamshell"
+      },
+      {
+        "value": "Foil",
+        "original_title": "Small Foil - Fred's Clamshell"
+      },
+      {
+        "value": "Foil",
+        "original_title": "Small Foil - Fred's Clamshell"
+      }
+    ]
+  },
+  {
+    "type": "portion_type",
+    "count": 21,
+    "examples": [
+      {
+        "value": "Portion",
+        "original_title": "(2 oz Portion) Truffle Aioli"
+      },
+      {
+        "value": "Portion",
+        "original_title": "(2 oz Portion) Truffle Aioli"
+      },
+      {
+        "value": "Portion",
+        "original_title": "(2 oz Portion) Truffle Aioli"
+      },
+      {
+        "value": "Portion",
+        "original_title": "(2 oz Portion) Truffle Aioli"
+      },
+      {
+        "value": "Portion",
+        "original_title": "(2 oz Portion) Truffle Aioli"
+      }
+    ]
+  },
+  {
+    "type": "container_target",
+    "count": 21,
+    "examples": [
+      {
+        "value": "16 oz Pulp Square",
+        "original_title": "(1 Portion Cup) Cocktail Sauce - Place Inside 16 oz Pulp Square"
+      },
+      {
+        "value": "16oz Pulp Square",
+        "original_title": "Shrimp - 16oz Pulp Square"
+      },
+      {
+        "value": "32oz Pulp Bowl",
+        "original_title": "(2) Diced Beets - 32oz Pulp Bowl"
+      },
+      {
+        "value": "Tin",
+        "original_title": "Broccolini - Place Left Side of Tin"
+      },
+      {
+        "value": "Tin",
+        "original_title": "Pisto Manchego - Place Right Side of Tin "
+      }
+    ]
+  },
+  {
+    "type": "application_target",
+    "count": 20,
+    "examples": [
+      {
+        "value": "each bun",
+        "original_title": "(4 Pt) Burger Sauce each bun"
+      },
+      {
+        "value": "each bun",
+        "original_title": "(4 Pt) Burger Sauce each bun"
+      },
+      {
+        "value": "each bun",
+        "original_title": "(4 Pt) Burger Sauce each bun"
+      },
+      {
+        "value": "Each Patty",
+        "original_title": "POST: (1 ea) Sliced American - Each Patty"
+      },
+      {
+        "value": "Each Patty",
+        "original_title": "POST: (1 ea) Sliced American - Each Patty"
+      }
+    ]
+  },
+  {
+    "type": "specific_instruction",
+    "count": 19,
+    "examples": [
+      {
+        "value": "BUTTON #4",
+        "original_title": "BUTTON #4"
+      },
+      {
+        "value": "BUTTON #4",
+        "original_title": "BUTTON #4"
+      },
+      {
+        "value": "BUTTON #4",
+        "original_title": "BUTTON #4"
+      },
+      {
+        "value": "BUTTON #4",
+        "original_title": "BUTTON #4"
+      },
+      {
+        "value": "BUTTON #4",
+        "original_title": "BUTTON #4"
+      }
+    ]
+  },
+  {
+    "type": "instruction_type",
+    "count": 18,
+    "examples": [
+      {
+        "value": "omit",
+        "original_title": "No Shawarma Slaw"
+      },
+      {
+        "value": "omit",
+        "original_title": "No Shawarma Slaw"
+      },
+      {
+        "value": "omit",
+        "original_title": "No Shawarma Slaw"
+      },
+      {
+        "value": "omit",
+        "original_title": "No Pickled Red Onion"
+      },
+      {
+        "value": "omit",
+        "original_title": "No Pickled Red Onion"
+      }
+    ]
+  },
+  {
+    "type": "material_shape",
+    "count": 16,
+    "examples": [
+      {
+        "value": "Round Metal",
+        "original_title": "Cheese Bread- Round Metal Pan"
+      },
+      {
+        "value": "Round Metal",
+        "original_title": "Cheese Bread- Round Metal Pan"
+      },
+      {
+        "value": "Round Metal",
+        "original_title": "Cheese Bread- Round Metal Pan"
+      },
+      {
+        "value": "Round Metal",
+        "original_title": "Cheese Bread- Round Metal Pan"
+      },
+      {
+        "value": "Round Metal",
+        "original_title": "Cheese Bread- Round Metal Pan"
+      }
+    ]
+  },
+  {
+    "type": "composition",
+    "count": 14,
+    "examples": [
+      {
+        "value": "3 Flats, 3 Drums",
+        "original_title": "Bone-in Wings: 3 Flats, 3 Drums "
+      },
+      {
+        "value": "3 Flats, 3 Drums",
+        "original_title": "Bone-in Wings: 3 Flats, 3 Drums "
+      },
+      {
+        "value": "3 Flats, 3 Drums",
+        "original_title": "Bone-in Wings: 3 Flats, 3 Drums "
+      },
+      {
+        "value": "3 Flats, 3 Drums",
+        "original_title": "Bone-in Wings: 3 Flats, 3 Drums "
+      },
+      {
+        "value": "3 Flats, 3 Drums",
+        "original_title": "Bone-in Wings: 3 Flats, 3 Drums "
+      }
+    ]
+  },
+  {
+    "type": "dietary_restriction",
+    "count": 14,
+    "examples": [
+      {
+        "value": "Gluten Free",
+        "original_title": "Butter - Gluten Free Bun"
+      },
+      {
+        "value": "Gluten Free",
+        "original_title": "Butter - Gluten Free Bun"
+      },
+      {
+        "value": "Gluten Free",
+        "original_title": "Butter - Gluten Free Bun"
+      },
+      {
+        "value": "Gluten Free",
+        "original_title": "Butter - Gluten Free Bun"
+      },
+      {
+        "value": "Gluten Free",
+        "original_title": "Butter - Gluten Free Bun"
+      }
+    ]
+  },
+  {
+    "type": "dietary",
+    "count": 14,
+    "examples": [
+      {
+        "value": "Gluten-Free",
+        "original_title": "Gluten-Free Burger Bun: Skinny Black Mat"
+      },
+      {
+        "value": "Gluten-Free",
+        "original_title": "Gluten-Free Burger Bun: Skinny Black Mat"
+      },
+      {
+        "value": "Gluten-Free",
+        "original_title": "Gluten-Free Burger Bun: Skinny Black Mat"
+      },
+      {
+        "value": "Gluten-Free",
+        "original_title": "Gluten-Free Burger Bun: Skinny Black Mat"
+      },
+      {
+        "value": "Gluten Free",
+        "original_title": "Gluten Free Bun"
+      }
+    ]
+  },
+  {
+    "type": "surface",
+    "count": 13,
+    "examples": [
+      {
+        "value": "Perforated Black Mat",
+        "original_title": "Shishito Pepper [Pouch] - Perforated Black Mat"
+      },
+      {
+        "value": "Perforated Black Mat",
+        "original_title": "Shishito Pepper [Pouch] - Perforated Black Mat"
+      },
+      {
+        "value": "PURPLE Mat",
+        "original_title": "Steak - Spice Rub Side DOWN, PURPLE Mat"
+      },
+      {
+        "value": "PURPLE Mat",
+        "original_title": "Steak - Spice Rub Side DOWN, PURPLE Mat"
+      },
+      {
+        "value": "Small Mat",
+        "original_title": "(1 Portion) Brisket Sandwich [Bulk Kit] - Small Mat"
+      }
+    ]
+  },
+  {
+    "type": "component_state",
+    "count": 13,
+    "examples": [
+      {
+        "value": "Pouch",
+        "original_title": "Creamed Corn [Pouch]"
+      },
+      {
+        "value": "Pouch",
+        "original_title": "Creamed Corn [Pouch] - 16oz Pulp Square"
+      },
+      {
+        "value": "Pouch",
+        "original_title": "Beef Massaman [Pouch]"
+      },
+      {
+        "value": "Pouch",
+        "original_title": "Beef Massaman [Pouch] - 24 oz Black Bowl"
+      },
+      {
+        "value": "Pouch",
+        "original_title": "Butter Bean Cassoulet [Pouch] - 7\" Round Black & Gold"
+      }
+    ]
+  },
+  {
+    "type": "measurement",
+    "count": 12,
+    "examples": [
+      {
+        "value": "to line",
+        "original_title": "Spring Mix, Fill to line"
+      },
+      {
+        "value": "to line",
+        "original_title": "Spring Mix, Fill to line"
+      },
+      {
+        "value": "to line",
+        "original_title": "Spring Mix, Fill to line"
+      },
+      {
+        "value": "to line",
+        "original_title": "Spring Mix, Fill to line"
+      },
+      {
+        "value": "to line",
+        "original_title": "Spring Mix, Fill to line"
+      }
+    ]
+  },
+  {
+    "type": "placement_position",
+    "count": 12,
+    "examples": [
+      {
+        "value": "left",
+        "original_title": "Braised Short Rib - Place Left "
+      },
+      {
+        "value": "left",
+        "original_title": "Braised Short Rib - Place Left "
+      },
+      {
+        "value": "left",
+        "original_title": "Braised Short Rib - Place Left "
+      },
+      {
+        "value": "left",
+        "original_title": "Short Rib Liquid - Place Left"
+      },
+      {
+        "value": "left",
+        "original_title": "Short Rib Liquid - Place Left"
+      }
+    ]
+  },
+  {
+    "type": "post_cook_step",
+    "count": 12,
+    "examples": [
+      {
+        "value": true,
+        "original_title": "POSTCOOK: Place Pizza Large Square Pizza Box + Liner"
+      },
+      {
+        "value": true,
+        "original_title": "POSTCOOK: Place Pizza Large Square Pizza Box + Liner"
+      },
+      {
+        "value": true,
+        "original_title": "POSTCOOK: Place Pizza Large Square Pizza Box + Liner"
+      },
+      {
+        "value": true,
+        "original_title": "POSTCOOK: Cut Pizza- 8 Slices"
+      },
+      {
+        "value": true,
+        "original_title": "POSTCOOK: Cut Pizza- 8 Slices"
+      }
+    ]
+  },
+  {
+    "type": "kit_type",
+    "count": 10,
+    "examples": [
+      {
+        "value": "Bulk Kit",
+        "original_title": "(1 Bag) Blanched Beef [Bulk Kit] - Tin"
+      },
+      {
+        "value": "Bulk Kit",
+        "original_title": "(1 Bag) Blanched Beef [Bulk Kit] - Tin"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Mozzarella Sticks [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Mozzarella Sticks [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Crispy Fish [Kit] - Small Black Mat"
+      }
+    ]
+  },
+  {
+    "type": "kit",
+    "count": 9,
+    "examples": [
+      {
+        "value": "Kit",
+        "original_title": "Roasted Mushroom Mix & Truffle Butter [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Roasted Mushroom Mix & Truffle Butter [Kit]"
+      },
+      {
+        "value": "Bulk Kit",
+        "original_title": "(1 ea) Burger Patty [Bulk Kit] - On Onions"
+      },
+      {
+        "value": "Bulk Kit",
+        "original_title": "(2 Bags) Onion Ring [Bulk Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Seared Salmon [Kit] - Small Black Mat"
+      }
+    ]
+  },
+  {
+    "type": "position",
+    "count": 9,
+    "examples": [
+      {
+        "value": "Right",
+        "original_title": "Watercress - Place Right "
+      },
+      {
+        "value": "Right",
+        "original_title": "Lemon Wedge - Place Right"
+      },
+      {
+        "value": "Inside",
+        "original_title": "Ranch Dressing - Place Inside"
+      },
+      {
+        "value": "Top Left Corner",
+        "original_title": "Cucumber Salad - Top Left Corner, 36 oz Pulp Rectangle"
+      },
+      {
+        "value": "Top Right Corner",
+        "original_title": "Peanut Sauce - Top Right Corner, 36 oz Pulp Rectangle"
+      }
+    ]
+  },
+  {
+    "type": "feature",
+    "count": 8,
+    "examples": [
+      {
+        "value": "Vented",
+        "original_title": "POST COOK: Vented Clamshell - (1) Foil Sheet"
+      },
+      {
+        "value": "Vented",
+        "original_title": "POST COOK: Vented Clamshell - (1) Foil Sheet"
+      },
+      {
+        "value": "Vented",
+        "original_title": "POST COOK: Vented Clamshell - (1) Foil Sheet"
+      },
+      {
+        "value": "Vented",
+        "original_title": "POST COOK: Vented Clamshell - (1) Foil Sheet"
+      },
+      {
+        "value": "Branded",
+        "original_title": "(2 ea) Pita Bread - Small Branded Sleeve"
+      }
+    ]
+  },
+  {
+    "type": "tool_description",
+    "count": 7,
+    "examples": [
+      {
+        "value": "Skinny Black Mat",
+        "original_title": "(4 ea) Bread, Global Crostini- Skinny Black Mat"
+      },
+      {
+        "value": "Skinny Black Mat",
+        "original_title": "(4 ea) Bread, Global Crostini- Skinny Black Mat"
+      },
+      {
+        "value": "Skinny Black Mat",
+        "original_title": "(4 ea) Bread, Global Crostini- Skinny Black Mat"
+      },
+      {
+        "value": "Skinny Black Mat",
+        "original_title": "(4 ea) Bread, Global Crostini- Skinny Black Mat"
+      },
+      {
+        "value": "Skinny Black Mat",
+        "original_title": "(4 ea) Bread, Global Crostini- Skinny Black Mat"
+      }
+    ]
+  },
+  {
+    "type": "destination",
+    "count": 7,
+    "examples": [
+      {
+        "value": "Branzino",
+        "original_title": "Lemon Vinaigrette (2oz Souffle Cup), Pour - Branzino"
+      },
+      {
+        "value": "Branzino",
+        "original_title": "Lemon Vinaigrette (2oz Souffle Cup), Pour - Branzino"
+      },
+      {
+        "value": "Branzino",
+        "original_title": "Lemon Vinaigrette (2oz Souffle Cup), Pour - Branzino"
+      },
+      {
+        "value": "Branzino",
+        "original_title": "Lemon Vinaigrette (2oz Souffle Cup), Pour - Branzino"
+      },
+      {
+        "value": "Branzino",
+        "original_title": "Lemon Vinaigrette (2oz Souffle Cup), Pour - Branzino"
+      }
+    ]
+  },
+  {
+    "type": "temperature_level",
+    "count": 6,
+    "examples": [
+      {
+        "value": "RARE",
+        "original_title": "RARE Steak - 22oz Black & Gold Rectangle"
+      },
+      {
+        "value": "RARE",
+        "original_title": "RARE Steak - 22oz Black & Gold Rectangle"
+      },
+      {
+        "value": "RARE",
+        "original_title": "RARE Steak - 22oz Black & Gold Rectangle"
+      },
+      {
+        "value": "MEDIUM",
+        "original_title": "MEDIUM Steak - 22oz Black & Gold Rectangle"
+      },
+      {
+        "value": "MEDIUM",
+        "original_title": "MEDIUM Steak - 22oz Black & Gold Rectangle"
+      }
+    ]
+  },
+  {
+    "type": "placement_relative",
+    "count": 6,
+    "examples": [
+      {
+        "value": "on bacon",
+        "original_title": "(1 ea) Burger Patty [Bulk Kit] - On Bacon"
+      },
+      {
+        "value": "on bacon",
+        "original_title": "(1 ea) Burger Patty [Bulk Kit] - On Bacon"
+      },
+      {
+        "value": "on bacon",
+        "original_title": "(1 ea) Burger Patty [Bulk Kit] - On Bacon"
+      },
+      {
+        "value": "in potato",
+        "original_title": "Bacon Bits - Place In Potato"
+      },
+      {
+        "value": "in potato",
+        "original_title": "Bacon Bits - Place In Potato"
+      }
+    ]
+  },
+  {
+    "type": "tool_detail",
+    "count": 6,
+    "examples": [
+      {
+        "value": "Small Black Mat",
+        "original_title": "6oz Diced Chicken Thigh - Small Black Mat"
+      },
+      {
+        "value": "Small Black Mat",
+        "original_title": "6oz Diced Chicken Thigh - Small Black Mat"
+      },
+      {
+        "value": "Small Black Mat",
+        "original_title": "(4 ea) Sliced Bacon - Small Black Mat, Right Side"
+      },
+      {
+        "value": "Small Black Mat",
+        "original_title": "(4 ea) Sliced Bacon - Small Black Mat, Right Side"
+      },
+      {
+        "value": "Skinny Black Mat",
+        "original_title": "Pork Ribs - Skinny Black Mat"
+      }
+    ]
+  },
+  {
+    "type": "instruction",
+    "count": 5,
+    "examples": [
+      {
+        "value": "BUTTON #3",
+        "original_title": "BUTTON #3"
+      },
+      {
+        "value": "BUTTON #3",
+        "original_title": "BUTTON #3"
+      },
+      {
+        "value": "POST COOK: PASS",
+        "original_title": "POST COOK: PASS Pellet Mashed Potato [Pouch]"
+      },
+      {
+        "value": "Fill to Line",
+        "original_title": "(Fill to Line) Sweet Vinegar - Salad Cup"
+      },
+      {
+        "value": "Fill to Line",
+        "original_title": "Romaine Lettuce- Fill to Line"
+      }
+    ]
+  },
+  {
+    "type": "dimensions",
+    "count": 4,
+    "examples": [
+      {
+        "value": "14x16",
+        "original_title": "Medium Honeycomb 14x16 Foil Paper"
+      },
+      {
+        "value": "14x16",
+        "original_title": "Medium Honeycomb 14x16 Foil Paper"
+      },
+      {
+        "value": "14x16",
+        "original_title": "Medium Honeycomb 14x16 Foil Paper"
+      },
+      {
+        "value": "14x16",
+        "original_title": "Medium Honeycomb 14x16 Foil Paper"
+      }
+    ]
+  },
+  {
+    "type": "quantity_per_item",
+    "count": 4,
+    "examples": [
+      {
+        "value": "1oz",
+        "original_title": "(2) 1oz Grated Parmesan"
+      },
+      {
+        "value": "1oz",
+        "original_title": "(2) 1oz Grated Parmesan"
+      },
+      {
+        "value": "1oz",
+        "original_title": "(2) 1oz Grated Parmesan"
+      },
+      {
+        "value": "1oz",
+        "original_title": "(2) 1oz Grated Parmesan"
+      }
+    ]
+  },
+  {
+    "type": "component_type",
+    "count": 4,
+    "examples": [
+      {
+        "value": "Kit",
+        "original_title": "Southern Style Green Beans [Kit]"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Tomatoes (Kit) - 32oz Pulp Bowl"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Vegetable Mix Bag (Kit)"
+      },
+      {
+        "value": "Kit",
+        "original_title": "Lemon Potatoes [Kit]"
+      }
+    ]
+  },
+  {
+    "type": "recipient",
+    "count": 3,
+    "examples": [
+      {
+        "value": "Pizza Pan",
+        "original_title": "Vegalene Spray- Pizza Pan"
+      },
+      {
+        "value": "Pizza Pan",
+        "original_title": "Vegalene Spray- Pizza Pan"
+      },
+      {
+        "value": "Pizza Pan",
+        "original_title": "Vegalene Spray- Pizza Pan"
+      }
+    ]
+  },
+  {
+    "type": "sticker_color",
+    "count": 3,
+    "examples": [
+      {
+        "value": "Blue",
+        "original_title": "---STICKER BLUE M---"
+      },
+      {
+        "value": "Blue",
+        "original_title": "---STICKER BLUE M---"
+      },
+      {
+        "value": "Blue",
+        "original_title": "---STICKER BLUE M---"
+      }
+    ]
+  },
+  {
+    "type": "sticker_label",
+    "count": 3,
+    "examples": [
+      {
+        "value": "M",
+        "original_title": "---STICKER BLUE M---"
+      },
+      {
+        "value": "M",
+        "original_title": "---STICKER BLUE M---"
+      },
+      {
+        "value": "M",
+        "original_title": "---STICKER BLUE M---"
+      }
+    ]
+  },
+  {
+    "type": "component_for",
+    "count": 3,
+    "examples": [
+      {
+        "value": "Brisket Enchiladas",
+        "original_title": "1oz Water - Brisket Enchiladas [Kit]"
+      },
+      {
+        "value": "Brisket Enchiladas",
+        "original_title": "1oz Water - Brisket Enchiladas [Kit]"
+      },
+      {
+        "value": "Raita",
+        "original_title": "Lid - Raita"
+      }
+    ]
+  },
+  {
+    "type": "appliance_detail",
+    "count": 2,
+    "examples": [
+      {
+        "value": "Panini Press",
+        "original_title": "2 Mini Pita - Panini Press"
+      },
+      {
+        "value": "Panini Press",
+        "original_title": "2 Mini Pita - Panini Press"
+      }
+    ]
+  },
+  {
+    "type": "context_activity",
+    "count": 2,
+    "examples": [
+      {
+        "value": "COOK",
+        "original_title": "2oz Scoop Cherry Peppers"
+      },
+      {
+        "value": "COOK",
+        "original_title": "Spatula Place Eggplant"
+      }
+    ]
+  },
+  {
+    "type": "source_container",
+    "count": 2,
+    "examples": [
+      {
+        "value": "Pouch",
+        "original_title": "Daal [Pouch] - 16oz Black Cup"
+      },
+      {
+        "value": "Bag (Kit)",
+        "original_title": " Vegetable Mix Bag (Kit) - 32oz Pulp Bowl"
+      }
+    ]
+  },
+  {
+    "type": "tool",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Spatula",
+        "original_title": "Salmon, Spatula Place - Small Black Mat"
+      }
+    ]
+  },
+  {
+    "type": "item_type",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Kit",
+        "original_title": "Beet & Citrus Salad [Kit]"
+      }
+    ]
+  },
+  {
+    "type": "container_prep",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Crimp Tin",
+        "original_title": "(2 Bag) Pulled Pork- Crimp Tin  "
+      }
+    ]
+  },
+  {
+    "type": "technique",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Fully Covered, 4 Spiral Pour",
+        "original_title": "Fully Covered, 4 Spiral Pour, Sweet & Sticky Sauce  (Tri-Tip Bottle)"
+      }
+    ]
+  },
+  {
+    "type": "dish_type",
+    "count": 1,
+    "examples": [
+      {
+        "value": "taco",
+        "original_title": "Chicken Tinga - Taco"
+      }
+    ]
+  },
+  {
+    "type": "prep_state",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Halved",
+        "original_title": "(2 ea) Lettuce, Iceberg, Baby Heart [Halved] - Cut Side Up, 32 oz Pulp Bowl"
+      }
+    ]
+  },
+  {
+    "type": "alias",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Gambas",
+        "original_title": "Place Shrimp (Gambas) - 16oz Black & Gold\u200b Rectangle"
+      }
+    ]
+  },
+  {
+    "type": "modification",
+    "count": 1,
+    "examples": [
+      {
+        "value": "No Onion",
+        "original_title": " No Onion"
+      }
+    ]
+  },
+  {
+    "type": "amount",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Half",
+        "original_title": "Crispy Leaf Lettuce- Fill Half"
+      }
+    ]
+  },
+  {
+    "type": "action_modifier",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Shakes",
+        "original_title": "Cover With Lid, (3) Shakes"
+      }
+    ]
+  },
+  {
+    "type": "component_target",
+    "count": 1,
+    "examples": [
+      {
+        "value": "Brioche Bun",
+        "original_title": "Butter - Brioche Bun"
+      }
+    ]
+  },
+  {
+    "type": "weight",
+    "count": 1,
+    "examples": [
+      {
+        "value": "100g",
+        "original_title": "Vodka Sauce [Pouch, 100g]"
+      }
+    ]
+  },
+  {
+    "type": "coverage",
+    "count": 1,
+    "examples": [
+      {
+        "value": "both sides",
+        "original_title": "Butter Wheel - (2 ea) Tortillas BOTH SIDES"
+      }
+    ]
+  }
+]
