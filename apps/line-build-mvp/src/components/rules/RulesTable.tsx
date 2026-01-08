@@ -8,6 +8,10 @@
 import React, { useState } from 'react';
 import { Pencil, Trash2, AlertTriangle } from 'lucide-react';
 import { ValidationRule } from '@/lib/model/types';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/Table';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from '@/components/ui/Modal';
 
 // ============================================================================
 // Delete Confirmation Modal
@@ -21,45 +25,30 @@ interface DeleteConfirmModalProps {
 }
 
 function DeleteConfirmModal({ ruleName, isOpen, onConfirm, onCancel }: DeleteConfirmModalProps) {
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/50"
-        onClick={onCancel}
-        onKeyDown={(e) => e.key === 'Escape' && onCancel()}
-      />
-      {/* Modal */}
-      <div className="relative bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+    <Modal isOpen={isOpen} onClose={onCancel} size="sm">
+      <ModalBody>
         <div className="flex items-start gap-4">
           <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
             <AlertTriangle className="w-5 h-5 text-red-600" />
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-900">Delete Rule</h3>
-            <p className="mt-2 text-sm text-gray-600">
+            <h3 className="text-lg font-semibold text-neutral-900">Delete Rule</h3>
+            <p className="mt-2 text-sm text-neutral-600">
               Are you sure you want to delete &quot;{ruleName}&quot;? This action cannot be undone.
             </p>
           </div>
         </div>
-        <div className="mt-6 flex justify-end gap-3">
-          <button
-            onClick={onCancel}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={onConfirm}
-            className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
+      </ModalBody>
+      <ModalFooter>
+        <Button variant="secondary" onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={onConfirm}>
+          Delete
+        </Button>
+      </ModalFooter>
+    </Modal>
   );
 }
 
@@ -86,8 +75,8 @@ export default function RulesTable({
     return (
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2"></div>
-          <p className="text-sm text-gray-500">Loading rules...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500 mx-auto mb-2"></div>
+          <p className="text-sm text-neutral-500">Loading rules...</p>
         </div>
       </div>
     );
@@ -98,8 +87,8 @@ export default function RulesTable({
     return (
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
-          <p className="text-gray-500 mb-2">No validation rules yet</p>
-          <p className="text-sm text-gray-400">
+          <p className="text-neutral-500 mb-2">No validation rules yet</p>
+          <p className="text-sm text-neutral-400">
             Create your first rule to start validating line builds
           </p>
         </div>
@@ -108,40 +97,28 @@ export default function RulesTable({
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Name
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Type
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Applies To
-            </th>
-            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Enabled
-            </th>
-            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {rules.map((rule) => (
-            <RuleRow
-              key={rule.id}
-              rule={rule}
-              onEdit={() => onEdit(rule)}
-              onDelete={() => onDelete(rule.id)}
-              onToggleEnabled={() => onToggleEnabled(rule.id)}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Table>
+      <TableHeader>
+        <TableRow noHover>
+          <TableHead>Name</TableHead>
+          <TableHead>Type</TableHead>
+          <TableHead>Applies To</TableHead>
+          <TableHead className="text-center">Enabled</TableHead>
+          <TableHead className="text-right">Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {rules.map((rule) => (
+          <RuleRow
+            key={rule.id}
+            rule={rule}
+            onEdit={() => onEdit(rule)}
+            onDelete={() => onDelete(rule.id)}
+            onToggleEnabled={() => onToggleEnabled(rule.id)}
+          />
+        ))}
+      </TableBody>
+    </Table>
   );
 }
 
@@ -189,43 +166,39 @@ function RuleRow({ rule, onEdit, onDelete, onToggleEnabled }: RuleRowProps) {
         : 'All';
 
   return (
-    <tr className={`hover:bg-gray-50 transition-colors ${isDeleting ? 'opacity-50' : ''}`}>
+    <TableRow className={isDeleting ? 'opacity-50' : ''}>
       {/* Name */}
-      <td className="px-6 py-4">
+      <TableCell>
         <div>
-          <p className="text-sm font-medium text-gray-900">{rule.name}</p>
+          <p className="text-sm font-medium text-neutral-900">{rule.name}</p>
           {rule.description && (
-            <p className="text-xs text-gray-500 mt-1 truncate max-w-xs">
+            <p className="text-xs text-neutral-500 mt-1 truncate max-w-xs">
               {rule.description}
             </p>
           )}
         </div>
-      </td>
+      </TableCell>
 
       {/* Type Badge */}
-      <td className="px-6 py-4">
+      <TableCell>
         {rule.type === 'structured' ? (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-            Structured
-          </span>
+          <Badge variant="success">Structured</Badge>
         ) : (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-            Semantic
-          </span>
+          <Badge className="bg-purple-50 text-purple-700 border-purple-200">Semantic</Badge>
         )}
-      </td>
+      </TableCell>
 
       {/* Applies To */}
-      <td className="px-6 py-4">
-        <span className="text-sm text-gray-600">{appliesToDisplay}</span>
-      </td>
+      <TableCell>
+        <span className="text-sm text-neutral-600">{appliesToDisplay}</span>
+      </TableCell>
 
-      {/* Enabled Toggle */}
-      <td className="px-6 py-4 text-center">
+      {/* Enabled Toggle - Keep existing toggle switch (it's good) */}
+      <TableCell className="text-center">
         <button
           onClick={onToggleEnabled}
-          className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-            rule.enabled ? 'bg-blue-600' : 'bg-gray-200'
+          className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+            rule.enabled ? 'bg-indigo-600' : 'bg-neutral-200'
           }`}
           role="switch"
           aria-checked={rule.enabled}
@@ -236,28 +209,32 @@ function RuleRow({ rule, onEdit, onDelete, onToggleEnabled }: RuleRowProps) {
             }`}
           />
         </button>
-      </td>
+      </TableCell>
 
       {/* Actions */}
-      <td className="px-6 py-4 text-right">
-        <div className="flex items-center justify-end gap-2">
-          <button
+      <TableCell className="text-right">
+        <div className="flex items-center justify-end gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={onEdit}
-            className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
             title="Edit rule"
+            className="p-2"
           >
             <Pencil className="w-4 h-4" />
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={handleDeleteClick}
             disabled={isDeleting}
-            className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors disabled:opacity-50"
             title="Delete rule"
+            className="p-2 hover:text-red-600 hover:bg-red-50"
           >
             <Trash2 className="w-4 h-4" />
-          </button>
+          </Button>
         </div>
-      </td>
+      </TableCell>
 
       {/* Delete Confirmation Modal */}
       <DeleteConfirmModal
@@ -266,6 +243,6 @@ function RuleRow({ rule, onEdit, onDelete, onToggleEnabled }: RuleRowProps) {
         onConfirm={handleDeleteConfirm}
         onCancel={handleDeleteCancel}
       />
-    </tr>
+    </TableRow>
   );
 }

@@ -6,12 +6,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Plus, AlertCircle } from 'lucide-react';
+import { Plus, AlertCircle, CheckCircle, Sparkles } from 'lucide-react';
 import { useRulesManager } from '@/lib/hooks/useRulesManager';
 import { ValidationRule } from '@/lib/model/types';
 import RulesTable from '@/components/rules/RulesTable';
 import RuleEditorModal from '@/components/rules/RuleEditorModal';
 import { ToastContainer, ToastProps } from '@/components/ui/Toast';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 
 export default function RulesPage() {
   // Rules manager hook
@@ -133,14 +135,14 @@ export default function RulesPage() {
   const semanticCount = rules.filter((r) => r.type === 'semantic').length;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-neutral-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-neutral-900 mb-2">
             Validation Rules
           </h1>
-          <p className="text-gray-600">
+          <p className="text-neutral-600">
             Define and manage structured and semantic validation rules for line builds.
           </p>
         </div>
@@ -153,49 +155,60 @@ export default function RulesPage() {
               <p className="text-sm font-medium text-red-900">Error</p>
               <p className="text-sm text-red-700">{error}</p>
             </div>
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={clearError}
-              className="text-red-600 hover:text-red-800 text-sm font-medium"
+              className="text-red-600 hover:text-red-800"
             >
               Dismiss
-            </button>
+            </Button>
           </div>
         )}
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Total Rules</p>
-            <p className="text-2xl font-semibold text-gray-900">{rules.length}</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Enabled</p>
+          {/* Total Rules - Neutral styling */}
+          <Card variant="bordered" padding="md">
+            <p className="text-sm text-neutral-500">Total Rules</p>
+            <p className="text-2xl font-semibold text-neutral-900">{rules.length}</p>
+          </Card>
+
+          {/* Enabled - Success accent (left border) */}
+          <Card variant="bordered" padding="md" className="border-l-4 border-l-emerald-500">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-emerald-600" />
+              <p className="text-sm text-neutral-500">Enabled</p>
+            </div>
             <p className="text-2xl font-semibold text-emerald-600">{enabledCount}</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Structured</p>
-            <p className="text-2xl font-semibold text-gray-900">{structuredCount}</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Semantic</p>
+          </Card>
+
+          {/* Structured - Neutral styling */}
+          <Card variant="bordered" padding="md">
+            <p className="text-sm text-neutral-500">Structured</p>
+            <p className="text-2xl font-semibold text-neutral-900">{structuredCount}</p>
+          </Card>
+
+          {/* Semantic - Purple accent (AI indicator) */}
+          <Card variant="bordered" padding="md" className="border-l-4 border-l-purple-500">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-purple-600" />
+              <p className="text-sm text-neutral-500">Semantic</p>
+            </div>
             <p className="text-2xl font-semibold text-purple-600">{semanticCount}</p>
-          </div>
+          </Card>
         </div>
 
         {/* Main Card */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <Card variant="bordered" padding="none">
           {/* Card Header */}
-          <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-900">
+          <div className="px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-neutral-900">
               All Rules
             </h2>
-            <button
-              onClick={handleCreate}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <Plus className="w-4 h-4" />
+            <Button onClick={handleCreate} leftIcon={<Plus className="w-4 h-4" />}>
               Create Rule
-            </button>
+            </Button>
           </div>
 
           {/* Table */}
@@ -206,10 +219,10 @@ export default function RulesPage() {
             onDelete={handleDelete}
             onToggleEnabled={handleToggleEnabled}
           />
-        </div>
+        </Card>
 
         {/* Help Text */}
-        <div className="mt-6 text-sm text-gray-500">
+        <div className="mt-6 text-sm text-neutral-500">
           <p>
             <strong>Structured rules</strong> use field-based conditions and are evaluated deterministically.
           </p>

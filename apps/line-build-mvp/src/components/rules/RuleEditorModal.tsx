@@ -21,6 +21,9 @@ import {
   STRUCTURED_RULE_OPERATORS,
   ACTION_TYPES,
 } from '@/lib/hooks/useRulesManager';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from '@/components/ui/Modal';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 
 interface RuleEditorModalProps {
   isOpen: boolean;
@@ -136,81 +139,65 @@ export default function RuleEditorModal({
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
-            {rule ? 'Edit Rule' : 'Create New Rule'}
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
+    <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      {/* Header */}
+      <ModalHeader showCloseButton onClose={onClose}>
+        <h2 className="text-lg font-semibold text-neutral-900">
+          {rule ? 'Edit Rule' : 'Create New Rule'}
+        </h2>
+      </ModalHeader>
 
-        {/* Content */}
-        <div className="flex-1 overflow-y-auto px-6 py-4">
-          {step === 'type-select' ? (
-            <TypeSelector
-              selectedType={selectedType}
-              onSelect={handleTypeSelect}
+      {/* Content */}
+      <ModalBody className="max-h-[60vh] overflow-y-auto">
+        {step === 'type-select' ? (
+          <TypeSelector
+            selectedType={selectedType}
+            onSelect={handleTypeSelect}
+          />
+        ) : formData ? (
+          formData.type === 'structured' ? (
+            <StructuredRuleForm
+              rule={formData as StructuredValidationRule}
+              onChange={handleChange}
             />
-          ) : formData ? (
-            formData.type === 'structured' ? (
-              <StructuredRuleForm
-                rule={formData as StructuredValidationRule}
-                onChange={handleChange}
-              />
-            ) : (
-              <SemanticRuleForm
-                rule={formData as SemanticValidationRule}
-                onChange={handleChange}
-              />
-            )
-          ) : null}
+          ) : (
+            <SemanticRuleForm
+              rule={formData as SemanticValidationRule}
+              onChange={handleChange}
+            />
+          )
+        ) : null}
 
-          {/* Validation error */}
-          {validationError && (
-            <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-sm text-red-700">{validationError}</p>
-            </div>
-          )}
-        </div>
+        {/* Validation error */}
+        {validationError && (
+          <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
+            <p className="text-sm text-red-700">{validationError}</p>
+          </div>
+        )}
+      </ModalBody>
 
-        {/* Footer */}
-        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50">
-          {step === 'edit' && !rule && (
-            <button
-              onClick={() => setStep('type-select')}
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              Back
-            </button>
-          )}
-          <button
-            onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+      {/* Footer */}
+      <ModalFooter className="bg-neutral-50">
+        {step === 'edit' && !rule && (
+          <Button
+            variant="ghost"
+            onClick={() => setStep('type-select')}
+            className="mr-auto"
           >
-            Cancel
-          </button>
-          {step === 'edit' && (
-            <button
-              onClick={handleSave}
-              disabled={isSaving}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {isSaving ? 'Saving...' : rule ? 'Save Changes' : 'Create Rule'}
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
+            Back
+          </Button>
+        )}
+        <Button variant="secondary" onClick={onClose}>
+          Cancel
+        </Button>
+        {step === 'edit' && (
+          <Button onClick={handleSave} loading={isSaving}>
+            {rule ? 'Save Changes' : 'Create Rule'}
+          </Button>
+        )}
+      </ModalFooter>
+    </Modal>
   );
 }
 
@@ -226,7 +213,7 @@ interface TypeSelectorProps {
 function TypeSelector({ selectedType, onSelect }: TypeSelectorProps) {
   return (
     <div className="space-y-4">
-      <p className="text-sm text-gray-600">
+      <p className="text-sm text-neutral-600">
         Choose the type of validation rule you want to create:
       </p>
 
@@ -236,21 +223,21 @@ function TypeSelector({ selectedType, onSelect }: TypeSelectorProps) {
           onClick={() => onSelect('structured')}
           className={`p-4 border-2 rounded-lg text-left transition-colors ${
             selectedType === 'structured'
-              ? 'border-blue-500 bg-blue-50'
-              : 'border-gray-200 hover:border-gray-300'
+              ? 'border-indigo-500 bg-indigo-50'
+              : 'border-neutral-200 hover:border-neutral-300'
           }`}
         >
           <div className="flex items-center gap-2 mb-2">
             <span className="inline-flex items-center justify-center w-8 h-8 bg-emerald-100 text-emerald-700 rounded-full text-sm font-semibold">
               S
             </span>
-            <h3 className="font-semibold text-gray-900">Structured Rule</h3>
+            <h3 className="font-semibold text-neutral-900">Structured Rule</h3>
           </div>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-neutral-600">
             Field-based validation using conditions like "equals", "in list", or
             "not empty". Fast and deterministic.
           </p>
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-neutral-500 mt-2">
             Example: "Action must be one of PREP, HEAT, COOK"
           </p>
         </button>
@@ -260,21 +247,21 @@ function TypeSelector({ selectedType, onSelect }: TypeSelectorProps) {
           onClick={() => onSelect('semantic')}
           className={`p-4 border-2 rounded-lg text-left transition-colors ${
             selectedType === 'semantic'
-              ? 'border-blue-500 bg-blue-50'
-              : 'border-gray-200 hover:border-gray-300'
+              ? 'border-indigo-500 bg-indigo-50'
+              : 'border-neutral-200 hover:border-neutral-300'
           }`}
         >
           <div className="flex items-center gap-2 mb-2">
             <span className="inline-flex items-center justify-center w-8 h-8 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
               AI
             </span>
-            <h3 className="font-semibold text-gray-900">Semantic Rule</h3>
+            <h3 className="font-semibold text-neutral-900">Semantic Rule</h3>
           </div>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-neutral-600">
             AI-powered validation using natural language prompts. Flexible but
             requires reasoning.
           </p>
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-neutral-500 mt-2">
             Example: "Check if prep steps logically precede cooking steps"
           </p>
         </button>
@@ -326,46 +313,40 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
       </div>
 
       {/* Name */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Rule Name <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="text"
-          value={rule.name}
-          onChange={(e) => onChange({ name: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-          placeholder="e.g., Valid Action Type"
-        />
-      </div>
+      <Input
+        label="Rule Name"
+        value={rule.name}
+        onChange={(e) => onChange({ name: e.target.value })}
+        placeholder="e.g., Valid Action Type"
+      />
 
       {/* Description */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-neutral-700 mb-1">
           Description
         </label>
         <textarea
           value={rule.description || ''}
           onChange={(e) => onChange({ description: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white text-neutral-900"
           rows={2}
           placeholder="Optional description of what this rule validates"
         />
       </div>
 
       {/* Condition */}
-      <div className="p-4 bg-gray-50 rounded-lg space-y-4">
-        <h4 className="font-medium text-sm text-gray-900">Condition</h4>
+      <div className="p-4 bg-neutral-50 rounded-lg space-y-4">
+        <h4 className="font-medium text-sm text-neutral-900">Condition</h4>
 
         {/* Field */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-neutral-700 mb-1">
             Field <span className="text-red-500">*</span>
           </label>
           <select
             value={rule.condition.field}
             onChange={(e) => handleConditionChange({ field: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white text-neutral-900"
           >
             {STRUCTURED_RULE_FIELDS.map((field) => (
               <option key={field.value} value={field.value}>
@@ -377,7 +358,7 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
 
         {/* Operator */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-neutral-700 mb-1">
             Operator
           </label>
           <select
@@ -387,7 +368,7 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
                 operator: e.target.value as StructuredValidationRule['condition']['operator'],
               })
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white text-neutral-900"
           >
             {STRUCTURED_RULE_OPERATORS.map((op) => (
               <option key={op.value} value={op.value}>
@@ -400,7 +381,7 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
         {/* Value - only show for operators that need a value */}
         {rule.condition.operator !== 'notEmpty' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
               Value
             </label>
             {rule.condition.operator === 'in' ? (
@@ -417,13 +398,12 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
                     .filter(Boolean);
                   handleConditionChange({ value: values });
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white text-neutral-900"
                 rows={2}
                 placeholder="Comma-separated values, e.g., PREP, HEAT, COOK"
               />
             ) : (
-              <input
-                type="text"
+              <Input
                 value={String(rule.condition.value || '')}
                 onChange={(e) => {
                   const val = e.target.value;
@@ -433,7 +413,6 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
                     value: isNaN(numVal) ? val : numVal,
                   });
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                 placeholder="Value to compare against"
               />
             )}
@@ -442,22 +421,16 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
       </div>
 
       {/* Failure Message */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Failure Message <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="text"
-          value={rule.failureMessage}
-          onChange={(e) => onChange({ failureMessage: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-          placeholder="Message shown when validation fails"
-        />
-      </div>
+      <Input
+        label="Failure Message"
+        value={rule.failureMessage}
+        onChange={(e) => onChange({ failureMessage: e.target.value })}
+        placeholder="Message shown when validation fails"
+      />
 
       {/* Applies To */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-neutral-700 mb-1">
           Applies To
         </label>
         <select
@@ -469,7 +442,7 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
               onChange({ appliesTo: [] });
             }
           }}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white text-neutral-900"
         >
           <option value="all">All Action Types</option>
           <option value="specific">Specific Action Types</option>
@@ -495,8 +468,8 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
                   }}
                   className={`px-2 py-1 text-xs rounded-md transition-colors ${
                     isSelected
-                      ? 'bg-blue-100 text-blue-800 border border-blue-300'
-                      : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
+                      ? 'bg-indigo-100 text-indigo-800 border border-indigo-300'
+                      : 'bg-neutral-100 text-neutral-700 border border-neutral-200 hover:bg-neutral-200'
                   }`}
                 >
                   {action}
@@ -514,9 +487,9 @@ function StructuredRuleForm({ rule, onChange }: StructuredRuleFormProps) {
           id="enabled"
           checked={rule.enabled}
           onChange={(e) => onChange({ enabled: e.target.checked })}
-          className="w-4 h-4 rounded border-gray-300"
+          className="w-4 h-4 rounded border-neutral-300 text-indigo-600 focus:ring-indigo-500"
         />
-        <label htmlFor="enabled" className="text-sm text-gray-700">
+        <label htmlFor="enabled" className="text-sm text-neutral-700">
           Enabled
         </label>
       </div>
@@ -544,28 +517,22 @@ function SemanticRuleForm({ rule, onChange }: SemanticRuleFormProps) {
       </div>
 
       {/* Name */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Rule Name <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="text"
-          value={rule.name}
-          onChange={(e) => onChange({ name: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-          placeholder="e.g., Logical Step Order"
-        />
-      </div>
+      <Input
+        label="Rule Name"
+        value={rule.name}
+        onChange={(e) => onChange({ name: e.target.value })}
+        placeholder="e.g., Logical Step Order"
+      />
 
       {/* Description */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-neutral-700 mb-1">
           Description
         </label>
         <textarea
           value={rule.description || ''}
           onChange={(e) => onChange({ description: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white text-neutral-900"
           rows={2}
           placeholder="Optional description of what this rule validates"
         />
@@ -573,30 +540,30 @@ function SemanticRuleForm({ rule, onChange }: SemanticRuleFormProps) {
 
       {/* Prompt */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-neutral-700 mb-1">
           Validation Prompt <span className="text-red-500">*</span>
         </label>
         <textarea
           value={rule.prompt}
           onChange={(e) => onChange({ prompt: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-mono"
+          className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm font-mono bg-white text-neutral-900"
           rows={6}
           placeholder="Describe what the AI should check. E.g., 'Verify that all PREP steps come before HEAT steps in the workflow.'"
         />
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-neutral-500 mt-1">
           This prompt will be sent to Gemini to evaluate each work unit.
         </p>
       </div>
 
       {/* Guidance */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-neutral-700 mb-1">
           Additional Guidance
         </label>
         <textarea
           value={rule.guidance || ''}
           onChange={(e) => onChange({ guidance: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white text-neutral-900"
           rows={3}
           placeholder="Optional context or examples to help the AI make better decisions"
         />
@@ -604,7 +571,7 @@ function SemanticRuleForm({ rule, onChange }: SemanticRuleFormProps) {
 
       {/* Applies To */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-neutral-700 mb-1">
           Applies To
         </label>
         <select
@@ -616,7 +583,7 @@ function SemanticRuleForm({ rule, onChange }: SemanticRuleFormProps) {
               onChange({ appliesTo: [] });
             }
           }}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white text-neutral-900"
         >
           <option value="all">All Action Types</option>
           <option value="specific">Specific Action Types</option>
@@ -642,8 +609,8 @@ function SemanticRuleForm({ rule, onChange }: SemanticRuleFormProps) {
                   }}
                   className={`px-2 py-1 text-xs rounded-md transition-colors ${
                     isSelected
-                      ? 'bg-blue-100 text-blue-800 border border-blue-300'
-                      : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
+                      ? 'bg-indigo-100 text-indigo-800 border border-indigo-300'
+                      : 'bg-neutral-100 text-neutral-700 border border-neutral-200 hover:bg-neutral-200'
                   }`}
                 >
                   {action}
@@ -658,12 +625,12 @@ function SemanticRuleForm({ rule, onChange }: SemanticRuleFormProps) {
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
-          id="enabled"
+          id="semantic-enabled"
           checked={rule.enabled}
           onChange={(e) => onChange({ enabled: e.target.checked })}
-          className="w-4 h-4 rounded border-gray-300"
+          className="w-4 h-4 rounded border-neutral-300 text-indigo-600 focus:ring-indigo-500"
         />
-        <label htmlFor="enabled" className="text-sm text-gray-700">
+        <label htmlFor="semantic-enabled" className="text-sm text-neutral-700">
           Enabled
         </label>
       </div>

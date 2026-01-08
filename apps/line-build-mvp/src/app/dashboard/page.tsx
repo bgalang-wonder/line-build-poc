@@ -25,6 +25,19 @@ import {
 import { useBulkEditActions } from '@/lib/copilotkit/useBulkEditActions';
 import type { ActionType, Phase } from '@/lib/model/types';
 
+// Design system components
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
+import { Card } from '@/components/ui/Card';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '@/components/ui/Table';
+
 export default function DashboardPage() {
   const [builds, setBuilds] = useState<LineBuild[]>([]);
   const [loading, setLoading] = useState(true);
@@ -209,118 +222,106 @@ export default function DashboardPage() {
   const isShowingSearch = searchResults !== null;
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-neutral-50">
       {/* Main content area */}
       <div className="flex-1 overflow-y-auto">
-        <div className="p-8">
+        <div className="px-6 lg:px-12 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-                <p className="text-gray-600 mt-2">
+                <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Dashboard</h1>
+                <p className="text-neutral-600 mt-2">
                   {isShowingSearch
                     ? `Search results for: ${searchResults.query}`
                     : 'Manage your line builds. Use the chat panel to search, or select a build to edit.'}
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <button
+                <Button
+                  variant="secondary"
                   onClick={() => setShowChat(!showChat)}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
-                  title="Toggle agent search chat"
+                  leftIcon={<MessageCircle className="w-4 h-4" />}
                 >
-                  <MessageCircle className="w-4 h-4" />
                   {showChat ? 'Hide' : 'Show'} Chat
-                </button>
-                <Link
-                  href="/editor?new=true"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  <Plus className="w-4 h-4" />
-                  Create New Build
+                </Button>
+                <Link href="/editor?new=true">
+                  <Button
+                    variant="primary"
+                    leftIcon={<Plus className="w-4 h-4" />}
+                  >
+                    Create New Build
+                  </Button>
                 </Link>
               </div>
             </div>
 
             {isShowingSearch && (
-              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-center justify-between">
+              <Card variant="bordered" padding="md" className="mb-6 flex items-center justify-between bg-primary-50 border-primary-200">
                 <div>
-                  <p className="text-sm font-medium text-blue-900">
+                  <p className="text-sm font-medium text-primary-900">
                     Found {searchResults.total} result{searchResults.total !== 1 ? 's' : ''}
                   </p>
-                  <p className="text-xs text-blue-700 mt-1">Query: {searchResults.query}</p>
+                  <p className="text-xs text-primary-700 mt-1">Query: {searchResults.query}</p>
                 </div>
-                <button
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  leftIcon={<X className="w-4 h-4" />}
                   onClick={() => {
                     setSearchResults(null);
                     setSearchQuery('');
                   }}
-                  className="inline-flex items-center gap-2 px-3 py-1 text-sm bg-blue-100 text-blue-700 hover:bg-blue-200 rounded transition-colors"
                 >
-                  <X className="w-4 h-4" />
                   Clear Search
-                </button>
-              </div>
+                </Button>
+              </Card>
             )}
 
             {loading ? (
-              <div className="bg-white rounded-lg shadow p-8 text-center">
-                <p className="text-gray-600">Loading line builds...</p>
-              </div>
+              <Card variant="default" padding="lg" className="text-center">
+                <p className="text-neutral-600">Loading line builds...</p>
+              </Card>
             ) : error ? (
-              <div className="bg-white rounded-lg shadow p-8">
-                <div className="text-red-600">
+              <Card variant="default" padding="lg">
+                <div className="text-danger-600">
                   <p className="font-semibold mb-2">Error loading builds</p>
                   <p className="text-sm">{error}</p>
                 </div>
-              </div>
+              </Card>
             ) : displayedBuilds.length === 0 ? (
-              <div className="bg-white rounded-lg shadow p-8 text-center">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">
+              <Card variant="default" padding="lg" className="text-center">
+                <h2 className="text-xl font-semibold text-neutral-900 mb-4">
                   {isShowingSearch ? 'No results found' : 'No Line Builds Yet'}
                 </h2>
-                <p className="text-gray-600 mb-6">
+                <p className="text-neutral-600 mb-6">
                   {isShowingSearch
                     ? 'Try a different search query.'
                     : 'Create a new line build to get started.'}
                 </p>
-                <Link
-                  href="/editor?new=true"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  <Plus className="w-4 h-4" />
-                  Create New Build
+                <Link href="/editor?new=true">
+                  <Button
+                    variant="primary"
+                    leftIcon={<Plus className="w-4 h-4" />}
+                  >
+                    Create New Build
+                  </Button>
                 </Link>
-              </div>
+              </Card>
             ) : (
-              <div className="bg-white rounded-lg shadow overflow-hidden">
-                <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                        Menu Item
-                      </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                        Build ID
-                      </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                        Status
-                      </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                        Version
-                      </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                        Author
-                      </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900 w-20">
-                        Steps
-                      </th>
-                      <th className="px-6 py-3 text-right text-sm font-semibold text-gray-900">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
+              <Card variant="default" padding="none" className="overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow noHover>
+                      <TableHead>Menu Item</TableHead>
+                      <TableHead>Build ID</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Version</TableHead>
+                      <TableHead>Author</TableHead>
+                      <TableHead className="w-20">Steps</TableHead>
+                      <TableHead className="text-right">Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
                     {displayedBuilds.map((item) => {
                       // Handle both LineBuild objects and search result objects
                       const isLineBuild = 'workUnits' in item;
@@ -333,56 +334,49 @@ export default function DashboardPage() {
                       const workUnitCount = isLineBuild ? item.workUnits.length : item.workUnitCount;
 
                       return (
-                        <tr
-                          key={id}
-                          className="hover:bg-gray-50 transition-colors"
-                        >
-                          <td className="px-6 py-4">
-                            <div className="font-medium text-gray-900">
+                        <TableRow key={id}>
+                          <TableCell>
+                            <div className="font-medium text-neutral-900">
                               {menuItemName}
                             </div>
-                            <div className="text-sm text-gray-500">
+                            <div className="text-sm text-neutral-500">
                               Item ID: {menuItemId}
                             </div>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-gray-600 font-mono">
+                          </TableCell>
+                          <TableCell className="font-mono text-neutral-600">
                             {id}
-                          </td>
-                          <td className="px-6 py-4">
-                            <span
-                              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                status === 'active'
-                                  ? 'bg-green-100 text-green-800'
-                                  : 'bg-yellow-100 text-yellow-800'
-                              }`}
-                            >
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={status === 'active' ? 'success' : 'warning'} size="sm">
                               {status === 'active' ? 'Active' : 'Draft'}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-gray-600">
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-neutral-600">
                             v{version}
-                          </td>
-                          <td className="px-6 py-4 text-sm text-gray-600">
+                          </TableCell>
+                          <TableCell className="text-neutral-600">
                             {author}
-                          </td>
-                          <td className="px-6 py-4 text-sm text-gray-600 text-center">
+                          </TableCell>
+                          <TableCell className="text-center text-neutral-600">
                             {workUnitCount}
-                          </td>
-                          <td className="px-6 py-4 text-right">
-                            <Link
-                              href={`/editor?id=${id}`}
-                              className="inline-flex items-center gap-1 px-3 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium text-sm"
-                            >
-                              Edit
-                              <ChevronRight className="w-4 h-4" />
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <Link href={`/editor?id=${id}`}>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                rightIcon={<ChevronRight className="w-4 h-4" />}
+                              >
+                                Edit
+                              </Button>
                             </Link>
-                          </td>
-                        </tr>
+                          </TableCell>
+                        </TableRow>
                       );
                     })}
-                  </tbody>
-                </table>
-              </div>
+                  </TableBody>
+                </Table>
+              </Card>
             )}
           </div>
         </div>
@@ -391,7 +385,7 @@ export default function DashboardPage() {
       {/* CopilotKit Agent Chat Sidebar */}
       {showChat && (
         <CopilotSidebar
-          className="w-96 border-l border-gray-200"
+          className="w-96 border-l border-neutral-200"
           defaultOpen={true}
         />
       )}

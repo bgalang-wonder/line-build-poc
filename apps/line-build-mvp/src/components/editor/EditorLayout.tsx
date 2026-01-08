@@ -65,11 +65,11 @@ function ResizableDivider({ vertical = true, onDrag }: ResizableDividerProps) {
   return (
     <div
       onMouseDown={() => setIsDragging(true)}
-      className={`flex items-center justify-center cursor-col-resize hover:bg-blue-200 transition-colors group ${
-        vertical ? 'w-2 bg-gray-200' : 'h-2 bg-gray-200'
-      }`}
+      className={`flex items-center justify-center cursor-col-resize hover:bg-primary-300 transition-colors duration-150 group rounded ${
+        vertical ? 'w-2 bg-neutral-200' : 'h-2 bg-neutral-200'
+      } ${isDragging ? 'bg-primary-400' : ''}`}
     >
-      <GripVertical className="w-3 h-3 text-gray-400 group-hover:text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <GripVertical className="w-3 h-3 text-neutral-400 group-hover:text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
   );
 }
@@ -125,19 +125,19 @@ export function EditorLayout({
     return (
       <div
         ref={containerRef}
-        className="flex flex-col h-[calc(100vh-60px)] bg-white overflow-hidden"
+        className="flex flex-col h-[calc(100vh-60px)] bg-neutral-100 overflow-hidden"
       >
         {/* Chat Panel */}
-        <div className="min-h-0 border-b border-gray-200">
-          <div className="h-60 overflow-y-auto p-4 bg-gray-50">
-            {chatPanel || <div className="text-gray-500 text-sm">Chat Panel</div>}
+        <div className="min-h-0 border-b border-neutral-200">
+          <div className="h-60 overflow-y-auto p-4 bg-neutral-100">
+            {chatPanel || <div className="text-neutral-500 text-sm">Chat Panel</div>}
           </div>
         </div>
 
         {/* DAG Panel */}
-        <div className="min-h-0 border-b border-gray-200">
-          <div className="h-80 overflow-auto p-4 bg-gray-50">
-            {dagPanel || <div className="text-gray-500 text-sm">DAG Visualization</div>}
+        <div className="min-h-0 border-b border-neutral-200">
+          <div className="h-80 overflow-auto p-4 bg-white">
+            {dagPanel || <div className="text-neutral-500 text-sm">DAG Visualization</div>}
           </div>
         </div>
 
@@ -145,13 +145,13 @@ export function EditorLayout({
         <div className="flex-1 min-h-0">
           <div className="h-full flex overflow-hidden">
             {/* Form */}
-            <div className="flex-1 border-r border-gray-200 overflow-y-auto p-4">
-              {formPanel || <div className="text-gray-500 text-sm">Form</div>}
+            <div className="flex-1 border-r border-neutral-200 overflow-y-auto p-4 bg-neutral-50">
+              {formPanel || <div className="text-neutral-500 text-sm">Form</div>}
             </div>
 
             {/* Validation */}
-            <div className="w-1/3 overflow-y-auto p-4 bg-gray-50">
-              {validationPanel || <div className="text-gray-500 text-sm">Validation</div>}
+            <div className="w-1/3 overflow-y-auto p-4 bg-neutral-50">
+              {validationPanel || <div className="text-neutral-500 text-sm">Validation</div>}
             </div>
           </div>
         </div>
@@ -163,47 +163,47 @@ export function EditorLayout({
   return (
     <div
       ref={containerRef}
-      className="flex h-[calc(100vh-60px)] bg-white gap-2 p-4 overflow-hidden"
+      className="flex h-[calc(100vh-60px)] bg-neutral-100 gap-2 p-4 overflow-hidden"
     >
-      {/* Left Column: Chat */}
+      {/* Left Column: Chat (slightly darker, input area) */}
       <div
         style={{ width: `${leftWidth}px` }}
-        className="min-w-[300px] flex flex-col bg-gray-50 rounded-lg border border-gray-200 overflow-hidden"
+        className="min-w-[300px] flex flex-col bg-neutral-100 rounded-xl border border-neutral-200 shadow-sm overflow-hidden"
       >
         <div className="flex-1 overflow-y-auto p-4">
-          {chatPanel || <div className="text-gray-500 text-sm">Chat Panel</div>}
+          {chatPanel || <div className="text-neutral-500 text-sm">Chat Panel</div>}
         </div>
       </div>
 
       {/* Divider 1 */}
       <ResizableDivider onDrag={handleLeftResize} />
 
-      {/* Center Column: DAG */}
+      {/* Center Column: DAG (primary focus, white background) */}
       <div
         style={{ width: `${centerWidth}px` }}
-        className="min-w-[300px] flex flex-col bg-gray-50 rounded-lg border border-gray-200 overflow-hidden"
+        className="min-w-[300px] flex flex-col bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden"
       >
         <div className="flex-1 overflow-auto p-4">
-          {dagPanel || <div className="text-gray-500 text-sm">DAG Visualization</div>}
+          {dagPanel || <div className="text-neutral-500 text-sm">DAG Visualization</div>}
         </div>
       </div>
 
       {/* Divider 2 */}
       <ResizableDivider onDrag={handleCenterResize} />
 
-      {/* Right Column: Form + Validation (split vertically) */}
+      {/* Right Column: Form + Validation (secondary/detail) */}
       <div
         style={{ width: `${rightWidth}px` }}
         className="min-w-[300px] flex flex-col gap-2 overflow-hidden"
       >
         {/* Form Panel */}
-        <div className="flex-1 bg-gray-50 rounded-lg border border-gray-200 overflow-y-auto p-4">
-          {formPanel || <div className="text-gray-500 text-sm">Form</div>}
+        <div className="flex-1 bg-neutral-50 rounded-xl border border-neutral-200 shadow-sm overflow-y-auto p-4">
+          {formPanel || <div className="text-neutral-500 text-sm">Form</div>}
         </div>
 
         {/* Validation Panel */}
-        <div className="flex-1 bg-gray-50 rounded-lg border border-gray-200 overflow-y-auto p-4">
-          {validationPanel || <div className="text-gray-500 text-sm">Validation Panel</div>}
+        <div className="flex-1 bg-neutral-50 rounded-xl border border-neutral-200 shadow-sm overflow-y-auto p-4">
+          {validationPanel || <div className="text-neutral-500 text-sm">Validation Panel</div>}
         </div>
       </div>
     </div>
@@ -217,20 +217,20 @@ export function EditorLayout({
 export function ChatPanelPlaceholder() {
   return (
     <div className="space-y-3">
-      <div className="text-sm font-semibold text-gray-900">Chat</div>
+      <div className="text-sm font-semibold text-neutral-900">Chat</div>
       <div className="space-y-2">
-        <div className="bg-blue-100 text-blue-900 rounded p-2 text-xs">
+        <div className="bg-primary-100 text-primary-900 rounded-lg p-2 text-xs">
           User message here
         </div>
-        <div className="bg-green-100 text-green-900 rounded p-2 text-xs">
+        <div className="bg-success-100 text-success-900 rounded-lg p-2 text-xs">
           Assistant response here
         </div>
       </div>
-      <div className="pt-2 border-t border-gray-200">
+      <div className="pt-2 border-t border-neutral-200">
         <input
           type="text"
           placeholder="Type a message..."
-          className="w-full px-2 py-1 text-xs border border-gray-300 rounded"
+          className="w-full px-2 py-1.5 text-xs border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
           disabled
         />
       </div>
@@ -241,8 +241,8 @@ export function ChatPanelPlaceholder() {
 export function DAGPanelPlaceholder() {
   return (
     <div className="space-y-3">
-      <div className="text-sm font-semibold text-gray-900">DAG Visualization</div>
-      <div className="bg-white rounded border border-gray-300 p-4 text-center text-xs text-gray-500 h-40 flex items-center justify-center">
+      <div className="text-sm font-semibold text-neutral-900">DAG Visualization</div>
+      <div className="bg-white rounded-lg border border-neutral-200 p-4 text-center text-xs text-neutral-500 h-40 flex items-center justify-center shadow-sm">
         Dependency graph will render here
       </div>
     </div>
@@ -252,22 +252,22 @@ export function DAGPanelPlaceholder() {
 export function FormPanelPlaceholder() {
   return (
     <div className="space-y-3">
-      <div className="text-sm font-semibold text-gray-900">Form Editor</div>
+      <div className="text-sm font-semibold text-neutral-900">Form Editor</div>
       <div className="space-y-2">
         <div>
-          <label className="text-xs font-semibold text-gray-700">
+          <label className="text-xs font-semibold text-neutral-700">
             Action Type
           </label>
-          <select className="w-full mt-1 text-xs border border-gray-300 rounded px-2 py-1" disabled>
+          <select className="w-full mt-1 text-xs border border-neutral-300 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500" disabled>
             <option>Select action...</option>
           </select>
         </div>
         <div>
-          <label className="text-xs font-semibold text-gray-700">Target</label>
+          <label className="text-xs font-semibold text-neutral-700">Target</label>
           <input
             type="text"
             placeholder="Item name"
-            className="w-full mt-1 text-xs border border-gray-300 rounded px-2 py-1"
+            className="w-full mt-1 text-xs border border-neutral-300 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500"
             disabled
           />
         </div>
@@ -279,13 +279,13 @@ export function FormPanelPlaceholder() {
 export function ValidationPanelPlaceholder() {
   return (
     <div className="space-y-2">
-      <div className="text-sm font-semibold text-gray-900">Validation</div>
-      <div className="bg-emerald-50 border border-emerald-200 rounded p-2 text-xs text-emerald-800">
-        ✓ All Clear
+      <div className="text-sm font-semibold text-neutral-900">Validation</div>
+      <div className="bg-success-50 border border-success-200 rounded-lg p-2 text-xs text-success-800">
+        All Clear
       </div>
-      <div className="space-y-1 text-xs text-gray-600">
-        <div>• Rule 1: Pass</div>
-        <div>• Rule 2: Pass</div>
+      <div className="space-y-1 text-xs text-neutral-600">
+        <div>Rule 1: Pass</div>
+        <div>Rule 2: Pass</div>
       </div>
     </div>
   );
