@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { DAGVisualization, type BenchTopLineBuild } from "@/components/visualization/DAGVisualization";
 import { Button } from "@/components/ui/Button";
+import { StepInspector } from "@/components/visualization/StepInspector";
 
 type BuildSummary = {
   buildId: string;
@@ -58,6 +59,11 @@ export default function ViewerPage() {
     () => builds.find((b) => b.buildId === selectedBuildId) ?? null,
     [builds, selectedBuildId],
   );
+
+  const selectedStep = useMemo(() => {
+    if (!selectedBuild || !selectedStepId) return null;
+    return selectedBuild.steps.find((s) => s.id === selectedStepId) ?? null;
+  }, [selectedBuild, selectedStepId]);
 
   const fetchBuilds = useCallback(async (): Promise<BuildSummary[]> => {
     const res = await fetch("/api/builds", { cache: "no-store" });
@@ -257,6 +263,7 @@ export default function ViewerPage() {
                 {selectedBuild ? (
                   <DAGVisualization
                     build={selectedBuild}
+                    validation={validation}
                     selectedStepId={selectedStepId}
                     onSelectStep={(id) => setSelectedStepId(id)}
                   />
@@ -271,6 +278,8 @@ export default function ViewerPage() {
               </div>
             </CardBody>
           </Card>
+
+          <StepInspector step={selectedStep} validation={validation} />
         </div>
       </div>
     </div>

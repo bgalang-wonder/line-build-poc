@@ -686,8 +686,8 @@
         "Toggling layers works without reload",
         "External build consumption is visible via synthetic nodes"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T01:12:12-05:00"
     },
     {
       "id": "T5.5",
@@ -708,8 +708,8 @@
         "Graph is readable for ~50 steps",
         "fitView results in sensible framing"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T01:12:12-05:00"
     },
     {
       "id": "T5.6",
@@ -731,8 +731,8 @@
         "SME can click a node and see why it is invalid",
         "Viewer does not recompute validation"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T01:12:12-05:00"
     },
     {
       "id": "T6.1",
