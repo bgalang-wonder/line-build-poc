@@ -81,3 +81,51 @@ Run: `cd poc/line-build-cli && npx vitest run`
 - Composition/flow checks use **ruleIds `C1`–`C3`** (to avoid colliding with H-rule IDs already used by HARD-RULES.md).
 
 ---
+
+## Cycle 3 - COMPLETED
+**Timestamp:** 2026-01-10 00:38:48
+**Model:** gpt-5.2-high
+
+**Tasks:** T3.1, T3.2
+
+**Acceptance check:** test -f /Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/scripts/lib/store.ts && test -f /Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/scripts/lib/receipts.ts
+
+**Duration:** 6m 57s
+
+**Agent output excerpt:**
+## Completed tasks
+
+- **T3.1**: Implemented file store helpers in `poc/line-build-cli/scripts/lib/store.ts`
+  - `readBuild(buildId)`, `writeBuild(build)`, `listBuilds()`, plus **`readBom(itemId)`**
+  - **Atomic write pattern** implemented via `atomicWriteFile` / `atomicWriteJsonFile` (temp file → rename)
+  - `listBuilds()` returns deterministic ordering (independent of filesystem traversal order)
+
+- **T3.2**: Implemented receipts + validation output writers
+  - `poc/line-build-cli/scripts/lib/receipts.ts`: `writeReceipt(...)` → writes JSON to `data/receipts/` using atomic write
+  - `poc/line-build-cli/scripts/lib/validationOutput.ts`: `writeValidationOutput(build, result)` → writes `data/validation/<buildId>.latest.json`
+    - Output schema matches `shared_conventions.validation_output_contract` in `docs/handoff/POC_TASKS.json`
+
+## Updates made (required)
+
+- Updated `docs/handoff/POC_TASKS.json`:
+  - **T3.1** → `status: "done"`, `completedAt: "2026-01-10T00:37:03-05:00"`
+  - **T3.2** → `status: "done"`, `completedAt: "2026-01-10T00:37:03-05:00"`
+
+## Decisions / notes
+
+- **Added `@types/node`** to `poc/line-build-cli/package.json` so file IO (`fs`, `path`, etc.) typechecks under `tsc`.
+- **Data root resolution** supports both run modes:
+  - from repo root (`npx tsx poc/line-build-cli/scripts/lb.ts`)
+  - from inside `poc/line-build-cli` (`npx tsx scripts/lb.ts`)
+- Empty `data/*` directories aren’t tracked by git; writers create directories on demand via `mkdir({ recursive: true })`.
+
+## Issues / deviations
+
+- No spec deviations.
+- There is a **pre-existing git stash** (`stash@{0}`) that I did not drop (not created in this cycle).
+
+## Pushed
+
+- Changes are **committed and pushed**; `git status` shows **up to date with `origin/main`**.
+
+---
