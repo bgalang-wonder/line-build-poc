@@ -38,3 +38,46 @@ to understand what has been completed and any issues encountered.
 - **Kept Node typings minimal** by declaring a small `process` shape in `scripts/lb.ts` (again to avoid extra deps in Cycle 1).
 
 ---
+
+## Cycle 2 - COMPLETED
+**Timestamp:** 2026-01-10 00:31:51
+**Model:** gpt-5.2-high
+
+**Tasks:** T2.1, T2.2
+
+**Acceptance check:** test -f /Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/scripts/lib/validate.ts && test -f /Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/scripts/lib/validate.test.ts
+
+**Duration:** 6m 29s
+
+**Agent output excerpt:**
+### Completed tasks
+- **T2.1**: Implemented deterministic validator in `poc/line-build-cli/scripts/lib/validate.ts`.
+- **T2.2**: Added minimal unit tests in `poc/line-build-cli/scripts/lib/validate.test.ts`.
+
+### What I implemented
+- **Hard rules H1–H25** (per `docs/spec/HARD-RULES.md`) as **hard errors** with `ruleId: "H*"` and deterministic ordering.
+- **Composition/flow integrity checks** (per `POC_TASKS.json` + `docs/spec/INVARIANTS.md`):
+  - `requiresBuilds` **unique + no self-dependency** (**hard**, `ruleId: "C1"`)
+  - `external_build` refs must be **declared in `requiresBuilds`** (**hard**, `ruleId: "C2"`)
+  - `in_build` artifact refs must **resolve against `build.artifacts`** (**hard**, `ruleId: "C3"`)
+- **Primary output artifact requirement** treated as a **Strong warning** when `artifacts` exist (**warning**, `severity: "strong"`, `ruleId: "S6"`), per T2.1.
+- **Determinism**: stable step iteration + stable error/warning sorting (severity → ruleId → step orderIndex → stepId → fieldPath → message).
+
+### Tests added (Vitest)
+Covers exactly what you requested:
+- **H15/H22** (HEAT equipment + time-or-notes)
+- **H8/H9** (dangling `dependsOn` + cycle detection)
+- **external_build declared**
+- **artifact refs resolve**
+Run: `cd poc/line-build-cli && npx vitest run`
+
+### Task status updates (required)
+- Updated `docs/handoff/POC_TASKS.json`:
+  - **T2.1** → `status: "done"`, `completedAt: "2026-01-10T00:29:36-05:00"`
+  - **T2.2** → `status: "done"`, `completedAt: "2026-01-10T00:29:36-05:00"`
+
+### Notes / decisions
+- Added `poc/line-build-cli/.gitignore` to prevent committing `node_modules`/caches.
+- Composition/flow checks use **ruleIds `C1`–`C3`** (to avoid colliding with H-rule IDs already used by HARD-RULES.md).
+
+---
