@@ -522,8 +522,8 @@
         "write blocks on validation failure (exit code 2)",
         "validate writes validation output file"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T00:49:27-05:00"
     },
     {
       "id": "T4.2",
@@ -545,8 +545,8 @@
         "Can deterministically find all steps with applianceId=waterbath",
         "Results include enough context for review"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T00:49:27-05:00"
     },
     {
       "id": "T4.3",
@@ -570,8 +570,8 @@
         "Apply updates builds and emits receipts",
         "Viewer reflects updates"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T00:49:27-05:00"
     },
     {
       "id": "T4.4",
@@ -592,8 +592,8 @@
       "acceptance": [
         "Can find candidates for '165' or 'golden brown'"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T00:49:27-05:00"
     },
     {
       "id": "T5.1",
