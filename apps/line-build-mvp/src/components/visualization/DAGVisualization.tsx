@@ -228,7 +228,7 @@ function createDAGNodes(params: {
         label: (
           <div className="relative w-full max-w-[150px] text-center">
             {hasHardError ? (
-              <div className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-semibold rounded-full px-1.5 py-0.5 shadow">
+              <div className="absolute -top-2 -right-2 bg-danger-600 text-white text-[10px] font-semibold rounded-full px-1.5 py-0.5 shadow">
                 {hardErrorCount}
               </div>
             ) : null}
@@ -261,7 +261,7 @@ function createDAGNodes(params: {
       style: {
         background: bgColor,
         border: hasHardError
-          ? '3px solid #DC2626'
+          ? '3px solid #e11d48'
           : isSelected
             ? `3px solid #000`
             : `2px solid ${actionColor}`,

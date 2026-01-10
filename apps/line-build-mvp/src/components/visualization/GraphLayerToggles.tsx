@@ -22,6 +22,7 @@ export function GraphLayerToggles({
         size="sm"
         variant={showWorkEdges ? "primary" : "secondary"}
         onClick={onToggleWorkEdges}
+        aria-pressed={showWorkEdges}
       >
         {showWorkEdges ? "✓ " : ""}Show Work Edges
       </Button>
@@ -30,6 +31,7 @@ export function GraphLayerToggles({
         size="sm"
         variant={showFlowEdges ? "primary" : "secondary"}
         onClick={onToggleFlowEdges}
+        aria-pressed={showFlowEdges}
       >
         {showFlowEdges ? "✓ " : ""}Show Flow Edges
       </Button>

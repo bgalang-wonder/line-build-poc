@@ -162,20 +162,21 @@ export default function ViewerPage() {
   }, [fetchBuild, fetchValidation, selectedBuildId, selectedSummary?.updatedAt, selectedBuild?.id]);
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-neutral-50 p-6">
-      <div className="mx-auto max-w-7xl grid grid-cols-12 gap-6">
-        <div className="col-span-12 md:col-span-4 lg:col-span-3">
-          <Card>
-            <CardHeader>
+    <div className="h-[calc(100vh-80px)] bg-neutral-50 p-6 overflow-hidden">
+      <div className="mx-auto max-w-7xl h-full grid grid-cols-12 gap-6">
+        {/* Left Column: Build List */}
+        <div className="col-span-12 md:col-span-4 lg:col-span-3 h-full flex flex-col min-h-0">
+          <Card padding="none" className="flex-1 flex flex-col min-h-0 shadow-sm border border-neutral-200">
+            <CardHeader className="flex-none">
               <div className="flex items-center justify-between">
                 <div className="text-sm font-semibold text-neutral-900">Builds</div>
                 <Badge variant="default">{builds.length}</Badge>
               </div>
             </CardHeader>
-            <CardBody>
-              <div className="space-y-2">
+            <CardBody className="flex-1 overflow-y-auto min-h-0 p-3">
+              <div className="space-y-2" role="listbox" aria-label="Available builds">
                 {builds.length === 0 ? (
-                  <div className="text-sm text-neutral-500">No builds found.</div>
+                  <div className="text-sm text-neutral-500 px-1">No builds found.</div>
                 ) : (
                   builds.map((b) => {
                     const active = b.buildId === selectedBuildId;
@@ -183,10 +184,12 @@ export default function ViewerPage() {
                       <button
                         key={b.buildId}
                         type="button"
-                        className={`w-full text-left rounded-lg border px-3 py-2 transition-colors ${
+                        role="option"
+                        aria-selected={active}
+                        className={`w-full text-left rounded-lg border px-3 py-2 transition-all outline-none focus-visible:ring-2 focus-visible:ring-primary-500 ${
                           active
-                            ? "border-primary-600 bg-primary-50"
-                            : "border-neutral-200 bg-white hover:bg-neutral-50"
+                            ? "border-primary-600 bg-primary-50 text-neutral-900 shadow-sm"
+                            : "border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-600 hover:text-neutral-900"
                         }`}
                         onClick={() => {
                           setSelectedBuildId(b.buildId);
@@ -195,16 +198,16 @@ export default function ViewerPage() {
                       >
                         <div className="flex items-center justify-between gap-2">
                           <div className="min-w-0">
-                            <div className="text-sm font-medium text-neutral-900 truncate">
+                            <div className="text-sm font-medium truncate">
                               {b.itemId || b.buildId}
                             </div>
-                            <div className="text-xs text-neutral-500 truncate">
+                            <div className="text-xs opacity-70 truncate">
                               v{b.version} • {b.buildId}
                             </div>
                           </div>
                           <Badge variant={statusBadgeVariant(b.status)}>{b.status}</Badge>
                         </div>
-                        <div className="mt-2 text-xs text-neutral-500 truncate">
+                        <div className="mt-2 text-xs opacity-50 truncate">
                           updated {b.updatedAt || "—"}
                         </div>
                       </button>
@@ -216,9 +219,11 @@ export default function ViewerPage() {
           </Card>
         </div>
 
-        <div className="col-span-12 md:col-span-8 lg:col-span-9 space-y-6">
-          <Card>
-            <CardHeader>
+        {/* Right Column: Graph + Inspector */}
+        <div className="col-span-12 md:col-span-8 lg:col-span-9 h-full flex flex-col gap-6 min-h-0">
+          {/* Graph Card */}
+          <Card padding="none" className="flex-1 flex flex-col min-h-0 shadow-sm border border-neutral-200">
+            <CardHeader className="flex-none">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
                   <div className="text-sm font-semibold text-neutral-900 truncate">
@@ -252,14 +257,26 @@ export default function ViewerPage() {
                 </div>
               </div>
             </CardHeader>
-            <CardBody>
+            <CardBody className="flex-1 flex flex-col min-h-0 p-0 relative">
               {validation && !validation.valid ? (
-                <div className="mb-4 text-sm text-danger-700">
-                  {validation.hardErrors.length} hard error(s), {validation.warnings.length} warning(s)
+                <div className="absolute top-4 left-4 z-10 max-w-sm pointer-events-none">
+                  <div className="bg-white/90 backdrop-blur-sm border border-rose-200 rounded-lg p-3 shadow-sm">
+                    <div className="text-sm font-medium text-rose-700">
+                      Validation Issues
+                    </div>
+                    <div className="text-xs text-rose-600 mt-1">
+                      {validation.hardErrors.length} hard error(s)
+                    </div>
+                    {validation.warnings.length > 0 && (
+                      <div className="text-xs text-amber-600 mt-0.5">
+                        {validation.warnings.length} warning(s)
+                      </div>
+                    )}
+                  </div>
                 </div>
               ) : null}
 
-              <div className="h-[600px]">
+              <div className="flex-1 min-h-0 w-full">
                 {selectedBuild ? (
                   <DAGVisualization
                     build={selectedBuild}
@@ -268,7 +285,7 @@ export default function ViewerPage() {
                     onSelectStep={(id) => setSelectedStepId(id)}
                   />
                 ) : (
-                  <div className="h-full w-full flex items-center justify-center bg-white rounded border border-neutral-200">
+                  <div className="h-full w-full flex items-center justify-center bg-neutral-50/50">
                     <div className="text-center text-neutral-500">
                       <div className="text-sm font-medium mb-1">No build selected</div>
                       <div className="text-xs">Choose a build from the list to view steps.</div>
@@ -279,10 +296,12 @@ export default function ViewerPage() {
             </CardBody>
           </Card>
 
-          <StepInspector step={selectedStep} validation={validation} />
+          {/* Inspector Card (Fixed height / Auto) */}
+          <div className="flex-none max-h-[35%] overflow-y-auto">
+             <StepInspector step={selectedStep} validation={validation} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
-

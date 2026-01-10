@@ -323,3 +323,21 @@ npx tsx scripts/lb.ts validate-fixtures
 - Changes are **committed and pushed**; `git status` is clean and up to date with `origin/main`.
 
 ---
+
+## Cycle 8 - COMPLETED
+**Timestamp:** 2026-01-10 01:45:00
+**Model:** gpt-5.2-high
+
+**Tasks:** UI-ROBUST
+
+**Duration:** 5m
+
+**Agent output excerpt:**
+### Completed tasks
+- **UI Robustness**: Applied `ux-strategy` and `ux-engineering` principles to the Viewer.
+  - **Responsive Layout**: Replaced fixed height with a full-height `flex` layout that adapts to screen size.
+  - **Accessibility**: Updated build selector buttons with `role="option"`, `aria-selected`, and visible focus rings. Added `aria-pressed` to graph layer toggles.
+  - **Design System Consistency**: Switched validation colors to `danger` (rose) tokens for consistency.
+  - **UX Polish**: Moved validation summary to a floating overlay on the graph for better context preservation.
+
+---

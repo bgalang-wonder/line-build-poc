@@ -169,17 +169,17 @@ export function StepInspector({ step, validation }: StepInspectorProps) {
               {messages.hard.map((e, idx) => (
                 <div
                   key={`hard-${idx}-${e.ruleId}`}
-                  className="rounded-lg border border-red-200 bg-red-50 p-3"
+                  className="rounded-lg border border-danger-200 bg-danger-50 p-3"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <div className="text-sm font-semibold text-red-800">
+                    <div className="text-sm font-semibold text-danger-800">
                       {e.ruleId} (hard)
                     </div>
                     {e.fieldPath ? (
-                      <div className="text-xs text-red-700">{e.fieldPath}</div>
+                      <div className="text-xs text-danger-700">{e.fieldPath}</div>
                     ) : null}
                   </div>
-                  <div className="text-sm text-red-800 mt-1">{e.message}</div>
+                  <div className="text-sm text-danger-800 mt-1">{e.message}</div>
                 </div>
               ))}
               {messages.warn.map((e, idx) => (
