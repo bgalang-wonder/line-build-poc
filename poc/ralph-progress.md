@@ -186,3 +186,45 @@ Run: `cd poc/line-build-cli && npx vitest run`
 - Changes are committed and **pushed**; `git status` shows **up to date with origin/main**.
 
 ---
+
+## Cycle 5 - COMPLETED
+**Timestamp:** 2026-01-10 01:05:07
+**Model:** gpt-5.2-high
+
+**Tasks:** T5.1, T5.2, T5.3
+
+**Acceptance check:** test -f /Users/brandongalang/Documents/01_Projects/line-build-redesign/apps/line-build-mvp/src/app/api/builds/route.ts && test -f /Users/brandongalang/Documents/01_Projects/line-build-redesign/apps/line-build-mvp/src/app/viewer/page.tsx
+
+**Duration:** 14m 3s
+
+**Agent output excerpt:**
+### Completed tasks (Cycle 5)
+
+- **T5.1 (done)**: Added Next.js API routes in `apps/line-build-mvp/src/app/api/`:
+  - `GET /api/builds` → lists build summaries from `<dataRoot>/line-builds/*.json`
+  - `GET /api/builds/[buildId]` → returns build JSON from `<dataRoot>/line-builds/<buildId>.json`
+  - `GET /api/validation/[buildId]` → returns `<dataRoot>/validation/<buildId>.latest.json` (404 if missing)
+  - Implemented `viewer_data_root_strategy` via `LINE_BUILD_POC_DATA_DIR` with fallback `../../poc/line-build-cli/data`.
+
+- **T5.2 (done)**: Created `apps/line-build-mvp/src/app/viewer/page.tsx`:
+  - Polls `/api/builds` every ~1.5s
+  - Keeps selection stable
+  - Refetches build + validation when selected build changes or its `updatedAt` changes
+
+- **T5.3 (done)**: Refactored `apps/line-build-mvp/src/components/visualization/DAGVisualization.tsx`:
+  - Uses canonical `BenchTopLineBuild/Step` shape (nodes from `build.steps`, edges from `step.dependsOn`)
+  - Labels use `action.family`, `target.name` (fallback to bom ids), `equipment.applianceId`, `time.durationSeconds`
+  - No dependency on legacy `WorkUnit` / `ActionType` vocab
+
+### Required task status updates
+Updated `docs/handoff/POC_TASKS.json` to mark **T5.1**, **T5.2**, **T5.3** as `done` with `completedAt: "2026-01-10T06:03:42Z"`.
+
+### Notes / decisions
+- **Data root resolution**: server routes try `LINE_BUILD_POC_DATA_DIR` first, else resolve the fallback relative to either the Next app cwd *or* repo root + `apps/line-build-mvp` (to be stable across common dev run modes).
+- **No viewer-side validation**: viewer only fetches `validation/<buildId>.latest.json`; it never recomputes validation.
+
+### Verification
+- `apps/line-build-mvp`: `npm test` ✅, `npm run build` ✅
+- Changes are committed and **pushed**; `git status` is clean and up to date with `origin/main`.
+
+---
