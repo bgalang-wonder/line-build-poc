@@ -129,3 +129,60 @@ Run: `cd poc/line-build-cli && npx vitest run`
 - Changes are **committed and pushed**; `git status` shows **up to date with `origin/main`**.
 
 ---
+
+## Cycle 4 - COMPLETED
+**Timestamp:** 2026-01-10 00:51:04
+**Model:** gpt-5.2-high
+
+**Tasks:** T4.1, T4.2, T4.3, T4.4
+
+**Acceptance check:** cd /Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli && npx tsx scripts/lb.ts --help
+
+**Duration:** 12m 16s
+
+**Agent output excerpt:**
+## Completed tasks
+
+- **T4.1**: Implemented CLI core commands + `--json` + exit codes in `poc/line-build-cli/scripts/lb.ts` (`read`, `write` via stdin, `validate`, `list`, `search`).
+- **T4.2**: Implemented `lb query` + DSL parsing/eval in `poc/line-build-cli/scripts/lib/query.ts` and wired into `lb.ts`.
+- **T4.3**: Implemented `lb bulk-update` (dry-run default, `--apply` to write) in `poc/line-build-cli/scripts/lib/bulkUpdate.ts` and wired into `lb.ts` (revalidates and updates `data/validation/<buildId>.latest.json` on apply).
+- **T4.4**: Implemented `lb search-notes` regex scan in `poc/line-build-cli/scripts/lib/searchNotes.ts` and wired into `lb.ts`.
+
+## What I implemented
+
+- **CLI commands** (all support `--json`, and use exit codes 0/2/3/4 per `POC_TASKS.json`):
+  - `read <buildId>`: prints the build JSON.
+  - `write` (stdin): parses build JSON, sets `updatedAt` to now, validates, then writes build + receipt + validation output (blocks on validation failure).
+  - `validate <buildId>`: validates build and writes/updates `data/validation/<buildId>.latest.json`.
+  - `list`: lists build summaries.
+  - `search --equipment=<id> --action=<family>`: step-level search across builds (either/both filters).
+  - `query --where <dsl>`: DSL query over whitelisted fields + operators.
+  - `bulk-update --where <dsl> --set <field>=<value> [--set ...] [--apply]`: structured-only patching with dry-run diff; apply writes builds atomically, revalidates, writes receipts, updates validation output.
+  - `search-notes <pattern> [--flags <reFlags>]`: regex search over `instruction` (preferred) else `notes`, returning contextual snippets.
+
+- **Query DSL** (`docs/handoff/POC_TASKS.json -> shared_conventions.dsl_contract`):
+  - Supports `=`, `!=`, `in [..]`, and `exists(field)` with field whitelist enforcement.
+
+## Decisions / notes
+
+- **`updatedAt`**: `lb write` and `lb bulk-update --apply` set `build.updatedAt` to the operation timestamp to make downstream polling deterministic.
+- **Bulk update + `step.time.durationSeconds`**: if a step had no `time`, bulk-update creates `time` with `isActive: false` (since patch contract doesn’t include `isActive`).
+- **No array ops**: `build.requiresBuilds.itemId` is queryable (whitelisted) but **not patchable** in bulk-update (per “no general array ops” in `patch_contract`).
+- **Apply safety**: `bulk-update --apply` aborts with exit code **2** if any updated build would become invalid (no partial writes).
+
+## Required task status updates
+
+- Updated `docs/handoff/POC_TASKS.json` to mark **T4.1–T4.4** as `done` with `completedAt: "2026-01-10T00:49:27-05:00"`.
+
+## Issues / blockers
+
+- No spec deviations needed.
+- **Pre-existing git stash remains** (`stash@{0}`); I did not drop it since it predates this work.
+
+## Verification
+
+- Typecheck: `npx tsc -p poc/line-build-cli`
+- Tests: `cd poc/line-build-cli && npx vitest run`
+- Changes are committed and **pushed**; `git status` shows **up to date with origin/main**.
+
+---
