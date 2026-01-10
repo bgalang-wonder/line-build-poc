@@ -1,0 +1,63 @@
+{
+  "id": "fixture-parallel-join",
+  "itemId": "ITEM_PARALLEL_JOIN",
+  "version": 1,
+  "status": "draft",
+  "artifacts": [
+    { "id": "a_componentA", "name": "Component A", "type": "intermediate" },
+    { "id": "a_componentB", "name": "Component B", "type": "intermediate" },
+    { "id": "a_joined", "name": "Joined mixture", "type": "intermediate" },
+    { "id": "a_final", "name": "Final item", "type": "final" }
+  ],
+  "primaryOutputArtifactId": "a_final",
+  "steps": [
+    {
+      "id": "p1",
+      "orderIndex": 1,
+      "action": { "family": "PREP", "techniqueId": "cut_diced" },
+      "instruction": "Dice component A.",
+      "produces": [{ "source": { "type": "in_build", "artifactId": "a_componentA" } }]
+    },
+    {
+      "id": "p2",
+      "orderIndex": 2,
+      "action": { "family": "PREP", "techniqueId": "wash" },
+      "instruction": "Wash component B.",
+      "produces": [{ "source": { "type": "in_build", "artifactId": "a_componentB" } }]
+    },
+    {
+      "id": "p3",
+      "orderIndex": 3,
+      "action": { "family": "COMBINE" },
+      "dependsOn": ["p1", "p2"],
+      "instruction": "Combine components A and B.",
+      "consumes": [
+        { "source": { "type": "in_build", "artifactId": "a_componentA" } },
+        { "source": { "type": "in_build", "artifactId": "a_componentB" } }
+      ],
+      "produces": [{ "source": { "type": "in_build", "artifactId": "a_joined" } }]
+    },
+    {
+      "id": "p4",
+      "orderIndex": 4,
+      "action": { "family": "HEAT" },
+      "dependsOn": ["p3"],
+      "equipment": { "applianceId": "turbo", "presetId": "program_2" },
+      "time": { "durationSeconds": 120, "isActive": false },
+      "instruction": "Heat joined mixture until hot.",
+      "consumes": [{ "source": { "type": "in_build", "artifactId": "a_joined" } }],
+      "produces": [{ "source": { "type": "in_build", "artifactId": "a_final" } }]
+    },
+    {
+      "id": "p5",
+      "orderIndex": 5,
+      "action": { "family": "VEND" },
+      "dependsOn": ["p4"],
+      "container": { "type": "clamshell", "name": "Standard clamshell" },
+      "instruction": "Package and hand off.",
+      "consumes": [{ "source": { "type": "in_build", "artifactId": "a_final" } }]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

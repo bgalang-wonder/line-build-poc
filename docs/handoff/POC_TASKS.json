@@ -755,8 +755,8 @@
         "Fixtures validate as expected (cycle fixture fails)",
         "Provides regression protection"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T06:18:53Z"
     },
     {
       "id": "T7.1",
@@ -776,8 +776,8 @@
       "acceptance": [
         "Another operator can run sessions without tribal knowledge"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T06:18:53Z"
     }
   ]
 }

@@ -9,8 +9,6 @@
  * - From poc dir:   cd poc/line-build-cli && npx tsx scripts/lb.ts --help
  */
 
-import * as fs from "node:fs/promises";
-
 import { readBuild, readBom, listBuilds, writeBuild } from "./lib/store";
 import { validateBuild } from "./lib/validate";
 import { writeReceipt } from "./lib/receipts";
@@ -19,6 +17,7 @@ import { BuildParseError, parseBuild, type BenchTopLineBuild } from "./lib/schem
 import { QueryParseError, runQuery } from "./lib/query";
 import { BulkUpdateError, parseSetOps, planBulkUpdate } from "./lib/bulkUpdate";
 import { searchNotes } from "./lib/searchNotes";
+import { validateFixtures } from "./lib/fixtures";
 
 // Exit codes per docs/handoff/POC_TASKS.json -> shared_conventions.cli_output.exit_codes
 const EXIT_SUCCESS = 0;
@@ -49,6 +48,7 @@ function printHelp(): void {
       "  query --where <dsl>",
       "  bulk-update --where <dsl> --set <field>=<value> [--set ...] [--apply]",
       "  search-notes <pattern> [--flags <reFlags>]",
+      "  validate-fixtures",
       "",
       "DSL (query/bulk-update --where):",
       "  Clauses separated by AND (no parentheses).",
@@ -611,6 +611,76 @@ async function cmdSearchNotes(flags: GlobalFlags, argv: string[]): Promise<numbe
   return EXIT_SUCCESS;
 }
 
+async function cmdValidateFixtures(flags: GlobalFlags, argv: string[]): Promise<number> {
+  if (argv.length > 0) {
+    writeError(flags, "usage: validate-fixtures");
+    return EXIT_USAGE_ERROR;
+  }
+
+  const summary = await validateFixtures();
+
+  if (flags.json) {
+    writeJson({
+      ok: summary.ok,
+      fixtureCount: summary.fixtureCount,
+      passed: summary.passed,
+      failed: summary.failed,
+      rows: summary.rows,
+    });
+    return summary.ok ? EXIT_SUCCESS : EXIT_VALIDATION_FAILED;
+  }
+
+  const lines: string[] = [];
+  lines.push(`fixtures: ${summary.fixtureCount} passed=${summary.passed} failed=${summary.failed}`);
+  for (const r of summary.rows) {
+    const expectedValid = r.expected?.expectedValid;
+    const actualValid = r.validation?.valid;
+    lines.push(
+      `- ${r.fileName} buildId=${r.buildId ?? "-"} itemId=${r.itemId ?? "-"} expectedValid=${
+        expectedValid === undefined ? "-" : String(expectedValid)
+      } actualValid=${actualValid === undefined ? "-" : String(actualValid)} ok=${String(r.ok)}`,
+    );
+    if (r.notes) lines.push(`  - note: ${r.notes}`);
+
+    if (r.parseIssues && r.parseIssues.length > 0) {
+      lines.push(`  - parseIssues (${r.parseIssues.length}):`);
+      for (const i of r.parseIssues.slice(0, 10)) {
+        lines.push(`    - ${i.path}: ${i.message} (${i.code})`);
+      }
+      if (r.parseIssues.length > 10) lines.push(`    - ... ${r.parseIssues.length - 10} more`);
+      continue;
+    }
+
+    if (r.validation) {
+      if (r.validation.hardErrors.length > 0) {
+        lines.push(`  - hardErrors (${r.validation.hardErrors.length}):`);
+        for (const e of r.validation.hardErrors.slice(0, 10)) {
+          lines.push(
+            `    - [${e.ruleId}] step=${e.stepId ?? "-"} field=${e.fieldPath ?? "-"} ${e.message}`,
+          );
+        }
+        if (r.validation.hardErrors.length > 10) {
+          lines.push(`    - ... ${r.validation.hardErrors.length - 10} more`);
+        }
+      }
+      if (r.validation.warnings.length > 0) {
+        lines.push(`  - warnings (${r.validation.warnings.length}):`);
+        for (const e of r.validation.warnings.slice(0, 10)) {
+          lines.push(
+            `    - [${e.ruleId}] step=${e.stepId ?? "-"} field=${e.fieldPath ?? "-"} ${e.message}`,
+          );
+        }
+        if (r.validation.warnings.length > 10) {
+          lines.push(`    - ... ${r.validation.warnings.length - 10} more`);
+        }
+      }
+    }
+  }
+
+  writeHuman(lines);
+  return summary.ok ? EXIT_SUCCESS : EXIT_VALIDATION_FAILED;
+}
+
 async function main(argv: string[]): Promise<number> {
   if (argv.includes("--help") || argv.includes("-h") || argv.length === 0) {
     printHelp();
@@ -650,6 +720,8 @@ async function main(argv: string[]): Promise<number> {
       return await cmdBulkUpdate(flags, args);
     case "search-notes":
       return await cmdSearchNotes(flags, args);
+    case "validate-fixtures":
+      return await cmdValidateFixtures(flags, args);
     default:
       writeError(flags, `unknown command: ${cmd}`);
       return EXIT_USAGE_ERROR;
