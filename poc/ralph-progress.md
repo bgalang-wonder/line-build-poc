@@ -228,3 +228,47 @@ Updated `docs/handoff/POC_TASKS.json` to mark **T5.1**, **T5.2**, **T5.3** as `d
 - Changes are committed and **pushed**; `git status` is clean and up to date with `origin/main`.
 
 ---
+
+## Cycle 6 - COMPLETED
+**Timestamp:** 2026-01-10 01:13:48
+**Model:** gpt-5.2-high
+
+**Tasks:** T5.4, T5.5, T5.6
+
+**Acceptance check:** grep -qE 'dependsOn|produces|consumes' /Users/brandongalang/Documents/01_Projects/line-build-redesign/apps/line-build-mvp/src/components/visualization/DAGVisualization.tsx
+
+**Duration:** 8m 40s
+
+**Agent output excerpt:**
+### Completed tasks
+- **T5.4**: Dual edge layers in `DAGVisualization` (work + flow), synthetic `external_build` source nodes, and toggle UI (`GraphLayerToggles`).
+- **T5.5**: Deterministic **dagre** layout based on **work edges** (with orderIndex row fallback when work edges are off) + auto fitView framing.
+- **T5.6**: Validation visualization (hard-error red outlines + count badge) and a clickable **Step Inspector** panel that shows step details + validation messages (viewer **does not** recompute validation).
+
+### What I implemented (viewer)
+- **Dual edge layers (T5.4)** in `apps/line-build-mvp/src/components/visualization/DAGVisualization.tsx`
+  - **Work edges**: from `step.dependsOn` (gray, arrowhead)
+  - **Flow edges**: from `produces (in_build)` → `consumes (in_build)` (teal, arrowhead)
+  - **External flow sources**: `consumes[].source.type === "external_build"` creates a **synthetic node** and draws a teal edge into the consuming step.
+  - **Toggles**: `apps/line-build-mvp/src/components/visualization/GraphLayerToggles.tsx` (“Show Work Edges”, “Show Flow Edges”)
+- **Layout (T5.5)**:
+  - Added `@dagrejs/dagre` and applied dagre layout **only when work edges are enabled**.
+  - When work edges are disabled, steps fall back to a simple **orderIndex row** layout (as required).
+- **Validation viz + inspector (T5.6)**:
+  - Viewer continues to **fetch** validation via `/api/validation/[buildId]` (CLI output file-backed; no in-browser validation).
+  - Nodes with hard errors get a **red outline** and an **error-count badge**.
+  - Added `apps/line-build-mvp/src/components/visualization/StepInspector.tsx` and wired it in `apps/line-build-mvp/src/app/viewer/page.tsx`.
+
+### Task status updates (required)
+- Updated `docs/handoff/POC_TASKS.json`:
+  - **T5.4**, **T5.5**, **T5.6** → `status: "done"`, `completedAt: "2026-01-10T01:12:12-05:00"`.
+
+### Verification
+- `apps/line-build-mvp`: `npm test` ✅, `npm run build` ✅
+- Synced + pushed to `origin/main` ✅ (commit: `6a4282d`)
+
+### Notes / issues
+- **No spec deviations**: viewer reads validation output only; no validation recomputation.
+- A **pre-existing** git stash remains: `stash@{0}` (not created by this work).
+
+---
