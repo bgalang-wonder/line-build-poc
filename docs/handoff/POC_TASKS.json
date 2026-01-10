@@ -1,0 +1,783 @@
+{
+  "meta": {
+    "project": "line-build-redesign",
+    "artifact": "POC_TASKS",
+    "created": "2026-01-10",
+    "timezone": "America/New_York",
+    "goal": "CLI-first Line Build PoC (Claude Code driven) + read-only viewer with dual graph layers (work + flow) and CLI-produced validation results.",
+    "non_goals": [
+      "No editing UI in viewer",
+      "No multi-user concurrency",
+      "No production DB (filesystem JSON is DB)",
+      "No embedding search in MVP (defer until structured ops work)"
+    ],
+    "success_criteria": [
+      "SME can author/update a build for an itemId via Claude Code + CLI in <10 minutes",
+      "lb write validates deterministically and writes atomically; viewer reflects update within 2 seconds",
+      "Viewer renders directed work edges (dependsOn) and directed flow edges (produces\u2192consumes) with toggles",
+      "Structured bulk update supports dry-run diff, apply, and receipt output",
+      "Viewer reads latest validation output produced by CLI (no in-browser validator)"
+    ],
+    "data_contract_refs": [
+      "docs/spec/SCHEMA-REFERENCE.md",
+      "docs/spec/INVARIANTS.md",
+      "docs/spec/HARD-RULES.md",
+      "docs/spec/POC-PLAN.md",
+      "docs/spec/BULK-OPERATIONS.md",
+      "progress.md"
+    ],
+    "runtime": {
+      "cli": "npx tsx scripts/lb.ts",
+      "viewer": "apps/line-build-mvp (Next.js read-only)"
+    },
+    "cycle_task_mapping": {
+      "1": [
+        "T0.1",
+        "T0.2",
+        "T1.1",
+        "T1.2"
+      ],
+      "2": [
+        "T2.1",
+        "T2.2"
+      ],
+      "3": [
+        "T3.1",
+        "T3.2"
+      ],
+      "4": [
+        "T4.1",
+        "T4.2",
+        "T4.3",
+        "T4.4"
+      ],
+      "5": [
+        "T5.1",
+        "T5.2",
+        "T5.3"
+      ],
+      "6": [
+        "T5.4",
+        "T5.5",
+        "T5.6"
+      ],
+      "7": [
+        "T6.1",
+        "T7.1"
+      ]
+    }
+  },
+  "shared_conventions": {
+    "repo_layout_decision": {
+      "poc_root_dir": "poc/line-build-cli",
+      "cli_entry": "poc/line-build-cli/scripts/lb.ts",
+      "cli_run": "npx tsx poc/line-build-cli/scripts/lb.ts",
+      "data_root": "poc/line-build-cli/data",
+      "viewer_app": "apps/line-build-mvp",
+      "viewer_reads_data_root": "poc/line-build-cli/data"
+    },
+    "viewer_data_root_strategy": {
+      "method": "env_var_with_fallback",
+      "env_var": "LINE_BUILD_POC_DATA_DIR",
+      "fallback_relative_to_next_app": "../../poc/line-build-cli/data",
+      "notes": "Next.js server routes must resolve data directory deterministically; do not rely on process.cwd() alone."
+    },
+    "test_runner_decision": {
+      "runner": "vitest",
+      "reason": "TypeScript-friendly, minimal config, avoids coupling to Next/Jest setup.",
+      "command": "npx vitest run",
+      "location": "poc/line-build-cli"
+    },
+    "paths": {
+      "builds": "poc/line-build-cli/data/line-builds",
+      "boms": "poc/line-build-cli/data/bom",
+      "receipts": "poc/line-build-cli/data/receipts",
+      "validation": "poc/line-build-cli/data/validation",
+      "fixtures": "poc/line-build-cli/data/fixtures"
+    },
+    "atomic_write": "Write temp file then rename",
+    "cli_output": {
+      "default": "human-readable",
+      "json_flag": "--json",
+      "exit_codes": {
+        "0": "success",
+        "2": "validation_failed",
+        "3": "usage_error",
+        "4": "io_error"
+      }
+    },
+    "schema_contract": {
+      "notes": "This is the executable PoC JSON contract. It mirrors docs/spec/SCHEMA-REFERENCE.md but is embedded here so an agent can implement without ambiguity.",
+      "BenchTopLineBuild": {
+        "required": [
+          "id",
+          "itemId",
+          "version",
+          "status",
+          "steps",
+          "createdAt",
+          "updatedAt"
+        ],
+        "optional": [
+          "menuItemId",
+          "operations",
+          "tracks",
+          "requiresBuilds",
+          "artifacts",
+          "primaryOutputArtifactId",
+          "customizationGroups",
+          "validationOverrides",
+          "authorId",
+          "changeLog"
+        ],
+        "status_enum": [
+          "draft",
+          "published",
+          "archived"
+        ],
+        "requiresBuilds_policy": "MVP: references published builds only (use version=latest_published or numeric version)."
+      },
+      "BuildRef": {
+        "required": [
+          "itemId"
+        ],
+        "optional": [
+          "version",
+          "role",
+          "notes"
+        ],
+        "role_enum": [
+          "prepared_component"
+        ],
+        "version_enum": [
+          "latest_published"
+        ],
+        "notes": "Prepared component builds are keyed by itemId; other builds may depend on them via requiresBuilds."
+      },
+      "Step": {
+        "required": [
+          "id",
+          "orderIndex",
+          "action"
+        ],
+        "optional": [
+          "instruction",
+          "trackId",
+          "operationId",
+          "target",
+          "stationId",
+          "toolId",
+          "equipment",
+          "time",
+          "cookingPhase",
+          "container",
+          "exclude",
+          "prepType",
+          "storageLocation",
+          "bulkPrep",
+          "quantity",
+          "notes",
+          "provenance",
+          "conditions",
+          "overlays",
+          "dependsOn",
+          "consumes",
+          "produces"
+        ],
+        "action_family_enum": [
+          "PREP",
+          "HEAT",
+          "TRANSFER",
+          "COMBINE",
+          "ASSEMBLE",
+          "PORTION",
+          "CHECK",
+          "VEND",
+          "OTHER"
+        ],
+        "notes": "StepKind is not part of the PoC contract (removed). Semantic classification is via action.family."
+      },
+      "Artifact": {
+        "required": [
+          "id"
+        ],
+        "optional": [
+          "name",
+          "type",
+          "bomUsageId",
+          "bomComponentId",
+          "notes"
+        ],
+        "type_enum": [
+          "intermediate",
+          "final",
+          "packaging",
+          "free_text",
+          "bom_usage",
+          "bom_component"
+        ]
+      },
+      "ArtifactRef": {
+        "required": [
+          "source"
+        ],
+        "optional": [
+          "quantity",
+          "notes"
+        ],
+        "source_union": {
+          "in_build": {
+            "required": [
+              "type",
+              "artifactId"
+            ],
+            "type": "in_build"
+          },
+          "external_build": {
+            "required": [
+              "type",
+              "itemId"
+            ],
+            "optional": [
+              "version",
+              "artifactId"
+            ],
+            "type": "external_build",
+            "notes": "artifactId omitted => external build primaryOutputArtifactId"
+          }
+        }
+      },
+      "Field_locations_for_bulk_ops": {
+        "canonical_bulk_edit_keys": [
+          "step.action.family",
+          "step.action.techniqueId",
+          "step.equipment.applianceId",
+          "step.time.durationSeconds",
+          "step.stationId",
+          "step.container.type",
+          "step.target.bomUsageId",
+          "step.target.bomComponentId",
+          "build.requiresBuilds[].itemId"
+        ],
+        "free_text": [
+          "step.instruction (operational/executable; optional but recommended)",
+          "step.notes (context/audit/uncertainty; optional; do not rely on for bulk ops)"
+        ],
+        "guidance": "Bulk ops should target structured fields. Text changes are review-required and should use search-notes candidate surfacing. Prefer keeping operational detail in structured fields; instruction should remain consistent with structure."
+      }
+    },
+    "dsl_contract": {
+      "where_grammar": "Conjunction of clauses separated by AND. No parentheses in PoC.",
+      "clause_forms": [
+        "<field> = <value>",
+        "<field> != <value>",
+        "<field> in [<value>, <value>, ...]",
+        "exists(<field>)"
+      ],
+      "value_coercion": {
+        "numbers": "digits parse to number",
+        "booleans": "true/false",
+        "strings": "otherwise treat as string (quotes optional if no spaces)"
+      },
+      "field_whitelist": [
+        "step.action.family",
+        "step.action.techniqueId",
+        "step.equipment.applianceId",
+        "step.time.durationSeconds",
+        "step.cookingPhase",
+        "step.prepType",
+        "step.storageLocation.type",
+        "step.container.type",
+        "step.stationId",
+        "step.target.bomUsageId",
+        "step.target.bomComponentId",
+        "build.itemId",
+        "build.status",
+        "build.requiresBuilds.itemId"
+      ],
+      "patch_contract": {
+        "set_forms": [
+          "--set <field>=<value>"
+        ],
+        "scope": "patches apply to matched steps unless the field starts with build.",
+        "array_ops": [
+          "PoC: no general array ops; only allow appending requiresBuilds via a dedicated flag later if needed."
+        ],
+        "dry_run_default": true
+      }
+    },
+    "validation_output_contract": {
+      "file_naming": "poc/line-build-cli/data/validation/<buildId>.latest.json",
+      "schema": {
+        "buildId": "string",
+        "itemId": "string",
+        "timestamp": "ISO-8601",
+        "valid": "boolean",
+        "hardErrors": "ValidationError[]",
+        "warnings": "ValidationError[]",
+        "metrics": "object (optional)"
+      },
+      "validation_error": {
+        "severity": "hard|strong|soft",
+        "ruleId": "string",
+        "message": "string",
+        "stepId": "string?",
+        "fieldPath": "string?"
+      }
+    }
+  },
+  "tasks": [
+    {
+      "id": "T0.1",
+      "title": "Create PoC directory scaffolding (new poc/ folder)",
+      "deps": [],
+      "type": "filesystem",
+      "paths": [
+        "poc/line-build-cli/",
+        "poc/line-build-cli/scripts/",
+        "poc/line-build-cli/scripts/lib/",
+        "poc/line-build-cli/scripts/cli/",
+        "poc/line-build-cli/data/line-builds/",
+        "poc/line-build-cli/data/bom/",
+        "poc/line-build-cli/data/receipts/",
+        "poc/line-build-cli/data/validation/",
+        "poc/line-build-cli/data/fixtures/"
+      ],
+      "acceptance": [
+        "All directories exist",
+        "No destructive deletions"
+      ],
+      "status": "done",
+      "completedAt": "2026-01-10T00:24:16-05:00"
+    },
+    {
+      "id": "T0.2",
+      "title": "Add minimal TS+tsx runner setup (scoped to poc/line-build-cli)",
+      "deps": [
+        "T0.1"
+      ],
+      "type": "tooling",
+      "work": [
+        "Create or update a package.json under poc/line-build-cli to include devDependencies: tsx, typescript, zod, vitest",
+        "Ensure `npx tsx poc/line-build-cli/scripts/lb.ts --help` works from repo root"
+      ],
+      "acceptance": [
+        "`npx tsx scripts/lb.ts --help` runs",
+        "No coupling required to apps/line-build-mvp"
+      ],
+      "status": "done",
+      "completedAt": "2026-01-10T00:24:16-05:00"
+    },
+    {
+      "id": "T1.1",
+      "title": "Implement canonical schema types (TS) matching SCHEMA-REFERENCE.md",
+      "deps": [
+        "T0.2"
+      ],
+      "type": "code",
+      "files": [
+        "scripts/lib/schema.ts"
+      ],
+      "work": [
+        "Define BenchTopLineBuild/Step and related enums/types aligned with docs/spec/SCHEMA-REFERENCE.md",
+        "Include new fields: itemId, optional menuItemId, requiresBuilds, artifacts, primaryOutputArtifactId, consumes, produces",
+        "Export shared types used by validator and CLI"
+      ],
+      "acceptance": [
+        "Types compile",
+        "No reference to legacy WorkUnit types"
+      ],
+      "status": "done",
+      "completedAt": "2026-01-10T00:24:16-05:00"
+    },
+    {
+      "id": "T1.2",
+      "title": "Add runtime schema validation (Zod) for build JSON",
+      "deps": [
+        "T1.1"
+      ],
+      "type": "code",
+      "files": [
+        "scripts/lib/schema.ts"
+      ],
+      "work": [
+        "Add Zod schemas for build + step",
+        "Export parseBuild(json) that returns typed build or throws structured errors"
+      ],
+      "acceptance": [
+        "Invalid JSON returns path-specific errors",
+        "Valid JSON parses successfully"
+      ],
+      "status": "done",
+      "completedAt": "2026-01-10T00:24:16-05:00"
+    },
+    {
+      "id": "T2.1",
+      "title": "Implement deterministic hard-rule validator (H1\u2013H25 + composition/flow integrity)",
+      "deps": [
+        "T1.2"
+      ],
+      "type": "code",
+      "files": [
+        "poc/line-build-cli/scripts/lib/validate.ts"
+      ],
+      "work": [
+        "Implement validateBuild(build, opts) -> { valid, hardErrors, warnings }",
+        "Implement H1\u2013H22, H24, H25 from docs/spec/HARD-RULES.md",
+        "Implement H23 BOM coverage if BOM provided",
+        "Implement composition/flow integrity checks per docs/spec/INVARIANTS.md: requiresBuilds uniqueness/no self-dep; external_build consumes declared; in_build artifact refs resolve",
+        "Treat primaryOutputArtifactId requirement as warning (Strong) in MVP"
+      ],
+      "acceptance": [
+        "Cycle detection works (H9)",
+        "Missing dependsOn refs detected (H8)",
+        "HEAT requirements enforced (H15/H22)",
+        "Composition/flow integrity enforced"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T2.2",
+      "title": "Add minimal unit tests for validator",
+      "deps": [
+        "T2.1"
+      ],
+      "type": "tests",
+      "files": [
+        "poc/line-build-cli/scripts/lib/validate.test.ts"
+      ],
+      "work": [
+        "Add tests for: H15/H22, H8/H9, requiresBuilds + external consumes, artifact ref resolution"
+      ],
+      "acceptance": [
+        "`npx vitest` or `npx jest` equivalent runs for scripts (choose one)",
+        "Tests cover key invariants"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T3.1",
+      "title": "Implement file store helpers with atomic writes",
+      "deps": [
+        "T2.1"
+      ],
+      "type": "code",
+      "files": [
+        "poc/line-build-cli/scripts/lib/store.ts"
+      ],
+      "work": [
+        "Implement readBuild(buildId), writeBuild(build), listBuilds()",
+        "Implement readBom(itemId) (optional for H23)",
+        "Use atomic write pattern"
+      ],
+      "acceptance": [
+        "Writes are atomic",
+        "listBuilds returns stable metadata"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T3.2",
+      "title": "Implement receipts + validation output files",
+      "deps": [
+        "T3.1"
+      ],
+      "type": "code",
+      "files": [
+        "poc/line-build-cli/scripts/lib/receipts.ts",
+        "poc/line-build-cli/scripts/lib/validationOutput.ts"
+      ],
+      "work": [
+        "Write receipt JSON to data/receipts for write/apply commands",
+        "Write validation result to data/validation/<buildId>.latest.json after validate and after write",
+        "Ensure viewer can rely on these files without re-validating"
+      ],
+      "acceptance": [
+        "Every successful lb write emits a receipt + validation.latest.json",
+        "lb validate emits/updates validation.latest.json"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T4.1",
+      "title": "Implement CLI skeleton + core commands",
+      "deps": [
+        "T3.2"
+      ],
+      "type": "code",
+      "files": [
+        "poc/line-build-cli/scripts/lb.ts"
+      ],
+      "work": [
+        "Implement commands: read, write(stdin), validate, list, search --equipment, search --action",
+        "Add --json option to each command",
+        "Use stable exit codes"
+      ],
+      "acceptance": [
+        "All commands run end-to-end",
+        "write blocks on validation failure (exit code 2)",
+        "validate writes validation output file"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T4.2",
+      "title": "Implement lb query (structured-only selection)",
+      "deps": [
+        "T4.1"
+      ],
+      "type": "code",
+      "files": [
+        "poc/line-build-cli/scripts/lib/query.ts",
+        "poc/line-build-cli/scripts/lb.ts"
+      ],
+      "work": [
+        "Implement minimal predicate parsing with whitelisted fields",
+        "Return matches with buildId,itemId,stepId,orderIndex,label snippet",
+        "Support --json"
+      ],
+      "acceptance": [
+        "Can deterministically find all steps with applianceId=waterbath",
+        "Results include enough context for review"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T4.3",
+      "title": "Implement lb bulk-update (structured-only) with dry-run + apply",
+      "deps": [
+        "T4.2"
+      ],
+      "type": "code",
+      "files": [
+        "poc/line-build-cli/scripts/lib/bulkUpdate.ts",
+        "poc/line-build-cli/scripts/lb.ts"
+      ],
+      "work": [
+        "Implement patch application on whitelisted fields",
+        "Default is dry-run; require --apply to write",
+        "On dry-run: print per-build diff summary (also support --json)",
+        "On apply: write updated builds atomically, revalidate, write receipts, update validation output files"
+      ],
+      "acceptance": [
+        "Dry-run produces no file changes",
+        "Apply updates builds and emits receipts",
+        "Viewer reflects updates"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T4.4",
+      "title": "Implement lb search-notes (regex) over instruction/notes",
+      "deps": [
+        "T4.1"
+      ],
+      "type": "code",
+      "files": [
+        "poc/line-build-cli/scripts/lib/searchNotes.ts",
+        "poc/line-build-cli/scripts/lb.ts"
+      ],
+      "work": [
+        "Search over step.instruction if present; fallback to step.notes",
+        "Output candidate matches with context",
+        "Support --json"
+      ],
+      "acceptance": [
+        "Can find candidates for '165' or 'golden brown'"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T5.1",
+      "title": "Add viewer API routes to read file-backed builds + validation",
+      "deps": [
+        "T4.1"
+      ],
+      "type": "code",
+      "files": [
+        "apps/line-build-mvp/src/app/api/builds/route.ts",
+        "apps/line-build-mvp/src/app/api/builds/[buildId]/route.ts",
+        "apps/line-build-mvp/src/app/api/validation/[buildId]/route.ts"
+      ],
+      "work": [
+        "Implement GET /api/builds -> list summaries",
+        "Implement GET /api/builds/[buildId] -> build JSON",
+        "Implement GET /api/validation/[buildId] -> data/validation/<buildId>.latest.json (or 404 if missing)"
+      ],
+      "acceptance": [
+        "Endpoints return JSON",
+        "No validation recomputation in viewer"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T5.2",
+      "title": "Viewer polling loop + build selection",
+      "deps": [
+        "T5.1"
+      ],
+      "type": "code",
+      "files": [
+        "apps/line-build-mvp/src/app/(...)/<viewer-page>.tsx"
+      ],
+      "work": [
+        "Create a new viewer route/page at apps/line-build-mvp/src/app/viewer/page.tsx (read-only)",
+        "Poll /api/builds every 1-2 seconds",
+        "When selected build changes or updatedAt changes, refetch build + validation",
+        "Keep selection stable if build refreshes"
+      ],
+      "acceptance": [
+        "Running lb write updates viewer within 2 seconds",
+        "Viewer displays validation status without recompute"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T5.3",
+      "title": "Refactor DAGVisualization to use canonical BenchTopLineBuild/Step",
+      "deps": [
+        "T5.2"
+      ],
+      "type": "code",
+      "files": [
+        "apps/line-build-mvp/src/components/visualization/DAGVisualization.tsx"
+      ],
+      "work": [
+        "Replace legacy LineBuild/WorkUnit usage with canonical types",
+        "Render nodes from build.steps",
+        "Update label fields to action.family, target.name, equipment, time"
+      ],
+      "acceptance": [
+        "Viewer renders a canonical build created by CLI",
+        "No dependency on old ActionType vocab"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T5.4",
+      "title": "Add dual edge layers (work + flow) with toggle UI",
+      "deps": [
+        "T5.3"
+      ],
+      "type": "code",
+      "files": [
+        "apps/line-build-mvp/src/components/visualization/DAGVisualization.tsx",
+        "apps/line-build-mvp/src/components/visualization/GraphLayerToggles.tsx"
+      ],
+      "work": [
+        "Compute work edges from step.dependsOn",
+        "Compute flow edges by mapping produced artifacts to consuming steps",
+        "Create synthetic nodes for external_build sources when flow layer enabled",
+        "Add toggles: Show Work Edges, Show Flow Edges",
+        "Add arrowheads; style work edges gray, flow edges teal/blue"
+      ],
+      "acceptance": [
+        "Toggling layers works without reload",
+        "External build consumption is visible via synthetic nodes"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T5.5",
+      "title": "Add deterministic layout (dagre) and fitView controls",
+      "deps": [
+        "T5.4"
+      ],
+      "type": "code",
+      "files": [
+        "apps/line-build-mvp/src/components/visualization/DAGVisualization.tsx"
+      ],
+      "work": [
+        "Integrate dagre layout based on work edges (when work layer enabled)",
+        "Fallback to orderIndex row layout when only flow edges enabled",
+        "Ensure stable node positioning by step.id"
+      ],
+      "acceptance": [
+        "Graph is readable for ~50 steps",
+        "fitView results in sensible framing"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T5.6",
+      "title": "Validation visualization: node styling + inspector panel",
+      "deps": [
+        "T5.5"
+      ],
+      "type": "code",
+      "files": [
+        "apps/line-build-mvp/src/components/visualization/DAGVisualization.tsx",
+        "apps/line-build-mvp/src/components/visualization/StepInspector.tsx"
+      ],
+      "work": [
+        "Fetch validation.latest.json for selected build",
+        "Mark nodes with hard errors (red outline) and show error count badge",
+        "On node click, show inspector with structured fields + instruction/notes + consumes/produces + validation messages"
+      ],
+      "acceptance": [
+        "SME can click a node and see why it is invalid",
+        "Viewer does not recompute validation"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T6.1",
+      "title": "Add fixture pack + validation runner",
+      "deps": [
+        "T2.1",
+        "T4.1"
+      ],
+      "type": "tests",
+      "files": [
+        "poc/line-build-cli/data/fixtures/*.json",
+        "poc/line-build-cli/scripts/lib/fixtures.ts",
+        "poc/line-build-cli/scripts/lb.ts"
+      ],
+      "work": [
+        "Create fixture builds: linear, parallel join, external consume, cycle error",
+        "Add lb validate-fixtures command to validate all fixtures and print report"
+      ],
+      "acceptance": [
+        "Fixtures validate as expected (cycle fixture fails)",
+        "Provides regression protection"
+      ],
+      "status": "pending",
+      "completedAt": null
+    },
+    {
+      "id": "T7.1",
+      "title": "Document SME session script (how to run PoC)",
+      "deps": [
+        "T4.3",
+        "T5.6"
+      ],
+      "type": "docs",
+      "files": [
+        "01_Projects/line-build-redesign/docs/handoff/SME_SESSION_SCRIPT.md"
+      ],
+      "work": [
+        "Write a short, repeatable SME session script: author build, validate loop, viewer review, bulk update demo, notes search demo",
+        "Include exact CLI commands"
+      ],
+      "acceptance": [
+        "Another operator can run sessions without tribal knowledge"
+      ],
+      "status": "pending",
+      "completedAt": null
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "line-build-cli-poc",
+  "private": true,
+  "version": "0.0.0",
+  "devDependencies": {
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4",
+    "zod": "^4.1.5"
+  },
+  "scripts": {
+    "lb": "tsx scripts/lb.ts",
+    "test": "vitest run"
+  }
+}

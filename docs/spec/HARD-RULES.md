@@ -22,8 +22,8 @@ This contract assumes the canonical v1 schema from `docs/schema/SPEC-TECHNICAL.m
 
 Rules reference these fields:
 
-- Build: `status`, `steps`, `customizationGroups`, `validationOverrides`
-- Step: `id`, `orderIndex`, `trackId`, `action.family`, `target`, `equipment`, `time`, `container`, `prepType`, `storageLocation`, `bulkPrep`, `quantity`, `conditions`, `overlays`, `dependsOn`, `notes`
+- Build: `status`, `steps`, `customizationGroups`, `validationOverrides`, `requiresBuilds`, `artifacts`, `primaryOutputArtifactId`
+- Step: `id`, `orderIndex`, `trackId`, `action.family`, `target`, `equipment`, `time`, `container`, `prepType`, `storageLocation`, `bulkPrep`, `quantity`, `conditions`, `overlays`, `dependsOn`, `consumes`, `produces`, `notes`
 
 ---
 
@@ -52,6 +52,8 @@ export interface BuildValidationResult {
 
 ## Rule Summary (H1–H22)
 
+> Note: Additional composition/flow invariants are defined in `docs/spec/INVARIANTS.md`. For MVP, we treat them as schema-contract invariants; teams can decide whether they are publish-blocking in policy.
+
 | ID | Scope | Rule (Plain English) |
 |----|-------|-----------------------|
 | H1 | Step | Every step has `action.family` (valid enum) |
@@ -76,6 +78,8 @@ export interface BuildValidationResult {
 | H20 | Build | Overlay predicates must reference valid customization `valueIds` |
 | H21 | Build | `MANDATORY_CHOICE` groups must have `minChoices` and `maxChoices` |
 | H22 | Step | If `action.family === "HEAT"` then `time` OR non-empty `notes` |
+| H24 | Step | If `action.family === "PORTION"` then `quantity` OR non-empty `notes` |
+| H25 | Step | If `action.family === "PREP"` then `techniqueId` OR non-empty `notes` |
 
 ---
 
@@ -508,6 +512,38 @@ function validateH22(step: Step): ValidationError[] {
 }
 ```
 
+### H24 — PORTION Steps Require Quantity or Notes
+
+- **Scope**: Step
+- **Rule**: If `action.family === "PORTION"`, then either `quantity` exists OR `notes.trim().length > 0`.
+- **Intent**: Portioning without a specific amount or description is invalid.
+
+```ts
+function validateH24(step: Step): ValidationError[] {
+  if (step.action?.family !== "PORTION") return [];
+  const hasQty = !!step.quantity;
+  const hasNotes = typeof step.notes === "string" && step.notes.trim().length > 0;
+  if (hasQty || hasNotes) return [];
+  return [{ severity: "hard", ruleId: "H24", message: "H24: PORTION step requires quantity or non-empty notes", stepId: step.id, fieldPath: "quantity|notes" }];
+}
+```
+
+### H25 — PREP Steps Require Technique or Notes
+
+- **Scope**: Step
+- **Rule**: If `action.family === "PREP"`, then either `techniqueId` exists OR `notes.trim().length > 0`.
+- **Intent**: Generic "Prep" actions should be specified with a technique (wash, cut, open) or a note.
+
+```ts
+function validateH25(step: Step): ValidationError[] {
+  if (step.action?.family !== "PREP") return [];
+  const hasTech = !!step.action?.techniqueId;
+  const hasNotes = typeof step.notes === "string" && step.notes.trim().length > 0;
+  if (hasTech || hasNotes) return [];
+  return [{ severity: "hard", ruleId: "H25", message: "H25: PREP step requires techniqueId or non-empty notes", stepId: step.id, fieldPath: "action.techniqueId|notes" }];
+}
+```
+
 ---
 
 ## Execution Order (Recommended)
@@ -517,7 +553,7 @@ To produce helpful error messages and avoid cascades:
 1. **Identity/structure**: H6, H7
 2. **Ordering**: H2
 3. **DAG integrity**: H8, H9
-4. **Per-step checks**: H1, H3, H10, H15, H16, H17, H18, H22, H4
+4. **Per-step checks**: H1, H3, H10, H15, H16, H17, H18, H22, H24, H25, H4
 5. **Customization + overlays** (if present): H12, H21, H19, H20, H11, H14
 6. **Override hygiene**: H13
 

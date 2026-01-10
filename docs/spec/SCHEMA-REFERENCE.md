@@ -8,8 +8,9 @@
 
 ## High-level Model
 
-- A **line build** is a list of steps with a deterministic order and optional dependency edges.
+- A **line build** is a list of steps with a deterministic order and optional dependency edges (**work graph**).
 - Each **step** is one unit of work, categorized by an **action family**.
+- The schema optionally supports **artifact flow** (what is produced/consumed) to model parallel component paths and “joins” at assembly/packaging.
 - Optional fields enrich the model (station, cooking phase, container, prep metadata, conditions/overlays).
 
 ---
@@ -20,22 +21,39 @@
 
 ```ts
 export type BuildId = string;     // UUID
-export type MenuItemId = string;  // 80* item reference (string)
+export type ItemId = string;      // catalog item reference (e.g., 80* menu items; prepared components may also have builds)
+export type MenuItemId = string;  // legacy alias; prefer ItemId going forward
 export type BuildStatus = "draft" | "published" | "archived";
 
 export interface BenchTopLineBuild {
   // Identity
   id: BuildId;
-  menuItemId: MenuItemId;
+
+  // Canonical: builds are keyed by the item they produce.
+  // For MVP, this may be an 80* menu item OR a prepared component item that is treated like a "menu item" for prep purposes.
+  itemId: ItemId;
+
+  // Back-compat: retained for legacy/POC compatibility.
+  // NOTE: In future revisions, migrate consumers to itemId.
+  menuItemId?: MenuItemId;
+
   version: number;               // immutable once created
   status: BuildStatus;
 
-  // Content
+  // Content (work graph)
   steps: Step[];                 // required (H6 constrains published)
 
   // Optional authoring structure
   operations?: Operation[];      // UX convenience grouping
   tracks?: TrackDefinition[];    // optional parallel lanes
+
+  // Cross-build composition: prepared components with their own builds.
+  // MVP policy: references published builds only.
+  requiresBuilds?: BuildRef[];
+
+  // Optional artifact flow (material graph). This is distinct from dependsOn (work ordering).
+  artifacts?: Artifact[];
+  primaryOutputArtifactId?: string;
 
   // Customization DAG support
   customizationGroups?: CustomizationGroup[];
@@ -55,7 +73,10 @@ export interface BenchTopLineBuild {
 
 ```ts
 export type StepId = string; // UUID
-export type StepKind = "component" | "action" | "quality_check" | "meta";
+
+// NOTE: Step.kind is primarily a UX/display hint.
+// Canonical semantics should be derived from action.family.
+export type StepKind = "action" | "quality_check" | "meta";
 
 export interface Step {
   // Identity & ordering
@@ -65,6 +86,9 @@ export interface Step {
   operationId?: string;           // optional grouping
 
   // Semantic meaning (required)
+  // MECE guidance:
+  // - kind="quality_check" should only be used with action.family=CHECK
+  // - kind="meta" should only be used with action.family=OTHER
   kind: StepKind;
   action: StepAction;             // required (H1)
 
@@ -94,15 +118,28 @@ export interface Step {
   // Quantity / amount (EXTRA_REQUESTS, portions)
   quantity?: StepQuantity;        // if present, value must be > 0 (H10)
 
+  // Human-executable instruction text (recommended).
+  // If omitted, consumers may fall back to `notes` or derive a display string from structured fields.
+  instruction?: string;
+
   // Escape hatch (always allowed) (H5)
   notes?: string;
 
   // Data quality tracking (optional)
   provenance?: StepProvenance;
 
+  // Artifact flow (optional): what this step consumes/produces.
+  // This models parallel component paths and joins (e.g., multiple components merge at assembly/packaging).
+  consumes?: ArtifactRef[];
+  produces?: ArtifactRef[];
+
   // Extension points (optional)
-  conditions?: StepCondition;      // equipment/customization gating
-  overlays?: StepOverlay[];        // conditional field overrides
+  // Conditions: inclusion/existence gating (step in/out of resolved build)
+  conditions?: StepCondition;
+  // Overlays: mutation (step remains but fields change under scenario/customization)
+  overlays?: StepOverlay[];
+
+  // Work-order graph edges
   dependsOn?: StepId[];            // dependency edges (if present: H8 + H9 apply)
 }
 
@@ -150,7 +187,37 @@ export type ToolId =
   | "squeeze_bottle"
   | "shaker"
   | "viper"         // portion tool
+  | "scale"         // for weighing portions
+  | "bench_scraper"
+  | "utility_knife"
+  | "whisk"
+  | "ladle"
   | "other";        // escape hatch
+```
+
+---
+
+### `TechniqueId` (Standardized Actions)
+
+Techniques are the **specific methods** used within an action family.
+
+```ts
+export type TechniqueId =
+  | "portion"       // dividing into specific amounts
+  | "weigh"         // measuring by weight
+  | "open_pack"     // opening vendor packaging
+  | "seal"          // sealing a bag/container
+  | "label"         // applying a date/content label
+  | "wash"          // cleaning produce
+  | "cut_diced"     // dicing (e.g. 1/4", 1/2")
+  | "cut_sliced"    // slicing
+  | "cut_julienne"  // julienne strips
+  | "stir"          // mixing gently
+  | "fold"          // incorporating ingredients gently
+  | "whisk"         // beating to incorporate air
+  | "scoop"         // using a scoop/spoodle
+  | "wipe"          // cleaning a surface/rim
+  | "other";
 ```
 
 ---
@@ -187,12 +254,83 @@ export enum CookingPhase {
 
 ## Step Sub-Types
 
+---
+
+## Cross-Build Composition (Prepared Components)
+
+Some items have their own prep/build instructions (e.g., a prepared component). Other menu items may depend on those prepared components.
+
+```ts
+export interface BuildRef {
+  itemId: ItemId;
+  version?: number | "latest_published";
+  role?: "prepared_component";
+  notes?: string;
+}
+```
+
+**MVP policy:** `requiresBuilds` references published builds only.
+
+---
+
+## Artifact Flow (Material Graph)
+
+The schema optionally supports a material-flow graph so multiple components can move in parallel and then **join** at assembly/packaging.
+
+This is distinct from `dependsOn`:
+- `dependsOn` = work ordering constraints (work graph)
+- `consumes`/`produces` = material flow constraints (material graph)
+
+```ts
+export type ArtifactId = string;
+
+export type ArtifactType =
+  | "intermediate"
+  | "final"
+  | "packaging"
+  | "free_text"
+  | "bom_usage"
+  | "bom_component";
+
+export interface Artifact {
+  id: ArtifactId;
+  name?: string;
+  type?: ArtifactType;
+  bomUsageId?: BomUsageId;
+  bomComponentId?: BomComponentId;
+  notes?: string;
+}
+
+export type ArtifactSource =
+  | { type: "in_build"; artifactId: ArtifactId }
+  | {
+      type: "external_build";
+      itemId: ItemId;
+      version?: number | "latest_published";
+      artifactId?: ArtifactId; // optional; default is external build's primaryOutputArtifactId
+    };
+
+export interface ArtifactRef {
+  source: ArtifactSource;
+  quantity?: StepQuantity;
+  notes?: string;
+}
+```
+
+**Primary output assumption:** each build should have exactly one primary output. When `artifacts` is used, set:
+- `primaryOutputArtifactId` to the artifact representing the build's canonical output.
+
+---
+
+## Step Sub-Types
+
 ### `StepAction` (Required)
 
 ```ts
 export interface StepAction {
   family: ActionFamily;             // required (H1)
-  detailId?: string;                // optional technique taxonomy
+  techniqueId?: TechniqueId;        // standardized technique
+  detailId?: string;                // legacy/raw detail
   displayTextOverride?: string;      // legacy output fixes (rare)
 }
 ```
@@ -215,6 +353,10 @@ export interface StepTarget {
   bomUsageId?: BomUsageId;
   bomComponentId?: BomComponentId;
   name?: string;          // strongly recommended for human readability
+
+  // IMPORTANT: StepTarget is about semantic identity (BOM linkage / “what is this step about?”).
+  // Do NOT use target alone to model multi-component flow or joins.
+  // Use consumes/produces + artifacts for flow semantics.
 }
 ```
 
@@ -268,6 +410,10 @@ export type ContainerType =
   | "cup"
   | "foil"
   | "lid"
+  | "lexan"        // clear plastic storage container
+  | "deli_cup"     // clear round portion cup (16oz, 32oz)
+  | "hotel_pan"    // stainless steel prep pan
+  | "squeeze_bottle"
   | "other";
 
 export interface StepContainer {
