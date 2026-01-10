@@ -537,7 +537,42 @@ Recommended POC policy:
 
 ## Appendix: POC-Only Checks (Not in H1–H22)
 
-These checks are implemented in the current React POC (`docs/HANDOFF-REACT-APP-POC.md`) but are **not** part of the canonical invariant set yet:
+These checks are implemented in the current React POC (`docs/HANDOFF-REACT-APP-POC.md`) but are **not** part of the canonical invariant set yet.
 
-- **BOM coverage**: block publish if consumables/packaged goods are uncovered (POC uses an `implicit` coverage state for things like frying oil).
+### H23 (POC): BOM Coverage Required
+
+**Rule:** All consumables and packaged goods in the menu item's BOM must be accounted for in the line build.
+
+**Coverage states:**
+- `covered` — step explicitly references this BOM item via `target.bomComponentId`
+- `implicit` — step uses item implicitly (e.g., frying oil during HEAT); tracked via `_bomImplicitUsage`
+- `uncovered` — no step references this BOM item
+
+**Validation:**
+```ts
+function validateH23(build: BenchTopLineBuild, bom: BOMItem[]): ValidationResult {
+  const coverage = computeBOMCoverage(build, bom);
+  const uncovered = coverage.items.filter(i =>
+    i.status === "uncovered" &&
+    (i.type === "consumable" || i.type === "packaged_good")
+  );
+  if (uncovered.length > 0) {
+    return {
+      valid: false,
+      error: `H23: ${uncovered.length} BOM item(s) uncovered: ${uncovered.map(i => i.name).join(", ")}`
+    };
+  }
+  return { valid: true };
+}
+```
+
+**Override policy:** Allow override with reason.
+- User must provide explanation for why item is intentionally uncovered
+- Creates `ValidationOverride` with `ruleId: "H23"` and non-empty `reason`
+- Common valid reasons: "Used in sub-component recipe", "Implicit usage (oil, water)", "Packaged separately"
+
+**Why this matters:**
+- Every ingredient in the dish should be traceable to a step
+- Uncovered items = potential missing instructions or data quality gap
+- Override + reason creates audit trail for intentional exceptions
 

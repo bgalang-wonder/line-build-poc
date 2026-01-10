@@ -106,13 +106,54 @@ export interface Step {
   dependsOn?: StepId[];            // dependency edges (if present: H8 + H9 apply)
 }
 
-export type StationId = string;
-export type ToolId = string;
 ```
 
 ---
 
 ## Core Enums
+
+### `StationId` (Physical Location)
+
+Stations are **physical locations** in the kitchen where work happens. They are distinct from equipment (appliances).
+
+```ts
+export type StationId =
+  | "hot_side"      // hot line — fryer, turbo, waterbath, etc.
+  | "cold_side"     // cold prep / cold line
+  | "prep"          // general prep area
+  | "garnish"       // garnish / cold assembly station
+  | "expo"          // expeditor / pass window
+  | "vending"       // vending / packaging station
+  | "pass"          // pass to next station (handoff point)
+  | "other";        // escape hatch + detail in notes
+
+// Note: In some legacy data, "station" was conflated with equipment (e.g., "Turbo", "Fryer").
+// The canonical model separates these: station = where, equipment = what appliance.
+```
+
+### `ToolId` (Hand Tools)
+
+Tools are **hand-held implements** used to manipulate food. Common vocabulary from scorecard:
+
+```ts
+export type ToolId =
+  | "hand"          // bare hands (most common)
+  | "tongs"
+  | "mini_tong"
+  | "paddle"
+  | "spatula"
+  | "spoon"
+  | "spoodle_1oz"
+  | "spoodle_2oz"
+  | "spoodle_3oz"
+  | "fry_basket"
+  | "squeeze_bottle"
+  | "shaker"
+  | "viper"         // portion tool
+  | "other";        // escape hatch
+```
+
+---
 
 ### `ActionFamily` (Required)
 
@@ -179,22 +220,29 @@ export interface StepTarget {
 
 ### `StepEquipment`
 
+Equipment refers to **appliances** that apply heat or perform mechanical work.
+
 ```ts
 export type ApplianceId =
-  | "turbo"
-  | "fryer"
-  | "waterbath"
-  | "salamander"
-  | "panini_press"
-  | "induction"
-  | "clamshell"
-  | "toaster"
-  | "conveyor"
-  | string; // extensible
+  // Heat appliances (common)
+  | "turbo"           // turbo oven / rapid cook
+  | "fryer"           // deep fryer
+  | "waterbath"       // sous vide / immersion circulator
+  | "toaster"         // toaster
+  | "salamander"      // salamander broiler
+  | "clamshell_grill" // clamshell / contact grill
+  | "press"           // panini press / sandwich press
+  | "induction"       // induction cooktop
+  | "conveyor"        // conveyor oven
+  // Holding equipment
+  | "hot_box"         // hot holding cabinet
+  | "hot_well"        // steam table / hot well
+  // Escape hatch
+  | "other";          // + detail in notes
 
 export interface StepEquipment {
   applianceId: ApplianceId;
-  presetId?: string;
+  presetId?: string;  // e.g., "350F", "program_3"
 }
 ```
 
@@ -235,12 +283,13 @@ export interface StepContainer {
 export type PrepType = "pre_service" | "order_execution";
 
 export type StorageLocationType =
-  | "cold_storage"
-  | "cold_rail"
-  | "dry_rail"
-  | "freezer"
-  | "ambient"
-  | "hot_hold_well"
+  | "cold_storage"    // walk-in or reach-in fridge
+  | "cold_rail"       // cold line/rail at station
+  | "dry_rail"        // dry storage at station
+  | "freezer"         // frozen storage
+  | "ambient"         // room temperature
+  | "hot_hold_well"   // hot holding equipment
+  | "kit"             // pre-assembled kit (ready to use)
   | "other";
 
 export interface StorageLocation {

@@ -79,10 +79,10 @@ Ask: “Do you want this as order-execution only, or include morning prep too?�
 
 Ask these first if missing:
 
-- **HEAT → equipment**: “What appliance is used for this heat step? (turbo / fryer / waterbath / oven / stovetop / other)”
-- **HEAT → time**: “How long does it run? If it’s ‘cook to temp/color’, what’s the target outcome?”
-- **VEND → container**: “What’s the packaging/container for final handoff?”
-- **pre_service → storage**: “Where does the prepped item live after prep? (cold_rail / cold_storage / dry_rail / freezer / ambient / hot_hold_well / other)”
+- **HEAT → equipment**: "What appliance is used for this heat step? (turbo / fryer / waterbath / toaster / salamander / press / clamshell_grill / other)"
+- **HEAT → time**: "How long does it run? If it's 'cook to temp/color', what's the target outcome?"
+- **VEND → container**: "What's the packaging/container for final handoff?"
+- **pre_service → storage**: "Where does the prepped item live after prep? (cold_rail / cold_storage / dry_rail / kit / freezer / ambient / hot_hold_well / other)"
 
 If user can’t answer:
 - Capture uncertainty in `notes` (“Timing TBD; cook until internal temp reaches 165°F”).
@@ -113,14 +113,35 @@ If uncertain, keep `dependsOn` empty and rely on orderIndex for sequencing.
 
 These are **heuristics** (not hard rules). Use them to propose values and ask for confirmation.
 
-### Station inference (recommended POC vocabulary)
+### Station vs Equipment (important distinction)
 
-Suggested station IDs (customizable): `hot_side`, `cold_side`, `prep`, `expo`, `pass`.
+**Station** = physical location in the kitchen where work happens.
+**Equipment** = appliance used to perform the work.
+
+These are **separate fields** in the schema. Legacy data often conflated them (e.g., "Turbo" as a station), but the canonical model keeps them distinct.
+
+**Station vocabulary** (physical locations):
+- `hot_side` — hot line (where fryers, turbos, waterbaths live)
+- `cold_side` — cold prep / cold line
+- `prep` — general prep area (morning prep work)
+- `garnish` — garnish / cold assembly station
+- `expo` — expeditor / pass window
+- `vending` — vending / packaging station
+- `pass` — handoff point between stations
+- `other` — escape hatch (use notes for detail)
+
+**Equipment vocabulary** (appliances):
+- `turbo`, `fryer`, `waterbath`, `toaster`, `salamander`, `clamshell_grill`, `press`, `induction`, `conveyor`, `hot_box`, `hot_well`, `other`
+
+### Station inference heuristics
 
 - If `action.family === HEAT` → default `stationId = hot_side`
-- If `action.family === ASSEMBLE` and no heat equipment involved → default `stationId = cold_side`
-- If `action.family === VEND` → default `stationId = expo` or `pass`
+- If `action.family === ASSEMBLE` and no heat equipment → default `stationId = garnish` or `cold_side`
+- If `action.family === VEND` → default `stationId = vending` or `expo`
 - If `prepType === pre_service` → default `stationId = prep`
+- If the chef says "garnish station" → `stationId = garnish`
+
+When uncertain, ask: "Does this happen on hot side, cold side, garnish, prep, or expo?"
 
 ### Phase inference
 
@@ -130,27 +151,44 @@ Suggested station IDs (customizable): `hot_side`, `cold_side`, `prep`, `expo`, `
 - ASSEMBLE/COMBINE near plating → ASSEMBLY
 - VEND → PASS
 
-### Time inference (use as “sanity check” ranges)
+### Time inference (use as "sanity check" ranges)
 
 Use only to flag outliers, not to fill missing time:
 
-- `turbo`: 30–120 seconds
-- `toaster`: 15–60 seconds
-- `fryer`: 120–300 seconds
-- `waterbath`: 180–600 seconds
+| Equipment | Typical Range | Notes |
+|-----------|---------------|-------|
+| `turbo` | 30–120 sec | Rapid cook oven |
+| `toaster` | 15–60 sec | Toast/warm |
+| `fryer` | 120–300 sec | Deep fry |
+| `waterbath` | 180–600 sec | Sous vide / retherm |
+| `salamander` | 30–90 sec | Broil / finish |
+| `clamshell_grill` | 60–180 sec | Contact grill |
+| `press` | 60–180 sec | Panini press |
 
-If a provided time is far outside range, ask: “That seems long/short — confirm?”
+If a provided time is far outside range, ask: "That seems long/short — confirm?"
 
 ### PrepType + StorageLocation inference
 
 If the chef describes morning staging, batch portioning, restocking rails:
 - `prepType = pre_service`
-- Require `storageLocation`
+- Require `storageLocation` (hard rule H17)
 
-Heuristic mapping:
+**Storage location vocabulary:**
+- `cold_storage` — walk-in or reach-in fridge
+- `cold_rail` — cold line/rail at station (ready to grab)
+- `dry_rail` — dry storage at station
+- `freezer` — frozen storage
+- `ambient` — room temperature
+- `hot_hold_well` — hot holding equipment
+- `kit` — pre-assembled kit (ready to use)
+- `other` — escape hatch
+
+**Heuristic mapping:**
 - cold proteins / ready-to-grab items → `cold_rail`
 - bulk backup / large batch → `cold_storage`
 - shelf stable (tortillas, dry seasoning packets) → `dry_rail`
+- pre-assembled mise en place → `kit`
+- frozen backup stock → `freezer`
 
 ### Container vs target (avoid H4 violations)
 
