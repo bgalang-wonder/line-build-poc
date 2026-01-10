@@ -15,10 +15,76 @@ import { PublishButton } from '../validation/PublishButton';
 import { CheckMyWorkButton } from '../validation/CheckMyWorkButton';
 import { ToastContainer } from '../ui/Toast';
 import { Button } from '../ui/Button';
-import { DAGVisualization } from '../visualization/DAGVisualization';
+import {
+  DAGVisualization,
+  type ActionFamily,
+  type BenchTopLineBuild,
+} from '../visualization/DAGVisualization';
 import { ScenarioPanel } from '../resolver/ScenarioPanel';
 import { ComplexityScoreDisplay } from '../scoring/ComplexityScoreDisplay';
 import { LineBuild, WorkUnit, BuildValidationStatus } from '@/lib/model/types';
+
+function legacyLineBuildToBenchTop(build: LineBuild): BenchTopLineBuild {
+  const now = new Date().toISOString();
+
+  const mapAction = (a: string): ActionFamily => {
+    if (
+      a === 'PREP' ||
+      a === 'HEAT' ||
+      a === 'TRANSFER' ||
+      a === 'COMBINE' ||
+      a === 'ASSEMBLE' ||
+      a === 'PORTION' ||
+      a === 'CHECK' ||
+      a === 'VEND' ||
+      a === 'OTHER'
+    ) {
+      return a;
+    }
+
+    // Legacy MVP vocab
+    if (a === 'QUALITY_CHECK') return 'CHECK';
+    if (a === 'PLATE') return 'VEND';
+    if (a === 'FINISH') return 'ASSEMBLE';
+    return 'OTHER';
+  };
+
+  return {
+    id: build.id,
+    itemId: build.menuItemId,
+    version: build.metadata?.version ?? 0,
+    status: build.metadata?.status === 'active' ? 'published' : 'draft',
+    createdAt: now,
+    updatedAt: now,
+    menuItemId: build.menuItemId,
+    steps: build.workUnits.map((wu, idx) => {
+      const durationSeconds =
+        wu.tags.time?.unit === 'min'
+          ? wu.tags.time.value * 60
+          : wu.tags.time?.unit === 'sec'
+            ? wu.tags.time.value
+            : undefined;
+
+      return {
+        id: wu.id,
+        orderIndex: idx,
+        action: { family: mapAction(wu.tags.action) },
+        target: {
+          type: wu.tags.target.bomId ? 'bom_component' : 'free_text',
+          bomComponentId: wu.tags.target.bomId,
+          name: wu.tags.target.name,
+        },
+        equipment: wu.tags.equipment ? { applianceId: wu.tags.equipment } : undefined,
+        time:
+          wu.tags.time && typeof durationSeconds === 'number'
+            ? { durationSeconds, isActive: wu.tags.time.type === 'active' }
+            : undefined,
+        cookingPhase: wu.tags.phase,
+        dependsOn: wu.dependsOn,
+      };
+    }),
+  };
+}
 
 interface EditorContainerProps {
   buildId?: string;
@@ -443,6 +509,8 @@ export default function EditorContainer({
   }
 
   // ========== RENDER EDITOR LAYOUT ==========
+  const buildForDag = legacyLineBuildToBenchTop(currentBuild);
+
   return (
     <>
       <EditorLayout
@@ -456,7 +524,7 @@ export default function EditorContainer({
         }
         dagPanel={
           <DAGVisualization
-            build={currentBuild}
+            build={buildForDag}
             selectedStepId={selectedStepId || undefined}
             onSelectStep={handleStepSelect}
           />

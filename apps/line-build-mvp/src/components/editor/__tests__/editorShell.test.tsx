@@ -224,7 +224,7 @@ describe('EditorLayout (benchtop-x0c.11.2)', () => {
       );
 
       // Check for column styling
-      const columns = container.querySelectorAll('.bg-gray-50');
+      const columns = container.querySelectorAll('.bg-neutral-50');
       expect(columns.length).toBeGreaterThanOrEqual(2);
     });
   });

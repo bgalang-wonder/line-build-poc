@@ -14,7 +14,7 @@
  */
 
 import { WorkUnit, LineBuild } from '@/lib/model/types';
-import { VertexAIClient, createVertexAIClient } from '@/lib/ai/vertex/client';
+import type { VertexAIClient } from '@/lib/ai/vertex/client';
 
 export interface ChatInterpretation {
   conversationContext: string; // Summary of what was discussed
@@ -82,11 +82,20 @@ IMPORTANT:
 `;
 
 export class ChatIntegrationService {
-  private vertexAI: VertexAIClient;
+  private vertexAI: VertexAIClient | null = null;
   private currentBuild: LineBuild | null = null;
 
   constructor(vertexAI?: VertexAIClient) {
-    this.vertexAI = vertexAI || createVertexAIClient();
+    this.vertexAI = vertexAI ?? null;
+  }
+
+  private async getVertexAI(): Promise<VertexAIClient> {
+    if (this.vertexAI) return this.vertexAI;
+
+    // Lazy-load to keep Jest (CJS) from eagerly importing ESM-only deps.
+    const { createVertexAIClient } = await import('@/lib/ai/vertex/client');
+    this.vertexAI = createVertexAIClient();
+    return this.vertexAI;
   }
 
   /**
@@ -104,7 +113,8 @@ export class ChatIntegrationService {
   async interpretMessage(userMessage: string): Promise<ChatInterpretation> {
     try {
       const prompt = this.buildPrompt(userMessage);
-      const response = await this.vertexAI.generateContent(
+      const vertexAI = await this.getVertexAI();
+      const response = await vertexAI.generateContent(
         prompt,
         CHAT_INTERPRETATION_SYSTEM_PROMPT
       );
@@ -239,7 +249,8 @@ export class ChatIntegrationService {
       })
       .join('\n');
 
-    let message = `Got it! I'm suggesting:\n${actionSummary}`;
+    const count = interpretation.suggestedActions.length;
+    let message = `Got it! I'm suggesting ${count} change${count === 1 ? '' : 's'}:\n${actionSummary}`;
 
     if (interpretation.clarifications && interpretation.clarifications.length > 0) {
       message += `\n\nA few things to clarify:\n`;

@@ -616,8 +616,8 @@
         "Endpoints return JSON",
         "No validation recomputation in viewer"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T06:03:42Z"
     },
     {
       "id": "T5.2",
@@ -639,8 +639,8 @@
         "Running lb write updates viewer within 2 seconds",
         "Viewer displays validation status without recompute"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T06:03:42Z"
     },
     {
       "id": "T5.3",
@@ -661,8 +661,8 @@
         "Viewer renders a canonical build created by CLI",
         "No dependency on old ActionType vocab"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T06:03:42Z"
     },
     {
       "id": "T5.4",

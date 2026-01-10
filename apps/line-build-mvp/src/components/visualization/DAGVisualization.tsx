@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import ReactFlow, {
   Node,
   Edge,
@@ -9,31 +9,82 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   MiniMap,
-  Connection,
-  addEdge,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { LineBuild, WorkUnit, ActionType } from '@/lib/model/types';
+
+/**
+ * Canonical PoC schema subset for visualization.
+ * Source of truth: docs/handoff/POC_TASKS.json -> shared_conventions.schema_contract
+ */
+export type ActionFamily =
+  | 'PREP'
+  | 'HEAT'
+  | 'TRANSFER'
+  | 'COMBINE'
+  | 'ASSEMBLE'
+  | 'PORTION'
+  | 'CHECK'
+  | 'VEND'
+  | 'OTHER';
+
+export type Step = {
+  id: string;
+  orderIndex: number;
+  action: {
+    family: ActionFamily;
+    techniqueId?: string;
+    detailId?: string;
+    displayTextOverride?: string;
+  };
+  target?: {
+    type?: string;
+    bomUsageId?: string;
+    bomComponentId?: string;
+    name?: string;
+  };
+  equipment?: {
+    applianceId: string;
+    presetId?: string;
+  };
+  time?: {
+    durationSeconds: number;
+    isActive: boolean;
+  };
+  cookingPhase?: string;
+  instruction?: string;
+  notes?: string;
+  dependsOn?: string[];
+};
+
+export type BenchTopLineBuild = {
+  id: string;
+  itemId: string;
+  version: number;
+  status: 'draft' | 'published' | 'archived';
+  steps: Step[];
+  createdAt: string;
+  updatedAt: string;
+  menuItemId?: string;
+};
 
 interface DAGVisualizationProps {
-  build: LineBuild;
+  build: BenchTopLineBuild;
   selectedStepId?: string;
   onSelectStep?: (stepId: string) => void;
 }
 
-// Action type to color mapping
-const ACTION_COLORS: Record<ActionType, string> = {
+const ACTION_COLORS: Record<ActionFamily, string> = {
   PREP: '#3B82F6', // blue
   HEAT: '#EF4444', // red
   TRANSFER: '#8B5CF6', // purple
+  COMBINE: '#06B6D4', // cyan
   ASSEMBLE: '#10B981', // green
   PORTION: '#F59E0B', // amber
-  PLATE: '#EC4899', // pink
-  FINISH: '#06B6D4', // cyan
-  QUALITY_CHECK: '#6366F1', // indigo
+  CHECK: '#6366F1', // indigo
+  VEND: '#EC4899', // pink
+  OTHER: '#6B7280', // neutral
 };
 
-// Phase to background mapping
 const PHASE_BG: Record<string, string> = {
   PRE_COOK: '#F0F9FF', // light blue
   COOK: '#FEF2F2', // light red
@@ -42,28 +93,60 @@ const PHASE_BG: Record<string, string> = {
   PASS: '#ECFDF5', // very light green
 };
 
-function createDAGNodes(workUnits: WorkUnit[], selectedStepId?: string): Node[] {
-  return workUnits.map((unit, index) => {
-    const actionColor = ACTION_COLORS[unit.tags.action] || '#6B7280';
-    const bgColor = unit.tags.phase ? PHASE_BG[unit.tags.phase] : '#FFFFFF';
-    const isSelected = unit.id === selectedStepId;
+function formatDuration(seconds: number): string {
+  if (!Number.isFinite(seconds) || seconds <= 0) return '';
+  if (seconds < 60) return `${Math.round(seconds)}s`;
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.round(seconds % 60);
+  return secs === 0 ? `${mins}m` : `${mins}m ${secs}s`;
+}
+
+function createDAGNodes(steps: Step[], selectedStepId?: string): Node[] {
+  // Layout: simple row by orderIndex (T5.5 will add deterministic dagre layout).
+  const ordered = [...steps].sort((a, b) => a.orderIndex - b.orderIndex);
+
+  return ordered.map((step, index) => {
+    const actionColor = ACTION_COLORS[step.action.family] || '#6B7280';
+    const bgColor = step.cookingPhase ? PHASE_BG[step.cookingPhase] : '#FFFFFF';
+    const isSelected = step.id === selectedStepId;
+
+    const targetLabel =
+      step.target?.name ||
+      step.target?.bomUsageId ||
+      step.target?.bomComponentId ||
+      '';
+
+    const instructionLabel =
+      typeof step.instruction === 'string' && step.instruction.trim().length > 0
+        ? step.instruction.trim()
+        : typeof step.notes === 'string' && step.notes.trim().length > 0
+          ? step.notes.trim()
+          : '';
 
     return {
-      id: unit.id,
+      id: step.id,
       data: {
         label: (
           <div className="w-full max-w-[150px] text-center">
-            <div className="font-semibold text-xs truncate">{unit.tags.action}</div>
-            <div className="text-xs text-gray-600 truncate">{unit.tags.target.name || unit.tags.target.bomId}</div>
-            {unit.tags.equipment && (
-              <div className="text-xs text-gray-500">🔧 {unit.tags.equipment}</div>
-            )}
-            {unit.tags.time && (
-              <div className="text-xs text-gray-500">
-                ⏱ {unit.tags.time.value}
-                {unit.tags.time.unit === 'min' ? 'm' : 's'}
-                {unit.tags.time.type === 'passive' && ' (passive)'}
+            <div className="font-semibold text-xs truncate">{step.action.family}</div>
+            {targetLabel ? (
+              <div className="text-xs text-neutral-600 truncate">{targetLabel}</div>
+            ) : null}
+            {step.equipment?.applianceId ? (
+              <div className="text-xs text-neutral-500">🔧 {step.equipment.applianceId}</div>
+            ) : null}
+            {typeof step.time?.durationSeconds === 'number' && step.time.durationSeconds > 0 ? (
+              <div className="text-xs text-neutral-500">
+                ⏱ {formatDuration(step.time.durationSeconds)}
+                {step.time.isActive === false ? ' (passive)' : ''}
               </div>
+            ) : null}
+            {instructionLabel ? (
+              <div className="mt-1 text-[11px] text-neutral-500 line-clamp-2">
+                {instructionLabel}
+              </div>
+            ) : (
+              <div className="mt-1 text-[11px] text-neutral-400">—</div>
             )}
           </div>
         ),
@@ -87,62 +170,59 @@ function createDAGNodes(workUnits: WorkUnit[], selectedStepId?: string): Node[] 
   });
 }
 
-function createDAGEdges(workUnits: WorkUnit[]): Edge[] {
+function createDAGEdges(steps: Step[]): Edge[] {
   const edges: Edge[] = [];
 
-  workUnits.forEach((unit) => {
-    unit.dependsOn.forEach((depId) => {
+  for (const step of steps) {
+    for (const depId of step.dependsOn ?? []) {
       edges.push({
-        id: `edge-${depId}-${unit.id}`,
+        id: `edge-${depId}-${step.id}`,
         source: depId,
-        target: unit.id,
-        animated: true,
+        target: step.id,
+        animated: false,
         style: {
           stroke: '#9CA3AF',
           strokeWidth: 2,
         },
       });
-    });
-  });
+    }
+  }
 
   return edges;
 }
 
 export function DAGVisualization({ build, selectedStepId, onSelectStep }: DAGVisualizationProps) {
-  // Generate nodes and edges from workUnits
   const initialNodes = useMemo(
-    () => createDAGNodes(build.workUnits, selectedStepId),
-    [build.workUnits, selectedStepId]
+    () => createDAGNodes(build.steps, selectedStepId),
+    [build.steps, selectedStepId],
   );
-
-  const initialEdges = useMemo(() => createDAGEdges(build.workUnits), [build.workUnits]);
+  const initialEdges = useMemo(() => createDAGEdges(build.steps), [build.steps]);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const onConnect = useCallback(
-    (connection: Connection) => {
-      setEdges((eds) => addEdge(connection, eds));
-    },
-    [setEdges]
-  );
+  // Keep internal state in sync when build/selection changes (e.g., polling refresh).
+  useEffect(() => {
+    setNodes(initialNodes);
+  }, [initialNodes, setNodes]);
 
-  // Handle node click for selection
+  useEffect(() => {
+    setEdges(initialEdges);
+  }, [initialEdges, setEdges]);
+
   const handleNodeClick = useCallback(
-    (event: React.MouseEvent, node: Node) => {
-      if (onSelectStep) {
-        onSelectStep(node.id);
-      }
+    (_event: React.MouseEvent, node: Node) => {
+      onSelectStep?.(node.id);
     },
-    [onSelectStep]
+    [onSelectStep],
   );
 
-  if (build.workUnits.length === 0) {
+  if (build.steps.length === 0) {
     return (
-      <div className="h-full w-full flex items-center justify-center bg-gray-50 rounded border border-gray-200">
-        <div className="text-center text-gray-500">
-          <p className="text-sm font-medium mb-2">No work units yet</p>
-          <p className="text-xs">Add steps using the chat or form to see the DAG</p>
+      <div className="h-full w-full flex items-center justify-center bg-neutral-50 rounded border border-neutral-200">
+        <div className="text-center text-neutral-500">
+          <p className="text-sm font-medium mb-2">No steps yet</p>
+          <p className="text-xs">This build has no steps to visualize.</p>
         </div>
       </div>
     );
@@ -155,9 +235,9 @@ export function DAGVisualization({ build, selectedStepId, onSelectStep }: DAGVis
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
         onNodeClick={handleNodeClick}
         fitView
+        nodesConnectable={false}
       >
         <Background />
         <Controls />
