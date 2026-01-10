@@ -434,8 +434,8 @@
         "HEAT requirements enforced (H15/H22)",
         "Composition/flow integrity enforced"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T00:29:36-05:00"
     },
     {
       "id": "T2.2",
@@ -454,8 +454,8 @@
         "`npx vitest` or `npx jest` equivalent runs for scripts (choose one)",
         "Tests cover key invariants"
       ],
-      "status": "pending",
-      "completedAt": null
+      "status": "done",
+      "completedAt": "2026-01-10T00:29:36-05:00"
     },
     {
       "id": "T3.1",
