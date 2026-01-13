@@ -1,70 +1,95 @@
-# Line Build CLI & Viewer (PoC)
+# Line Build CLI & Viewer POC: AI-Assisted Culinary Operations
 
-Prototype for authoring and validating cooking line-build workflows. Two parts:
-- CLI (`scripts/lb.ts`) for read/write/validate/query/builds
-- Viewer (`viewer/`) for DAG visualization + validation overlay
+This Proof of Concept (POC) demonstrates a high-leverage workflow for authoring, validating, and visualizing culinary "line builds" (pre-service and service preparation workflows). 
+
+It combines **AI reasoning**, **deterministic CLI validation**, and **live DAG visualization** to turn loose culinary descriptions into actionable, valid workflow graphs.
+
+## The Three-Pillar Architecture
+
+### 1. The Interviewer (Claude Code)
+Claude Code acts as a **culinary operations interviewer**. Instead of just generating JSON, it:
+- **Validates early**: Catches schema and kitchen logic violations *before* writing.
+- **Analyzes structure**: Detects parallel tracks, merge points, and missing dependencies.
+- **Enriches data**: Proactively asks about station assignments, tool IDs, and active vs. passive cooking times.
+- **Uses templates**: Follows `templates/validation-checklist.md` to ensure every build passes rigorous standards.
+
+### 2. The Engine (CLI)
+A TypeScript CLI (`scripts/lb.ts`) provides the "source of truth" for validation and data management:
+- **Strict Validation**: Enforces 26+ rules (H1-H26) covering schema, connectivity, and kitchen logic.
+- **Data Store**: Manages file-backed JSON builds, validation reports, and audit receipts.
+- **Control Interface**: Allows Claude to "jump" the viewer to specific builds or steps via the `view` command.
+
+### 3. The Viewer (Next.js)
+A live-polling React application (`viewer/`) that visualizes the build as a Directed Acyclic Graph (DAG):
+- **Live Updates**: Automatically reflects changes made by Claude or the CLI within 1.5 seconds.
+- **Validation Overlay**: Highlights steps with errors or warnings directly on the graph.
+- **Interactive Inspection**: Allows deep-diving into step details, dependencies, and rule violations.
+
+---
+
+## Core Workflows
+
+### The "Interview" Workflow
+1. **Input**: User provides a CSV, a rough description, or a recipe.
+2. **Analysis**: Claude parses the input and runs `validate-stdin` to identify "gaps" (missing fields or logic errors).
+3. **Clarification**: Claude uses the `AskUserQuestion` tool to batch-interview the user about equipment, units, and track coordination.
+4. **Generation**: Once all gaps are resolved, Claude writes the build using the CLI.
+5. **Visualization**: The CLI automatically triggers the viewer to jump to the new build.
+
+### The "Structural Validation" Workflow
+The system doesn't just check fields; it checks the **Graph**:
+- **Entry Points**: Flags if >25% of steps lack dependencies (ensures a connected workflow).
+- **Parallel Tracks**: Identifies independent work streams (e.g., a "salsa track" vs a "main track") and asks how they merge.
+- **Station Flow**: Detects unusual transitions (e.g., moving from a hot side to a cold side without a transfer step).
+
+---
 
 ## Quick Start
-```bash
-# From repo root
-npm install                             # installs CLI deps in poc/line-build-cli
-npx tsx poc/line-build-cli/scripts/lb.ts --help
 
-# Viewer (Next.js)
-cd poc/line-build-cli/viewer
+### 1. Setup
+```bash
+# Install root dependencies (CLI)
 npm install
-npm run dev    # http://localhost:3000
+
+# Setup Viewer
+cd viewer
+npm install
 ```
 
-## Data Layout (default)
-- Builds: `data/line-builds/<buildId>.json`
-- Validation outputs: `data/validation/<buildId>.latest.json`
-- Receipts/audit: `data/receipts/*.json`
-- Checklists/prompts: `templates/validation-checklist.md`, `templates/rule-questions.md`
-- Fixtures (input examples): `data/fixtures/*.json`
+### 2. Run the Viewer
+```bash
+cd viewer
+npm run dev
+# Open http://localhost:3000
+```
 
-Use `LINE_BUILD_POC_DATA_DIR=/abs/path/to/data` to point CLI + viewer elsewhere.
+### 3. Interact via Claude Code
+Simply ask Claude to:
+- "Find all builds for item X"
+- "Author a new build for a Baked Potato from this CSV..."
+- "Show me the health of the Beef Barbacoa build"
 
-## CLI Commands (high value)
-- `find [query]` / `list <itemId>` – discover builds
-- `read <buildId> [--summary|--steps]` – inspect builds
-- `validate <buildId>` / `validate-stdin` – run validators (H/C/S rules)
-- `gaps <buildId>` / `gaps-stdin` – grouped interview gaps
-- `write` – read build JSON from stdin, validate, write build + validation + receipt
-- `query --where <dsl>` – DSL over whitelisted fields (`step.*`, `build.*`)
-- `bulk-update --where ... --set field=value [--apply]` – dry-run by default
-- `search-notes <pattern>` – regex on notes/instruction
-- `view <buildId>` – request viewer to jump to build (writes selection control file)
+---
 
-Help: `npx tsx scripts/lb.ts --help`
+## Technical Reference
 
-## Viewer
-- Auto-polls builds + validation every 1.5s
-- Views: Graph (dependsOn + flow), Steps table, Rules panel
-- URL params: `?buildId=...&stepId=...`
-- Selection control: `npx tsx scripts/lb.ts view <buildId>` writes `data/viewer/selection.json`
-- Code entry: `viewer/src/app/page.tsx`; DAG: `viewer/src/components/visualization/DAGVisualization.tsx`
+### CLI Commands
+- `find [query]` / `list <itemId>`: Discover builds.
+- `read <buildId> [--steps]`: Inspect builds in terminal.
+- `write`: Validate and persist a build + receipt.
+- `validate <buildId>`: Refresh validation report for a build.
+- `view <buildId>`: Jump the viewer to a specific build.
+- `bulk-update --where <dsl> --set <field>=<value>`: Patch multiple steps at once.
 
-## Validation & Schema
-- Schema + Zod: `scripts/lib/schema.ts`
-- Rules catalog: `scripts/lib/rules.ts`
-- Validator impl: `scripts/lib/validate.ts`
-- Tests: `scripts/lib/validate.test.ts`
-- Fixtures: `data/fixtures/*.json`, run `npx tsx scripts/lb.ts validate-fixtures`
+### Data Layout
+- `data/line-builds/`: Source JSON for builds.
+- `data/validation/`: Latest validation reports.
+- `data/receipts/`: Audit trail of all write operations.
+- `data/checklists/`: Per-build progress tracking.
+- `scripts/lib/rules.ts`: The "Golden Rules" (H1-H26).
 
-## Output Model (examples)
-- Builds: `data/line-builds/*.json` (BenchTopLineBuild)
-- Validation results: `data/validation/*.latest.json` (valid + errors/warnings)
-- Receipts: `data/receipts/*.json` (audit of write/bulk-update/validate)
-
-## Dev Notes (PoC)
-- File-backed, atomic writes (temp + rename)
-- Query/bulk-update use whitelisted fields only
-- Polling-based viewer (no DB, no server state)
-
-## Handy Paths
-- CLI entry: `scripts/lb.ts`
-- Query DSL: `scripts/lib/query.ts`
-- Bulk update planner: `scripts/lib/bulkUpdate.ts`
-- Store IO (atomic writes): `scripts/lib/store.ts`
-- Viewer data paths util: `viewer/src/lib/dataPaths.ts`
+### Rules Highlight
+- **H15/H22**: HEAT steps require equipment and time (active/passive).
+- **H16**: VEND steps require a container or target.
+- **H26**: Graph Connectivity (Connected DAG).
+- **C1-C3**: Culinary logic (e.g., HEAT should happen before ASSEMBLE).
