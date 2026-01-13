@@ -1,0 +1,32 @@
+{
+  "id": "fixture-container-in-target",
+  "itemId": "ITEM_CONTAINER_TARGET",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
+      "instruction": "Grab salad from cold rail."
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "action": { "family": "ASSEMBLE" },
+      "dependsOn": ["s1"],
+      "target": { "type": "free_text", "name": "clamshell container" },
+      "instruction": "Place salad in clamshell container (H4: container-like target.name without container field)."
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "action": { "family": "VEND" },
+      "dependsOn": ["s2"],
+      "container": { "type": "clamshell" },
+      "instruction": "Send to expo."
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

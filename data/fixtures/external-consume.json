@@ -1,0 +1,48 @@
+{
+  "id": "fixture-external-consume",
+  "itemId": "ITEM_EXTERNAL_CONSUME",
+  "version": 1,
+  "status": "draft",
+  "requiresBuilds": [
+    {
+      "itemId": "ITEM_COMPONENT_SAUCE",
+      "version": "latest_published",
+      "role": "prepared_component",
+      "notes": "Prepared component sauce"
+    }
+  ],
+  "steps": [
+    {
+      "id": "e1",
+      "orderIndex": 1,
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open prepared sauce component package."
+    },
+    {
+      "id": "e2",
+      "orderIndex": 2,
+      "action": { "family": "COMBINE" },
+      "dependsOn": ["e1"],
+      "instruction": "Add prepared sauce component to the assembly.",
+      "consumes": [
+        {
+          "source": {
+            "type": "external_build",
+            "itemId": "ITEM_COMPONENT_SAUCE",
+            "version": "latest_published"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "orderIndex": 3,
+      "action": { "family": "VEND" },
+      "dependsOn": ["e2"],
+      "container": { "type": "clamshell", "name": "Standard clamshell" },
+      "instruction": "Package and hand off."
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

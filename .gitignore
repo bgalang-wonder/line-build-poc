@@ -1,0 +1,10 @@
+node_modules/
+.vite/
+dist/
+coverage/
+*.log
+.DS_Store
+
+# Viewer control state (local only)
+data/viewer/selection.json
+

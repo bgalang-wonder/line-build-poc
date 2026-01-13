@@ -1,0 +1,32 @@
+{
+  "id": "fixture-prep-missing-technique",
+  "itemId": "ITEM_PREP_NO_TECH",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "action": { "family": "PREP" },
+      "toolId": "utility_knife",
+      "instruction": "Prep the lettuce (missing techniqueId and notes to trigger H25)."
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "action": { "family": "ASSEMBLE" },
+      "dependsOn": ["s1"],
+      "instruction": "Place lettuce on plate."
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "action": { "family": "VEND" },
+      "dependsOn": ["s2"],
+      "container": { "type": "tray" },
+      "instruction": "Send to expo."
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

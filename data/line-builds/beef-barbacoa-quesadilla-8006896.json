@@ -1,0 +1,477 @@
+{
+  "id": "beef-barbacoa-quesadilla-8006896",
+  "itemId": "8006896",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "step-1",
+      "orderIndex": 0,
+      "action": {
+        "family": "PREP",
+        "techniqueId": "retrieve"
+      },
+      "instruction": "Place braised brisket pouch from cold storage to waterbath station",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Braised Brisket [Pouch]"
+      },
+      "stationId": "hot_side",
+      "toolId": "hand",
+      "cookingPhase": "PRE_COOK",
+      "notes": "Retrieve from cold storage"
+    },
+    {
+      "id": "step-2",
+      "orderIndex": 1,
+      "action": {
+        "family": "HEAT"
+      },
+      "instruction": "Cook brisket pouch in waterbath for 6 minutes",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Braised Brisket [Pouch]"
+      },
+      "stationId": "hot_side",
+      "toolId": "hand",
+      "equipment": {
+        "applianceId": "waterbath"
+      },
+      "time": {
+        "durationSeconds": 360,
+        "isActive": false
+      },
+      "cookingPhase": "COOK",
+      "dependsOn": [
+        "step-1"
+      ]
+    },
+    {
+      "id": "step-3",
+      "orderIndex": 2,
+      "action": {
+        "family": "TRANSFER"
+      },
+      "instruction": "Pass cooked brisket pouch to garnish station",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Cooked Braised Brisket [Pouch]"
+      },
+      "stationId": "hot_side",
+      "toolId": "hand",
+      "cookingPhase": "POST_COOK",
+      "notes": "Transfer to garnish station",
+      "dependsOn": [
+        "step-2"
+      ]
+    },
+    {
+      "id": "step-4",
+      "orderIndex": 3,
+      "action": {
+        "family": "PREP",
+        "techniqueId": "retrieve"
+      },
+      "instruction": "Place foil sheet on work surface",
+      "trackId": "default",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "container": {
+        "type": "foil",
+        "name": "Foil Sheet"
+      },
+      "notes": "Retrieve from dry rail"
+    },
+    {
+      "id": "step-5",
+      "orderIndex": 4,
+      "action": {
+        "family": "PREP",
+        "techniqueId": "open_pack"
+      },
+      "instruction": "Open pack of large tortillas",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Large Tortilla"
+      },
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "notes": "From dry rail, bulk prep item"
+    },
+    {
+      "id": "step-6",
+      "orderIndex": 5,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Place one large tortilla on foil sheet",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Large Tortilla"
+      },
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "quantity": {
+        "value": 1,
+        "unit": "count"
+      },
+      "dependsOn": [
+        "step-4",
+        "step-5"
+      ]
+    },
+    {
+      "id": "step-7",
+      "orderIndex": 6,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Open brisket pouch",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Cooked Braised Brisket [Pouch]"
+      },
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "notes": "Open pouch from waterbath station",
+      "dependsOn": [
+        "step-3",
+        "step-6"
+      ]
+    },
+    {
+      "id": "step-8",
+      "orderIndex": 7,
+      "action": {
+        "family": "ASSEMBLE"
+      },
+      "instruction": "Spread brisket across tortilla",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Cooked Braised Brisket"
+      },
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "notes": "Spread evenly on one half of tortilla",
+      "dependsOn": [
+        "step-7"
+      ]
+    },
+    {
+      "id": "step-9",
+      "orderIndex": 8,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Sprinkle shredded cheese over brisket (2 scoops)",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Shredded Cheese"
+      },
+      "stationId": "garnish",
+      "toolId": "spoodle_3oz",
+      "cookingPhase": "ASSEMBLY",
+      "quantity": {
+        "value": 6,
+        "unit": "oz"
+      },
+      "notes": "2 scoops with 3oz spoodle, from cold rail",
+      "dependsOn": [
+        "step-8"
+      ]
+    },
+    {
+      "id": "step-10",
+      "orderIndex": 9,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Place pickled red onion on quesadilla",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Pickled Red Onion"
+      },
+      "stationId": "garnish",
+      "toolId": "mini_tong",
+      "cookingPhase": "ASSEMBLY",
+      "quantity": {
+        "value": 1,
+        "unit": "portion"
+      },
+      "notes": "From cold rail",
+      "dependsOn": [
+        "step-9"
+      ]
+    },
+    {
+      "id": "step-11",
+      "orderIndex": 10,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Fold quesadilla in half",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Quesadilla"
+      },
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "notes": "Fold tortilla over filling",
+      "dependsOn": [
+        "step-10"
+      ]
+    },
+    {
+      "id": "step-12",
+      "orderIndex": 11,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Spray press with Vegalene",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Vegalene"
+      },
+      "stationId": "hot_side",
+      "toolId": "hand",
+      "cookingPhase": "PRE_COOK",
+      "notes": "Spray release agent on press, from dry rail"
+    },
+    {
+      "id": "step-13",
+      "orderIndex": 12,
+      "action": {
+        "family": "HEAT"
+      },
+      "instruction": "Press quesadilla for 3 minutes",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Quesadilla"
+      },
+      "stationId": "hot_side",
+      "toolId": "hand",
+      "equipment": {
+        "applianceId": "press"
+      },
+      "time": {
+        "durationSeconds": 180,
+        "isActive": false
+      },
+      "cookingPhase": "COOK",
+      "dependsOn": [
+        "step-11",
+        "step-12"
+      ]
+    },
+    {
+      "id": "step-14",
+      "orderIndex": 13,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Cut quesadilla with pizza wheel",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Cooked Quesadilla"
+      },
+      "stationId": "hot_side",
+      "toolId": "other",
+      "cookingPhase": "POST_COOK",
+      "notes": "Cut with pizza wheel into portions",
+      "dependsOn": [
+        "step-13"
+      ]
+    },
+    {
+      "id": "step-15",
+      "orderIndex": 14,
+      "action": {
+        "family": "PREP",
+        "techniqueId": "retrieve"
+      },
+      "instruction": "Place 28oz rectangle container",
+      "trackId": "default",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "container": {
+        "type": "clamshell",
+        "name": "28oz Rectangle"
+      },
+      "notes": "Retrieve from packaging station"
+    },
+    {
+      "id": "step-16",
+      "orderIndex": 15,
+      "action": {
+        "family": "TRANSFER"
+      },
+      "instruction": "Place cooked quesadilla in container",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Cooked Quesadilla"
+      },
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "notes": "Transfer from press station",
+      "dependsOn": [
+        "step-14",
+        "step-15"
+      ]
+    },
+    {
+      "id": "step-17",
+      "orderIndex": 16,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Place lime wedge in container",
+      "trackId": "default",
+      "target": {
+        "type": "free_text",
+        "name": "Lime Wedge"
+      },
+      "stationId": "garnish",
+      "toolId": "mini_tong",
+      "cookingPhase": "ASSEMBLY",
+      "quantity": {
+        "value": 1,
+        "unit": "count"
+      },
+      "notes": "From cold rail",
+      "dependsOn": [
+        "step-16"
+      ]
+    },
+    {
+      "id": "step-18",
+      "orderIndex": 17,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Apply lid to container",
+      "trackId": "default",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "container": {
+        "type": "lid",
+        "name": "28oz Lid"
+      },
+      "notes": "Secure lid on 28oz container",
+      "dependsOn": [
+        "step-17"
+      ]
+    },
+    {
+      "id": "step-19",
+      "orderIndex": 18,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Apply Barrio sleeve to container",
+      "trackId": "default",
+      "target": {
+        "type": "packaging",
+        "name": "Barrio Sleeve"
+      },
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "notes": "Brand sleeve from packaging",
+      "dependsOn": [
+        "step-18"
+      ]
+    },
+    {
+      "id": "step-20",
+      "orderIndex": 19,
+      "action": {
+        "family": "VEND"
+      },
+      "instruction": "Pass completed quesadilla to expo",
+      "trackId": "default",
+      "target": {
+        "type": "packaging",
+        "name": "Beef Barbacoa Quesadilla"
+      },
+      "stationId": "expo",
+      "toolId": "hand",
+      "cookingPhase": "PASS",
+      "container": {
+        "type": "clamshell",
+        "name": "28oz Rectangle with Lid and Sleeve"
+      },
+      "notes": "Coordinate with salsa track at expo",
+      "dependsOn": [
+        "step-19"
+      ]
+    },
+    {
+      "id": "step-21",
+      "orderIndex": 0,
+      "action": {
+        "family": "PREP",
+        "techniqueId": "retrieve"
+      },
+      "instruction": "Retrieve salsa cup from cold storage",
+      "trackId": "choose-your-salsa",
+      "target": {
+        "type": "free_text",
+        "name": "Salsa"
+      },
+      "stationId": "vending",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "notes": "Customer choice salsa from cold storage"
+    },
+    {
+      "id": "step-22",
+      "orderIndex": 1,
+      "action": {
+        "family": "VEND"
+      },
+      "instruction": "Pass salsa to expo",
+      "trackId": "choose-your-salsa",
+      "target": {
+        "type": "packaging",
+        "name": "Salsa"
+      },
+      "stationId": "expo",
+      "toolId": "hand",
+      "cookingPhase": "PASS",
+      "container": {
+        "type": "cup",
+        "name": "Salsa Cup"
+      },
+      "notes": "Coordinate with main track at expo",
+      "dependsOn": [
+        "step-21"
+      ]
+    }
+  ],
+  "createdAt": "2026-01-12T00:00:00Z",
+  "updatedAt": "2026-01-12T19:17:39.379Z",
+  "name": "Beef Barbacoa Quesadilla, Barrio 3.0"
+}

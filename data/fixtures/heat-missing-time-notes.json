@@ -1,0 +1,32 @@
+{
+  "id": "fixture-heat-missing-time-notes",
+  "itemId": "ITEM_HEAT_NO_TIME",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open soup pouch."
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "action": { "family": "HEAT" },
+      "dependsOn": ["s1"],
+      "equipment": { "applianceId": "waterbath" },
+      "instruction": "Heat soup in waterbath (missing time and notes to trigger H22)."
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "action": { "family": "VEND" },
+      "dependsOn": ["s2"],
+      "container": { "type": "bowl" },
+      "instruction": "Pour into bowl and serve."
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "fixture-portion-missing-qty",
+  "itemId": "ITEM_PORTION_NO_QTY",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open sauce container."
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "action": { "family": "PORTION" },
+      "dependsOn": ["s1"],
+      "toolId": "spoodle_2oz",
+      "instruction": "Portion sauce into ramekin (missing quantity and notes to trigger H24)."
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "action": { "family": "VEND" },
+      "dependsOn": ["s2"],
+      "container": { "type": "ramekin" },
+      "instruction": "Place ramekin on tray."
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

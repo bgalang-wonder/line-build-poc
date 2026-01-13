@@ -1,0 +1,18 @@
+{
+  "id": "0801d08a-ce1e-487e-94a1-abd5318f57a9",
+  "command": "write",
+  "timestamp": "2026-01-10T20:43:40.230Z",
+  "inputs": {
+    "buildId": "baked-potato-mainstay-v1",
+    "itemId": "8008281"
+  },
+  "outputs": {
+    "buildFilePathAbs": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/baked-potato-mainstay-v1.json",
+    "validationFilePathAbs": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/validation/baked-potato-mainstay-v1.latest.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/baked-potato-mainstay-v1.json",
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/validation/baked-potato-mainstay-v1.latest.json"
+  ]
+}

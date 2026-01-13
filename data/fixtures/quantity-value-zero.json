@@ -1,0 +1,33 @@
+{
+  "id": "fixture-quantity-zero",
+  "itemId": "ITEM_QTY_ZERO",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open cheese container."
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "action": { "family": "PORTION" },
+      "dependsOn": ["s1"],
+      "quantity": { "value": 0, "unit": "oz" },
+      "toolId": "hand",
+      "instruction": "Portion cheese (invalid: quantity.value = 0 triggers H10)."
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "action": { "family": "VEND" },
+      "dependsOn": ["s2"],
+      "container": { "type": "cup" },
+      "instruction": "Place in cup for service."
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

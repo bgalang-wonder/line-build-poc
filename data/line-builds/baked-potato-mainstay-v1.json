@@ -1,0 +1,238 @@
+{
+  "id": "baked-potato-mainstay-v1",
+  "itemId": "8008281",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "step-1",
+      "orderIndex": 0,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Place Baked Potato [Pouch] from Cold Storage",
+      "stationId": "hot_side",
+      "toolId": "hand",
+      "storageLocation": {
+        "type": "cold_storage"
+      },
+      "notes": "1 unit"
+    },
+    {
+      "id": "step-2",
+      "orderIndex": 1,
+      "action": {
+        "family": "HEAT"
+      },
+      "instruction": "Cook potato in Waterbath",
+      "stationId": "hot_side",
+      "equipment": {
+        "applianceId": "waterbath"
+      },
+      "time": {
+        "durationSeconds": 1200,
+        "isActive": false
+      },
+      "notes": "20 minutes passive cook",
+      "dependsOn": [
+        "step-1"
+      ]
+    },
+    {
+      "id": "step-3",
+      "orderIndex": 2,
+      "action": {
+        "family": "TRANSFER"
+      },
+      "instruction": "Pass cooked potato to Garnish station",
+      "stationId": "pass",
+      "toolId": "hand",
+      "dependsOn": [
+        "step-2"
+      ]
+    },
+    {
+      "id": "step-4",
+      "orderIndex": 3,
+      "action": {
+        "family": "ASSEMBLE"
+      },
+      "instruction": "Place 7\" B&G container",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "container": {
+        "type": "clamshell",
+        "name": "7\" B&G",
+        "size": "7 inch"
+      },
+      "notes": "Packaging setup"
+    },
+    {
+      "id": "step-5",
+      "orderIndex": 4,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Open pouch with viper tool",
+      "stationId": "garnish",
+      "toolId": "viper",
+      "notes": "Use viper to open pouch",
+      "dependsOn": [
+        "step-3"
+      ]
+    },
+    {
+      "id": "step-6",
+      "orderIndex": 5,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Smash open the baked potato",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "notes": "Hand smash to open",
+      "dependsOn": [
+        "step-5"
+      ]
+    },
+    {
+      "id": "step-7",
+      "orderIndex": 6,
+      "action": {
+        "family": "ASSEMBLE"
+      },
+      "instruction": "Place potato in container",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "notes": "No liquid - drain well",
+      "dependsOn": [
+        "step-4",
+        "step-6"
+      ]
+    },
+    {
+      "id": "step-8",
+      "orderIndex": 7,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Add Shredded Cheddar",
+      "stationId": "garnish",
+      "toolId": "spoodle_2oz",
+      "storageLocation": {
+        "type": "cold_rail"
+      },
+      "quantity": {
+        "value": 2,
+        "unit": "oz"
+      },
+      "dependsOn": [
+        "step-7"
+      ]
+    },
+    {
+      "id": "step-9",
+      "orderIndex": 8,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Add Bacon Bits",
+      "stationId": "garnish",
+      "toolId": "spoodle_1oz",
+      "storageLocation": {
+        "type": "cold_rail"
+      },
+      "quantity": {
+        "value": 1,
+        "unit": "oz"
+      },
+      "dependsOn": [
+        "step-8"
+      ]
+    },
+    {
+      "id": "step-10",
+      "orderIndex": 9,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Add Scallion",
+      "stationId": "garnish",
+      "toolId": "spoon",
+      "storageLocation": {
+        "type": "cold_rail"
+      },
+      "quantity": {
+        "value": 1,
+        "unit": "Tbsp"
+      },
+      "dependsOn": [
+        "step-9"
+      ]
+    },
+    {
+      "id": "step-11",
+      "orderIndex": 10,
+      "action": {
+        "family": "ASSEMBLE"
+      },
+      "instruction": "Place 7\" lid on container",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "container": {
+        "type": "lid",
+        "name": "7\" Lid"
+      },
+      "dependsOn": [
+        "step-10"
+      ]
+    },
+    {
+      "id": "step-12",
+      "orderIndex": 11,
+      "action": {
+        "family": "TRANSFER"
+      },
+      "instruction": "Pass completed item to expo",
+      "stationId": "pass",
+      "toolId": "hand",
+      "dependsOn": [
+        "step-11"
+      ]
+    },
+    {
+      "id": "step-13",
+      "orderIndex": 12,
+      "action": {
+        "family": "VEND"
+      },
+      "instruction": "Vend Sour Cream",
+      "stationId": "vending",
+      "toolId": "hand",
+      "container": {
+        "type": "cup",
+        "name": "Sour Cream cup"
+      },
+      "storageLocation": {
+        "type": "cold_storage"
+      }
+    },
+    {
+      "id": "step-14",
+      "orderIndex": 13,
+      "action": {
+        "family": "TRANSFER"
+      },
+      "instruction": "Pass sour cream to expo",
+      "stationId": "pass",
+      "toolId": "hand",
+      "notes": "Complete order",
+      "dependsOn": [
+        "step-13"
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00Z",
+  "updatedAt": "2026-01-10T20:43:40.230Z",
+  "name": "Baked Potato, The Mainstay - Standard Build"
+}
