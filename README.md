@@ -4,14 +4,39 @@ This Proof of Concept (POC) demonstrates a high-leverage workflow for authoring,
 
 It combines **AI reasoning**, **deterministic CLI validation**, and **live DAG visualization** to turn loose culinary descriptions into actionable, valid workflow graphs.
 
+### 1. The Interviewer (Claude Code)
+Claude Code acts as a **culinary operations interviewer**. Driven by the instructions in `CLAUDE.md`, it:
+- **Validates early**: Catches schema and kitchen logic violations *before* writing JSON.
+- **Analyzes structure**: Identifies flow issues, dependencies, and parallel tracks *before* generation.
+- **Enrich thoroughly**: Ensures every step has a station, phase, tool, and proper structure.
+- **Uses templates**: Deterministically works through `templates/validation-checklist.md` for every build.
+
+---
+
+## Agent Intelligence: `CLAUDE.md`
+
+The "brain" of the agent is `CLAUDE.md`. It defines the **"Culinary Operations Interviewer"** persona, shifting the AI from a simple code generator to a proactive workflow architect.
+
+### Proactive Validation & Enrichment
+`CLAUDE.md` prompts the agent to:
+1.  **Never Guess**: If information is missing (equipment, units, times), the agent MUST ask.
+2.  **Two-Phase Validation**: 
+    - **Phase 1: Structural**: Checks the "big picture" (flow, dependencies, starts/ends).
+    - **Phase 2: Schema**: Checks per-step details (required fields, enum values).
+3.  **Checklist-Driven Workflow**: The agent creates and maintains a per-build checklist in `data/checklists/` to track validation progress.
+
+### "Dependencies ARE the Instruction"
+`CLAUDE.md` enforces a strict philosophy: **A line build without dependencies is just a list, not an instruction.**
+-   **Graph Connectivity (Rule H26)**: The agent ensures >75% of steps have `dependsOn` links, forming a connected Directed Acyclic Graph (DAG).
+-   **Parallel Track Detection**: The agent identifies independent work streams and proactively asks how they coordinate or merge at expo.
+-   **Entry Point Heuristic**: The agent flags builds with too many starting points, ensuring that only legitimate retrievals or independent prep steps lack dependencies.
+
+---
+
 ## The Three-Pillar Architecture
 
 ### 1. The Interviewer (Claude Code)
-Claude Code acts as a **culinary operations interviewer**. Instead of just generating JSON, it:
-- **Validates early**: Catches schema and kitchen logic violations *before* writing.
-- **Analyzes structure**: Detects parallel tracks, merge points, and missing dependencies.
-- **Enriches data**: Proactively asks about station assignments, tool IDs, and active vs. passive cooking times.
-- **Uses templates**: Follows `templates/validation-checklist.md` to ensure every build passes rigorous standards.
+(See above)
 
 ### 2. The Engine (CLI)
 A TypeScript CLI (`scripts/lb.ts`) provides the "source of truth" for validation and data management:
