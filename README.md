@@ -33,6 +33,19 @@ The "brain" of the agent is `CLAUDE.md`. It defines the **"Culinary Operations I
 
 ---
 
+## Getting Started (Agent-First)
+
+The most effective way to use this POC is to let **Claude Code** handle the orchestration.
+
+1.  **Open Claude Code** from the repository root.
+2.  **Initialize**: Ask Claude to get things running:
+    > "Initialize the viewer and show me the health of existing builds."
+3.  **Author**: Provide a description or CSV:
+    > "Author a new build for a Baked Potato from this CSV..."
+4.  **Visualize**: Claude will automatically validate your input and open the viewer to show you the result.
+
+---
+
 ## The Three-Pillar Architecture
 
 ### 1. The Interviewer (Claude Code)
@@ -89,7 +102,8 @@ npm run dev
 ```
 
 ### 3. Interact via Claude Code
-Simply ask Claude to:
+Simply open Claude Code in the repository root and ask it to get started:
+- "Initialize the viewer and show me the health of existing builds"
 - "Find all builds for item X"
 - "Author a new build for a Baked Potato from this CSV..."
 - "Show me the health of the Beef Barbacoa build"
