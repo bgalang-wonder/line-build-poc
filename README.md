@@ -113,12 +113,14 @@ Simply open Claude Code in the repository root and ask it to get started:
 ## Technical Reference
 
 ### CLI Commands
-- `find [query]` / `list <itemId>`: Discover builds.
-- `read <buildId> [--steps]`: Inspect builds in terminal.
-- `write`: Validate and persist a build + receipt.
-- `validate <buildId>`: Refresh validation report for a build.
-- `view <buildId>`: Jump the viewer to a specific build.
-- `bulk-update --where <dsl> --set <field>=<value>`: Patch multiple steps at once.
+- `lb list [--query <q>] [--item <itemId>]`: Discover builds.
+- `lb get <buildId> [--format full|summary|steps|gaps]`: Read builds in various views.
+- `lb write`: Create/replace a build from stdin (validates first).
+- `lb edit <buildId> --op <json>`: Incremental structural or field edits.
+- `lb validate <buildId> [--gaps]`: Run validation and write report.
+- `lb search [--where <dsl>] [--notes <regex>]`: Find steps or notes.
+- `lb rules [ruleId]`: Reference the validation rule catalog.
+- `lb view <buildId>`: Jump the viewer to a specific build.
 
 ### Data Layout
 - `data/line-builds/`: Source JSON for builds.

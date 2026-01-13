@@ -661,60 +661,41 @@ echo '<json>' | npx tsx scripts/lb.ts write
 
 ## CLI Reference
 
-Run all commands from this folder using `npx tsx scripts/lb.ts <command>`.
+Run all commands using `npx tsx scripts/lb.ts <command>`.
 
 ### Core Commands
 
-| Command | Description |
-|---------|-------------|
-| `find [query]` | Discover builds by name or itemId (shows all if no query) |
-| `list <itemId>` | List all builds for a specific menu item |
-| `read <buildId>` | Read a specific build (full JSON) |
-| `read <buildId> --summary` | Show compact build header only |
-| `read <buildId> --steps` | Show compact step table |
-| `write` | Write a build from stdin (validates first) |
-| `validate <buildId>` | Validate on-disk build (writes validation file) |
-| `validate-stdin` | Validate draft JSON from stdin (no file writes) |
-| `gaps <buildId>` | Show validation gaps grouped for interview |
-| `gaps-stdin` | Show gaps for draft JSON from stdin |
+| Command | Purpose | Options |
+|---------|---------|---------|
+| `list` | Discover builds | `--query <q>`, `--item <itemId>` |
+| `get` | Read build | `<buildId>`, `--format full\|summary\|steps\|gaps` |
+| `write` | Create/Replace | `--stdin` |
+| `edit` | Incremental change | `<buildId>`, `--op '<json>'`, `--apply`, `--normalize` |
+| `validate` | Run validation | `<buildId>`, `--stdin`, `--gaps` |
+| `search` | Search | `--where <dsl>`, `--notes <regex>` |
+| `rules` | Rule reference | `[ruleId]` |
+| `view` | Sync viewer | `<buildId>` |
 
-### Query & Update Commands
+### `lb edit` Op Types
 
-| Command | Description |
-|---------|-------------|
-| `query --where <dsl>` | Query steps across all builds |
-| `bulk-update --where <dsl> --set <field>=<value> [--apply]` | Patch fields in bulk |
-| `search --equipment=<id> --action=<family>` | Find steps by equipment/action |
-| `search-notes <pattern>` | Search notes fields by regex |
-
-### Reference Commands
-
-| Command | Description |
-|---------|-------------|
-| `rules` | List all validation rules |
-| `rules <ruleId>` | Show details for a specific rule (e.g., `rules H15`) |
-| `validate-fixtures` | Run validation fixture test suite |
-
-Add `--json` to any command for machine-readable output.
+- `set_field`: `{ "type": "set_field", "where": "dsl", "field": "step.toolId", "value": "tongs" }`
+- `add_step`: `{ "type": "add_step", "step": { ... }, "afterStepId": "id" }`
+- `remove_step`: `{ "type": "remove_step", "stepId": "id" }`
+- `move_step`: `{ "type": "move_step", "stepId": "id", "toOrderIndex": n }`
+- `add_dep`: `{ "type": "add_dep", "stepId": "id", "dependsOn": "depId" }`
+- `remove_dep`: `{ "type": "remove_dep", "stepId": "id", "dependsOn": "depId" }`
+- `set_build_field`: `{ "type": "set_build_field", "field": "build.name", "value": "new name" }`
+- `normalize_indices`: `{ "type": "normalize_indices" }` (auto-renumber sequence)
 
 ---
 
 ## Recommended Authoring Loop
 
-**Use this loop for efficient CSV/notes → validated build workflow:**
-
-1. **Draft skeleton** — Create initial build JSON (manually or from parsed CSV)
-2. **Validate draft** — `validate-stdin` or `gaps-stdin` to get compact interview agenda
-3. **Ask user batched questions** — Use AskUserQuestion tool with grouped gaps
-4. **Bulk-update patches** — Use `bulk-update --where ... --set ...` to fix fields
-5. **Repeat** — Loop steps 2-4 until validation passes
-6. **Write once** — `write` to persist validated build + receipts
-
-**Key benefits:**
-- Use `read --steps` instead of full JSON to save context
-- Use `gaps-stdin` for draft-safe validation (no file writes)
-- Bulk-update can patch tool, time, quantity, container, instruction, notes fields
-- Only write once when build is valid
+1. **Initial Draft**: Create skeleton JSON → `lb write` (or `lb validate --stdin` to check).
+2. **Review Gaps**: `lb get <buildId> --format gaps` to see what's missing.
+3. **Refine**: Use `lb edit <buildId> --op ... --apply` for incremental fixes.
+4. **Normalize**: `lb edit <buildId> --normalize --apply` to clean up step ordering.
+5. **Finalize**: `lb validate <buildId>` to confirm 100% health.
 
 ---
 

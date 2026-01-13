@@ -41,6 +41,7 @@ export type QueryMatch = {
 };
 
 export const QUERY_FIELD_WHITELIST = [
+  "step.id",
   "step.action.family",
   "step.action.techniqueId",
   "step.equipment.applianceId",
@@ -271,6 +272,8 @@ function getFieldValues(
   // Note: returning [] means "no value present"
   switch (field) {
     // step.*
+    case "step.id":
+      return [step.id];
     case "step.action.family":
       return [step.action.family];
     case "step.action.techniqueId":
