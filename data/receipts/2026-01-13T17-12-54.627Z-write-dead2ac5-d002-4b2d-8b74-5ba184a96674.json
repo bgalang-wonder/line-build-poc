@@ -1,0 +1,15 @@
+{
+  "id": "dead2ac5-d002-4b2d-8b74-5ba184a96674",
+  "command": "write",
+  "timestamp": "2026-01-13T17:12:54.627Z",
+  "inputs": {
+    "buildId": "cheese-fries-burger-baby-8009068"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/cheese-fries-burger-baby-8009068.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/cheese-fries-burger-baby-8009068.json"
+  ]
+}

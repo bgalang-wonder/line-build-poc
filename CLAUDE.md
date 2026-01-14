@@ -382,6 +382,103 @@ When user pastes CSV data, map columns to schema fields:
 
 ## Interview Workflow
 
+### The Two-Step Pattern: Summary → Questions
+
+**Step 1: Show a structured summary** for the user to react to (scan and flag errors)
+**Step 2: Ask targeted questions** only for missing data or low-confidence inferences
+
+This is faster than asking all questions upfront. Users can quickly scan a summary and say "looks good" or "wait, step 4 is wrong."
+
+---
+
+### Pre-Generation Validation Summary (ALWAYS SHOW THIS)
+
+After parsing input, ALWAYS present this structured summary before generating JSON:
+
+```markdown
+## Build Overview: [Item Name]
+
+### Tracks & Flow
+| Track | Steps | Entry Point | Exit Point |
+|-------|-------|-------------|------------|
+| Default | 1-8 | step-1: Get fries | step-8: Pass to expo |
+| Cheese Sauce | 9-16 | step-9: Get cheese pouch | step-16: Pass |
+| Ketchup | 17-18 | step-17: Get ketchup | step-18: Pass |
+
+### Entry Points (steps that can start immediately)
+These steps have NO dependencies — they're where work begins:
+
+| Step | Description | Confidence |
+|------|-------------|------------|
+| step-1 | Get fries from cold storage | ✓ High — first retrieval |
+| step-4 | Get bowl from dry rail | ⚠️ Verify — could depend on fry step? |
+| step-9 | Get cheese pouch | ✓ High — parallel track start |
+| step-17 | Get ketchup | ✓ High — parallel track start |
+
+### Merge Points (where tracks converge)
+| Step | Waits For | Effect |
+|------|-----------|--------|
+| step-8 (pass to expo) | step-7, step-16, step-18 | All 3 components handed off together |
+
+### Key Dependency Decisions
+| Step | Depends On | My Reasoning | Confidence |
+|------|------------|--------------|------------|
+| step-5 (salt) | step-3 + step-4 | Need cooked fries in bowl | ⚠️ Verify |
+| step-14 (pour) | step-12 + step-13 | Need cup AND open pouch | ✓ High |
+
+### Data I'm Inferring (not explicit in input)
+| Field | My Inference | Source |
+|-------|--------------|--------|
+| Fry time | 210s active | CSV column "Cook Time" |
+| Waterbath time | ❓ Missing | Need to ask |
+| Cheese quantity | ❓ Missing | Need to ask |
+
+---
+👆 **Scan above.** Flag anything that looks wrong, then I'll ask about the ❓ items.
+```
+
+---
+
+### What to Always Validate (Even If You Can Infer)
+
+**Critical structural decisions have high impact if wrong.** Always show these for confirmation:
+
+| Category | Why Validate | Example |
+|----------|--------------|---------|
+| **Entry points** | Determines what can run in parallel | "Can bowl retrieval start before fries cook?" |
+| **Merge points** | Determines final handoff coordination | "Does step 8 wait for ALL tracks?" |
+| **Cross-track dependencies** | Rare and easy to get wrong | "Does cheese track depend on fries track at all?" |
+| **Fan-in steps** | Steps waiting for multiple inputs | "Step 5 waits for fry AND bowl — both?" |
+| **Non-obvious entry points** | Things that LOOK like they should have deps | "Bowl retrieval has no dependency — intentional?" |
+
+---
+
+### What to Skip Validation On
+
+**High confidence + low ambiguity = don't waste user's time:**
+
+| Category | Why Skip | Example |
+|----------|----------|---------|
+| **Obvious action families** | Unambiguous mapping | "Fry" → HEAT, "Portion" → PORTION |
+| **Explicit equipment** | CSV says it clearly | "Fryer" → `applianceId: fryer` |
+| **Sequential same-component** | Obviously flows | Retrieve fries → Fry fries |
+| **Explicit cook times** | CSV has the number | 210 → `durationSeconds: 210` |
+| **Standard tool mappings** | Clear from technique | "Fry basket" → `toolId: fry_basket` |
+
+---
+
+### Confidence Markers
+
+Use these in your summary tables:
+
+| Marker | Meaning | Action |
+|--------|---------|--------|
+| ✓ High | Very confident, low ambiguity | Show but don't ask |
+| ⚠️ Verify | Could infer but want confirmation | Highlight for user reaction |
+| ❓ Missing | Can't infer, need user input | Ask via AskUserQuestion |
+
+---
+
 ### Use the AskUserQuestion Tool
 
 **IMPORTANT:** When you have multiple questions, use the `AskUserQuestion` tool to present them as multiple choice or multi-select questions. This lets the user answer everything in one turn via the UI.
@@ -477,115 +574,129 @@ When user pastes CSV data, map columns to schema fields:
 | Track coordination | "Track merge" | Merge at expo, Separate handoff |
 | Yes/No | "Confirm" | Yes, No |
 
-### Generating Build-Specific Questions
+### When to Use AskUserQuestion vs Summary
 
-After parsing input, dynamically generate questions based on **which rules apply to this specific build**:
+**Summary (show first):**
+- Structural decisions (tracks, merge points, entry points)
+- Dependency inferences (what waits for what)
+- Anything user can react to with "looks good" or "that's wrong"
 
-1. **Scan steps for action families** → generate questions only for families present
-2. **Detect structural issues** → generate questions about parallel tracks, dependencies, etc.
-3. **Identify missing required fields** → generate questions for each gap
-4. **Batch into 1-4 question groups** → prioritize structural questions first
+**AskUserQuestion (ask after summary):**
+- Missing data you can't infer (cook times, quantities)
+- Ambiguous classifications (active vs passive)
+- Multiple valid options where user preference matters
 
-**Example Analysis → Questions:**
+**Batch questions efficiently:**
+- Group related questions (all HEAT questions together, all PORTION questions together)
+- Max 4 questions per AskUserQuestion call
+- Prioritize: missing data > ambiguous classifications > edge cases
 
-```
-Input: CSV with 14 steps
-
-Analysis:
-- HEAT steps found: 1 (step 2) → need H15 (equipment) + H22 (time/isActive)
-- PREP steps found: 3 (steps 1, 5, 6) → need H25 (technique or notes)
-- PORTION steps found: 3 (steps 8-10) → need H24 (quantity or notes)
-- Parallel tracks detected → need structural clarification
-
-Batch 1 (structural + heat):
-  Q1: header="Track merge", question="Do the potato and sour cream tracks merge at expo?"
-  Q2: header="Equipment", question="What equipment for step 2?"
-  Q3: header="Cook style", question="Is the 20-min cook passive?"
-
-Batch 2 (portions + techniques):
-  Q1: header="Units", question="What units for portions (steps 8-10)?"
-  Q2: header="Technique", question="Which PREP steps use technique IDs?" (multiSelect)
-```
-
-### Step 1: Parse Input → Identify ALL Issues
+### Step 1: Parse & Analyze
 
 When user provides input (CSV, description, etc.):
 
 1. **Parse into candidate steps**
-2. **Run Pre-flight Checklist** (schema/rule requirements)
-3. **Run Structural Validation** (flow, dependencies, parallel tracks)
-4. **Collect ALL issues** (both types)
-5. **Ask about ALL issues in ONE batch** (prioritize structural issues first)
+2. **Analyze structure** — tracks, entry points, merge points, dependencies
+3. **Identify confidence levels** — what's certain vs. needs verification
+4. **Identify missing data** — what you can't infer at all
 
-### Step 2: Present Issues in Priority Order
+### Step 2: Show the Validation Summary
 
-**Order of questions:**
+Present the structured summary (see format above). This lets the user:
+- **Scan quickly** and spot obvious errors
+- **React to your inferences** with "looks good" or "wait, that's wrong"
+- **See the DAG structure** you're about to create
 
-1. **Structural/Flow issues first** (these affect the whole build)
-   - Parallel tracks and merge points
-   - Missing dependencies
-   - Unusual ordering
-   
-2. **Schema/Rule issues second** (these are per-step)
-   - Missing required fields (equipment, time, quantity)
-   - Technique IDs vs notes
-
-**Example response:**
+**Example:**
 
 ```
-I've parsed 14 steps for Baked Potato. Before I generate the build, I have some questions:
+## Build Overview: Cheese Fries (18 steps)
 
-**STRUCTURAL QUESTIONS:**
+### Tracks & Flow
+| Track | Steps | Entry → Exit |
+|-------|-------|--------------|
+| Default (Fries) | 1-8 | Get fries → Pass to expo |
+| Cheese Sauce | 9-16 | Get cheese → Pass to expo |
+| Ketchup | 17-18 | Get ketchup → Pass to expo |
 
-1. **Parallel Tracks**: Steps 1-12 are on "Default" track, steps 13-14 are on "Ketchup" track.
-   - Do these tracks merge at expo?
-   - Should the sour cream (step 13) depend on any main track steps?
-   - Or are they fully independent (handed off separately)?
+### Entry Points
+| Step | Description | Confidence |
+|------|-------------|------------|
+| step-1 | Get fries from cold storage | ✓ High |
+| step-4 | Get bowl from dry rail | ⚠️ Verify — can this start before fries cook? |
+| step-9 | Get cheese pouch | ✓ High |
+| step-17 | Get ketchup | ✓ High |
 
-2. **Missing Retrieval**: Step 13 vends sour cream but I don't see where it's retrieved from.
-   - Is there a "grab sour cream from cold rail" step that's missing?
-   - Or does the vend step include retrieval implicitly?
+### Merge Point
+→ **step-8** waits for fries (step-7) + cheese (step-16) + ketchup (step-18)
+→ All 3 components handed off together at expo
 
-3. **Dependency Confirmation**: The assembly steps (7-11) seem to depend on step 4 (place container).
-   - Which assembly steps need the container to exist first?
-   - Should I add `dependsOn: ["step-4"]` to those steps?
+### Key Dependencies
+| Step | Waits For | Confidence |
+|------|-----------|------------|
+| step-5 (salt) | step-3 (fry) + step-4 (bowl) | ⚠️ Verify |
+| step-14 (pour) | step-12 (cup) + step-13 (open) | ✓ High |
 
-**FIELD QUESTIONS:**
+### Missing Data
+- ❓ Waterbath cook time (not in CSV)
+- ❓ Cheese pour quantity
 
-4. **Waterbath cooking** (step 2): Is the 20-minute cook passive (just sitting in waterbath)?
-
-5. **Portions** (steps 8-10): What units? oz, tbsp, or count?
+---
+👆 Scan above. Flag anything wrong, then I'll ask about the ❓ items.
 ```
 
-### Step 3: Confirm Understanding
+### Step 3: Collect Feedback & Ask Questions
 
-After user answers, summarize your understanding:
+**If user flags issues:** Address them before proceeding.
+
+**For ❓ missing data:** Use AskUserQuestion to gather in one batch:
+
+```typescript
+{
+  questions: [
+    {
+      header: "Waterbath",
+      question: "How long does cheese sauce cook in waterbath?",
+      options: [
+        { label: "3 min (180s)", description: "Quick reheat" },
+        { label: "5 min (300s)", description: "Standard reheat" },
+        { label: "10 min (600s)", description: "Full cook" }
+      ],
+      multiSelect: false
+    },
+    {
+      header: "Cheese qty",
+      question: "How much cheese sauce in the 4oz cup?",
+      options: [
+        { label: "2 oz", description: "Half fill" },
+        { label: "3 oz", description: "3/4 fill" },
+        { label: "4 oz", description: "Full cup" }
+      ],
+      multiSelect: false
+    }
+  ]
+}
+```
+
+### Step 4: Confirm & Generate
+
+After resolving all ⚠️ and ❓ items, briefly confirm:
 
 ```
-Got it. Here's what I'll create:
+Got it. Generating with:
+- 3 tracks merging at expo (step-8)
+- Bowl retrieval can start immediately (parallel with fry)
+- Waterbath: 300s passive
+- Cheese: 3oz
 
-**Structure:**
-- Main track (Default): Steps 1-12, potato build with sequential dependencies
-- Parallel track (Ketchup): Steps 13-14, sour cream vend (independent track)
-- Tracks are INDEPENDENT (no merge, separate handoff)
-- Each track has internal `dependsOn` chains
-
-**Key details:**
-- Waterbath: 1200s, passive cooking
-- Portions: all in oz (cheddar 2oz, bacon 1oz, scallion 1tbsp)
-- Sour cream: retrieval implicit in vend step (from cold storage)
-
-Does this match your intent?
+Writing build...
 ```
 
-### Step 4: Generate, Write, and Open Viewer
+Then write and open viewer:
 
 ```bash
-# Write the build
-echo '<json>' | npx tsx scripts/lb.ts write
-
-# If successful, automatically open in viewer
-./scripts/open-viewer.sh <buildId>
+echo '<json>' | npx tsx scripts/lb.ts write --stdin
+npx tsx scripts/lb.ts view <buildId>
 ```
 
 ---
@@ -594,68 +705,100 @@ echo '<json>' | npx tsx scripts/lb.ts write
 
 **User pastes CSV. You should:**
 
-### 1. Parse and Run BOTH Checklists
+### 1. Parse & Analyze
 
-**Structural Analysis:**
-- ⚠️ Two tracks detected: "Default" (steps 1-12) and "Ketchup" (steps 13-14)
-- ⚠️ Step 13 (Sour Cream VEND) has no prior retrieval step
-- ⚠️ No explicit merge point — do tracks converge at expo?
-- ⚠️ Station transitions: Waterbath → Garnish (step 3 is "Pass to")
+Identify structure, confidence levels, and missing data.
 
-**Schema/Rule Analysis:**
-- ⚠️ Step 2: HEAT with waterbath, 1200s — need `isActive`
-- ⚠️ Step 5: "Open Pouch" is PREP — need `techniqueId` or `notes`
-- ⚠️ Step 6: "Smash Open" is PREP — need `techniqueId` or `notes`
-- ⚠️ Steps 8-10: PORTION — have qty but unclear units
+### 2. Show Validation Summary
 
-### 2. Ask ALL Questions (Structural First)
+```markdown
+## Build Overview: Baked Potato (14 steps)
 
-> I've parsed the baked potato build (14 steps). Some clarifications:
->
-> **STRUCTURE:**
-> 1. **Parallel tracks**: Steps 1-12 are on "Default", steps 13-14 are on "Ketchup".
->    - Do these merge at expo (both go together)?
->    - Or are they handed off separately?
->
-> 2. **Missing retrieval**: Step 13 vends sour cream, but where does it come from?
->    - Should I add a retrieval step from cold storage?
->    - Or is retrieval implicit in the vend?
->
-> 3. **Station flow**: Steps go Waterbath → Garnish with a "Pass to" step.
->    - Is there any hold time between cooking and assembly?
->    - Does the pass require any dependency modeling?
->
-> **FIELDS:**
-> 4. Waterbath (1200s / 20 min) — passive cooking?
-> 5. Portions (cheddar 2, bacon 1, scallion 1) — what units?
-> 6. "Open Pouch" and "Smash Open" — should I capture as technique ID or notes?
+### Tracks & Flow
+| Track | Steps | Entry → Exit |
+|-------|-------|--------------|
+| Default | 1-12 | Get potato → Pass to expo |
+| Sour Cream | 13-14 | Get sour cream → Pass to expo |
 
-### 3. Confirm Understanding
+### Entry Points
+| Step | Description | Confidence |
+|------|-------------|------------|
+| step-1 | Get potato from cold storage | ✓ High |
+| step-4 | Place container | ⚠️ Verify — depends on anything? |
+| step-13 | Get sour cream | ⚠️ Verify — is retrieval implicit in vend? |
 
-> Got it. Here's what I'll create:
->
-> **Structure:**
-> - Main track: Steps 1-12 (potato build from waterbath through garnish)
-> - Parallel track: Steps 13-14 (sour cream from cold storage to expo)
-> - **No merge** — they're handed off independently
-> - Sour cream retrieval is implicit in vend step
->
-> **Key details:**
-> - Waterbath: 1200s, passive
-> - Portions: cheddar 2oz, bacon 1oz, scallion 1tbsp
-> - Techniques: captured in notes ("Open pouch with viper", "Smash open")
->
-> Does this match your intent?
+### Merge Point
+→ ⚠️ **Unclear** — do tracks merge at expo or stay separate?
 
-### 4. Generate JSON With
+### Key Dependencies
+| Step | Waits For | Confidence |
+|------|-----------|------------|
+| step-2 (cook) | step-1 (retrieve) | ✓ High |
+| step-7 (place in container) | step-4 (container) + step-6 (smash) | ⚠️ Verify |
+| step-8-10 (toppings) | step-7 (potato in container) | ⚠️ Verify — or step-4? |
 
-- Correct `equipment: { applianceId: "waterbath" }`
-- Correct `time: { durationSeconds: 1200, isActive: false }`
+### Missing Data
+- ❓ Track merge behavior (together or separate?)
+- ❓ Waterbath cook: active or passive?
+- ❓ Portion units (oz, tbsp, count?)
+
+---
+👆 Scan above. Flag anything wrong, then I'll ask about the ❓ items.
+```
+
+### 3. User Reacts + You Ask Questions
+
+User says: "Looks good, but tracks are separate — no merge."
+
+Then ask about remaining ❓ items via AskUserQuestion:
+
+```typescript
+{
+  questions: [
+    {
+      header: "Cook style",
+      question: "Is the 20-min waterbath cook active or passive?",
+      options: [
+        { label: "Passive", description: "Just sits in water, no attention" },
+        { label: "Active", description: "Needs monitoring" }
+      ],
+      multiSelect: false
+    },
+    {
+      header: "Units",
+      question: "What units for toppings (cheddar, bacon, scallion)?",
+      options: [
+        { label: "oz", description: "Ounces by weight" },
+        { label: "tbsp", description: "Tablespoons by volume" },
+        { label: "count", description: "Pieces/scoops" }
+      ],
+      multiSelect: false
+    }
+  ]
+}
+```
+
+### 4. Confirm & Generate
+
+```
+Got it. Generating with:
+- 2 tracks, NO merge (separate handoffs)
+- Waterbath: 1200s passive
+- Toppings: cheddar 2oz, bacon 1oz, scallion 1tbsp
+- Sour cream retrieval implicit in vend step
+
+Writing build...
+```
+
+### 5. Generate JSON With
+
+- `equipment: { applianceId: "waterbath" }`
+- `time: { durationSeconds: 1200, isActive: false }`
 - PREP steps with `notes` (since no standard techniqueId)
 - `quantity: { value: 2, unit: "oz" }` format
-- `trackId: "ketchup"` for steps 13-14
-- `dependsOn` chains within each track (steps flow sequentially)
-- `instruction` and `stationId` for every step
+- `trackId: "sour-cream"` for steps 13-14
+- `dependsOn` chains within each track
+- NO cross-track dependencies (separate handoffs)
 
 ---
 
