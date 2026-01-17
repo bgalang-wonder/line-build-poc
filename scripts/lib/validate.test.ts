@@ -29,6 +29,10 @@ function step(
     id,
     orderIndex,
     action: { family },
+    input: [],
+    output: [],
+    from: {},
+    to: {},
     ...partial,
   };
 }
@@ -68,7 +72,7 @@ describe("validateBuild (hard rules + composition/flow)", () => {
 
   it("requires external_build references to be declared in requiresBuilds", () => {
     const s1 = step("s1", 1, ActionFamily.ASSEMBLE, {
-      consumes: [
+      input: [
         {
           source: { type: "external_build", itemId: "component-1" },
         },
@@ -85,7 +89,7 @@ describe("validateBuild (hard rules + composition/flow)", () => {
 
   it("requires in_build artifact references to resolve", () => {
     const s1 = step("s1", 1, ActionFamily.ASSEMBLE, {
-      produces: [{ source: { type: "in_build", artifactId: "a1" } }],
+      output: [{ source: { type: "in_build", artifactId: "a1" } }],
     });
 
     const result = validateBuild(baseBuild([s1]));
@@ -105,6 +109,68 @@ describe("validateBuild (hard rules + composition/flow)", () => {
     expect(result.warnings.some((w) => w.ruleId === "S6" && w.severity === "strong")).toBe(
       true,
     );
+  });
+
+  it("warns (strong) when graph appears under-specified (H26)", () => {
+    const a = step("a", 1, ActionFamily.PREP, { notes: "a" });
+    const b = step("b", 2, ActionFamily.PREP, { notes: "b" });
+    const c = step("c", 3, ActionFamily.PREP, { dependsOn: ["a"], notes: "c" });
+    const result = validateBuild(baseBuild([a, b, c]));
+    expect(result.valid).toBe(true);
+    expect(result.warnings.some((w) => w.ruleId === "H26" && w.severity === "strong")).toBe(
+      true,
+    );
+  });
+
+  it("enforces TRANSFER place/retrieve endpoint requirements (H27/H28)", () => {
+    const place = step("p", 1, ActionFamily.TRANSFER, {
+      action: { family: ActionFamily.TRANSFER, techniqueId: "place" },
+      to: undefined as any,
+    });
+    const retrieve = step("r", 2, ActionFamily.TRANSFER, {
+      action: { family: ActionFamily.TRANSFER, techniqueId: "retrieve" },
+      dependsOn: ["p"],
+      from: undefined as any,
+    });
+    const result = validateBuild(baseBuild([place, retrieve]));
+    expect(result.valid).toBe(false);
+    expect(result.hardErrors.map((e) => e.ruleId).sort()).toEqual(["H27", "H28"]);
+  });
+
+  it("requires merge inputs to declare base/added roles (H29)", () => {
+    const merge = step("m1", 1, ActionFamily.ASSEMBLE, {
+      input: [
+        { source: { type: "in_build", artifactId: "a1" } },
+        { source: { type: "in_build", artifactId: "b1" } },
+      ],
+      output: [{ source: { type: "in_build", artifactId: "c1" } }],
+    });
+    const result = validateBuild(
+      baseBuild([merge], { artifacts: [{ id: "a1" }, { id: "b1" }, { id: "c1" }] }),
+    );
+    expect(result.warnings.some((e) => e.ruleId === "H29")).toBe(true);
+  });
+
+  it("requires lineage on 1:1 transformations (H30)", () => {
+    const evolve = step("e1", 1, ActionFamily.HEAT, {
+      input: [{ source: { type: "in_build", artifactId: "raw" } }],
+      output: [{ source: { type: "in_build", artifactId: "cooked" } }],
+    });
+    const result = validateBuild(
+      baseBuild([evolve], {
+        artifacts: [{ id: "raw" }, { id: "cooked" }],
+      }),
+    );
+    expect(result.warnings.some((e) => e.ruleId === "H30")).toBe(true);
+  });
+
+  it("warns (strong) on missing artifact locations (S15)", () => {
+    const s1 = step("s1", 1, ActionFamily.ASSEMBLE, {
+      input: [{ source: { type: "in_build", artifactId: "a1" } }],
+      output: [{ source: { type: "in_build", artifactId: "a2" } }],
+    });
+    const result = validateBuild(baseBuild([s1], { artifacts: [{ id: "a1" }, { id: "a2" }] }));
+    expect(result.warnings.filter(w => w.ruleId === "S15").length).toBe(2);
   });
 });
 

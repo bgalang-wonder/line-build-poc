@@ -426,14 +426,14 @@ function validateH15(step: Step): ValidationError[] {
 }
 
 function validateH16(step: Step): ValidationError[] {
-  if (step.action?.family !== ActionFamily.VEND) return [];
+  if (step.action?.family !== ActionFamily.PACKAGING) return [];
   const ok = !!step.container || step.target?.type === "packaging";
   if (ok) return [];
   return [
     {
       severity: "hard",
       ruleId: "H16",
-      message: "H16: VEND step requires container or packaging target",
+      message: "H16: PACKAGING step requires container or packaging target",
       stepId: step.id,
       fieldPath: "container|target.type",
     },
@@ -649,8 +649,8 @@ function validateExternalBuildRefsDeclared(build: BenchTopLineBuild): Validation
   const errors: ValidationError[] = [];
   for (const step of getOrderedSteps(build)) {
     const refs = [
-      ...(step.consumes ?? []).map((r) => ({ kind: "consumes" as const, r })),
-      ...(step.produces ?? []).map((r) => ({ kind: "produces" as const, r })),
+      ...(step.input ?? []).map((r) => ({ kind: "input" as const, r })),
+      ...(step.output ?? []).map((r) => ({ kind: "output" as const, r })),
     ];
     for (const { kind, r } of refs) {
       if (r.source.type !== "external_build") continue;
@@ -675,8 +675,8 @@ function validateInBuildArtifactRefsResolve(build: BenchTopLineBuild): Validatio
   const errors: ValidationError[] = [];
   for (const step of getOrderedSteps(build)) {
     const refs = [
-      ...(step.consumes ?? []).map((r) => ({ kind: "consumes" as const, r })),
-      ...(step.produces ?? []).map((r) => ({ kind: "produces" as const, r })),
+      ...(step.input ?? []).map((r) => ({ kind: "input" as const, r })),
+      ...(step.output ?? []).map((r) => ({ kind: "output" as const, r })),
     ];
     for (const { kind, r } of refs) {
       if (r.source.type !== "in_build") continue;
@@ -740,6 +740,234 @@ function validatePrimaryOutputArtifactIdWarning(
 // Public API
 // --------------------------------------------
 
+function validateS16StationBouncing(build: BenchTopLineBuild): ValidationError[] {
+  const steps = getOrderedSteps(build);
+  const stepsByTrack = new Map<string, Step[]>();
+  for (const step of steps) {
+    const trackId = step.trackId ?? "default";
+    if (!stepsByTrack.has(trackId)) stepsByTrack.set(trackId, []);
+    stepsByTrack.get(trackId)!.push(step);
+  }
+
+  const warnings: ValidationError[] = [];
+
+  for (const [trackId, trackSteps] of Array.from(stepsByTrack.entries())) {
+    const stationVisits = new Map<string, number[]>(); // stationId -> array of visit indices
+    let currentStation = "";
+    let visitCount = 0;
+
+    for (const step of trackSteps) {
+      const stationId = step.stationId ?? "other";
+      if (stationId !== currentStation) {
+        currentStation = stationId;
+        visitCount++;
+        if (!stationVisits.has(stationId)) stationVisits.set(stationId, []);
+        stationVisits.get(stationId)!.push(visitCount);
+      }
+    }
+
+    for (const [stationId, visits] of Array.from(stationVisits.entries())) {
+      if (visits.length > 1) {
+        // Station was revisited. Find the first step of the revisit.
+        let visitIdx = 0;
+        let currentStationInScan = "";
+        let currentVisitNum = 0;
+        
+        for (const step of trackSteps) {
+          const sId = step.stationId ?? "other";
+          if (sId !== currentStationInScan) {
+            currentStationInScan = sId;
+            currentVisitNum++;
+          }
+          
+          if (sId === stationId && currentVisitNum === visits[1]) {
+            warnings.push({
+              severity: "strong",
+              ruleId: "S16",
+              message: `S16: station bouncing detected for station '${stationId}' in track '${trackId}'. The build leaves this station and returns to it later, which is inefficient.`,
+              stepId: step.id,
+              fieldPath: "stationId",
+            });
+            break; // Only report once per station per track.
+          }
+        }
+      }
+    }
+  }
+
+  return warnings;
+}
+
+function validateH27(step: Step): ValidationError[] {
+  if (step.action?.family !== ActionFamily.TRANSFER) return [];
+  if (step.action?.techniqueId !== "place") return [];
+  // Check for meaningful content, not just presence (from/to default to {})
+  const hasTo = step.to?.stationId || step.to?.sublocation;
+  if (hasTo) return [];
+  return [
+    {
+      severity: "hard",
+      ruleId: "H27",
+      message: "H27: TRANSFER/place requires `to` location",
+      stepId: step.id,
+      fieldPath: "to",
+    },
+  ];
+}
+
+function validateH28(step: Step): ValidationError[] {
+  if (step.action?.family !== ActionFamily.TRANSFER) return [];
+  if (step.action?.techniqueId !== "retrieve") return [];
+  // Check for meaningful content, not just presence (from/to default to {})
+  const hasFrom = step.from?.stationId || step.from?.sublocation;
+  if (hasFrom) return [];
+  return [
+    {
+      severity: "hard",
+      ruleId: "H28",
+      message: "H28: TRANSFER/retrieve requires `from` location",
+      stepId: step.id,
+      fieldPath: "from",
+    },
+  ];
+}
+
+function validateH26GraphConnectivity(build: BenchTopLineBuild): ValidationError[] {
+  const steps = getOrderedSteps(build);
+  if (steps.length <= 1) return [];
+  const entryPoints = steps.filter((s) => (s.dependsOn ?? []).length === 0);
+  const dependentCount = steps.length - entryPoints.length;
+  const ratioDependent = dependentCount / steps.length;
+  if (ratioDependent >= 0.75) return [];
+  return [
+    {
+      severity: "strong",
+      ruleId: "H26",
+      message: `H26: graph appears under-specified (only ${(ratioDependent * 100).toFixed(0)}% of steps have dependsOn). Confirm which steps truly can start immediately.`,
+      fieldPath: "steps[].dependsOn",
+    },
+  ];
+}
+
+function validateH29MergeRoles(build: BenchTopLineBuild): ValidationError[] {
+  const warnings: ValidationError[] = [];
+  
+  for (const step of getOrderedSteps(build)) {
+    const inputs = step.input ?? [];
+    const outputs = step.output ?? [];
+    
+    // Only applies to merge steps: 2+ inputs, at least 1 output
+    if (inputs.length < 2 || outputs.length < 1) continue;
+    
+    // Check that all inputs have role defined
+    const missingRoles = inputs.filter(inp => !inp.role);
+    if (missingRoles.length > 0) {
+      warnings.push({
+        severity: "strong",
+        ruleId: "H29",
+        message: `H29: merge step has ${inputs.length} inputs but ${missingRoles.length} are missing role (base/added)`,
+        stepId: step.id,
+        fieldPath: "input[].role",
+      });
+      continue;
+    }
+    
+    // Check that exactly one input is "base"
+    const baseCount = inputs.filter(inp => inp.role === "base").length;
+    if (baseCount !== 1) {
+      warnings.push({
+        severity: "strong",
+        ruleId: "H29",
+        message: `H29: merge step should have exactly 1 base input, found ${baseCount}`,
+        stepId: step.id,
+        fieldPath: "input[].role",
+      });
+    }
+  }
+  
+  return warnings;
+}
+
+function validateH30Lineage(build: BenchTopLineBuild): ValidationError[] {
+  const warnings: ValidationError[] = [];
+  const artifacts = build.artifacts ?? [];
+  const artifactById = new Map(artifacts.map(a => [a.id, a]));
+  
+  for (const step of getOrderedSteps(build)) {
+    const inputs = step.input ?? [];
+    const outputs = step.output ?? [];
+    
+    // Only applies to 1:1 transformations: exactly 1 input, exactly 1 output
+    if (inputs.length !== 1 || outputs.length !== 1) continue;
+    
+    const inputRef = inputs[0]!;
+    const outputRef = outputs[0]!;
+    
+    // Only check in_build refs
+    if (inputRef.source.type !== "in_build" || outputRef.source.type !== "in_build") continue;
+    
+    const inputArtifactId = inputRef.source.artifactId;
+    const outputArtifactId = outputRef.source.artifactId;
+    
+    // Same artifact evolving is fine
+    if (inputArtifactId === outputArtifactId) continue;
+    
+    const outputArtifact = artifactById.get(outputArtifactId);
+    if (!outputArtifact) continue; // C3 will catch missing artifacts
+    
+    // Check that output artifact has lineage.evolvesFrom pointing to input
+    if (!outputArtifact.lineage?.evolvesFrom) {
+      warnings.push({
+        severity: "strong",
+        ruleId: "H30",
+        message: `H30: 1:1 transformation output '${outputArtifactId}' should have lineage.evolvesFrom='${inputArtifactId}'`,
+        stepId: step.id,
+        fieldPath: "artifacts[].lineage.evolvesFrom",
+      });
+    }
+  }
+  
+  return warnings;
+}
+
+function validateS15ArtifactLocations(build: BenchTopLineBuild): ValidationError[] {
+  const warnings: ValidationError[] = [];
+  
+  for (const step of getOrderedSteps(build)) {
+    // Check inputs for missing from location
+    for (const inp of step.input ?? []) {
+      if (inp.source.type !== "in_build") continue;
+      const hasFrom = inp.from?.stationId || inp.from?.sublocation;
+      if (!hasFrom) {
+        warnings.push({
+          severity: "strong",
+          ruleId: "S15",
+          message: `S15: input artifact '${inp.source.artifactId}' is missing from location`,
+          stepId: step.id,
+          fieldPath: "input[].from",
+        });
+      }
+    }
+    
+    // Check outputs for missing to location
+    for (const out of step.output ?? []) {
+      if (out.source.type !== "in_build") continue;
+      const hasTo = out.to?.stationId || out.to?.sublocation;
+      if (!hasTo) {
+        warnings.push({
+          severity: "strong",
+          ruleId: "S15",
+          message: `S15: output artifact '${out.source.artifactId}' is missing to location`,
+          stepId: step.id,
+          fieldPath: "output[].to",
+        });
+      }
+    }
+  }
+  
+  return warnings;
+}
+
 /**
  * Deterministic build validator.
  *
@@ -775,6 +1003,8 @@ export function validateBuild(
     hardErrors.push(...validateH4(step));
     hardErrors.push(...validateH11(step));
     hardErrors.push(...validateH14(step));
+    hardErrors.push(...validateH27(step));
+    hardErrors.push(...validateH28(step));
   }
 
   // Build-level customization/overlays + override hygiene.
@@ -794,6 +1024,11 @@ export function validateBuild(
 
   // Warnings (Strong) - MVP: primaryOutputArtifactId requirement is not publish-blocking.
   warnings.push(...validatePrimaryOutputArtifactIdWarning(build));
+  warnings.push(...validateH26GraphConnectivity(build));
+  warnings.push(...validateH29MergeRoles(build));
+  warnings.push(...validateH30Lineage(build));
+  warnings.push(...validateS15ArtifactLocations(build));
+  warnings.push(...validateS16StationBouncing(build));
 
   const stepOrderIndexById = buildStepOrderIndexMap(build);
   const sortedHard = sortErrors(hardErrors, stepOrderIndexById);

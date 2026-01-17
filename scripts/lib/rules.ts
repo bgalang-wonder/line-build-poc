@@ -91,8 +91,8 @@ export const VALIDATION_RULES: RuleInfo[] = [
   {
     id: "H16",
     scope: "Step",
-    appliesTo: "VEND steps",
-    description: "VEND step requires container or packaging target",
+    appliesTo: "PACKAGING steps",
+    description: "PACKAGING step requires container or packaging target",
   },
   {
     id: "H17",
@@ -150,6 +150,28 @@ export const VALIDATION_RULES: RuleInfo[] = [
     description: "Graph must be connected: >75% of steps should have dependsOn (entry points are retrieval steps or first steps of parallel tracks)",
   },
   {
+    id: "H27",
+    scope: "Step",
+    appliesTo: "TRANSFER/place steps",
+    description: "TRANSFER/place requires `to`",
+  },
+  {
+    id: "H28",
+    scope: "Step",
+    appliesTo: "TRANSFER/retrieve steps",
+    description: "TRANSFER/retrieve requires `from`",
+  },
+  {
+    id: "H29",
+    scope: "Build",
+    description: "Merge steps require input[].role and exactly one base input",
+  },
+  {
+    id: "H30",
+    scope: "Build",
+    description: "1:1 transformations require artifact.lineage.evolvesFrom",
+  },
+  {
     id: "C1",
     scope: "Build",
     description: "requiresBuilds must be unique and not self-referential",
@@ -157,7 +179,7 @@ export const VALIDATION_RULES: RuleInfo[] = [
   {
     id: "C2",
     scope: "Build",
-    description: "external_build consumes must be declared in requiresBuilds",
+    description: "external_build input must be declared in requiresBuilds",
   },
   {
     id: "C3",
@@ -168,6 +190,62 @@ export const VALIDATION_RULES: RuleInfo[] = [
     id: "S6",
     scope: "Build",
     description: "primaryOutputArtifactId should be set when artifacts present (warning)",
+  },
+  {
+    id: "S7",
+    scope: "Step",
+    appliesTo: "HEAT steps",
+    description: "HEAT technique should match equipment (warning)",
+  },
+  {
+    id: "S8",
+    scope: "Step",
+    description: "Station change without explicit TRANSFER step (warning)",
+  },
+  {
+    id: "S9",
+    scope: "Step",
+    appliesTo: "HEAT steps",
+    description: "HEAT sublocation should be equipment(...) and match equipment.applianceId (warning)",
+  },
+  {
+    id: "S10",
+    scope: "Step",
+    appliesTo: "TRANSFER steps",
+    description: "TRANSFER should specify techniqueId (place/retrieve/pass/handoff) or notes (warning)",
+  },
+  {
+    id: "S11",
+    scope: "Step",
+    appliesTo: "TRANSFER place/retrieve steps",
+    description: "TRANSFER place/retrieve should specify endpoint stationId/sublocation shape (warning)",
+  },
+  {
+    id: "S12",
+    scope: "Step",
+    appliesTo: "published order_execution steps",
+    description: "Published order_execution steps should set stationId (warning)",
+  },
+  {
+    id: "S13",
+    scope: "Step",
+    appliesTo: "steps with stationId='pass'",
+    description: "stationId='pass' is typically only used for TRANSFER steps (warning)",
+  },
+  {
+    id: "S14",
+    scope: "Step",
+    description: "Technique suggests a different action family (warning)",
+  },
+  {
+    id: "S15",
+    scope: "Step",
+    description: "Artifact input/output refs should specify from/to locations (warning)",
+  },
+  {
+    id: "S16",
+    scope: "Build",
+    description: "Station bouncing: build leaves a station and returns to it later (warning)",
   },
 ];
 
@@ -182,7 +260,8 @@ export function getRulesByScope(scope: "Build" | "Step"): RuleInfo[] {
 export function getRulesByActionFamily(family: string): RuleInfo[] {
   const familyRules: Record<string, string[]> = {
     HEAT: ["H15", "H22"],
-    VEND: ["H16"],
+    PACKAGING: ["H16"],
+    TRANSFER: ["H27", "H28"],
     PORTION: ["H24"],
     PREP: ["H25"],
   };
