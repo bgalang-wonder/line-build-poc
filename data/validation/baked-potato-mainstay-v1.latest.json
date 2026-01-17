@@ -1,8 +1,37 @@
 {
   "buildId": "baked-potato-mainstay-v1",
   "itemId": "8008281",
-  "timestamp": "2026-01-13T13:09:43.039Z",
+  "timestamp": "2026-01-15T23:29:11.478Z",
   "valid": true,
   "hardErrors": [],
-  "warnings": []
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "S10",
+      "message": "S10: TRANSFER steps should specify action.techniqueId (place/retrieve/pass/handoff) or include notes describing the movement",
+      "stepId": "step-3",
+      "fieldPath": "action.techniqueId|notes"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "S10",
+      "message": "S10: TRANSFER steps should specify action.techniqueId (place/retrieve/pass/handoff) or include notes describing the movement",
+      "stepId": "step-12",
+      "fieldPath": "action.techniqueId|notes"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S8",
+      "message": "S8: station changes from 'pass' to 'garnish' (via dependsOn) with no explicit TRANSFER step; consider modeling a staged transfer (place/retrieve) if this is a real handoff",
+      "stepId": "step-5",
+      "fieldPath": "stationId|dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S9",
+      "message": "S9: HEAT steps usually set sublocation to equipment(equipmentId=...) for clarity (missing sublocation)",
+      "stepId": "step-2",
+      "fieldPath": "sublocation"
+    }
+  ]
 }

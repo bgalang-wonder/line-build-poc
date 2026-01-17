@@ -3,390 +3,364 @@
   "itemId": "8009068",
   "version": 1,
   "status": "draft",
+  "name": "Cheese Fries, Burger Baby",
+  "artifacts": [
+    { "id": "fries_raw", "name": "Fries (raw)", "groupId": "fries" },
+    { "id": "fries_portioned", "name": "Fries (portioned)", "groupId": "fries" },
+    { "id": "fries_cooked", "name": "Fries (cooked)", "groupId": "fries" },
+    { "id": "fry_bowl", "name": "Fry Bowl", "groupId": "container" },
+    { "id": "salt", "name": "Salt", "groupId": "seasoning" },
+    { "id": "fries_salted", "name": "Fries (salted)", "groupId": "fries", "components": ["fries_cooked", "fry_bowl", "salt"] },
+    { "id": "fries_tossed", "name": "Fries (tossed)", "groupId": "fries", "components": ["fries_salted"] },
+    { "id": "bb_clamshell", "name": "Burger Baby Clamshell", "groupId": "packaging" },
+    { "id": "cheese_raw", "name": "Cheese Sauce [Pouch]", "groupId": "cheese" },
+    { "id": "cheese_cooked", "name": "Cheese Sauce (cooked)", "groupId": "cheese" },
+    { "id": "cheese_cup", "name": "4oz Cup", "groupId": "cheese_container" },
+    { "id": "cheese_cup_lid", "name": "4oz Lid", "groupId": "cheese_container" },
+    { "id": "cheese_opened", "name": "Cheese Sauce (opened)", "groupId": "cheese" },
+    { "id": "cheese_portioned", "name": "Cheese Sauce (portioned)", "groupId": "cheese", "components": ["cheese_opened", "cheese_cup"] },
+    { "id": "cheese_sealed", "name": "Cheese Sauce (sealed)", "groupId": "cheese", "components": ["cheese_portioned", "cheese_cup_lid"] },
+    { "id": "ketchup", "name": "Ketchup Packet", "groupId": "ketchup" },
+    { "id": "complete_order", "name": "Complete Cheese Fries Order", "groupId": "assembly", "components": ["fries_tossed", "bb_clamshell", "cheese_sealed", "ketchup"] }
+  ],
   "steps": [
     {
       "id": "step-1",
       "orderIndex": 0,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "open_pack"
-      },
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
       "instruction": "Open fries pack from cold storage",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Fries"
-      },
+      "target": { "type": "free_text", "name": "Fries" },
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "PRE_COOK",
-      "storageLocation": {
-        "type": "cold_storage"
-      }
+      "storageLocation": { "type": "cold_storage" },
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "fries_raw" }, "to": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-2",
       "orderIndex": 1,
-      "action": {
-        "family": "PORTION"
-      },
+      "action": { "family": "PORTION" },
       "instruction": "Portion fries into portion cup",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Fries"
-      },
+      "target": { "type": "free_text", "name": "Fries" },
       "stationId": "hot_side",
       "toolId": "other",
       "cookingPhase": "PRE_COOK",
-      "quantity": {
-        "value": 1,
-        "unit": "portion"
-      },
+      "quantity": { "value": 1, "unit": "portion" },
       "notes": "Use portion cup",
-      "dependsOn": [
-        "step-1"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "fries_raw" }, "from": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "fries_portioned" }, "to": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-1"]
     },
     {
       "id": "step-3",
       "orderIndex": 2,
-      "action": {
-        "family": "HEAT"
-      },
+      "action": { "family": "HEAT" },
       "instruction": "Fry for 210 seconds",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Fries"
-      },
+      "target": { "type": "free_text", "name": "Cooked Fries" },
       "stationId": "hot_side",
       "toolId": "fry_basket",
-      "equipment": {
-        "applianceId": "fryer"
-      },
-      "time": {
-        "durationSeconds": 210,
-        "isActive": true
-      },
+      "equipment": { "applianceId": "fryer" },
+      "time": { "durationSeconds": 210, "isActive": true },
       "cookingPhase": "COOK",
-      "dependsOn": [
-        "step-2"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "fries_portioned" }, "from": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "fries_cooked" }, "to": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "fryer" } } }
+      ],
+      "dependsOn": ["step-2"]
     },
     {
       "id": "step-4",
       "orderIndex": 3,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place bowl from dry rail",
       "trackId": "default",
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "POST_COOK",
-      "container": {
-        "type": "bowl",
-        "name": "Fry Bowl"
-      },
-      "storageLocation": {
-        "type": "dry_rail"
-      }
+      "container": { "type": "bowl", "name": "Fry Bowl" },
+      "storageLocation": { "type": "dry_rail" },
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "fry_bowl" }, "to": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-5",
       "orderIndex": 4,
-      "action": {
-        "family": "PORTION"
-      },
-      "instruction": "Shake salt on fries in bowl",
+      "action": { "family": "ASSEMBLE" },
+      "instruction": "Transfer fries to bowl and shake salt",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Salt"
-      },
+      "target": { "type": "free_text", "name": "Salt" },
       "stationId": "hot_side",
       "toolId": "shaker",
       "cookingPhase": "POST_COOK",
-      "quantity": {
-        "value": 2,
-        "unit": "shakes"
-      },
-      "notes": "Rose shaker",
-      "dependsOn": [
-        "step-3",
-        "step-4"
-      ]
+      "quantity": { "value": 2, "unit": "shakes" },
+      "notes": "Rose shaker - combine fries, bowl, and salt",
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "fries_cooked" }, "from": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "fryer" } } },
+        { "source": { "type": "in_build", "artifactId": "fry_bowl" }, "from": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "salt" }, "from": { "stationId": "hot_side", "sublocation": { "type": "dry_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "fries_salted" }, "to": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-3", "step-4"]
     },
     {
       "id": "step-6",
       "orderIndex": 5,
-      "action": {
-        "family": "PREP"
-      },
+      "action": { "family": "PREP" },
       "instruction": "Toss fries with salt",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Finished Fries"
-      },
+      "target": { "type": "free_text", "name": "Finished Fries" },
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "POST_COOK",
       "notes": "Toss to distribute salt evenly",
-      "dependsOn": [
-        "step-5"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "fries_salted" }, "from": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "fries_tossed" }, "to": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-5"]
     },
     {
       "id": "step-7",
       "orderIndex": 6,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place Burger Baby clamshell from packaging",
       "trackId": "default",
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "PASS",
-      "container": {
-        "type": "clamshell",
-        "name": "Burger Baby Clamshell"
-      },
-      "dependsOn": [
-        "step-6"
-      ]
+      "container": { "type": "clamshell", "name": "Burger Baby Clamshell" },
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "bb_clamshell" }, "to": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-6"]
     },
     {
       "id": "step-8",
       "orderIndex": 7,
-      "action": {
-        "family": "VEND"
-      },
+      "action": { "family": "PACKAGING" },
       "instruction": "Pass complete order to expo (fries + cheese sauce + ketchup)",
       "trackId": "default",
       "stationId": "expo",
       "toolId": "hand",
       "cookingPhase": "PASS",
-      "container": {
-        "type": "clamshell",
-        "name": "Complete Order"
-      },
+      "container": { "type": "clamshell", "name": "Complete Order" },
       "notes": "Merge point: all 3 tracks converge here",
-      "dependsOn": [
-        "step-7",
-        "step-16",
-        "step-18"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "fries_tossed" }, "from": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "bb_clamshell" }, "from": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "cheese_sealed" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "ketchup" }, "from": { "stationId": "vending", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "complete_order" }, "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } } }
+      ],
+      "dependsOn": ["step-16", "step-18", "step-7"]
     },
     {
       "id": "step-9",
       "orderIndex": 0,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place cheese sauce pouch from cold storage into waterbath",
       "trackId": "cheese-sauce",
-      "target": {
-        "type": "free_text",
-        "name": "Cheese Sauce Pouch"
-      },
+      "target": { "type": "free_text", "name": "Cheese Sauce Pouch" },
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "PRE_COOK",
-      "storageLocation": {
-        "type": "cold_storage"
-      }
+      "storageLocation": { "type": "cold_storage" },
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "cheese_raw" }, "to": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-10",
       "orderIndex": 1,
-      "action": {
-        "family": "HEAT"
-      },
+      "action": { "family": "HEAT" },
       "instruction": "Cook cheese sauce in waterbath for 5 minutes",
       "trackId": "cheese-sauce",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Cheese Sauce"
-      },
+      "target": { "type": "free_text", "name": "Cooked Cheese Sauce" },
       "stationId": "hot_side",
       "toolId": "hand",
-      "equipment": {
-        "applianceId": "waterbath"
-      },
-      "time": {
-        "durationSeconds": 300,
-        "isActive": false
-      },
+      "equipment": { "applianceId": "waterbath" },
+      "time": { "durationSeconds": 300, "isActive": false },
       "cookingPhase": "COOK",
-      "dependsOn": [
-        "step-9"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "cheese_raw" }, "from": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "cheese_cooked" }, "to": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "dependsOn": ["step-9"]
     },
     {
       "id": "step-11",
       "orderIndex": 2,
-      "action": {
-        "family": "TRANSFER"
-      },
+      "action": { "family": "TRANSFER", "techniqueId": "pass" },
       "instruction": "Pass cooked cheese sauce to garnish station",
       "trackId": "cheese-sauce",
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "POST_COOK",
       "notes": "Transfer pouch to garnish for portioning",
-      "dependsOn": [
-        "step-10"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "cheese_cooked" }, "from": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "cheese_cooked" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-10"]
     },
     {
       "id": "step-12",
       "orderIndex": 3,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place 4oz cup from packaging",
       "trackId": "cheese-sauce",
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
-      "container": {
-        "type": "cup",
-        "name": "4oz Cup"
-      },
-      "dependsOn": [
-        "step-11"
-      ]
+      "container": { "type": "cup", "name": "4oz Cup" },
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "cheese_cup" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-11"]
     },
     {
       "id": "step-13",
       "orderIndex": 4,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "open_pack"
-      },
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
       "instruction": "Open cheese sauce pouch with viper",
       "trackId": "cheese-sauce",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Cheese Sauce"
-      },
+      "target": { "type": "free_text", "name": "Cooked Cheese Sauce" },
       "stationId": "garnish",
       "toolId": "viper",
       "cookingPhase": "ASSEMBLY",
-      "dependsOn": [
-        "step-11"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "cheese_cooked" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "cheese_opened" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-11"]
     },
     {
       "id": "step-14",
       "orderIndex": 5,
-      "action": {
-        "family": "PORTION"
-      },
+      "action": { "family": "PORTION" },
       "instruction": "Pour 3oz cheese sauce into cup",
       "trackId": "cheese-sauce",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Cheese Sauce"
-      },
+      "target": { "type": "free_text", "name": "Cooked Cheese Sauce" },
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
-      "quantity": {
-        "value": 3,
-        "unit": "oz"
-      },
-      "dependsOn": [
-        "step-12",
-        "step-13"
-      ]
+      "quantity": { "value": 3, "unit": "oz" },
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "cheese_opened" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "cheese_cup" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "cheese_portioned" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-12", "step-13"]
     },
     {
       "id": "step-15",
       "orderIndex": 6,
-      "action": {
-        "family": "ASSEMBLE"
-      },
+      "action": { "family": "ASSEMBLE" },
       "instruction": "Apply 4oz lid to cup",
       "trackId": "cheese-sauce",
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "PASS",
-      "container": {
-        "type": "lid",
-        "name": "4oz Lid"
-      },
+      "container": { "type": "lid", "name": "4oz Lid" },
       "notes": "Seal the cheese sauce cup",
-      "dependsOn": [
-        "step-14"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "cheese_portioned" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "cheese_cup_lid" }, "from": { "stationId": "garnish", "sublocation": { "type": "dry_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "cheese_sealed" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-14"]
     },
     {
       "id": "step-16",
       "orderIndex": 7,
-      "action": {
-        "family": "VEND"
-      },
+      "action": { "family": "PACKAGING" },
       "instruction": "Cheese sauce ready for expo",
       "trackId": "cheese-sauce",
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "PASS",
-      "container": {
-        "type": "cup",
-        "name": "Sealed Cheese Sauce Cup"
-      },
-      "dependsOn": [
-        "step-15"
-      ]
+      "container": { "type": "cup", "name": "Sealed Cheese Sauce Cup" },
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "cheese_sealed" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "cheese_sealed" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-15"]
     },
     {
       "id": "step-17",
       "orderIndex": 0,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place ketchup from cold storage",
       "trackId": "ketchup",
-      "target": {
-        "type": "free_text",
-        "name": "Ketchup"
-      },
+      "target": { "type": "free_text", "name": "Ketchup" },
       "stationId": "vending",
       "toolId": "hand",
       "cookingPhase": "PASS",
-      "storageLocation": {
-        "type": "cold_storage"
-      }
+      "storageLocation": { "type": "cold_storage" },
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "ketchup" }, "to": { "stationId": "vending", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-18",
       "orderIndex": 1,
-      "action": {
-        "family": "VEND"
-      },
+      "action": { "family": "PACKAGING" },
       "instruction": "Ketchup ready for expo",
       "trackId": "ketchup",
       "stationId": "vending",
       "toolId": "hand",
       "cookingPhase": "PASS",
-      "container": {
-        "type": "other",
-        "name": "Ketchup Packet"
-      },
-      "dependsOn": [
-        "step-17"
-      ]
+      "container": { "type": "other", "name": "Ketchup Packet" },
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "ketchup" }, "from": { "stationId": "vending", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "ketchup" }, "to": { "stationId": "vending", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-17"]
     }
   ],
+  "bom": [],
   "createdAt": "2026-01-13T00:00:00Z",
-  "updatedAt": "2026-01-13T00:00:00Z",
-  "name": "Cheese Fries, Burger Baby"
+  "updatedAt": "2026-01-15T00:00:00Z"
 }

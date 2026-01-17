@@ -1,8 +1,85 @@
 {
   "buildId": "beef-barbacoa-quesadilla-8006896",
   "itemId": "8006896",
-  "timestamp": "2026-01-13T13:09:43.037Z",
+  "timestamp": "2026-01-15T23:29:11.960Z",
   "valid": true,
   "hardErrors": [],
-  "warnings": []
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "H26",
+      "message": "H26: graph appears under-specified (only 73% of steps have dependsOn). Entry points=6/22: step-21(@0), step-1(@0), step-4(@3), step-5(@4), step-12(@11), step-15(@14). Confirm which steps truly can start immediately; add dependsOn edges for the rest.",
+      "fieldPath": "steps[].dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S14",
+      "message": "S14: technique 'retrieve' is usually modeled under action.family='TRANSFER', but step has 'PREP'",
+      "stepId": "step-1",
+      "fieldPath": "action.techniqueId|action.family"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S14",
+      "message": "S14: technique 'retrieve' is usually modeled under action.family='TRANSFER', but step has 'PREP'",
+      "stepId": "step-21",
+      "fieldPath": "action.techniqueId|action.family"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S14",
+      "message": "S14: technique 'retrieve' is usually modeled under action.family='TRANSFER', but step has 'PREP'",
+      "stepId": "step-4",
+      "fieldPath": "action.techniqueId|action.family"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S14",
+      "message": "S14: technique 'retrieve' is usually modeled under action.family='TRANSFER', but step has 'PREP'",
+      "stepId": "step-15",
+      "fieldPath": "action.techniqueId|action.family"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S8",
+      "message": "S8: station changes from 'vending' to 'expo' (via dependsOn) with no explicit TRANSFER step; consider modeling a staged transfer (place/retrieve) if this is a real handoff",
+      "stepId": "step-22",
+      "fieldPath": "stationId|dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S8",
+      "message": "S8: station changes from 'hot_side' to 'garnish' (via dependsOn) with no explicit TRANSFER step; consider modeling a staged transfer (place/retrieve) if this is a real handoff",
+      "stepId": "step-7",
+      "fieldPath": "stationId|dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S8",
+      "message": "S8: station changes from 'garnish' to 'hot_side' (via dependsOn) with no explicit TRANSFER step; consider modeling a staged transfer (place/retrieve) if this is a real handoff",
+      "stepId": "step-13",
+      "fieldPath": "stationId|dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S8",
+      "message": "S8: station changes from 'garnish' to 'expo' (via dependsOn) with no explicit TRANSFER step; consider modeling a staged transfer (place/retrieve) if this is a real handoff",
+      "stepId": "step-20",
+      "fieldPath": "stationId|dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S9",
+      "message": "S9: HEAT steps usually set sublocation to equipment(equipmentId=...) for clarity (missing sublocation)",
+      "stepId": "step-2",
+      "fieldPath": "sublocation"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S9",
+      "message": "S9: HEAT steps usually set sublocation to equipment(equipmentId=...) for clarity (missing sublocation)",
+      "stepId": "step-13",
+      "fieldPath": "sublocation"
+    }
+  ]
 }

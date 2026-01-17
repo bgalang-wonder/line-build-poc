@@ -3,236 +3,283 @@
   "itemId": "8008281",
   "version": 1,
   "status": "draft",
+  "name": "Baked Potato, The Mainstay - Standard Build",
+  "artifacts": [
+    { "id": "potato_raw", "name": "Baked Potato [Pouch]", "groupId": "potato" },
+    { "id": "potato_cooked", "name": "Cooked Potato [Pouch]", "groupId": "potato" },
+    { "id": "potato_opened", "name": "Potato (opened)", "groupId": "potato" },
+    { "id": "potato_smashed", "name": "Potato (smashed)", "groupId": "potato" },
+    { "id": "container_7in", "name": "7\" B&G Container", "groupId": "container" },
+    { "id": "lid_7in", "name": "7\" Lid", "groupId": "container" },
+    { "id": "cheddar", "name": "Shredded Cheddar", "groupId": "topping" },
+    { "id": "bacon", "name": "Bacon Bits", "groupId": "topping" },
+    { "id": "scallion", "name": "Scallion", "groupId": "topping" },
+    { "id": "potato_in_container", "name": "Potato in Container", "groupId": "assembly", "components": ["potato_smashed", "container_7in"] },
+    { "id": "potato_with_cheese", "name": "Potato + Cheese", "groupId": "assembly", "components": ["potato_in_container", "cheddar"] },
+    { "id": "potato_with_bacon", "name": "Potato + Cheese + Bacon", "groupId": "assembly", "components": ["potato_with_cheese", "bacon"] },
+    { "id": "potato_with_scallion", "name": "Loaded Potato", "groupId": "assembly", "components": ["potato_with_bacon", "scallion"] },
+    { "id": "potato_sealed", "name": "Sealed Potato Container", "groupId": "assembly", "components": ["potato_with_scallion", "lid_7in"] },
+    { "id": "sour_cream", "name": "Sour Cream Cup", "groupId": "sour_cream" }
+  ],
   "steps": [
     {
       "id": "step-1",
       "orderIndex": 0,
-      "action": {
-        "family": "PREP"
-      },
+      "trackId": "main",
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place Baked Potato [Pouch] from Cold Storage",
       "stationId": "hot_side",
       "toolId": "hand",
-      "storageLocation": {
-        "type": "cold_storage"
-      },
-      "notes": "1 unit"
+      "cookingPhase": "PRE_COOK",
+      "storageLocation": { "type": "cold_storage" },
+      "notes": "1 unit",
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_raw" }, "to": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-2",
       "orderIndex": 1,
-      "action": {
-        "family": "HEAT"
-      },
+      "trackId": "main",
+      "action": { "family": "HEAT" },
       "instruction": "Cook potato in Waterbath",
       "stationId": "hot_side",
-      "equipment": {
-        "applianceId": "waterbath"
-      },
-      "time": {
-        "durationSeconds": 1200,
-        "isActive": false
-      },
+      "equipment": { "applianceId": "waterbath" },
+      "time": { "durationSeconds": 1200, "isActive": false },
+      "cookingPhase": "COOK",
       "notes": "20 minutes passive cook",
-      "dependsOn": [
-        "step-1"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_raw" }, "from": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_cooked" }, "to": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "dependsOn": ["step-1"]
     },
     {
       "id": "step-3",
       "orderIndex": 2,
-      "action": {
-        "family": "TRANSFER"
-      },
+      "trackId": "main",
+      "action": { "family": "TRANSFER", "techniqueId": "pass" },
       "instruction": "Pass cooked potato to Garnish station",
       "stationId": "pass",
       "toolId": "hand",
-      "dependsOn": [
-        "step-2"
-      ]
+      "cookingPhase": "POST_COOK",
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_cooked" }, "from": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_cooked" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-2"]
     },
     {
       "id": "step-4",
       "orderIndex": 3,
-      "action": {
-        "family": "ASSEMBLE"
-      },
+      "trackId": "main",
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place 7\" B&G container",
       "stationId": "garnish",
       "toolId": "hand",
-      "container": {
-        "type": "clamshell",
-        "name": "7\" B&G",
-        "size": "7 inch"
-      },
-      "notes": "Packaging setup"
+      "cookingPhase": "ASSEMBLY",
+      "container": { "type": "clamshell", "name": "7\" B&G", "size": "7 inch" },
+      "notes": "Packaging setup",
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "container_7in" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-5",
       "orderIndex": 4,
-      "action": {
-        "family": "PREP"
-      },
+      "trackId": "main",
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
       "instruction": "Open pouch with viper tool",
       "stationId": "garnish",
       "toolId": "viper",
+      "cookingPhase": "ASSEMBLY",
       "notes": "Use viper to open pouch",
-      "dependsOn": [
-        "step-3"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_cooked" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_opened" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-3"]
     },
     {
       "id": "step-6",
       "orderIndex": 5,
-      "action": {
-        "family": "PREP"
-      },
+      "trackId": "main",
+      "action": { "family": "PREP" },
       "instruction": "Smash open the baked potato",
       "stationId": "garnish",
       "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
       "notes": "Hand smash to open",
-      "dependsOn": [
-        "step-5"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_opened" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_smashed" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-5"]
     },
     {
       "id": "step-7",
       "orderIndex": 6,
-      "action": {
-        "family": "ASSEMBLE"
-      },
+      "trackId": "main",
+      "action": { "family": "ASSEMBLE" },
       "instruction": "Place potato in container",
       "stationId": "garnish",
       "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
       "notes": "No liquid - drain well",
-      "dependsOn": [
-        "step-4",
-        "step-6"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_smashed" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "container_7in" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_in_container" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-4", "step-6"]
     },
     {
       "id": "step-8",
       "orderIndex": 7,
-      "action": {
-        "family": "PORTION"
-      },
+      "trackId": "main",
+      "action": { "family": "PORTION" },
       "instruction": "Add Shredded Cheddar",
       "stationId": "garnish",
       "toolId": "spoodle_2oz",
-      "storageLocation": {
-        "type": "cold_rail"
-      },
-      "quantity": {
-        "value": 2,
-        "unit": "oz"
-      },
-      "dependsOn": [
-        "step-7"
-      ]
+      "cookingPhase": "ASSEMBLY",
+      "storageLocation": { "type": "cold_rail" },
+      "quantity": { "value": 2, "unit": "oz" },
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_in_container" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "cheddar" }, "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_with_cheese" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-7"]
     },
     {
       "id": "step-9",
       "orderIndex": 8,
-      "action": {
-        "family": "PORTION"
-      },
+      "trackId": "main",
+      "action": { "family": "PORTION" },
       "instruction": "Add Bacon Bits",
       "stationId": "garnish",
       "toolId": "spoodle_1oz",
-      "storageLocation": {
-        "type": "cold_rail"
-      },
-      "quantity": {
-        "value": 1,
-        "unit": "oz"
-      },
-      "dependsOn": [
-        "step-8"
-      ]
+      "cookingPhase": "ASSEMBLY",
+      "storageLocation": { "type": "cold_rail" },
+      "quantity": { "value": 1, "unit": "oz" },
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_with_cheese" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "bacon" }, "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_with_bacon" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-8"]
     },
     {
       "id": "step-10",
       "orderIndex": 9,
-      "action": {
-        "family": "PORTION"
-      },
+      "trackId": "main",
+      "action": { "family": "PORTION" },
       "instruction": "Add Scallion",
       "stationId": "garnish",
       "toolId": "spoon",
-      "storageLocation": {
-        "type": "cold_rail"
-      },
-      "quantity": {
-        "value": 1,
-        "unit": "Tbsp"
-      },
-      "dependsOn": [
-        "step-9"
-      ]
+      "cookingPhase": "ASSEMBLY",
+      "storageLocation": { "type": "cold_rail" },
+      "quantity": { "value": 1, "unit": "Tbsp" },
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_with_bacon" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "scallion" }, "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_with_scallion" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-9"]
     },
     {
       "id": "step-11",
       "orderIndex": 10,
-      "action": {
-        "family": "ASSEMBLE"
-      },
+      "trackId": "main",
+      "action": { "family": "ASSEMBLE" },
       "instruction": "Place 7\" lid on container",
       "stationId": "garnish",
       "toolId": "hand",
-      "container": {
-        "type": "lid",
-        "name": "7\" Lid"
-      },
-      "dependsOn": [
-        "step-10"
-      ]
+      "cookingPhase": "ASSEMBLY",
+      "container": { "type": "lid", "name": "7\" Lid" },
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_with_scallion" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "lid_7in" }, "from": { "stationId": "garnish", "sublocation": { "type": "dry_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_sealed" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-10"]
     },
     {
       "id": "step-12",
       "orderIndex": 11,
-      "action": {
-        "family": "TRANSFER"
-      },
+      "trackId": "main",
+      "action": { "family": "TRANSFER", "techniqueId": "pass" },
       "instruction": "Pass completed item to expo",
       "stationId": "pass",
       "toolId": "hand",
-      "dependsOn": [
-        "step-11"
-      ]
+      "cookingPhase": "PASS",
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "potato_sealed" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "potato_sealed" }, "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } } }
+      ],
+      "dependsOn": ["step-11"]
     },
     {
       "id": "step-13",
-      "orderIndex": 12,
-      "action": {
-        "family": "VEND"
-      },
+      "orderIndex": 0,
+      "trackId": "sour-cream",
+      "action": { "family": "PACKAGING" },
       "instruction": "Vend Sour Cream",
       "stationId": "vending",
       "toolId": "hand",
-      "container": {
-        "type": "cup",
-        "name": "Sour Cream cup"
-      },
-      "storageLocation": {
-        "type": "cold_storage"
-      }
+      "cookingPhase": "PASS",
+      "container": { "type": "cup", "name": "Sour Cream cup" },
+      "storageLocation": { "type": "cold_storage" },
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "sour_cream" }, "to": { "stationId": "vending", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-14",
-      "orderIndex": 13,
-      "action": {
-        "family": "TRANSFER"
-      },
+      "orderIndex": 1,
+      "trackId": "sour-cream",
+      "action": { "family": "TRANSFER", "techniqueId": "pass" },
       "instruction": "Pass sour cream to expo",
       "stationId": "pass",
       "toolId": "hand",
+      "cookingPhase": "PASS",
       "notes": "Complete order",
-      "dependsOn": [
-        "step-13"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "sour_cream" }, "from": { "stationId": "vending", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "sour_cream" }, "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } } }
+      ],
+      "dependsOn": ["step-13"]
     }
   ],
+  "bom": [],
   "createdAt": "2026-01-10T00:00:00Z",
-  "updatedAt": "2026-01-10T20:43:40.230Z",
-  "name": "Baked Potato, The Mainstay - Standard Build"
+  "updatedAt": "2026-01-15T00:00:00Z"
 }

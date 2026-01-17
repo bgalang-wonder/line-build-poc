@@ -3,475 +3,454 @@
   "itemId": "8006896",
   "version": 1,
   "status": "draft",
+  "name": "Beef Barbacoa Quesadilla, Barrio 3.0",
+  "artifacts": [
+    { "id": "brisket_raw", "name": "Braised Brisket [Pouch]", "groupId": "brisket" },
+    { "id": "brisket_cooked", "name": "Cooked Brisket [Pouch]", "groupId": "brisket" },
+    { "id": "brisket_opened", "name": "Cooked Brisket (opened)", "groupId": "brisket" },
+    { "id": "foil_sheet", "name": "Foil Sheet", "groupId": "packaging" },
+    { "id": "tortilla", "name": "Large Tortilla", "groupId": "tortilla" },
+    { "id": "cheese_shredded", "name": "Shredded Cheese", "groupId": "cheese" },
+    { "id": "onion_pickled", "name": "Pickled Red Onion", "groupId": "onion" },
+    { "id": "lime_wedge", "name": "Lime Wedge", "groupId": "lime" },
+    { "id": "tortilla_on_foil", "name": "Tortilla on Foil", "groupId": "quesadilla", "components": ["foil_sheet", "tortilla"] },
+    { "id": "quesadilla_v1", "name": "Quesadilla (brisket)", "groupId": "quesadilla", "components": ["tortilla_on_foil", "brisket_opened"] },
+    { "id": "quesadilla_v2", "name": "Quesadilla (+ cheese)", "groupId": "quesadilla", "components": ["quesadilla_v1", "cheese_shredded"] },
+    { "id": "quesadilla_v3", "name": "Quesadilla (+ onion)", "groupId": "quesadilla", "components": ["quesadilla_v2", "onion_pickled"] },
+    { "id": "quesadilla_folded", "name": "Quesadilla (folded)", "groupId": "quesadilla", "components": ["quesadilla_v3"] },
+    { "id": "quesadilla_pressed", "name": "Quesadilla (pressed)", "groupId": "quesadilla", "components": ["quesadilla_folded"] },
+    { "id": "quesadilla_cut", "name": "Quesadilla (cut)", "groupId": "quesadilla", "components": ["quesadilla_pressed"] },
+    { "id": "container_28oz", "name": "28oz Rectangle Container", "groupId": "container" },
+    { "id": "lid_28oz", "name": "28oz Lid", "groupId": "container" },
+    { "id": "barrio_sleeve", "name": "Barrio Sleeve", "groupId": "packaging" },
+    { "id": "quesadilla_in_container", "name": "Quesadilla in Container", "groupId": "assembly", "components": ["quesadilla_cut", "container_28oz"] },
+    { "id": "quesadilla_with_lime", "name": "Quesadilla + Lime", "groupId": "assembly", "components": ["quesadilla_in_container", "lime_wedge"] },
+    { "id": "quesadilla_lidded", "name": "Quesadilla (lidded)", "groupId": "assembly", "components": ["quesadilla_with_lime", "lid_28oz"] },
+    { "id": "quesadilla_sleeved", "name": "Quesadilla (sleeved)", "groupId": "assembly", "components": ["quesadilla_lidded", "barrio_sleeve"] },
+    { "id": "salsa_cup", "name": "Salsa Cup", "groupId": "salsa" }
+  ],
   "steps": [
     {
       "id": "step-1",
       "orderIndex": 0,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place braised brisket pouch from cold storage to waterbath station",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Braised Brisket [Pouch]"
-      },
+      "target": { "type": "free_text", "name": "Braised Brisket [Pouch]" },
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "PRE_COOK",
-      "notes": "Retrieve from cold storage"
+      "notes": "Retrieve from cold storage",
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "brisket_raw" }, "to": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-2",
       "orderIndex": 1,
-      "action": {
-        "family": "HEAT"
-      },
+      "action": { "family": "HEAT" },
       "instruction": "Cook brisket pouch in waterbath for 6 minutes",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Braised Brisket [Pouch]"
-      },
+      "target": { "type": "free_text", "name": "Braised Brisket [Pouch]" },
       "stationId": "hot_side",
       "toolId": "hand",
-      "equipment": {
-        "applianceId": "waterbath"
-      },
-      "time": {
-        "durationSeconds": 360,
-        "isActive": false
-      },
+      "equipment": { "applianceId": "waterbath" },
+      "time": { "durationSeconds": 360, "isActive": false },
       "cookingPhase": "COOK",
-      "dependsOn": [
-        "step-1"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "brisket_raw" }, "from": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "brisket_cooked" }, "to": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "dependsOn": ["step-1"]
     },
     {
       "id": "step-3",
       "orderIndex": 2,
-      "action": {
-        "family": "TRANSFER"
-      },
+      "action": { "family": "TRANSFER", "techniqueId": "pass" },
       "instruction": "Pass cooked brisket pouch to garnish station",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Braised Brisket [Pouch]"
-      },
+      "target": { "type": "free_text", "name": "Cooked Braised Brisket [Pouch]" },
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "POST_COOK",
       "notes": "Transfer to garnish station",
-      "dependsOn": [
-        "step-2"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "brisket_cooked" }, "from": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "waterbath" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "brisket_cooked" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-2"]
     },
     {
       "id": "step-4",
       "orderIndex": 3,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place foil sheet on work surface",
       "trackId": "default",
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
-      "container": {
-        "type": "foil",
-        "name": "Foil Sheet"
-      },
-      "notes": "Retrieve from dry rail"
+      "container": { "type": "foil", "name": "Foil Sheet" },
+      "notes": "Retrieve from dry rail",
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "foil_sheet" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-5",
       "orderIndex": 4,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "open_pack"
-      },
-      "instruction": "Open pack of large tortillas",
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
+      "instruction": "Retrieve large tortilla from dry rail",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Large Tortilla"
-      },
+      "target": { "type": "free_text", "name": "Large Tortilla" },
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
-      "notes": "From dry rail, bulk prep item"
+      "notes": "From dry rail, bulk prep item",
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "tortilla" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-6",
       "orderIndex": 5,
-      "action": {
-        "family": "PORTION"
-      },
+      "action": { "family": "ASSEMBLE" },
       "instruction": "Place one large tortilla on foil sheet",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Large Tortilla"
-      },
+      "target": { "type": "free_text", "name": "Large Tortilla" },
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
-      "quantity": {
-        "value": 1,
-        "unit": "count"
-      },
-      "dependsOn": [
-        "step-4",
-        "step-5"
-      ]
+      "quantity": { "value": 1, "unit": "count" },
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "foil_sheet" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "tortilla" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "tortilla_on_foil" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-4", "step-5"]
     },
     {
       "id": "step-7",
       "orderIndex": 6,
-      "action": {
-        "family": "PREP"
-      },
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
       "instruction": "Open brisket pouch",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Braised Brisket [Pouch]"
-      },
+      "target": { "type": "free_text", "name": "Cooked Braised Brisket [Pouch]" },
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
       "notes": "Open pouch from waterbath station",
-      "dependsOn": [
-        "step-3",
-        "step-6"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "brisket_cooked" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "brisket_opened" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-3", "step-6"]
     },
     {
       "id": "step-8",
       "orderIndex": 7,
-      "action": {
-        "family": "ASSEMBLE"
-      },
+      "action": { "family": "ASSEMBLE" },
       "instruction": "Spread brisket across tortilla",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Braised Brisket"
-      },
+      "target": { "type": "free_text", "name": "Cooked Braised Brisket" },
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
       "notes": "Spread evenly on one half of tortilla",
-      "dependsOn": [
-        "step-7"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "tortilla_on_foil" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "brisket_opened" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_v1" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-7"]
     },
     {
       "id": "step-9",
       "orderIndex": 8,
-      "action": {
-        "family": "PORTION"
-      },
+      "action": { "family": "PORTION" },
       "instruction": "Sprinkle shredded cheese over brisket (2 scoops)",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Shredded Cheese"
-      },
+      "target": { "type": "free_text", "name": "Shredded Cheese" },
       "stationId": "garnish",
       "toolId": "spoodle_3oz",
       "cookingPhase": "ASSEMBLY",
-      "quantity": {
-        "value": 6,
-        "unit": "oz"
-      },
+      "quantity": { "value": 6, "unit": "oz" },
       "notes": "2 scoops with 3oz spoodle, from cold rail",
-      "dependsOn": [
-        "step-8"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_v1" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "cheese_shredded" }, "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_v2" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-8"]
     },
     {
       "id": "step-10",
       "orderIndex": 9,
-      "action": {
-        "family": "PORTION"
-      },
+      "action": { "family": "PORTION" },
       "instruction": "Place pickled red onion on quesadilla",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Pickled Red Onion"
-      },
+      "target": { "type": "free_text", "name": "Pickled Red Onion" },
       "stationId": "garnish",
       "toolId": "mini_tong",
       "cookingPhase": "ASSEMBLY",
-      "quantity": {
-        "value": 1,
-        "unit": "portion"
-      },
+      "quantity": { "value": 1, "unit": "portion" },
       "notes": "From cold rail",
-      "dependsOn": [
-        "step-9"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_v2" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "onion_pickled" }, "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_v3" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-9"]
     },
     {
       "id": "step-11",
       "orderIndex": 10,
-      "action": {
-        "family": "PREP"
-      },
+      "action": { "family": "PREP" },
       "instruction": "Fold quesadilla in half",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Quesadilla"
-      },
+      "target": { "type": "free_text", "name": "Quesadilla" },
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
       "notes": "Fold tortilla over filling",
-      "dependsOn": [
-        "step-10"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_v3" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_folded" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-10"]
     },
     {
       "id": "step-12",
       "orderIndex": 11,
-      "action": {
-        "family": "PREP"
-      },
+      "action": { "family": "PREP" },
       "instruction": "Spray press with Vegalene",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Vegalene"
-      },
+      "target": { "type": "free_text", "name": "Vegalene" },
       "stationId": "hot_side",
       "toolId": "hand",
       "cookingPhase": "PRE_COOK",
-      "notes": "Spray release agent on press, from dry rail"
+      "notes": "Spray release agent on press, from dry rail",
+      "input": [],
+      "output": [],
+      "dependsOn": []
     },
     {
       "id": "step-13",
       "orderIndex": 12,
-      "action": {
-        "family": "HEAT"
-      },
+      "action": { "family": "HEAT" },
       "instruction": "Press quesadilla for 3 minutes",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Quesadilla"
-      },
+      "target": { "type": "free_text", "name": "Quesadilla" },
       "stationId": "hot_side",
       "toolId": "hand",
-      "equipment": {
-        "applianceId": "press"
-      },
-      "time": {
-        "durationSeconds": 180,
-        "isActive": false
-      },
+      "equipment": { "applianceId": "press" },
+      "time": { "durationSeconds": 180, "isActive": false },
       "cookingPhase": "COOK",
-      "dependsOn": [
-        "step-11",
-        "step-12"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_folded" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_pressed" }, "to": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "press" } } }
+      ],
+      "dependsOn": ["step-11", "step-12"]
     },
     {
       "id": "step-14",
       "orderIndex": 13,
-      "action": {
-        "family": "PREP"
-      },
+      "action": { "family": "PREP" },
       "instruction": "Cut quesadilla with pizza wheel",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Quesadilla"
-      },
+      "target": { "type": "free_text", "name": "Cooked Quesadilla" },
       "stationId": "hot_side",
       "toolId": "other",
       "cookingPhase": "POST_COOK",
       "notes": "Cut with pizza wheel into portions",
-      "dependsOn": [
-        "step-13"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_pressed" }, "from": { "stationId": "hot_side", "sublocation": { "type": "equipment", "equipmentId": "press" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_cut" }, "to": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-13"]
     },
     {
       "id": "step-15",
       "orderIndex": 14,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Place 28oz rectangle container",
       "trackId": "default",
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
-      "container": {
-        "type": "clamshell",
-        "name": "28oz Rectangle"
-      },
-      "notes": "Retrieve from packaging station"
+      "container": { "type": "clamshell", "name": "28oz Rectangle" },
+      "notes": "Retrieve from packaging station",
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "container_28oz" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-16",
       "orderIndex": 15,
-      "action": {
-        "family": "TRANSFER"
-      },
+      "action": { "family": "ASSEMBLE" },
       "instruction": "Place cooked quesadilla in container",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Cooked Quesadilla"
-      },
+      "target": { "type": "free_text", "name": "Cooked Quesadilla" },
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
       "notes": "Transfer from press station",
-      "dependsOn": [
-        "step-14",
-        "step-15"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_cut" }, "from": { "stationId": "hot_side", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "container_28oz" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_in_container" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-14", "step-15"]
     },
     {
       "id": "step-17",
       "orderIndex": 16,
-      "action": {
-        "family": "PORTION"
-      },
+      "action": { "family": "PORTION" },
       "instruction": "Place lime wedge in container",
       "trackId": "default",
-      "target": {
-        "type": "free_text",
-        "name": "Lime Wedge"
-      },
+      "target": { "type": "free_text", "name": "Lime Wedge" },
       "stationId": "garnish",
       "toolId": "mini_tong",
       "cookingPhase": "ASSEMBLY",
-      "quantity": {
-        "value": 1,
-        "unit": "count"
-      },
+      "quantity": { "value": 1, "unit": "count" },
       "notes": "From cold rail",
-      "dependsOn": [
-        "step-16"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_in_container" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "lime_wedge" }, "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_with_lime" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-16"]
     },
     {
       "id": "step-18",
       "orderIndex": 17,
-      "action": {
-        "family": "PREP"
-      },
+      "action": { "family": "ASSEMBLE" },
       "instruction": "Apply lid to container",
       "trackId": "default",
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
-      "container": {
-        "type": "lid",
-        "name": "28oz Lid"
-      },
+      "container": { "type": "lid", "name": "28oz Lid" },
       "notes": "Secure lid on 28oz container",
-      "dependsOn": [
-        "step-17"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_with_lime" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "lid_28oz" }, "from": { "stationId": "garnish", "sublocation": { "type": "dry_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_lidded" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-17"]
     },
     {
       "id": "step-19",
       "orderIndex": 18,
-      "action": {
-        "family": "PREP"
-      },
+      "action": { "family": "ASSEMBLE" },
       "instruction": "Apply Barrio sleeve to container",
       "trackId": "default",
-      "target": {
-        "type": "packaging",
-        "name": "Barrio Sleeve"
-      },
+      "target": { "type": "packaging", "name": "Barrio Sleeve" },
       "stationId": "garnish",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
       "notes": "Brand sleeve from packaging",
-      "dependsOn": [
-        "step-18"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_lidded" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } },
+        { "source": { "type": "in_build", "artifactId": "barrio_sleeve" }, "from": { "stationId": "garnish", "sublocation": { "type": "dry_rail" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_sleeved" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": ["step-18"]
     },
     {
       "id": "step-20",
       "orderIndex": 19,
-      "action": {
-        "family": "VEND"
-      },
+      "action": { "family": "PACKAGING" },
       "instruction": "Pass completed quesadilla to expo",
       "trackId": "default",
-      "target": {
-        "type": "packaging",
-        "name": "Beef Barbacoa Quesadilla"
-      },
+      "target": { "type": "packaging", "name": "Beef Barbacoa Quesadilla" },
       "stationId": "expo",
       "toolId": "hand",
       "cookingPhase": "PASS",
-      "container": {
-        "type": "clamshell",
-        "name": "28oz Rectangle with Lid and Sleeve"
-      },
+      "container": { "type": "clamshell", "name": "28oz Rectangle with Lid and Sleeve" },
       "notes": "Coordinate with salsa track at expo",
-      "dependsOn": [
-        "step-19"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_sleeved" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "quesadilla_sleeved" }, "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } } }
+      ],
+      "dependsOn": ["step-19"]
     },
     {
       "id": "step-21",
       "orderIndex": 0,
-      "action": {
-        "family": "PREP",
-        "techniqueId": "retrieve"
-      },
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
       "instruction": "Retrieve salsa cup from cold storage",
       "trackId": "choose-your-salsa",
-      "target": {
-        "type": "free_text",
-        "name": "Salsa"
-      },
+      "target": { "type": "free_text", "name": "Salsa" },
       "stationId": "vending",
       "toolId": "hand",
       "cookingPhase": "ASSEMBLY",
-      "notes": "Customer choice salsa from cold storage"
+      "notes": "Customer choice salsa from cold storage",
+      "input": [],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "salsa_cup" }, "to": { "stationId": "vending", "sublocation": { "type": "work_surface" } } }
+      ],
+      "dependsOn": []
     },
     {
       "id": "step-22",
       "orderIndex": 1,
-      "action": {
-        "family": "VEND"
-      },
+      "action": { "family": "PACKAGING" },
       "instruction": "Pass salsa to expo",
       "trackId": "choose-your-salsa",
-      "target": {
-        "type": "packaging",
-        "name": "Salsa"
-      },
+      "target": { "type": "packaging", "name": "Salsa" },
       "stationId": "expo",
       "toolId": "hand",
       "cookingPhase": "PASS",
-      "container": {
-        "type": "cup",
-        "name": "Salsa Cup"
-      },
+      "container": { "type": "cup", "name": "Salsa Cup" },
       "notes": "Coordinate with main track at expo",
-      "dependsOn": [
-        "step-21"
-      ]
+      "input": [
+        { "source": { "type": "in_build", "artifactId": "salsa_cup" }, "from": { "stationId": "vending", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "artifactId": "salsa_cup" }, "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } } }
+      ],
+      "dependsOn": ["step-21"]
     }
   ],
+  "bom": [],
   "createdAt": "2026-01-12T00:00:00Z",
-  "updatedAt": "2026-01-12T19:17:39.379Z",
-  "name": "Beef Barbacoa Quesadilla, Barrio 3.0"
+  "updatedAt": "2026-01-15T00:00:00Z"
 }
