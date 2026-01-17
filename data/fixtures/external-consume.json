@@ -24,7 +24,7 @@
       "action": { "family": "COMBINE" },
       "dependsOn": ["e1"],
       "instruction": "Add prepared sauce component to the assembly.",
-      "consumes": [
+      "input": [
         {
           "source": {
             "type": "external_build",
@@ -37,7 +37,7 @@
     {
       "id": "e3",
       "orderIndex": 3,
-      "action": { "family": "VEND" },
+      "action": { "family": "PACKAGING" },
       "dependsOn": ["e2"],
       "container": { "type": "clamshell", "name": "Standard clamshell" },
       "instruction": "Package and hand off."

@@ -21,6 +21,7 @@ export type StepId = string;
 export type ArtifactId = string;
 export type BomUsageId = string;
 export type BomComponentId = string;
+export type BomEntryId = string;
 
 // -----------------------------
 // Build
@@ -44,6 +45,9 @@ export interface BenchTopLineBuild {
   operations?: Operation[];
   tracks?: TrackDefinition[];
   requiresBuilds?: BuildRef[];
+  // Bill of Materials: component list for this menu item.
+  // Used for step.target mapping and artifact tagging.
+  bom?: BomEntry[];
   artifacts?: Artifact[];
   primaryOutputArtifactId?: string;
   customizationGroups?: CustomizationGroup[];
@@ -82,7 +86,7 @@ export enum ActionFamily {
   ASSEMBLE = "ASSEMBLE",
   PORTION = "PORTION",
   CHECK = "CHECK",
-  VEND = "VEND",
+  PACKAGING = "PACKAGING",
   OTHER = "OTHER",
 }
 
@@ -153,7 +157,33 @@ export type ApplianceId =
   | "conveyor"
   | "hot_box"
   | "hot_well"
+  | "rice_cooker"
+  | "pasta_cooker"
+  | "pizza_oven"
+  | "pizza_conveyor_oven"
+  | "steam_well"
+  | "sauce_warmer"
   | "other";
+
+export type SublocationId =
+  | "work_surface"
+  | "cold_rail"
+  | "dry_rail"
+  | "cold_storage"
+  | "packaging"
+  | "kit_storage"
+  | "window_shelf"
+  | "equipment";
+
+export interface StepSublocation {
+  type: SublocationId;
+  equipmentId?: ApplianceId; // required when type === "equipment"
+}
+
+export interface LocationRef {
+  stationId?: StationId;
+  sublocation?: StepSublocation;
+}
 
 export interface StepEquipment {
   applianceId: ApplianceId;
@@ -324,6 +354,7 @@ export interface Step {
   time?: StepTime;
   cookingPhase?: CookingPhase;
   container?: StepContainer;
+  sublocation?: StepSublocation;
   exclude?: boolean;
   prepType?: PrepType;
   storageLocation?: StorageLocation;
@@ -334,13 +365,33 @@ export interface Step {
   conditions?: StepCondition;
   overlays?: StepOverlay[];
   dependsOn?: StepId[];
-  consumes?: ArtifactRef[];
-  produces?: ArtifactRef[];
+  // Component/material flow
+  input: ArtifactRef[];
+  output: ArtifactRef[];
+
+  // Location flow
+  from: LocationRef;
+  to: LocationRef;
 }
 
 // -----------------------------
 // Artifacts / flow
 // -----------------------------
+
+// -----------------------------
+// BOM
+// -----------------------------
+
+export interface BomEntry {
+  id: BomEntryId; // usage id within the build
+  componentId?: BomComponentId; // catalog component id (if known)
+  name: string;
+  quantity?: {
+    value: number;
+    unit: string;
+  };
+  notes?: string;
+}
 
 export type ArtifactType =
   | "intermediate"
@@ -357,6 +408,19 @@ export interface Artifact {
   bomUsageId?: BomUsageId;
   bomComponentId?: BomComponentId;
   notes?: string;
+
+  // NEW: group versioned artifacts together (e.g., quesadilla_main_v1 and _v2 share groupId)
+  groupId?: string;
+
+  // NEW: for sub-assemblies, track what BOM components are in this version
+  components?: BomEntryId[];
+
+  // NEW: lineage tracking for 1:1 evolution steps
+  lineage?: ArtifactLineage;
+}
+
+export interface ArtifactLineage {
+  evolvesFrom?: ArtifactId;
 }
 
 export type ArtifactSource =
@@ -372,7 +436,19 @@ export interface ArtifactRef {
   source: ArtifactSource;
   quantity?: StepQuantity;
   notes?: string;
+
+  // NEW: Precise location tracking for this component
+  from?: LocationRef;
+  to?: LocationRef;
+
+  // NEW: Component-relative placement (e.g., place cheese ON the tortilla)
+  onArtifact?: ArtifactId;
+
+  // NEW: Input role for merge steps (base vs added)
+  role?: ArtifactInputRole;
 }
+
+export type ArtifactInputRole = "base" | "added";
 
 // -----------------------------
 // Zod schemas (runtime validation)
@@ -477,23 +553,72 @@ export const StepTargetSchema = z
   })
   .strict();
 
+const ApplianceIdSchema = z.union([
+  z.literal("turbo"),
+  z.literal("fryer"),
+  z.literal("waterbath"),
+  z.literal("toaster"),
+  z.literal("salamander"),
+  z.literal("clamshell_grill"),
+  z.literal("press"),
+  z.literal("induction"),
+  z.literal("conveyor"),
+  z.literal("hot_box"),
+  z.literal("hot_well"),
+  z.literal("rice_cooker"),
+  z.literal("pasta_cooker"),
+  z.literal("pizza_oven"),
+  z.literal("pizza_conveyor_oven"),
+  z.literal("steam_well"),
+  z.literal("sauce_warmer"),
+  z.literal("other"),
+]);
+
 export const StepEquipmentSchema = z
   .object({
-    applianceId: z.union([
-      z.literal("turbo"),
-      z.literal("fryer"),
-      z.literal("waterbath"),
-      z.literal("toaster"),
-      z.literal("salamander"),
-      z.literal("clamshell_grill"),
-      z.literal("press"),
-      z.literal("induction"),
-      z.literal("conveyor"),
-      z.literal("hot_box"),
-      z.literal("hot_well"),
-      z.literal("other"),
-    ]),
+    applianceId: ApplianceIdSchema,
     presetId: z.string().optional(),
+  })
+  .strict();
+
+const SublocationIdSchema = z.union([
+  z.literal("work_surface"),
+  z.literal("cold_rail"),
+  z.literal("dry_rail"),
+  z.literal("cold_storage"),
+  z.literal("packaging"),
+  z.literal("kit_storage"),
+  z.literal("window_shelf"),
+  z.literal("equipment"),
+]);
+
+const StepSublocationSchema = z
+  .object({
+    type: SublocationIdSchema,
+    equipmentId: ApplianceIdSchema.optional(),
+  })
+  .strict();
+
+const LocationRefSchema = z
+  .object({
+    stationId: StationIdSchema.optional(),
+    sublocation: StepSublocationSchema.optional(),
+  })
+  .strict();
+
+const BomEntrySchema = z
+  .object({
+    id: NonEmptyString,
+    componentId: z.string().optional(),
+    name: NonEmptyString,
+    quantity: z
+      .object({
+        value: z.number(),
+        unit: z.string(),
+      })
+      .strict()
+      .optional(),
+    notes: z.string().optional(),
   })
   .strict();
 
@@ -642,6 +767,13 @@ export const ArtifactSchema = z
     bomUsageId: z.string().optional(),
     bomComponentId: z.string().optional(),
     notes: z.string().optional(),
+    groupId: z.string().optional(),
+    components: z.array(z.string()).optional(),
+    lineage: z
+      .object({
+        evolvesFrom: z.string().optional(),
+      })
+      .optional(),
   })
   .strict();
 
@@ -667,6 +799,10 @@ export const ArtifactRefSchema = z
     source: ArtifactSourceSchema,
     quantity: StepQuantitySchema.optional(),
     notes: z.string().optional(),
+    from: LocationRefSchema.optional(),
+    to: LocationRefSchema.optional(),
+    onArtifact: z.string().optional(),
+    role: z.union([z.literal("base"), z.literal("added")]).optional(),
   })
   .strict();
 
@@ -686,6 +822,11 @@ export const StepSchema = z
     time: StepTimeSchema.optional(),
     cookingPhase: z.nativeEnum(CookingPhase).optional(),
     container: StepContainerSchema.optional(),
+    sublocation: StepSublocationSchema.optional(),
+    // In the new model we want these present on every step. For backwards compatibility,
+    // we default missing values to empty objects (all fields optional).
+    from: LocationRefSchema.default({}),
+    to: LocationRefSchema.default({}),
     exclude: z.boolean().optional(),
     prepType: z.union([z.literal("pre_service"), z.literal("order_execution")]).optional(),
     storageLocation: StorageLocationSchema.optional(),
@@ -696,8 +837,10 @@ export const StepSchema = z
     conditions: StepConditionSchema.optional(),
     overlays: z.array(StepOverlaySchema).optional(),
     dependsOn: z.array(z.string()).optional(),
-    consumes: z.array(ArtifactRefSchema).optional(),
-    produces: z.array(ArtifactRefSchema).optional(),
+    // In the new model we want these present on every step. For backwards compatibility,
+    // we default missing arrays to [].
+    input: z.array(ArtifactRefSchema).default([]),
+    output: z.array(ArtifactRefSchema).default([]),
   })
   .strict();
 
@@ -716,6 +859,7 @@ export const BenchTopLineBuildSchema = z
     operations: z.array(z.record(z.string(), z.unknown())).optional(),
     tracks: z.array(z.record(z.string(), z.unknown())).optional(),
     requiresBuilds: z.array(BuildRefSchema).optional(),
+    bom: z.array(BomEntrySchema).default([]),
     artifacts: z.array(ArtifactSchema).optional(),
     primaryOutputArtifactId: z.string().optional(),
     customizationGroups: z.array(CustomizationGroupSchema).optional(),

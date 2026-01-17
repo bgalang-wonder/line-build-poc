@@ -16,14 +16,14 @@
       "orderIndex": 1,
       "action": { "family": "PREP", "techniqueId": "cut_diced" },
       "instruction": "Dice component A.",
-      "produces": [{ "source": { "type": "in_build", "artifactId": "a_componentA" } }]
+      "output": [{ "source": { "type": "in_build", "artifactId": "a_componentA" } }]
     },
     {
       "id": "p2",
       "orderIndex": 2,
       "action": { "family": "PREP", "techniqueId": "wash" },
       "instruction": "Wash component B.",
-      "produces": [{ "source": { "type": "in_build", "artifactId": "a_componentB" } }]
+      "output": [{ "source": { "type": "in_build", "artifactId": "a_componentB" } }]
     },
     {
       "id": "p3",
@@ -31,11 +31,11 @@
       "action": { "family": "COMBINE" },
       "dependsOn": ["p1", "p2"],
       "instruction": "Combine components A and B.",
-      "consumes": [
+      "input": [
         { "source": { "type": "in_build", "artifactId": "a_componentA" } },
         { "source": { "type": "in_build", "artifactId": "a_componentB" } }
       ],
-      "produces": [{ "source": { "type": "in_build", "artifactId": "a_joined" } }]
+      "output": [{ "source": { "type": "in_build", "artifactId": "a_joined" } }]
     },
     {
       "id": "p4",
@@ -45,17 +45,17 @@
       "equipment": { "applianceId": "turbo", "presetId": "program_2" },
       "time": { "durationSeconds": 120, "isActive": false },
       "instruction": "Heat joined mixture until hot.",
-      "consumes": [{ "source": { "type": "in_build", "artifactId": "a_joined" } }],
-      "produces": [{ "source": { "type": "in_build", "artifactId": "a_final" } }]
+      "input": [{ "source": { "type": "in_build", "artifactId": "a_joined" } }],
+      "output": [{ "source": { "type": "in_build", "artifactId": "a_final" } }]
     },
     {
       "id": "p5",
       "orderIndex": 5,
-      "action": { "family": "VEND" },
+      "action": { "family": "PACKAGING" },
       "dependsOn": ["p4"],
       "container": { "type": "clamshell", "name": "Standard clamshell" },
       "instruction": "Package and hand off.",
-      "consumes": [{ "source": { "type": "in_build", "artifactId": "a_final" } }]
+      "input": [{ "source": { "type": "in_build", "artifactId": "a_final" } }]
     }
   ],
   "createdAt": "2026-01-10T00:00:00.000Z",

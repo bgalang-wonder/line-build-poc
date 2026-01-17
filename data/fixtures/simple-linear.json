@@ -29,7 +29,7 @@
     {
       "id": "s4",
       "orderIndex": 4,
-      "action": { "family": "VEND" },
+      "action": { "family": "PACKAGING" },
       "dependsOn": ["s3"],
       "container": { "type": "clamshell", "name": "Standard clamshell" },
       "instruction": "Place in clamshell and hand off."

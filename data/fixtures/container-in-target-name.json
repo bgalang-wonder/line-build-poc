@@ -21,7 +21,7 @@
     {
       "id": "s3",
       "orderIndex": 3,
-      "action": { "family": "VEND" },
+      "action": { "family": "PACKAGING" },
       "dependsOn": ["s2"],
       "container": { "type": "clamshell" },
       "instruction": "Send to expo."
