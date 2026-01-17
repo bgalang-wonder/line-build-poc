@@ -131,6 +131,6 @@ Simply open Claude Code in the repository root and ask it to get started:
 
 ### Rules Highlight
 - **H15/H22**: HEAT steps require equipment and time (active/passive).
-- **H16**: VEND steps require a container or target.
+- **H16**: PACKAGING steps require a container or packaging target.
 - **H26**: Graph Connectivity (Connected DAG).
 - **C1-C3**: Culinary logic (e.g., HEAT should happen before ASSEMBLE).

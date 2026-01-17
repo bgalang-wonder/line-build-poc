@@ -14,7 +14,7 @@ Then open http://localhost:3000 in your browser.
 ## What It Does
 
 - Reads builds from `../data/line-builds/` (same data the CLI uses)
-- Displays builds as interactive DAGs with work edges (dependsOn) and flow edges (produces→consumes)
+- Displays builds as interactive DAGs with work edges (dependsOn) and flow edges (output→input)
 - Shows validation errors from `../data/validation/`
 - Updates automatically when builds change (polls every 1.5 seconds)
 

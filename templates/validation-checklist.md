@@ -25,7 +25,7 @@
 | Check | Status | Notes |
 |-------|--------|-------|
 | Clear start point (retrieval/prep) | [ ] | |
-| Clear end point (VEND/handoff) | [ ] | |
+| Clear end point (PACKAGING/handoff) | [ ] | |
 | All stations accounted for | [ ] | |
 | Station transitions make sense | [ ] | |
 
@@ -88,7 +88,7 @@
 
 **If issues found, ask:**
 - [ ] "Step X uses [component] but I don't see where it comes from — is there a retrieval step?"
-- [ ] "Step Y produces [output] but nothing uses it — what happens to it?"
+- [ ] "Step Y has output [X] but nothing uses it — what happens to it?"
 - [ ] "The BOM has [item] but no step references it — is it implicit or missing?"
 
 **User's answers:**
@@ -112,7 +112,7 @@
 | H22 (HEAT time) | Any HEAT steps | |
 | H25 (PREP technique) | Any PREP steps | |
 | H24 (PORTION quantity) | Any PORTION steps | |
-| H16 (VEND container) | Any VEND steps | |
+| H16 (PACKAGING container) | Any PACKAGING steps | |
 | H17 (storage location) | Any pre_service steps | |
 | Parallel tracks | Multiple trackIds detected | |
 | Dependencies | Implicit ordering unclear | |
@@ -222,7 +222,7 @@ Copy this block for each step:
 | quantity.unit | [ ] | <oz/tbsp/count/etc> |
 | OR notes | [ ] | |
 
-<For VEND steps>
+<For PACKAGING steps>
 | Requirement | Status | Value |
 |-------------|--------|-------|
 | container.type | [ ] | <bag/clamshell/cup/etc> |

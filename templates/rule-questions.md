@@ -16,7 +16,7 @@
 
 **Applies to:** All steps
 
-**Required:** `action.family` must be one of: `PREP`, `HEAT`, `TRANSFER`, `COMBINE`, `ASSEMBLE`, `PORTION`, `CHECK`, `VEND`, `OTHER`
+**Required:** `action.family` must be one of: `PREP`, `HEAT`, `TRANSFER`, `COMBINE`, `ASSEMBLE`, `PORTION`, `CHECK`, `PACKAGING`, `OTHER`
 
 **Questions:**
 - "What type of action is this? (prep, heat, portion, assemble, transfer, vend)"
@@ -28,7 +28,7 @@
 - "portion", "scoop", "weigh", "measure" → PORTION
 - "place", "add", "top", "layer" → ASSEMBLE
 - "pass", "move", "transfer" → TRANSFER
-- "bag", "package", "hand off", "vend" → VEND
+- "bag", "package", "lid", "wrap" → PACKAGING
 - "mix", "combine", "fold", "stir" → COMBINE
 
 ---
@@ -135,16 +135,16 @@ Options:
 
 ---
 
-### H16 — VEND Steps Require Container ⚠️ CRITICAL
+### H16 — PACKAGING Steps Require Container ⚠️ CRITICAL
 
-**Applies to:** Steps where `action.family === "VEND"`
+**Applies to:** Steps where `action.family === "PACKAGING"`
 
 **Required:** `container` OR `target.type === "packaging"`
 
 **Ask Questions Tool Format:**
 ```
 Type: multiple_choice
-Question: "Step [N] (VEND [description]) - Container/packaging?"
+Question: "Step [N] (PACKAGING [description]) - Container/packaging?"
 Options:
   - bag (Bag)
   - clamshell (Clamshell container)
@@ -351,7 +351,7 @@ Options:
 
 **Applies to:** Steps that consume from external builds
 
-**Required:** If `step.consumes[].source.type === "external_build"`, the `itemId` must be in `build.requiresBuilds`
+**Required:** If `step.input[].source.type === "external_build"`, the `itemId` must be in `build.requiresBuilds`
 
 **Questions:**
 - "This step uses a component from another build — what's the item ID?"
@@ -363,7 +363,7 @@ Options:
 
 **Applies to:** Steps that consume in-build artifacts
 
-**Required:** If `step.consumes[].source.type === "in_build"`, the `artifactId` must exist in `build.artifacts`
+**Required:** If `step.input[].source.type === "in_build"`, the `artifactId` must exist in `build.artifacts`
 
 **Auto-check:** Verify artifact IDs exist before writing.
 
@@ -399,7 +399,7 @@ Options:
 
 ### Missing Retrieval
 
-**Detection:** HEAT/PORTION/VEND step with no prior PREP/retrieval step for that component
+**Detection:** HEAT/PORTION/PACKAGING step with no prior PREP/retrieval step for that component
 
 **Ask Questions Tool Format:**
 ```
@@ -417,14 +417,14 @@ Options:
 
 ### Missing Handoff
 
-**Detection:** Last step isn't VEND or TRANSFER to expo/pass
+**Detection:** Last step isn't PACKAGING or TRANSFER to expo/pass
 
 **Ask Questions Tool Format:**
 ```
 Type: multiple_choice
 Question: "Build ends at Step [N] ([description]). How is final handoff done?"
 Options:
-  - Add VEND step to expo
+  - Add PACKAGING step to expo
   - Add TRANSFER step to pass window
   - Last step IS the handoff (update action family)
   - No handoff needed (prep build only)
@@ -473,7 +473,7 @@ Options:
 | **PREP** | H25 | `multiple_choice` | wash, cut_diced, cut_sliced, open_pack, etc. |
 | **PORTION** | H24 | `multiple_choice` | oz, tbsp, tsp, count, g, ml |
 | **PORTION** | - | `multiple_choice` | spoodle_1oz, spoodle_2oz, scale, hand, etc. |
-| **VEND** | H16 | `multiple_choice` | bag, clamshell, cup, bowl, tray, etc. |
+| **PACKAGING** | H16 | `multiple_choice` | bag, clamshell, cup, bowl, tray, etc. |
 | **pre_service** | H17 | `multiple_choice` | cold_storage, cold_rail, dry_rail, freezer, etc. |
 
 ## Quick Reference: Structural Questions
@@ -483,6 +483,6 @@ Options:
 | Parallel tracks | `multiple_choice` | Merge at expo, Separate handoff, Depends on other |
 | Cross-track deps | `yes_no` | Yes, No |
 | Missing retrieval | `multiple_choice` | Add from cold_storage, Add from cold_rail, Implicit, etc. |
-| Missing handoff | `multiple_choice` | Add VEND, Add TRANSFER, Last step IS handoff, etc. |
+| Missing handoff | `multiple_choice` | Add PACKAGING, Add TRANSFER, Last step IS handoff, etc. |
 | Unusual order | `yes_no` | Yes intentional, No reverse it |
 | Station transition | `multiple_choice` | Add TRANSFER, Same person, Implicit |
