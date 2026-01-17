@@ -107,6 +107,42 @@ function setStepField(step: Step, field: string, value: any) {
     step.instruction = value;
   } else if (field === "step.cookingPhase") {
     step.cookingPhase = value;
+  } else if (field === "step.sublocation.type") {
+    if (!step.sublocation) step.sublocation = { type: value };
+    else step.sublocation.type = value;
+  } else if (field === "step.sublocation.equipmentId") {
+    if (!step.sublocation) step.sublocation = { type: "equipment", equipmentId: value };
+    else step.sublocation.equipmentId = value;
+  } else if (field === "step.from.stationId") {
+    if (!step.from) step.from = { stationId: value };
+    else step.from.stationId = value;
+  } else if (field === "step.from.sublocation.type") {
+    if (!step.from) step.from = { sublocation: { type: value } } as any;
+    else {
+      if (!step.from.sublocation) step.from.sublocation = { type: value } as any;
+      else step.from.sublocation.type = value;
+    }
+  } else if (field === "step.from.sublocation.equipmentId") {
+    if (!step.from) step.from = { sublocation: { type: "equipment", equipmentId: value } } as any;
+    else {
+      if (!step.from.sublocation) step.from.sublocation = { type: "equipment", equipmentId: value } as any;
+      else step.from.sublocation.equipmentId = value;
+    }
+  } else if (field === "step.to.stationId") {
+    if (!step.to) step.to = { stationId: value };
+    else step.to.stationId = value;
+  } else if (field === "step.to.sublocation.type") {
+    if (!step.to) step.to = { sublocation: { type: value } } as any;
+    else {
+      if (!step.to.sublocation) step.to.sublocation = { type: value } as any;
+      else step.to.sublocation.type = value;
+    }
+  } else if (field === "step.to.sublocation.equipmentId") {
+    if (!step.to) step.to = { sublocation: { type: "equipment", equipmentId: value } } as any;
+    else {
+      if (!step.to.sublocation) step.to.sublocation = { type: "equipment", equipmentId: value } as any;
+      else step.to.sublocation.equipmentId = value;
+    }
   } else if (field.startsWith("step.equipment.")) {
     if (!step.equipment) step.equipment = { applianceId: value };
     else step.equipment.applianceId = value;
@@ -195,9 +231,6 @@ function applyAddDep(build: BenchTopLineBuild, op: { stepId: string; dependsOn: 
   const step = build.steps.find(s => s.id === op.stepId);
   if (!step) throw new EditError(`Step not found: ${op.stepId}`);
   
-  const dep = build.steps.find(s => s.id === op.dependsOn);
-  if (!dep) throw new EditError(`Dependency step not found: ${op.dependsOn}`);
-
   if (!step.dependsOn) step.dependsOn = [];
   if (!step.dependsOn.includes(op.dependsOn)) {
     step.dependsOn.push(op.dependsOn);

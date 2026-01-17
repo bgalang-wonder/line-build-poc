@@ -179,18 +179,28 @@ async function cmdWrite(flags: GlobalFlags, argv: string[]): Promise<number> {
   if (fileOpt.value) raw = await fs.readFile(fileOpt.value, "utf8");
   else raw = await readStdin();
 
-  const build = parseBuild(JSON.parse(raw));
+  let build: BenchTopLineBuild;
+  try {
+    build = parseBuild(JSON.parse(raw));
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    writeError(flags, `Invalid JSON input: ${msg}`);
+    return EXIT_USAGE_ERROR;
+  }
   const bom = await readBom(build.itemId);
   const validation = validateBuild(build, { bom });
 
-  if (!validation.valid) {
-    writeError(flags, `Validation failed: ${validation.hardErrors[0]?.message}`);
+  // Policy:
+  // - Drafts may be invalid (validation output is still written).
+  // - Published builds must be valid (no hard errors).
+  if (build.status === "published" && !validation.valid) {
+    writeError(flags, `Publish blocked: ${validation.hardErrors[0]?.message}`);
     return EXIT_VALIDATION_FAILED;
   }
 
   const buildPath = await writeBuild(build);
   await writeValidationOutput(build, validation);
-  await writeReceipt({ command: "write", timestamp: new Date().toISOString(), inputs: { buildId: build.id }, outputs: { path: buildPath, valid: true }, touchedFiles: [buildPath] });
+  await writeReceipt({ command: "write", timestamp: new Date().toISOString(), inputs: { buildId: build.id }, outputs: { path: buildPath, valid: validation.valid }, touchedFiles: [buildPath] });
 
   if (flags.json) writeJson({ ok: true, buildId: build.id, path: buildPath });
   else writeHuman([`Wrote ${build.id} to ${buildPath}`]);
@@ -206,7 +216,14 @@ async function cmdEdit(flags: GlobalFlags, argv: string[]): Promise<number> {
   if (!buildId) { writeError(flags, "usage: edit <buildId> [--op <json>] [--apply]"); return EXIT_USAGE_ERROR; }
 
   const build = await readBuild(buildId);
-  const ops = opsOpt.values.map(v => JSON.parse(v) as EditOp);
+  let ops: EditOp[];
+  try {
+    ops = opsOpt.values.map(v => JSON.parse(v) as EditOp);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    writeError(flags, `Invalid --op JSON: ${msg}`);
+    return EXIT_USAGE_ERROR;
+  }
   if (normalizeFlag.present) ops.push({ type: "normalize_indices" });
 
   try {
@@ -220,8 +237,11 @@ async function cmdEdit(flags: GlobalFlags, argv: string[]): Promise<number> {
       return EXIT_SUCCESS;
     }
 
-    if (!validation.valid) {
-      writeError(flags, `Validation failed after edit: ${validation.hardErrors[0]?.message}`);
+    // Policy:
+    // - Draft edits may be invalid (save anyway; validation output will guide next steps).
+    // - If the edit results in status=published, block unless valid.
+    if (updated.status === "published" && !validation.valid) {
+      writeError(flags, `Publish blocked after edit: ${validation.hardErrors[0]?.message}`);
       return EXIT_VALIDATION_FAILED;
     }
 
@@ -297,6 +317,7 @@ async function main(argv: string[]): Promise<number> {
       const bid = args[0];
       if (!bid) return EXIT_USAGE_ERROR;
       const ctrl = { buildId: bid, requestId: randomUUID(), timestamp: new Date().toISOString() };
+      await fs.mkdir(`${DATA_ROOT_ABS}/viewer`, { recursive: true });
       await fs.writeFile(`${DATA_ROOT_ABS}/viewer/selection.json`, JSON.stringify(ctrl));
       return EXIT_SUCCESS;
     }

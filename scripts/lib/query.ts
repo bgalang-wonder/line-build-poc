@@ -54,6 +54,14 @@ export const QUERY_FIELD_WHITELIST = [
   "step.container.name",
   "step.container.size",
   "step.stationId",
+  "step.sublocation.type",
+  "step.sublocation.equipmentId",
+  "step.from.stationId",
+  "step.from.sublocation.type",
+  "step.from.sublocation.equipmentId",
+  "step.to.stationId",
+  "step.to.sublocation.type",
+  "step.to.sublocation.equipmentId",
   "step.toolId",
   "step.target.bomUsageId",
   "step.target.bomComponentId",
@@ -304,6 +312,22 @@ function getFieldValues(
       return step.container?.size ? [step.container.size] : [];
     case "step.stationId":
       return step.stationId ? [step.stationId] : [];
+    case "step.sublocation.type":
+      return step.sublocation?.type ? [step.sublocation.type] : [];
+    case "step.sublocation.equipmentId":
+      return step.sublocation?.equipmentId ? [step.sublocation.equipmentId] : [];
+    case "step.from.stationId":
+      return step.from?.stationId ? [step.from.stationId] : [];
+    case "step.from.sublocation.type":
+      return step.from?.sublocation?.type ? [step.from.sublocation.type] : [];
+    case "step.from.sublocation.equipmentId":
+      return step.from?.sublocation?.equipmentId ? [step.from.sublocation.equipmentId] : [];
+    case "step.to.stationId":
+      return step.to?.stationId ? [step.to.stationId] : [];
+    case "step.to.sublocation.type":
+      return step.to?.sublocation?.type ? [step.to.sublocation.type] : [];
+    case "step.to.sublocation.equipmentId":
+      return step.to?.sublocation?.equipmentId ? [step.to.sublocation.equipmentId] : [];
     case "step.toolId":
       return step.toolId ? [step.toolId] : [];
     case "step.target.bomUsageId":
@@ -394,6 +418,37 @@ export function buildMatchLabel(step: Step): string {
     parts.push(`t=${step.time.durationSeconds}s`);
   }
   return parts.join(" ");
+}
+
+export type BuildGap = {
+  ruleId: string;
+  message: string;
+  steps: string[];
+};
+
+export function buildGapsFromValidation(
+  _build: BenchTopLineBuild,
+  validation: { hardErrors: any[]; warnings: any[] },
+): BuildGap[] {
+  const combined = [...validation.hardErrors, ...validation.warnings];
+  const gaps: Map<string, BuildGap> = new Map();
+
+  for (const err of combined) {
+    const key = err.ruleId;
+    if (!gaps.has(key)) {
+      gaps.set(key, {
+        ruleId: err.ruleId,
+        message: err.message,
+        steps: [],
+      });
+    }
+    const gap = gaps.get(key)!;
+    if (err.stepId && !gap.steps.includes(err.stepId)) {
+      gap.steps.push(err.stepId);
+    }
+  }
+
+  return Array.from(gaps.values());
 }
 
 export function runQuery(input: {

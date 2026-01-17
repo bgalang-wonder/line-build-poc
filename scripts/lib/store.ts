@@ -4,6 +4,7 @@ import * as fs from "node:fs/promises";
 import * as path from "node:path";
 
 import { parseBuild, type BenchTopLineBuild } from "./schema";
+import { normalizeBuild } from "./normalize";
 
 /**
  * PoC file-backed store utilities.
@@ -118,8 +119,9 @@ export async function readBuild(buildId: string): Promise<BenchTopLineBuild> {
 }
 
 export async function writeBuild(build: BenchTopLineBuild): Promise<string> {
-  const filePath = buildFilePathAbs(build.id);
-  await atomicWriteJsonFile(filePath, build);
+  const normalized = normalizeBuild(build);
+  const filePath = buildFilePathAbs(normalized.id);
+  await atomicWriteJsonFile(filePath, normalized);
   return filePath;
 }
 
