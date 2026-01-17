@@ -2,35 +2,119 @@ import React from "react";
 
 import { Button } from "@/components/ui/Button";
 
-type ViewMode = 'compact' | 'expanded';
+export type VisualizationMode = 'work_order' | 'material_flow' | 'station_handoffs';
+export type ViewMode = 'compact' | 'expanded';
 
-export type GraphLayerTogglesProps = {
-  showWorkEdges: boolean;
-  showFlowEdges: boolean;
-  onToggleWorkEdges: () => void;
-  onToggleFlowEdges: () => void;
-  viewMode?: ViewMode;
-  onSetViewMode?: (mode: ViewMode) => void;
+export type ModeSelectorProps = {
+  mode: VisualizationMode;
+  onSetMode: (mode: VisualizationMode) => void;
 };
 
-export function GraphLayerToggles({
-  showWorkEdges,
-  showFlowEdges,
-  onToggleWorkEdges,
-  onToggleFlowEdges,
-  viewMode = 'compact',
-  onSetViewMode,
-}: GraphLayerTogglesProps) {
+export type ModeOptionsProps = {
+  mode: VisualizationMode;
+  
+  // View mode (all modes)
+  viewMode: ViewMode;
+  onSetViewMode: (mode: ViewMode) => void;
+
+  // Work Order mode options
+  showCriticalPath: boolean;
+  onToggleCriticalPath: () => void;
+  showSwimlanes: boolean;
+  onToggleSwimlanes: () => void;
+
+  // Material Flow specific
+  selectedGroupIds?: string[];
+  availableGroupIds?: string[];
+  groupColorMap?: Map<string, string>;
+  onToggleGroupId?: (groupId: string) => void;
+  showAssemblyPoints?: boolean;
+  onToggleAssemblyPoints?: () => void;
+  highlightMergesOnly?: boolean;
+  onToggleHighlightMergesOnly?: () => void;
+  mergeCount?: number;
+  showKitchenLayout?: boolean;
+  onToggleKitchenLayout?: () => void;
+};
+
+// Keep the old combined props for backward compatibility during transition
+export type GraphLayerTogglesProps = ModeSelectorProps & ModeOptionsProps;
+
+const MODE_LABELS: Record<VisualizationMode, { label: string; description: string }> = {
+  work_order: {
+    label: 'Work Order',
+    description: 'Task sequence & dependencies',
+  },
+  material_flow: {
+    label: 'Material Flow',
+    description: 'How components combine into sub-assemblies',
+  },
+  station_handoffs: {
+    label: 'Station Timeline',
+    description: 'Physical movement through stations',
+  },
+};
+
+/**
+ * Mode selector tabs - sits at the top of the visualization
+ */
+export function ModeSelector({ mode, onSetMode }: ModeSelectorProps) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      {onSetViewMode ? (
+    <div className="flex items-center gap-1 p-1 bg-neutral-100 rounded-lg">
+      {(Object.keys(MODE_LABELS) as VisualizationMode[]).map((m) => (
+        <button
+          key={m}
+          type="button"
+          onClick={() => onSetMode(m)}
+          title={MODE_LABELS[m].description}
+          className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+            mode === m
+              ? 'bg-white text-neutral-900 shadow-sm'
+              : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+          }`}
+        >
+          {MODE_LABELS[m].label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Mode-specific options bar - sits below the graph
+ */
+export function ModeOptions({
+  mode,
+  viewMode,
+  onSetViewMode,
+  showCriticalPath,
+  onToggleCriticalPath,
+  showSwimlanes,
+  onToggleSwimlanes,
+  selectedGroupIds = [],
+  availableGroupIds = [],
+  groupColorMap,
+  onToggleGroupId,
+  showAssemblyPoints = true,
+  onToggleAssemblyPoints,
+  highlightMergesOnly = false,
+  onToggleHighlightMergesOnly,
+  mergeCount = 0,
+  showKitchenLayout = false,
+  onToggleKitchenLayout,
+}: ModeOptionsProps) {
+  return (
+    <div className="flex items-center gap-4 px-4 py-2 bg-neutral-50 border-t border-neutral-200">
+      {/* View Mode Toggle - all modes */}
+      <div className="flex items-center gap-2">
+        <span className="text-xs font-medium text-neutral-500">Detail:</span>
         <div className="inline-flex rounded-md overflow-hidden border border-neutral-300">
           <button
             type="button"
             onClick={() => onSetViewMode('compact')}
-            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`px-3 py-1 text-xs font-medium transition-colors ${
               viewMode === 'compact'
-                ? 'bg-primary-600 text-white'
+                ? 'bg-neutral-800 text-white'
                 : 'bg-white text-neutral-700 hover:bg-neutral-50'
             }`}
           >
@@ -39,35 +123,132 @@ export function GraphLayerToggles({
           <button
             type="button"
             onClick={() => onSetViewMode('expanded')}
-            className={`px-3 py-1.5 text-xs font-medium transition-colors border-l border-neutral-300 ${
+            className={`px-3 py-1 text-xs font-medium transition-colors border-l border-neutral-300 ${
               viewMode === 'expanded'
-                ? 'bg-primary-600 text-white'
+                ? 'bg-neutral-800 text-white'
                 : 'bg-white text-neutral-700 hover:bg-neutral-50'
             }`}
           >
             Expanded
           </button>
         </div>
-      ) : null}
-      <div className="w-px h-5 bg-neutral-200" />
-      <Button
-        type="button"
-        size="sm"
-        variant={showWorkEdges ? "primary" : "secondary"}
-        onClick={onToggleWorkEdges}
-        aria-pressed={showWorkEdges}
-      >
-        {showWorkEdges ? "✓ " : ""}Work Edges
-      </Button>
-      <Button
-        type="button"
-        size="sm"
-        variant={showFlowEdges ? "primary" : "secondary"}
-        onClick={onToggleFlowEdges}
-        aria-pressed={showFlowEdges}
-      >
-        {showFlowEdges ? "✓ " : ""}Flow Edges
-      </Button>
+      </div>
+
+      {/* Work Order Options */}
+      {mode === 'work_order' && (
+        <>
+          <div className="w-px h-5 bg-neutral-300" />
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              size="sm"
+              variant={showCriticalPath ? "primary" : "secondary"}
+              onClick={onToggleCriticalPath}
+              aria-pressed={showCriticalPath}
+            >
+              {showCriticalPath ? "✓ " : ""}Critical Path
+            </Button>
+          </div>
+        </>
+      )}
+
+      {/* Material Flow Options */}
+      {mode === 'material_flow' && (
+        <>
+          <div className="w-px h-5 bg-neutral-300" />
+          <div className="flex items-center gap-2">
+            {onToggleAssemblyPoints && (
+              <Button
+                type="button"
+                size="sm"
+                variant={showAssemblyPoints ? "primary" : "secondary"}
+                onClick={onToggleAssemblyPoints}
+                aria-pressed={showAssemblyPoints}
+              >
+                {showAssemblyPoints ? "✓ " : ""}Merge Points
+              </Button>
+            )}
+            {onToggleHighlightMergesOnly && mergeCount > 0 && (
+              <Button
+                type="button"
+                size="sm"
+                variant={highlightMergesOnly ? "primary" : "secondary"}
+                onClick={onToggleHighlightMergesOnly}
+                aria-pressed={highlightMergesOnly}
+                title="Dim non-merge nodes to focus on convergence points"
+              >
+                {highlightMergesOnly ? "✓ " : ""}Focus Merges ({mergeCount})
+              </Button>
+            )}
+            {onToggleKitchenLayout && (
+              <Button
+                type="button"
+                size="sm"
+                variant={showKitchenLayout ? "primary" : "secondary"}
+                onClick={onToggleKitchenLayout}
+                aria-pressed={showKitchenLayout}
+                title="Align artifacts by equipment lanes"
+              >
+                {showKitchenLayout ? "✓ " : ""}Kitchen Layout
+              </Button>
+            )}
+          </div>
+
+          {/* Group Filter */}
+          {availableGroupIds.length > 0 && onToggleGroupId && (
+            <>
+              <div className="w-px h-5 bg-neutral-300" />
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-medium text-neutral-500">Groups:</span>
+                <div className="flex flex-wrap gap-1">
+                  {availableGroupIds.map((groupId) => {
+                    const isSelected = selectedGroupIds.includes(groupId);
+                    const color = groupColorMap?.get(groupId) || '#6B7280';
+                    return (
+                      <button
+                        key={groupId}
+                        type="button"
+                        onClick={() => onToggleGroupId(groupId)}
+                        className={`px-2 py-0.5 text-xs rounded-full border transition-all ${
+                          isSelected
+                            ? 'border-transparent text-white'
+                            : 'border-neutral-300 text-neutral-500 bg-white hover:bg-neutral-50 opacity-50'
+                        }`}
+                        style={isSelected ? { backgroundColor: color } : {}}
+                      >
+                        {groupId}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
+        </>
+      )}
+
+      {/* Station Timeline Options */}
+      {mode === 'station_handoffs' && (
+        <>
+          <div className="w-px h-5 bg-neutral-300" />
+          <span className="text-xs text-neutral-500">
+            Shows station visits as nodes, with track lanes for parallel work
+          </span>
+        </>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Combined component for backward compatibility
+ * @deprecated Use ModeSelector and ModeOptions separately
+ */
+export function GraphLayerToggles(props: GraphLayerTogglesProps) {
+  return (
+    <div className="flex flex-col gap-2">
+      <ModeSelector mode={props.mode} onSetMode={props.onSetMode} />
+      <ModeOptions {...props} />
     </div>
   );
 }

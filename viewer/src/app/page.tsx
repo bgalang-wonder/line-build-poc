@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { DAGVisualization } from "@/components/visualization/DAGVisualization";
-import { StepInspector } from "@/components/visualization/StepInspector";
+import { useEffect, useState, useCallback, useMemo } from "react";
+import { DAGVisualization, type VisualizationMode } from "@/components/visualization/DAGVisualization";
+import { DetailPanel } from "@/components/visualization/DetailPanel";
 import { MainViewToggle, type ViewType } from "@/components/layout/MainViewToggle";
 import { StepsTable } from "@/components/steps/StepsTable";
 import { RulesPanel } from "@/components/validation/RulesPanel";
 import { BuildHealthStrip } from "@/components/validation/BuildHealthStrip";
-import type { BenchTopLineBuild, ValidationOutput, BuildSummary } from "@/types";
+import { buildGroupColorMap } from "@/lib/componentColors";
+import type { BenchTopLineBuild, ValidationOutput, BuildSummary, StationVisit, Step } from "@/types";
+
+type Artifact = { id: string; name?: string; groupId?: string; components?: string[] };
+type ArtifactSteps = { producedBy: Step[]; consumedBy: Step[] };
 
 const POLL_MS = 1500;
 const SELECTION_STORAGE_KEY = "lineBuildViewer.lastSelectionRequestId";
@@ -34,15 +38,59 @@ export default function ViewerPage() {
   const [selectedBuild, setSelectedBuild] = useState<BenchTopLineBuild | null>(null);
   const [validation, setValidation] = useState<ValidationOutput | null>(null);
   const [selectedStepId, setSelectedStepId] = useState<string | undefined>(getStepIdFromUrl() ?? undefined);
+  const [selectedVisit, setSelectedVisit] = useState<StationVisit | null>(null);
   const [highlightStepIds, setHighlightStepIds] = useState<string[]>([]);
   const [mainView, setMainView] = useState<ViewType>("graph");
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null);
   const [lastProcessedSelectionRequestId, setLastProcessedSelectionRequestId] = useState<string | null>(
     null,
   );
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [dagMode, setDagMode] = useState<VisualizationMode>("work_order");
+  const [selectedArtifact, setSelectedArtifact] = useState<Artifact | null>(null);
+  const [artifactSteps, setArtifactSteps] = useState<ArtifactSteps | null>(null);
 
   const selectedSummary = builds.find((b) => b.buildId === selectedBuildId) ?? null;
   const selectedStep = selectedBuild?.steps.find((s) => s.id === selectedStepId) ?? null;
+
+  // Build group color map for DetailPanel
+  const groupColorMap = useMemo(() => {
+    if (!selectedBuild?.artifacts) return new Map<string, string>();
+    return buildGroupColorMap(selectedBuild.artifacts);
+  }, [selectedBuild?.artifacts]);
+
+  // Clear selections when mode changes
+  const handleModeChange = useCallback((mode: VisualizationMode) => {
+    setDagMode(mode);
+    // Clear selections for other modes
+    if (mode !== "work_order") {
+      setSelectedStepId(undefined);
+    }
+    if (mode !== "material_flow") {
+      setSelectedArtifact(null);
+      setArtifactSteps(null);
+    }
+    if (mode !== "station_handoffs") {
+      setSelectedVisit(null);
+    }
+  }, []);
+
+  // Handle artifact selection from DAG
+  const handleSelectArtifact = useCallback((artifact: Artifact | null, steps: ArtifactSteps | null) => {
+    setSelectedArtifact(artifact);
+    setArtifactSteps(steps);
+    // Clear other selections
+    setSelectedStepId(undefined);
+    setSelectedVisit(null);
+  }, []);
+
+  // Clear detail panel selection
+  const handleCloseDetailPanel = useCallback(() => {
+    setSelectedStepId(undefined);
+    setSelectedVisit(null);
+    setSelectedArtifact(null);
+    setArtifactSteps(null);
+  }, []);
 
   const fetchBuilds = useCallback(async (): Promise<BuildSummary[]> => {
     try {
@@ -161,6 +209,7 @@ export default function ViewerPage() {
         ) {
           setSelectedBuildId(selection.buildId);
           setSelectedStepId(selection.stepId);
+          setSelectedVisit(null);
           setLastProcessedSelectionRequestId(selection.requestId);
           try {
             window.localStorage.setItem(SELECTION_STORAGE_KEY, selection.requestId);
@@ -205,6 +254,7 @@ export default function ViewerPage() {
       setValidation(v);
       setLastUpdatedAt(updatedAt);
       setHighlightStepIds([]); // Clear highlights on build change
+      setSelectedVisit(null);
     })();
     return () => { cancelled = true; };
   }, [fetchBuild, fetchValidation, selectedBuildId, selectedSummary?.updatedAt, lastUpdatedAt, selectedBuild?.id]);
@@ -212,33 +262,64 @@ export default function ViewerPage() {
   return (
     <div className="h-screen flex">
       {/* Sidebar */}
-      <div className="w-72 border-r border-neutral-200 bg-white flex flex-col">
-        <div className="p-4 border-b border-neutral-200">
-          <h1 className="font-semibold text-lg">Line Build Viewer</h1>
-          <p className="text-sm text-neutral-500">{builds.length} build(s)</p>
-        </div>
-        <div className="flex-1 overflow-y-auto p-2">
-          {builds.length === 0 ? (
-            <p className="text-sm text-neutral-400 p-2">No builds found</p>
-          ) : (
-            builds.map((b) => (
-              <button
-                key={b.buildId}
-                onClick={() => { setSelectedBuildId(b.buildId); setSelectedStepId(undefined); setHighlightStepIds([]); }}
-                className={`w-full text-left p-3 rounded-lg mb-1 transition ${
-                  b.buildId === selectedBuildId
-                    ? "bg-primary-50 border border-primary-200"
-                    : "hover:bg-neutral-50 border border-transparent"
-                }`}
-              >
-                <div className="font-medium text-sm truncate">{b.name || b.itemId}</div>
-                <div className="text-xs text-neutral-500">
-                  v{b.version} • {b.status} • {b.buildId}
-                </div>
-              </button>
-            ))
+      <div 
+        className={`border-r border-neutral-200 bg-white flex flex-col transition-all duration-200 ${
+          sidebarCollapsed ? "w-12" : "w-72"
+        }`}
+      >
+        <div className="p-2 border-b border-neutral-200 flex items-center justify-between min-h-[60px]">
+          {!sidebarCollapsed && (
+            <div className="flex-1 min-w-0 px-2">
+              <h1 className="font-semibold text-lg truncate">Line Build Viewer</h1>
+              <p className="text-sm text-neutral-500">{builds.length} build(s)</p>
+            </div>
           )}
+          <button
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="p-2 hover:bg-neutral-100 rounded-md transition-colors text-neutral-500 hover:text-neutral-700 flex-shrink-0"
+            title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {sidebarCollapsed ? (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+              </svg>
+            ) : (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+              </svg>
+            )}
+          </button>
         </div>
+        {sidebarCollapsed ? (
+          <div className="flex-1 flex flex-col items-center py-2">
+            <div className="text-xs font-medium text-neutral-400 rotate-180 [writing-mode:vertical-lr] mt-2">
+              {builds.length} builds
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1 overflow-y-auto p-2">
+            {builds.length === 0 ? (
+              <p className="text-sm text-neutral-400 p-2">No builds found</p>
+            ) : (
+              builds.map((b) => (
+                <button
+                  key={b.buildId}
+                  onClick={() => { setSelectedBuildId(b.buildId); setSelectedStepId(undefined); setHighlightStepIds([]); }}
+                  className={`w-full text-left p-3 rounded-lg mb-1 transition ${
+                    b.buildId === selectedBuildId
+                      ? "bg-primary-50 border border-primary-200"
+                      : "hover:bg-neutral-50 border border-transparent"
+                  }`}
+                >
+                  <div className="font-medium text-sm truncate">{b.name || b.itemId}</div>
+                  <div className="text-xs text-neutral-500">
+                    v{b.version} • {b.status} • {b.buildId}
+                  </div>
+                </button>
+              ))
+            )}
+          </div>
+        )}
       </div>
 
       {/* Main Content */}
@@ -273,16 +354,30 @@ export default function ViewerPage() {
           {selectedBuild ? (
             <>
               {mainView === "graph" && (
-                <div className="h-full w-full">
+                <div className="flex-1 min-h-0">
                   <DAGVisualization
                     build={selectedBuild}
                     validation={validation}
                     selectedStepId={selectedStepId}
+                    selectedVisitId={selectedVisit?.id}
+                    selectedArtifactId={selectedArtifact?.id}
                     highlightStepIds={highlightStepIds}
                     onSelectStep={(id) => {
                       setSelectedStepId(id);
+                      setSelectedVisit(null);
+                      setSelectedArtifact(null);
+                      setArtifactSteps(null);
                       setHighlightStepIds([]); // Clear rule highlight on manual step selection
                     }}
+                    onSelectVisit={(visit) => {
+                      setSelectedVisit(visit);
+                      setSelectedStepId(undefined);
+                      setSelectedArtifact(null);
+                      setArtifactSteps(null);
+                      setHighlightStepIds([]);
+                    }}
+                    onSelectArtifact={handleSelectArtifact}
+                    onModeChange={handleModeChange}
                   />
                 </div>
               )}
@@ -292,7 +387,7 @@ export default function ViewerPage() {
                     build={selectedBuild}
                     validation={validation}
                     selectedStepId={selectedStepId}
-                    onSelectStep={(id) => { setSelectedStepId(id); setHighlightStepIds([]); }}
+                    onSelectStep={(id) => { setSelectedStepId(id); setSelectedVisit(null); setHighlightStepIds([]); }}
                   />
                 </div>
               )}
@@ -300,7 +395,7 @@ export default function ViewerPage() {
                 <div className="flex-1 overflow-hidden bg-white rounded-lg border border-neutral-200">
                   <RulesPanel
                     validation={validation}
-                    onSelectStep={setSelectedStepId}
+                    onSelectStep={(id) => { setSelectedStepId(id); setSelectedVisit(null); }}
                     onHighlightSteps={setHighlightStepIds}
                     onSetView={setMainView}
                   />
@@ -314,15 +409,26 @@ export default function ViewerPage() {
           )}
         </div>
 
-        {/* Inspector */}
-        {selectedStep && (
-          <div className="border-t border-neutral-200 bg-white max-h-[40%] overflow-y-auto">
-            <StepInspector
-              step={selectedStep}
-              validation={validation}
-              buildId={selectedBuildId ?? undefined}
-            />
-          </div>
+        {/* Detail Panel */}
+        {mainView === "graph" && (
+          <DetailPanel
+            mode={dagMode}
+            selectedStep={selectedStep}
+            validation={validation}
+            buildId={selectedBuildId ?? undefined}
+            selectedArtifact={selectedArtifact}
+            artifactSteps={artifactSteps}
+            artifacts={selectedBuild?.artifacts}
+            groupColorMap={groupColorMap}
+            selectedVisit={selectedVisit}
+            onClose={handleCloseDetailPanel}
+            onSelectStep={(id) => { 
+              setSelectedStepId(id); 
+              setSelectedVisit(null);
+              setSelectedArtifact(null);
+              setArtifactSteps(null);
+            }}
+          />
         )}
       </div>
     </div>

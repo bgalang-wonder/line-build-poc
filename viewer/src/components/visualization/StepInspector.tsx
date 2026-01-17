@@ -4,17 +4,24 @@ import { Badge } from "@/components/ui/Badge";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { formatStepLabel } from "@/lib/stepLabel";
-import type { Step, ValidationOutput } from "@/types";
+import type { Step, StationVisit, ValidationOutput, BenchTopLineBuild } from "@/types";
 
 type StepInspectorProps = {
   step: Step | null;
   validation: ValidationOutput | null;
   buildId?: string;
+  artifacts?: BenchTopLineBuild["artifacts"];
+  visit?: StationVisit | null;
+  onSelectStep?: (stepId: string) => void;
 };
 
-function formatArtifactRef(ref: NonNullable<Step["consumes"]>[number]): string {
+function formatArtifactRef(ref: NonNullable<Step["input"]>[number], artifacts?: BenchTopLineBuild["artifacts"]): string {
   if (ref.source.type === "in_build") {
-    return `in_build:${ref.source.artifactId ?? "unknown"}`;
+    const artifactId = ref.source.artifactId;
+    const meta = artifacts?.find(a => a.id === artifactId);
+    const label = meta?.name || artifactId || "unknown";
+    const group = meta?.groupId ? ` (group: ${meta.groupId})` : "";
+    return `in_build:${label}${group}`;
   }
   if (ref.source.type === "external_build") {
     const version = ref.source.version === undefined ? "" : `@${String(ref.source.version)}`;
@@ -36,7 +43,7 @@ function formatFieldValue(v: unknown): string {
   }
 }
 
-export function StepInspector({ step, validation, buildId }: StepInspectorProps) {
+export function StepInspector({ step, validation, buildId, artifacts, visit, onSelectStep }: StepInspectorProps) {
   const messages = useMemo(() => {
     if (!validation || !step) return { hard: [], warn: [] };
     const hard = (validation.hardErrors ?? []).filter((e) => e.stepId === step.id);
@@ -51,7 +58,7 @@ export function StepInspector({ step, validation, buildId }: StepInspectorProps)
     navigator.clipboard.writeText(text);
   }, [step, buildId]);
 
-  if (!step) {
+  if (!step && !visit) {
     return (
       <Card>
         <CardHeader>
@@ -68,6 +75,47 @@ export function StepInspector({ step, validation, buildId }: StepInspectorProps)
       </Card>
     );
   }
+
+  if (!step && visit) {
+    return (
+      <Card>
+        <CardHeader>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="bg-neutral-800 text-white text-sm font-bold px-2 py-0.5 rounded">
+                {visit.stationId.replace("_", " ").toUpperCase()} {visit.visitNumber}
+              </div>
+              <div className="min-w-0">
+                <div className="text-sm font-semibold text-neutral-900 truncate">Station Visit</div>
+                <div className="text-xs text-neutral-500 truncate">
+                  {visit.trackId} • S{String(visit.stepRange[0] + 1).padStart(2, "0")}-S{String(visit.stepRange[1] + 1).padStart(2, "0")}
+                </div>
+              </div>
+            </div>
+            <Badge variant="default">{visit.steps.length} steps</Badge>
+          </div>
+        </CardHeader>
+        <CardBody>
+          <div className="text-xs font-semibold text-neutral-700 mb-2">Steps in this visit</div>
+          <div className="space-y-2">
+            {visit.steps.map((s) => (
+              <div key={s.id} className="flex items-center justify-between gap-3">
+                <div className="text-sm text-neutral-700 truncate">
+                  {formatStepLabel(s.orderIndex)} {s.action.family} — {s.instruction ?? s.notes ?? s.id}
+                </div>
+                <Button size="sm" variant="secondary" onClick={() => onSelectStep?.(s.id)}>
+                  View
+                </Button>
+              </div>
+            ))}
+          </div>
+        </CardBody>
+      </Card>
+    );
+  }
+
+  // At this point, step must be defined (both early returns checked for !step)
+  if (!step) return null;
 
   const targetLabel =
     step.target?.name || step.target?.bomUsageId || step.target?.bomComponentId || "—";
@@ -140,17 +188,40 @@ export function StepInspector({ step, validation, buildId }: StepInspectorProps)
               </div>
               <div className="flex items-start justify-between gap-3">
                 <div className="text-neutral-500">Consumes</div>
-                <div className="text-neutral-900 font-medium text-right">
-                  {(step.consumes ?? []).length > 0
-                    ? (step.consumes ?? []).map(formatArtifactRef).join(", ")
+                <div className="text-neutral-900 font-medium text-right flex flex-col items-end">
+                  {(step.input ?? []).length > 0
+                    ? (step.input ?? []).map((input, i) => (
+                        <div key={i} className="flex flex-col items-end border-b border-neutral-100 last:border-0 pb-1 mb-1 last:pb-0 last:mb-0">
+                          <span className="font-semibold text-cyan-700">{formatArtifactRef(input, artifacts)}</span>
+                          {input.from && (
+                            <span className="text-[10px] text-neutral-500">
+                              from: {input.from.stationId || '—'} / {input.from.sublocation?.type || '—'}
+                            </span>
+                          )}
+                        </div>
+                      ))
                     : "—"}
                 </div>
               </div>
               <div className="flex items-start justify-between gap-3">
                 <div className="text-neutral-500">Produces</div>
-                <div className="text-neutral-900 font-medium text-right">
-                  {(step.produces ?? []).length > 0
-                    ? (step.produces ?? []).map(formatArtifactRef).join(", ")
+                <div className="text-neutral-900 font-medium text-right flex flex-col items-end">
+                  {(step.output ?? []).length > 0
+                    ? (step.output ?? []).map((output, i) => (
+                        <div key={i} className="flex flex-col items-end border-b border-neutral-100 last:border-0 pb-1 mb-1 last:pb-0 last:mb-0">
+                          <span className="font-semibold text-green-700">{formatArtifactRef(output, artifacts)}</span>
+                          {output.to && (
+                            <span className="text-[10px] text-neutral-500">
+                              to: {output.to.stationId || '—'} / {output.to.sublocation?.type || '—'}
+                            </span>
+                          )}
+                          {output.onArtifact && (
+                            <span className="text-[10px] text-neutral-500 italic">
+                              on: {output.onArtifact}
+                            </span>
+                          )}
+                        </div>
+                      ))
                     : "—"}
                 </div>
               </div>
