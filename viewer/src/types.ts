@@ -28,6 +28,7 @@ export type ValidationOutput = {
 export type Step = {
   id: string;
   orderIndex: number;
+  trackId?: string;
   action: {
     family: string;
     techniqueId?: string;
@@ -55,20 +56,33 @@ export type Step = {
     type?: string;
     name?: string;
   };
+  quantity?: {
+    value: number;
+    unit: string;
+    kind?: "absolute" | "multiplier";
+  };
   dependsOn?: string[];
-  consumes?: Array<{
+  input?: Array<{
     source:
       | { type: "in_build"; artifactId: string }
       | { type: "external_build"; itemId: string; version?: number | "latest_published"; artifactId?: string };
     quantity?: { value: number; unit: string; kind?: "absolute" | "multiplier" };
     notes?: string;
+    from?: { stationId?: string; sublocation?: { type: string; equipmentId?: string } };
+    to?: { stationId?: string; sublocation?: { type: string; equipmentId?: string } };
+    onArtifact?: string;
+    role?: "base" | "added";
   }>;
-  produces?: Array<{
+  output?: Array<{
     source:
       | { type: "in_build"; artifactId: string }
       | { type: "external_build"; itemId: string; version?: number | "latest_published"; artifactId?: string };
     quantity?: { value: number; unit: string; kind?: "absolute" | "multiplier" };
     notes?: string;
+    from?: { stationId?: string; sublocation?: { type: string; equipmentId?: string } };
+    to?: { stationId?: string; sublocation?: { type: string; equipmentId?: string } };
+    onArtifact?: string;
+    role?: "base" | "added";
   }>;
 };
 
@@ -83,10 +97,31 @@ export type BenchTopLineBuild = {
     id: string;
     name?: string;
     type?: string;
+    groupId?: string;
+    components?: string[];
+    lineage?: { evolvesFrom?: string };
   }>;
   requiresBuilds?: Array<{
     itemId: string;
   }>;
   createdAt: string;
   updatedAt: string;
+};
+
+export type StationVisit = {
+  id: string;
+  trackId: string;
+  stationId: string;
+  visitNumber: number;
+  globalVisitIndex: number;
+  steps: Step[];
+  stepRange: [number, number];
+  stepIdRange: [string, string];
+  primaryActions: string[];
+};
+
+export type TrackTimeline = {
+  trackId: string;
+  visits: StationVisit[];
+  firstOrderIndex: number;
 };
