@@ -1,5 +1,9 @@
+# Local-only archive (large files not synced to GitHub)
+local-archive/
 
 # Archives and releases
 archive/releases/*.zip
 *.zip
-!Prep PDFs/*.pdf
+
+# macOS
+.DS_Store
