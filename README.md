@@ -4,69 +4,119 @@ A structured line build authoring system that enables automatic complexity scori
 
 ---
 
-## 📋 Current PRD
+## 📋 Current Status
 
-**The PRD lives in Confluence** (source of truth):
+**Phase:** Active Development (CLI + Viewer + Complexity Scoring)  
+**Last Updated:** 2026-01-30
 
-🔗 **[Line Build Redesign: Complexity Scoring & Data Management PRD](https://wonder.atlassian.net/wiki/spaces/~712020735951bb19ca4030aef4f98504f0b3da/pages/4628054070/Line+Build+Redesign+Complexity+Scoring+Data+Management+PRD)**
-
-> **Last Updated:** Jan 7, 2025  
-> **Version:** 16  
-> **Status:** Current
-
-A local reference copy is available at [`docs/PRD.md`](./docs/PRD.md) (points to Confluence).
+The system is now a functional CLI tool with:
+- 46 validation rules (H1-H46, C1-C3, S6-S45)
+- Complexity scoring with HDR-aware mapping
+- Next.js DAG viewer with dual graph layers
+- 20+ sample line builds
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-/
-├── README.md                    # This file
+line-build-redesign/
+├── line-build-cli/          # Main codebase (was poc/line-build-cli)
+│   ├── scripts/             # CLI commands (lb.ts + commands/)
+│   ├── viewer/              # Next.js DAG visualization
+│   ├── data/                # Builds, fixtures, validation reports
+│   ├── config/              # Stations, techniques, tools
+│   └── CLAUDE.md            # Agent persona & authoring instructions
+│
 ├── docs/
-│   ├── PRD.md                  # Reference to Confluence PRD
-│   ├── research/               # Research documents
-│   ├── analysis/               # Analysis documents
-│   ├── schema/                 # Technical schema documentation
-│   └── archive/                # Superseded PRD versions and old docs
-├── prompts/                    # Agent prompts and interview guides
-├── meeting-notes/              # Meeting notes and session notes
-├── apps/
-│   └── benchtop-mvp/           # Authoring tool MVP
-├── data/                       # Data files and analysis results
-├── validation/                 # Validation documentation
-└── comms/                      # Communication templates
+│   ├── prd/PRD-FULL-v2.md   # Product requirements (source of truth)
+│   ├── spec/                # Schema, validation rules, system design
+│   │   ├── SCHEMA-REFERENCE.md
+│   │   ├── HARD-RULES.md
+│   │   └── SOURCES.md       # Requirements traceability matrix
+│   └── legacy/              # Archived PRDs and specs
+│
+├── archive/
+│   ├── benchtop-mvp/        # Historical reference (stripped)
+│   └── releases/            # Distribution zips
+│
+├── prompts/                 # Agent prompts and interview guides
+├── meeting-notes/           # Session notes
+├── transcripts/             # Stakeholder interview transcripts
+├── LOG.md                   # Active decisions & receipts
+└── AGENTS.md                # Beads workflow for this repo
 ```
-
----
-
-## 🎯 Project Status
-
-**Current Phase:** Schema validation (Phase 0)
-
-See [Phasing / Release Cadence](https://wonder.atlassian.net/wiki/spaces/~712020735951bb19ca4030aef4f98504f0b3da/pages/4628054070/Line+Build+Redesign+Complexity+Scoring+Data+Management+PRD#Phasing--Release-Cadence) in the PRD for details.
 
 ---
 
 ## 🔑 Key Documents
 
-- **PRD:** [Confluence](https://wonder.atlassian.net/wiki/spaces/~712020735951bb19ca4030aef4f98504f0b3da/pages/4628054070/Line+Build+Redesign+Complexity+Scoring+Data+Management+PRD) | [`docs/PRD.md`](./docs/PRD.md)
-- **Schema:** [`docs/schema/`](./docs/schema/)
-- **Research:** [`docs/research/`](./docs/research/)
-- **Analysis:** [`docs/analysis/`](./docs/analysis/)
+| Document | Purpose |
+|----------|---------|
+| **PRD** | [`docs/prd/PRD-FULL-v2.md`](./docs/prd/PRD-FULL-v2.md) — Vision and requirements |
+| **Schema** | [`docs/spec/SCHEMA-REFERENCE.md`](./docs/spec/SCHEMA-REFERENCE.md) — Data model |
+| **Rules** | [`docs/SOURCES.md`](./docs/SOURCES.md) — Validation rules mapped to code |
+| **Decisions** | [`LOG.md`](./LOG.md) — Architecture decisions since Dec 2025 |
+| **Agent Guide** | [`line-build-cli/CLAUDE.md`](./line-build-cli/CLAUDE.md) — Authoring instructions |
+
+---
+
+## 🚀 Quick Start
+
+### CLI
+
+```bash
+cd line-build-cli
+npm install
+
+# List builds
+npx tsx scripts/lb.ts list
+
+# Validate a build
+npx tsx scripts/lb.ts validate baked-potato-mainstay-v1
+
+# See all commands
+npx tsx scripts/lb.ts help
+```
+
+### Viewer
+
+```bash
+cd line-build-cli/viewer
+npm install
+npm run dev
+# Open http://localhost:3000
+```
 
 ---
 
 ## 👥 Primary Stakeholders
 
 - **Culinary Engineering:** Shin Izumi (primary stakeholder)
-- **Menu Strategy:** Jenna (time trial simulation use cases)
+- **Menu Strategy:** Jenna (complexity scoring use cases)
 - **OpEx:** Amy, Kevin (expected users)
 
 ---
 
 ## 📝 Notes
 
-- **Confluence is the source of truth** for the PRD. Local files in `docs/archive/` are historical references only.
-- For questions or updates to the PRD, edit directly in Confluence.
-- See [`docs/archive/`](./docs/archive/) for previous PRD versions and superseded documents.
+- **Source of truth:** Local docs (`docs/prd/`, `docs/spec/`) are authoritative. Confluence is a reference only.
+- **Active work:** Check [`LOG.md`](./LOG.md) for recent decisions and current focus.
+- **Requirements traceability:** [`docs/SOURCES.md`](./docs/SOURCES.md) maps what's documented vs. implemented.
+- **Distribution:** Zips for colleagues go in `archive/releases/` (gitignored).
+
+---
+
+## Development Workflow
+
+This project uses **beads** for issue tracking:
+
+```bash
+bd ready              # Find available work
+bd show <id>          # View issue details
+bd update <id> --status in_progress  # Claim work
+bd close <id>         # Complete work
+bd sync               # Sync with git
+```
+
+See [`AGENTS.md`](./AGENTS.md) for full workflow.
