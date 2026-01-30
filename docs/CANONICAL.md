@@ -235,19 +235,46 @@ H1-H10, H15-H22, H24-H26, H32-H33, H35-H42, C1-C3
 
 ---
 
-## Technique Database 🔶
+## Technique Database ✅
 
-**Status:** Shin has spreadsheet with ~64 techniques and weights. Need to formalize.
+**Status:** LOCKED IN — 561 lines in `config/techniques.config.ts`
 
-**Known Patterns:**
-- Compound techniques: "retrieve move sprinkle"
-- Technique drives complexity weight
-- Aliases may exist (e.g., "shake" vs "toss")
+**Structure:**
+```typescript
+interface TechniqueConfig {
+  id: string;                    // Canonical ID
+  label: string;                 // Display name
+  actionFamily: ActionFamily;    // Which family it belongs to
+  typicalTools?: string[];       // Tools typically used
+  aliases?: string[];            // Alternative names
+  description?: string;          // Help text
+}
+```
 
-**Open Items:**
-- Formal taxonomy
-- Weight assignment methodology
-- Governance for new techniques
+**Categories:**
+- PREP techniques (cut, drain, open_kit, open_pack, etc.)
+- HEAT techniques (fry, grill, press, bake, etc.)
+- TRANSFER techniques (pass, retrieve, place, move)
+- ASSEMBLE techniques (combine, layer, stack)
+- PORTION techniques (scoop, ladle, weigh)
+- PACKAGE techniques (wrap, box, bag)
+- HOLD techniques (rest, stage)
+- QUALITY_CHECK techniques (temp, visual_check)
+
+**Key Properties:**
+- **Controlled vocabulary** — H33 validates techniqueId is in this list
+- **Action family binding** — Each technique belongs to exactly one family
+- **Tool associations** — Typical tools for validation warnings
+- **Aliases** — Normalization support (e.g., "deep_fry" → "fry")
+
+**Complexity Weights:**
+- Technique weights drive complexity scoring
+- Weights stored in complexity config, not technique config
+- Shin's spreadsheet has the weights; mapped in `config/complexity.config.ts`
+
+**Governance:**
+- New techniques require schema update + complexity weight assignment
+- Aliases can be added without schema changes
 
 ---
 
@@ -285,7 +312,7 @@ H1-H10, H15-H22, H24-H26, H32-H33, H35-H42, C1-C3
 | Question | Stakeholder | Urgency | Notes |
 |----------|-------------|---------|-------|
 | Confirm Press/Toaster station removal | Shin | High | Transcript says removed, PRD still lists them |
-| Technique database formalization | Shin | Medium | Has spreadsheet, need structured format |
+| HDR D1-D2-D4 exact layouts | Shin/Portal | Medium | Need station/equipment lists |
 | HDR D1-D5 exact layouts | Shin/Portal | Medium | Need station/equipment lists |
 | Customization/branch modeling | Jenna/Shin | Medium | Future feature, need spec |
 | H11-H14 implementation priority | Engineering | Low | Overlay validation — defer? |
