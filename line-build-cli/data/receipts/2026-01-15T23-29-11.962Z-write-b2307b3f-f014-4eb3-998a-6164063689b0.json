@@ -1,0 +1,15 @@
+{
+  "id": "b2307b3f-f014-4eb3-998a-6164063689b0",
+  "command": "write",
+  "timestamp": "2026-01-15T23:29:11.962Z",
+  "inputs": {
+    "buildId": "beef-barbacoa-quesadilla-8006896"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/beef-barbacoa-quesadilla-8006896.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/beef-barbacoa-quesadilla-8006896.json"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "43c4b831-1a26-4504-8dd6-9594931fdafc",
+  "command": "write",
+  "timestamp": "2026-01-24T09:11:39.870Z",
+  "inputs": {
+    "buildId": "cheeseburger-melt-burger-baby-8007391"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/cheeseburger-melt-burger-baby-8007391.json",
+    "valid": false
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/cheeseburger-melt-burger-baby-8007391.json"
+  ]
+}

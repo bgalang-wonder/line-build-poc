@@ -1,0 +1,95 @@
+{
+  "id": "fixture-simple-linear",
+  "itemId": "ITEM_SIMPLE_LINEAR",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "stationId": "garnish",
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open bun package and stage bun.",
+      "from": { "stationId": "prep", "sublocation": { "type": "cold_storage" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "bun" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "stationId": "garnish",
+      "action": { "family": "COMBINE" },
+      "dependsOn": ["s1"],
+      "instruction": "Assemble bun with filling.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "bun" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "bun_filled" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "stationId": "turbo",
+      "action": { "family": "HEAT" },
+      "dependsOn": ["s2"],
+      "equipment": { "applianceId": "turbo", "presetId": "program_1" },
+      "time": { "durationSeconds": 75, "isActive": false },
+      "instruction": "Toast assembled bun until warm and lightly golden.",
+      "from": { "stationId": "turbo", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "turbo", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "bun_filled" },
+          "from": { "stationId": "turbo", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "bun_toasted" },
+          "to": { "stationId": "turbo", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "orderIndex": 4,
+      "stationId": "expo",
+      "action": { "family": "PACKAGING" },
+      "dependsOn": ["s3"],
+      "container": { "type": "clamshell", "name": "Standard clamshell" },
+      "instruction": "Place in clamshell and hand off.",
+      "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "bun_toasted" },
+          "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "bun_packaged" },
+          "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

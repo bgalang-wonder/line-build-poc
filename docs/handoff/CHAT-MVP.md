@@ -137,7 +137,7 @@ Build a **chat-based MVP** that validates:
 - **Extension points:** `conditions`, `overlays`, `dependsOn`, `provenance`
 
 **`StepAction`** — What we're doing
-- `family`: `PREP` | `HEAT` | `TRANSFER` | `COMBINE` | `ASSEMBLE` | `PORTION` | `CHECK` | `VEND` | `OTHER`
+- `family`: `PREP` | `HEAT` | `TRANSFER` | `COMBINE` | `ASSEMBLE` | `PORTION` | `CHECK` | `PACKAGING` | `OTHER`
 - Optional: `detailId`, `displayTextOverride`
 
 **`StepTarget`** — What we're acting on
@@ -156,7 +156,7 @@ Build a **chat-based MVP** that validates:
 
 1. **S1:** Component steps should have `target`
 2. **S2:** HEAT steps should have `equipment`
-3. **S3:** VEND steps should reference container/packaging
+3. **S3:** PACKAGING steps should reference container/packaging
 4. **S4:** Phase markers in notes should match `cookingPhase`
 5. **S5:** Negation patterns should use `exclude` flag
 

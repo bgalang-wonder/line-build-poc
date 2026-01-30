@@ -1,0 +1,15 @@
+{
+  "id": "e6a24268-ce62-410c-9b94-ccb72a8d8842",
+  "command": "write",
+  "timestamp": "2026-01-24T09:02:08.219Z",
+  "inputs": {
+    "buildId": "original-square-pizza-difara-8006375"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/original-square-pizza-difara-8006375.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/original-square-pizza-difara-8006375.json"
+  ]
+}

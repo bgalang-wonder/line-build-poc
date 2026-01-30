@@ -1,0 +1,70 @@
+{
+  "id": "fixture-quantity-zero",
+  "itemId": "ITEM_QTY_ZERO",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open cheese container.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "cheese_opened" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "action": { "family": "PORTION" },
+      "dependsOn": ["s1"],
+      "quantity": { "value": 0, "unit": "oz" },
+      "toolId": "hand",
+      "instruction": "Portion cheese (invalid: quantity.value = 0 triggers H10).",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "cheese_opened" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "cheese_portioned" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "action": { "family": "PACKAGING" },
+      "dependsOn": ["s2"],
+      "container": { "type": "cup" },
+      "instruction": "Place in cup for service.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "cheese_portioned" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "cheese_packaged" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

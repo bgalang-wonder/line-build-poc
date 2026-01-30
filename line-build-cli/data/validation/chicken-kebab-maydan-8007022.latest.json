@@ -1,0 +1,108 @@
+{
+  "buildId": "chicken-kebab-maydan-8007022",
+  "itemId": "8007022",
+  "timestamp": "2026-01-28T17:39:57.529Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "main-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "sauces-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "sauces-2",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "sauces-3",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "flatbread-4",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "sauces-4",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "main-5",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "flatbread-5",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "main-6",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "main-7",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "main-8",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "main-9",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "main-10",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "main-11",
+      "fieldPath": "output[].from"
+    }
+  ]
+}

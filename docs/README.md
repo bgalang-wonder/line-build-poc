@@ -4,53 +4,95 @@ This directory contains project documentation for the Line Build Authoring Syste
 
 ---
 
-## 🚀 POC Quick Start (Reading Order)
+## Current Focus: CLI + DAG Viewer POC
 
-New to this POC? Read these in order:
+The active MVP is in `poc/line-build-cli/`:
+- **CLI** (`scripts/lb.ts`) - Command-line tool for querying/editing line builds
+- **DAG Viewer** (`viewer/`) - Next.js app for visualizing builds as dependency graphs
+
+---
+
+## Reading Order
 
 | # | Document | Purpose |
 |---|----------|---------|
-| 1 | [POC-PLAN.md](./spec/POC-PLAN.md) | **Start here.** Overview of the Claude Code + DAG Viewer POC. |
-| 2 | [SCHEMA-REFERENCE.md](./spec/SCHEMA-REFERENCE.md) | Canonical data model (BenchTopLineBuild, Step, enums). |
-| 3 | [HARD-RULES.md](./spec/HARD-RULES.md) | Validation invariants (H1–H25) that block invalid data. |
-| 4 | [AI-AGENT-PROMPT.md](./spec/AI-AGENT-PROMPT.md) | Agent interview playbook and heuristics. |
-| 5 | [PRD-FULL.md](./prd/PRD-FULL.md) | Full product requirements and business context. |
+| 1 | [PRD-FULL-v2.md](./prd/PRD-FULL-v2.md) | **Canonical PRD** - Business context and requirements |
+| 2 | [SCHEMA-REFERENCE.md](./spec/SCHEMA-REFERENCE.md) | Canonical data model (BenchTopLineBuild, Step, enums) |
+| 3 | [HARD-RULES.md](./spec/HARD-RULES.md) | Validation invariants (H1–H28) |
+| 4 | [TIME-RESOLUTION.md](./spec/TIME-RESOLUTION.md) | Duration inheritance hierarchy |
+| 5 | [SYSTEM-DESIGN.md](./spec/SYSTEM-DESIGN.md) | Architecture and component design |
+
+### Additional Specs
+
+| Document | Status | Purpose |
+|----------|--------|---------|
+| [INVARIANTS.md](./spec/INVARIANTS.md) | Canonical | Detailed rule definitions |
+| [AI-AGENT-PROMPT.md](./spec/AI-AGENT-PROMPT.md) | Canonical | Agent interview playbook |
+| [BULK-OPERATIONS.md](./spec/BULK-OPERATIONS.md) | Canonical | Bulk edit patterns |
+| [POC-PLAN.md](./spec/POC-PLAN.md) | Reference | Original POC planning |
+| [SCHEMA-REDESIGN-PROPOSAL.md](./spec/SCHEMA-REDESIGN-PROPOSAL.md) | Proposal | Schema evolution ideas |
+| [SCHEMA-MIGRATION-PLAN.md](./spec/SCHEMA-MIGRATION-PLAN.md) | Proposal | Migration strategy |
 
 ---
 
-## 📁 Directory Structure
+## Directory Structure
 
 ```
 docs/
-├── spec/           # ★ CANONICAL SOURCE OF TRUTH ★
-│   ├── POC-PLAN.md
-│   ├── SCHEMA-REFERENCE.md
-│   ├── HARD-RULES.md
-│   ├── AI-AGENT-PROMPT.md
-│   └── INVARIANTS.md
+├── spec/               # ★ CANONICAL SOURCE OF TRUTH ★
+│   ├── SCHEMA-REFERENCE.md    # Data model
+│   ├── HARD-RULES.md          # Validation rules
+│   ├── INVARIANTS.md          # Rule details
+│   ├── TIME-RESOLUTION.md     # Duration hierarchy
+│   ├── SYSTEM-DESIGN.md       # Architecture
+│   ├── AI-AGENT-PROMPT.md     # Agent playbook
+│   ├── BULK-OPERATIONS.md     # Bulk patterns
+│   ├── POC-PLAN.md            # POC planning
+│   └── SCHEMA-*.md            # Proposals (not yet canonical)
 │
-├── prd/            # Product Requirements
-│   ├── PRD-FULL.md
-│   └── PRD-BUSINESS.md
+├── prd/                # Product Requirements
+│   ├── PRD-FULL-v2.md         # ★ CANONICAL PRD ★
+│   └── PRD-BUSINESS.md        # Business context summary
 │
-├── research/       # Dec 2025 Discovery (immutable)
+├── research/           # Dec 2025 Discovery (immutable)
+│   ├── research-discovery-overview.md
+│   ├── research-existing-initiatives.md
+│   └── research-pain-points-constraints.md
 │
-├── handoff/        # POC-specific onboarding
+├── handoff/            # POC onboarding docs
 │   ├── QUICK-START.md
-│   ├── REACT-APP-POC.md
-│   └── CHAT-MVP.md
+│   ├── SME_SESSION_SCRIPT.md
+│   └── ...
 │
-├── legacy/         # Superseded files (read-only)
-│   ├── schema/     # Old TypeScript types
-│   └── prd/        # Old PRD drafts
+├── legacy/             # Archived (read-only reference)
+│   ├── prd/            # Old PRD versions
+│   ├── schema/         # Old TypeScript types
+│   └── analysis/       # Dec 2025 analysis
 │
-└── requests/       # Data requests / open questions
+└── requests/           # Data requests / open questions
 ```
 
 ---
 
-## 📝 Key Principles
+## Project Code Structure
+
+```
+poc/
+└── line-build-cli/     # ★ ACTIVE MVP ★
+    ├── scripts/        # CLI (lb.ts)
+    ├── viewer/         # DAG Viewer (Next.js)
+    └── data/           # Fixtures & line builds
+
+apps/
+├── archive-copilotkit-mvp/   # Archived: CopilotKit approach
+└── archive-benchtop-mvp/     # Archived: Initial scaffold
+```
+
+---
+
+## Key Principles
 
 - **`spec/` is the source of truth.** All other docs reference it.
-- **`research/` is immutable.** Dec 2025 findings are preserved as-is.
+- **`research/` is immutable.** Dec 2025 findings preserved as-is.
 - **`legacy/` is read-only.** Historical reference only.
+- **PRD-FULL-v2.md is canonical** but may need updates as we iterate.

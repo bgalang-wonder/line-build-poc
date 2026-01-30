@@ -1,29 +1,32 @@
 # Hard Rules (Publish-Blocking Invariants)
 
-> **Source of truth:** This document is a POC-friendly restatement of the canonical invariants in `docs/schema/INVARIANTS.md`.  
+> **⚠️ Source of truth:** TypeScript implementation in `line-build-cli/scripts/lib/validate/`
+> This document provides conceptual guidance but may lag behind implementation.
 > **Scope:** These rules define what must be true for a line build to be considered **valid** (and therefore publishable, unless overridden by explicit policy).
 
 ---
 
 ## Philosophy
 
-- **Hard or nothing**: A “warning” that users ignore is worse than no warning.
+- **Hard or nothing**: A "warning" that users ignore is worse than no warning.
 - **Hard invariants**: violations represent real data errors and should block publish.
-- **Notes are an escape hatch**: when edge cases can’t be structured yet, preserve truth in `notes` rather than inventing structure.
+- **Notes are an escape hatch**: when edge cases can't be structured yet, preserve truth in `notes` rather than inventing structure.
 
 ---
 
 ## Entities (Referenced by Rules)
 
-This contract assumes the canonical v1 schema from `docs/schema/SPEC-TECHNICAL.md`:
+See TypeScript schema in `line-build-cli/scripts/lib/schema/`:
 
-- **Build**: `BenchTopLineBuild`
-- **Step**: `Step`
+- **Build**: `BenchTopLineBuild` (build.ts)
+- **Step**: `Step` (step.ts)
+- **Assembly**: `Assembly`, `AssemblyRef` (assembly.ts)
 
 Rules reference these fields:
 
-- Build: `status`, `steps`, `customizationGroups`, `validationOverrides`, `requiresBuilds`, `artifacts`, `primaryOutputArtifactId`
-- Step: `id`, `orderIndex`, `trackId`, `action.family`, `target`, `equipment`, `time`, `container`, `prepType`, `storageLocation`, `bulkPrep`, `quantity`, `conditions`, `overlays`, `dependsOn`, `consumes`, `produces`, `notes`
+- Build: `status`, `steps`, `customizationGroups`, `validationOverrides`, `requiresBuilds`, `assemblies`, `primaryOutputAssemblyId`
+- Step: `id`, `orderIndex`, `trackId`, `action.family`, `target`, `equipment`, `time`, `container`, `prepType`, `storageLocation`, `bulkPrep`, `quantity`, `conditions`, `overlays`, `dependsOn`, `input`, `output`, `workLocation`, `notes`
+- **Note:** `from`/`to` removed from steps, now only on `AssemblyRef`
 
 ---
 
@@ -50,7 +53,7 @@ export interface BuildValidationResult {
 
 ---
 
-## Rule Summary (H1–H22)
+## Rule Summary (H1–H25)
 
 > Note: Additional composition/flow invariants are defined in `docs/spec/INVARIANTS.md`. For MVP, we treat them as schema-contract invariants; teams can decide whether they are publish-blocking in policy.
 
@@ -71,7 +74,7 @@ export interface BuildValidationResult {
 | H13 | Build | If validation override exists: `validationOverride.reason` non-empty |
 | H14 | Step | Overlay predicates must not be empty (must specify at least 1 predicate) |
 | H15 | Step | If `action.family === "HEAT"` then `equipment` must exist |
-| H16 | Step | If `action.family === "VEND"` then container or packaging target must exist |
+| H16 | Step | If `action.family === "PACKAGING"` then container or packaging target must exist |
 | H17 | Step | If `prepType === "pre_service"` then `storageLocation` must exist |
 | H18 | Step | If `bulkPrep === true` then `prepType === "pre_service"` |
 | H19 | Build | Step conditions must reference valid customization `valueIds` |
@@ -80,6 +83,8 @@ export interface BuildValidationResult {
 | H22 | Step | If `action.family === "HEAT"` then `time` OR non-empty `notes` |
 | H24 | Step | If `action.family === "PORTION"` then `quantity` OR non-empty `notes` |
 | H25 | Step | If `action.family === "PREP"` then `techniqueId` OR non-empty `notes` |
+| H27 | Step | If `action.family === "TRANSFER"` and `action.techniqueId === "place"` then `to` must exist |
+| H28 | Step | If `action.family === "TRANSFER"` and `action.techniqueId === "retrieve"` then `from` must exist |
 
 ---
 
@@ -390,19 +395,19 @@ function validateH15(step: Step): ValidationError[] {
 }
 ```
 
-### H16 — VEND Steps Require Container or Packaging Target
+### H16 — PACKAGING Steps Require Container or Packaging Target
 
 - **Scope**: Step
-- **Rule**: If `action.family === "VEND"`, require either:
+- **Rule**: If `action.family === "PACKAGING"`, require either:
   - `step.container` exists, OR
   - `step.target?.type === "packaging"`
 
 ```ts
 function validateH16(step: Step): ValidationError[] {
-  if (step.action?.family !== "VEND") return [];
+  if (step.action?.family !== "PACKAGING") return [];
   const ok = !!step.container || step.target?.type === "packaging";
   if (ok) return [];
-  return [{ severity: "hard", ruleId: "H16", message: "H16: VEND step requires container or packaging target", stepId: step.id, fieldPath: "container|target.type" }];
+  return [{ severity: "hard", ruleId: "H16", message: "H16: PACKAGING step requires container or packaging target", stepId: step.id, fieldPath: "container|target.type" }];
 }
 ```
 
@@ -544,6 +549,47 @@ function validateH25(step: Step): ValidationError[] {
 }
 ```
 
+### H27 — DEPRECATED (was TRANSFER/place Requires `to`)
+
+- **Status**: DEPRECATED - `step.to` removed from schema
+- **Replacement**: Material flow now tracked via `output[].to` on AssemblyRef
+- **New behavior**: TRANSFER steps are derived from assembly flow, not authored directly (see H38)
+
+### H28 — DEPRECATED (was TRANSFER/retrieve Requires `from`)
+
+- **Status**: DEPRECATED - `step.from` removed from schema
+- **Replacement**: Material flow now tracked via `input[].from` on AssemblyRef
+- **New behavior**: TRANSFER steps are derived from assembly flow, not authored directly (see H38)
+
+### H38 — TRANSFER Steps Are Derived-Only
+
+- **Scope**: Step
+- **Rule**: Steps with `action.family === "TRANSFER"` MUST have `derived: true` and cannot be authored.
+- **Intent**: Transfer steps are automatically generated from material flow (when assembly location changes between producer and consumer). Authors should NOT create explicit TRANSFER steps.
+
+### H39 — DEPRECATED (Steps No Longer Have from/to)
+
+- **Status**: DEPRECATED
+- **Migration**: Material flow is tracked exclusively via `input[].from` and `output[].to` on AssemblyRef.
+
+### H40 — Assembly Refs Require Locations
+
+- **Scope**: Step
+- **Rule**: Each `input[]` entry must have `from.sublocation` specified. Each `output[]` entry must have `to.sublocation` specified.
+- **Intent**: Material flow must explicitly state where materials come from and go to.
+
+### H41 — Steps Require Explicit Material Flow
+
+- **Scope**: Step
+- **Rule**: Every step must have at least one `output[]` entry (what it produces/modifies).
+- **Intent**: Steps without output have no effect on material flow and are likely incomplete.
+
+### H42 — StationId Required When Location Ambiguous
+
+- **Scope**: Step
+- **Rule**: When `workLocation.type` is used by multiple stations OR step uses shared equipment, `stationId` must be explicit.
+- **Intent**: Prevents ambiguity about where work happens when locations/equipment are shared across stations.
+
 ---
 
 ## Execution Order (Recommended)
@@ -554,8 +600,11 @@ To produce helpful error messages and avoid cascades:
 2. **Ordering**: H2
 3. **DAG integrity**: H8, H9
 4. **Per-step checks**: H1, H3, H10, H15, H16, H17, H18, H22, H24, H25, H4
-5. **Customization + overlays** (if present): H12, H21, H19, H20, H11, H14
-6. **Override hygiene**: H13
+5. **Material flow**: H38, H40, H41, H42
+6. **Customization + overlays** (if present): H12, H21, H19, H20, H11, H14
+7. **Override hygiene**: H13
+
+**Deprecated rules** (removed from schema): H27, H28, H39
 
 ---
 
@@ -566,10 +615,44 @@ The schema supports an **audit trail** for overriding hard blocks with a reason 
 Recommended POC policy:
 
 - **Never allow override** for: H7 (duplicate IDs), H8 (dangling dependsOn), H9 (cycles). These break resolution.
-- **Allow override with reason** for: missing timing details (H22), missing equipment (H15), missing container for VEND (H16), and pre-service storage details (H17) *only if the user explicitly confirms the data is unknown/unavailable*.
+- **Allow override with reason** for: missing timing details (H22), missing equipment (H15), missing container for PACKAGING (H16), and pre-service storage details (H17) *only if the user explicitly confirms the data is unknown/unavailable*.
 - Always surface override counts as a quality signal.
 
 ---
+
+## Non-blocking checks (Strong/Soft)
+
+These checks are implemented in the CLI/agent workflow to make authoring smoother and errors more explainable. They are **not publish-blocking** (unless we later promote them).
+
+**H26 (strong)** — Graph under-specified:
+- If too many steps have no `dependsOn`, the build looks like a list, not an instruction.
+- Output should include a preview list of “entry point” steps to review.
+
+**S7 (soft)** — HEAT technique ↔ equipment mismatch:
+- If `action.family === "HEAT"` and technique looks like an appliance (e.g., `turbo`, `fry`) but equipment differs, warn.
+
+**S8 (soft)** — Station change without explicit TRANSFER:
+- If a step depends on a prior step at a different station, warn that an explicit staged transfer (`TRANSFER/place` → `TRANSFER/retrieve`) may be needed.
+
+**S9 (strong/soft)** — HEAT sublocation consistency:
+- HEAT steps should usually set `sublocation.type = "equipment"` with matching `equipmentId`.
+- Warn if missing sublocation (soft); warn strongly if sublocation conflicts with `equipment.applianceId`.
+
+**S10 (strong)** — TRANSFER technique recommended:
+- TRANSFER steps should specify `action.techniqueId` (place/retrieve/pass/handoff) or include descriptive `notes`.
+
+**S11 (strong)** — TRANSFER endpoints shape:
+- For `TRANSFER/place`, recommend `to.stationId` and/or `to.sublocation`.
+- For `TRANSFER/retrieve`, recommend `from.stationId` and/or `from.sublocation`.
+
+**S12 (strong)** — Published order-execution steps should include stationId:
+- For `status === "published"` and `prepType !== "pre_service"`, recommend `stationId` is set.
+
+**S13 (soft)** — `stationId="pass"` should be TRANSFER:
+- `pass` is a handoff marker; if used with non-TRANSFER families, warn.
+
+**S14 (soft)** — Technique suggests different family:
+- If technique is strongly suggestive (e.g., `wrap`, `lid`, `pass`, `fry`) but family differs, warn.
 
 ## Appendix: POC-Only Checks (Not in H1–H22)
 

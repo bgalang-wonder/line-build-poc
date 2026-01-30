@@ -1,0 +1,87 @@
+{
+  "buildId": "regular-round-pizza-difara-8006380",
+  "itemId": "8006380",
+  "timestamp": "2026-01-28T17:39:57.522Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pepper_flakes-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pizza-7",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pizza-8",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pizza-9",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "pizza-2",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "pizza-3",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "pizza-4",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "pizza-5",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "pizza-11",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "pizza-12",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "pizza-13",
+      "fieldPath": "output[].from"
+    }
+  ]
+}

@@ -1,0 +1,906 @@
+{
+  "id": "baked-potato-mainstay-v1",
+  "itemId": "8008281",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "step-1",
+      "orderIndex": 0,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Place baked potato pouch from cold storage",
+      "groupingId": "hot_side",
+      "stationId": "waterbath",
+      "toolId": "hand",
+      "cookingPhase": "PRE_COOK",
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "notes": "Legacy CSV row 1: Pre Cook, Cold Storage",
+      "dependsOn": [],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_pouch"
+          },
+          "from": {
+            "stationId": "waterbath",
+            "sublocation": {
+              "type": "cold_storage"
+            }
+          },
+          "role": "base"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_pouch_positioned"
+          },
+          "to": {
+            "stationId": "waterbath",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-2",
+      "orderIndex": 1,
+      "action": {
+        "family": "HEAT",
+        "techniqueId": "waterbath"
+      },
+      "instruction": "Cook potato in waterbath for 20 minutes",
+      "groupingId": "hot_side",
+      "stationId": "waterbath",
+      "toolId": "hand",
+      "equipment": {
+        "applianceId": "waterbath"
+      },
+      "time": {
+        "durationSeconds": 1200,
+        "isActive": false
+      },
+      "cookingPhase": "COOK",
+      "workLocation": {
+        "type": "equipment",
+        "equipmentId": "waterbath"
+      },
+      "notes": "Legacy CSV row 2: Cook, Waterbath, 1200s",
+      "dependsOn": [
+        {
+          "stepId": "step-1"
+        },
+        "step-1"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_pouch_positioned"
+          },
+          "from": {
+            "stationId": "waterbath",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_cooked"
+          },
+          "to": {
+            "stationId": "waterbath",
+            "sublocation": {
+              "type": "equipment",
+              "equipmentId": "waterbath"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-3",
+      "orderIndex": 2,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Place 7-inch B&G container",
+      "groupingId": "cold_side",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "notes": "Legacy CSV row 4: Build, 7\" B&G, packaging - parallel start",
+      "dependsOn": [],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "container_7in_bg"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "packaging"
+            }
+          },
+          "role": "base"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "container_positioned"
+          },
+          "to": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-4",
+      "orderIndex": 3,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Open cooked potato pouch",
+      "groupingId": "cold_side",
+      "stationId": "garnish",
+      "toolId": "viper",
+      "cookingPhase": "POST_COOK",
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "notes": "Legacy CSV row 5: Build, From Waterbath Station, Open Pouch",
+      "dependsOn": [
+        {
+          "stepId": "step-2"
+        },
+        "step-2"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_cooked"
+          },
+          "from": {
+            "stationId": "waterbath",
+            "sublocation": {
+              "type": "equipment",
+              "equipmentId": "waterbath"
+            }
+          },
+          "role": "base"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_opened"
+          },
+          "to": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-5",
+      "orderIndex": 4,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Smash open potato",
+      "groupingId": "cold_side",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "POST_COOK",
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "notes": "Legacy CSV row 6: Build, Smash Open - non-standard technique",
+      "dependsOn": [
+        {
+          "stepId": "step-4"
+        },
+        "step-4"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_opened"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_smashed"
+          },
+          "to": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-6",
+      "orderIndex": 5,
+      "action": {
+        "family": "ASSEMBLE"
+      },
+      "instruction": "Place smashed potato in container",
+      "groupingId": "cold_side",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "notes": "Legacy CSV row 7: Build, place potato - merge step",
+      "dependsOn": [
+        {
+          "stepId": "step-3"
+        },
+        {
+          "stepId": "step-5"
+        },
+        "step-3",
+        "step-5"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "container_positioned"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        },
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_smashed"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "added"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_in_container_v1"
+          },
+          "to": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-7",
+      "orderIndex": 6,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Add shredded cheddar",
+      "groupingId": "cold_side",
+      "stationId": "garnish",
+      "toolId": "spoodle_2oz",
+      "cookingPhase": "ASSEMBLY",
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "quantity": {
+        "value": 2,
+        "unit": "oz"
+      },
+      "notes": "Legacy CSV row 8: Build, Shredded Cheddar, Cold Rail, 2 oz Spoodle",
+      "dependsOn": [
+        {
+          "stepId": "step-6"
+        },
+        "step-6"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_in_container_v1"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        },
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "cheddar_shredded"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "cold_rail"
+            }
+          },
+          "role": "added"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_in_container_v2"
+          },
+          "to": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-8",
+      "orderIndex": 7,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Add bacon bits",
+      "groupingId": "cold_side",
+      "stationId": "garnish",
+      "toolId": "spoodle_1oz",
+      "cookingPhase": "ASSEMBLY",
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "quantity": {
+        "value": 1,
+        "unit": "oz"
+      },
+      "notes": "Legacy CSV row 9: Build, Bacon Bits, Cold Rail, 1 oz Spoodle",
+      "dependsOn": [
+        {
+          "stepId": "step-7"
+        },
+        "step-7"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_in_container_v2"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        },
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "bacon_bits"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "cold_rail"
+            }
+          },
+          "role": "added"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_in_container_v3"
+          },
+          "to": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-9",
+      "orderIndex": 8,
+      "action": {
+        "family": "PORTION"
+      },
+      "instruction": "Add scallion",
+      "groupingId": "cold_side",
+      "stationId": "garnish",
+      "toolId": "spoon",
+      "cookingPhase": "ASSEMBLY",
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "quantity": {
+        "value": 1,
+        "unit": "tbsp"
+      },
+      "notes": "Legacy CSV row 10: Build, Scallion, Cold Rail, 1 Tbsp",
+      "dependsOn": [
+        {
+          "stepId": "step-8"
+        },
+        "step-8"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_in_container_v3"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        },
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "scallion"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "cold_rail"
+            }
+          },
+          "role": "added"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_complete"
+          },
+          "to": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-10",
+      "orderIndex": 9,
+      "action": {
+        "family": "PACKAGING",
+        "techniqueId": "lid"
+      },
+      "instruction": "Place lid on container",
+      "groupingId": "cold_side",
+      "stationId": "garnish",
+      "toolId": "hand",
+      "cookingPhase": "PASS",
+      "container": {
+        "name": "7\" B&G with lid"
+      },
+      "workLocation": {
+        "type": "work_surface"
+      },
+      "notes": "Legacy CSV row 11: Package, 7\" Lid",
+      "dependsOn": [
+        {
+          "stepId": "step-9"
+        },
+        "step-9"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_complete"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        },
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "lid_7in"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "packaging"
+            }
+          },
+          "role": "added"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_packaged"
+          },
+          "to": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-11",
+      "orderIndex": 10,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Place packaged potato at expo window",
+      "groupingId": "cold_side",
+      "stationId": "expo",
+      "toolId": "hand",
+      "cookingPhase": "PASS",
+      "workLocation": {
+        "type": "window_shelf"
+      },
+      "notes": "Legacy CSV row 12: Pass to expo - main track",
+      "dependsOn": [
+        {
+          "stepId": "step-10"
+        },
+        "step-10"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_packaged"
+          },
+          "from": {
+            "stationId": "garnish",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "potato_at_expo"
+          },
+          "to": {
+            "stationId": "expo",
+            "sublocation": {
+              "type": "window_shelf"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-12",
+      "orderIndex": 11,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Get sour cream from vending",
+      "groupingId": "vending",
+      "stationId": "vending",
+      "toolId": "hand",
+      "cookingPhase": "ASSEMBLY",
+      "workLocation": {
+        "type": "equipment",
+        "equipmentId": "vending"
+      },
+      "notes": "Legacy CSV row 13: Vending, Sour Cream - parallel track",
+      "dependsOn": [],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "sour_cream"
+          },
+          "from": {
+            "stationId": "vending",
+            "sublocation": {
+              "type": "cold_storage"
+            }
+          },
+          "role": "base"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "sour_cream_ready"
+          },
+          "to": {
+            "stationId": "vending",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-13",
+      "orderIndex": 12,
+      "action": {
+        "family": "PREP"
+      },
+      "instruction": "Place sour cream at expo (coordinate with main item)",
+      "groupingId": "vending",
+      "stationId": "expo",
+      "toolId": "hand",
+      "cookingPhase": "PASS",
+      "workLocation": {
+        "type": "window_shelf"
+      },
+      "notes": "Legacy CSV row 14: Pass to expo - sour cream track, waits for main potato",
+      "dependsOn": [
+        {
+          "stepId": "step-11"
+        },
+        {
+          "stepId": "step-12"
+        },
+        "step-12"
+      ],
+      "input": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "sour_cream_ready"
+          },
+          "from": {
+            "stationId": "vending",
+            "sublocation": {
+              "type": "work_surface"
+            }
+          },
+          "role": "base"
+        }
+      ],
+      "output": [
+        {
+          "source": {
+            "type": "in_build",
+            "assemblyId": "sour_cream_at_expo"
+          },
+          "to": {
+            "stationId": "expo",
+            "sublocation": {
+              "type": "window_shelf"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-29T00:00:00Z",
+  "updatedAt": "2026-01-29T00:00:00Z",
+  "name": "Baked Potato, The Mainstay",
+  "bom": [],
+  "assemblies": [
+    {
+      "id": "potato_pouch",
+      "name": "potato_pouch",
+      "type": "intermediate",
+      "groupId": "potato_pouch"
+    },
+    {
+      "id": "potato_pouch_positioned",
+      "name": "potato_pouch_positioned",
+      "type": "intermediate",
+      "lineage": {
+        "evolvesFrom": "potato_pouch"
+      },
+      "groupId": "potato_pouch"
+    },
+    {
+      "id": "potato_cooked",
+      "name": "potato_cooked",
+      "type": "intermediate",
+      "lineage": {
+        "evolvesFrom": "potato_pouch_positioned"
+      },
+      "groupId": "potato_pouch"
+    },
+    {
+      "id": "container_7in_bg",
+      "name": "container_7in_bg",
+      "type": "intermediate",
+      "groupId": "container_7in_bg"
+    },
+    {
+      "id": "container_positioned",
+      "name": "container_positioned",
+      "type": "intermediate",
+      "lineage": {
+        "evolvesFrom": "container_7in_bg"
+      },
+      "groupId": "container_7in_bg"
+    },
+    {
+      "id": "potato_opened",
+      "name": "potato_opened",
+      "type": "intermediate",
+      "lineage": {
+        "evolvesFrom": "potato_cooked"
+      },
+      "groupId": "potato_pouch"
+    },
+    {
+      "id": "potato_smashed",
+      "name": "potato_smashed",
+      "type": "intermediate",
+      "lineage": {
+        "evolvesFrom": "potato_opened"
+      },
+      "groupId": "potato_pouch"
+    },
+    {
+      "id": "potato_in_container_v1",
+      "name": "potato_in_container_v1",
+      "type": "intermediate",
+      "groupId": "potato_in_container"
+    },
+    {
+      "id": "cheddar_shredded",
+      "name": "cheddar_shredded",
+      "type": "intermediate",
+      "groupId": "cheddar_shredded"
+    },
+    {
+      "id": "potato_in_container_v2",
+      "name": "potato_in_container_v2",
+      "type": "intermediate",
+      "groupId": "potato_in_container"
+    },
+    {
+      "id": "bacon_bits",
+      "name": "bacon_bits",
+      "type": "intermediate",
+      "groupId": "bacon_bits"
+    },
+    {
+      "id": "potato_in_container_v3",
+      "name": "potato_in_container_v3",
+      "type": "intermediate",
+      "groupId": "potato_in_container"
+    },
+    {
+      "id": "scallion",
+      "name": "scallion",
+      "type": "intermediate",
+      "groupId": "scallion"
+    },
+    {
+      "id": "potato_complete",
+      "name": "potato_complete",
+      "type": "intermediate",
+      "groupId": "potato"
+    },
+    {
+      "id": "lid_7in",
+      "name": "lid_7in",
+      "type": "intermediate",
+      "groupId": "lid_7in"
+    },
+    {
+      "id": "potato_packaged",
+      "name": "potato_packaged",
+      "type": "intermediate",
+      "groupId": "potato_packaged"
+    },
+    {
+      "id": "potato_at_expo",
+      "name": "potato_at_expo",
+      "type": "intermediate",
+      "lineage": {
+        "evolvesFrom": "potato_packaged"
+      },
+      "groupId": "potato_packaged"
+    },
+    {
+      "id": "sour_cream",
+      "name": "sour_cream",
+      "type": "intermediate",
+      "groupId": "sour_cream"
+    },
+    {
+      "id": "sour_cream_ready",
+      "name": "sour_cream_ready",
+      "type": "intermediate",
+      "lineage": {
+        "evolvesFrom": "sour_cream"
+      },
+      "groupId": "sour_cream"
+    },
+    {
+      "id": "sour_cream_at_expo",
+      "name": "sour_cream_at_expo",
+      "type": "intermediate",
+      "lineage": {
+        "evolvesFrom": "sour_cream_ready"
+      },
+      "groupId": "sour_cream"
+    }
+  ]
+}

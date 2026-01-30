@@ -1,0 +1,15 @@
+{
+  "id": "f5a8c907-4641-4d05-a5eb-c83e1efce007",
+  "command": "write",
+  "timestamp": "2026-01-24T09:15:07.707Z",
+  "inputs": {
+    "buildId": "burrito-byo-limesalt-8004637"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/burrito-byo-limesalt-8004637.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/burrito-byo-limesalt-8004637.json"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "b367828b-0001-4560-9fc0-c94c475a51ff",
+  "command": "write",
+  "timestamp": "2026-01-24T09:17:48.287Z",
+  "inputs": {
+    "buildId": "sandwich-byo-yasas-8007402"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/sandwich-byo-yasas-8007402.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/sandwich-byo-yasas-8007402.json"
+  ]
+}

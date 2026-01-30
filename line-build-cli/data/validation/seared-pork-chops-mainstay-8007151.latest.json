@@ -1,0 +1,108 @@
+{
+  "buildId": "seared-pork-chops-mainstay-8007151",
+  "itemId": "8007151",
+  "timestamp": "2026-01-28T17:39:57.531Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "assembly-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pork-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "sauce-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "accompaniments-2",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "assembly-3",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pork-3",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "sauce-3",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "accompaniments-4",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pork-4",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "assembly-5",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pork-7",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "pork-9",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "soft",
+      "ruleId": "S20",
+      "message": "S20: step has dependsOn but no input[]. Confirm this is a work-only dependency (not missing material flow).",
+      "stepId": "assembly-1",
+      "fieldPath": "dependsOn|input"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "pork-5",
+      "fieldPath": "output[].from"
+    }
+  ]
+}

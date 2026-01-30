@@ -1,0 +1,72 @@
+{
+  "id": "fixture-prep-missing-technique",
+  "itemId": "ITEM_PREP_NO_TECH",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "stationId": "prep",
+      "action": { "family": "PREP" },
+      "toolId": "utility_knife",
+      "instruction": "Prep the lettuce (missing techniqueId and notes to trigger H25).",
+      "from": { "stationId": "prep", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "lettuce_prep" },
+          "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "stationId": "garnish",
+      "action": { "family": "ASSEMBLE" },
+      "dependsOn": ["s1"],
+      "instruction": "Place lettuce on plate.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "lettuce_prep" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "lettuce_plated" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "stationId": "expo",
+      "action": { "family": "PACKAGING" },
+      "dependsOn": ["s2"],
+      "container": { "type": "tray" },
+      "instruction": "Send to expo.",
+      "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "lettuce_plated" },
+          "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "lettuce_served" },
+          "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

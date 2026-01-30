@@ -1,0 +1,15 @@
+{
+  "id": "833a771c-22e5-4a52-affa-0bca13ac5785",
+  "command": "write",
+  "timestamp": "2026-01-24T09:07:56.856Z",
+  "inputs": {
+    "buildId": "shrimp-saganaki-symon-8006066"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/shrimp-saganaki-symon-8006066.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/shrimp-saganaki-symon-8006066.json"
+  ]
+}

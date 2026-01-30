@@ -1,0 +1,72 @@
+{
+  "id": "fixture-portion-missing-qty",
+  "itemId": "ITEM_PORTION_NO_QTY",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "stationId": "prep",
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open sauce container.",
+      "from": { "stationId": "prep", "sublocation": { "type": "cold_storage" } },
+      "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "sauce_opened" },
+          "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "stationId": "garnish",
+      "action": { "family": "PORTION" },
+      "dependsOn": ["s1"],
+      "toolId": "spoodle_2oz",
+      "instruction": "Portion sauce into ramekin (missing quantity and notes to trigger H24).",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "sauce_opened" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "sauce_portioned" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "stationId": "expo",
+      "action": { "family": "PACKAGING" },
+      "dependsOn": ["s2"],
+      "container": { "type": "ramekin" },
+      "instruction": "Place ramekin on tray.",
+      "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "sauce_portioned" },
+          "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "sauce_served" },
+          "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

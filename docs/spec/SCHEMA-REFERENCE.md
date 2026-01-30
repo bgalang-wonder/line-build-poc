@@ -1,8 +1,14 @@
 # Schema Reference (Canonical v1)
 
-> **Purpose:** Single source of truth for the POC data model.  
-> **Primary sources:** `docs/schema/SPEC-TECHNICAL.md`, `docs/schema/INVARIANTS.md`.  
-> **Note:** `docs/schema/types-benchtop.ts` contains earlier “WorkUnit” types preserved for reference; this doc defines the canonical `BenchTopLineBuild` + `Step` schema used by invariants H1–H22.
+> **⚠️ IMPORTANT:** This document is for **conceptual reference only**.
+> **Source of truth:** TypeScript schema files in `line-build-cli/scripts/lib/schema/`:
+> - `build.ts` - BenchTopLineBuild interface
+> - `step.ts` - Step interface
+> - `assembly.ts` - Assembly and AssemblyRef interfaces (material flow)
+> - `enums.ts` - All enum types
+>
+> This doc provides high-level guidance but may lag behind implementation.
+> **When in doubt, read the TypeScript files.**
 
 ---
 
@@ -10,139 +16,129 @@
 
 - A **line build** is a list of steps with a deterministic order and optional dependency edges (**work graph**).
 - Each **step** is one unit of work, categorized by an **action family**.
-- The schema optionally supports **artifact flow** (what is produced/consumed) to model parallel component paths and “joins” at assembly/packaging.
+- The schema uses **assembly-based material flow** (not artifact flow) via `input[]` and `output[]` arrays on each step.
+- Material locations tracked via `AssemblyRef.from` and `AssemblyRef.to` (NOT on steps directly).
+- Steps describe **where work happens** via `stationId` + `workLocation` (NOT via from/to fields).
 - Optional fields enrich the model (station, cooking phase, container, prep metadata, conditions/overlays).
 
 ---
 
-## Canonical Types (TypeScript)
+## Key Concepts
 
-### `BenchTopLineBuild`
+### Material Flow vs. Work Location
 
-```ts
-export type BuildId = string;     // UUID
-export type ItemId = string;      // catalog item reference (e.g., 80* menu items; prepared components may also have builds)
-export type MenuItemId = string;  // legacy alias; prefer ItemId going forward
-export type BuildStatus = "draft" | "published" | "archived";
+**Critical distinction:**
+- **Material flow**: Where materials come FROM and go TO → tracked in `input[].from` and `output[].to`
+- **Work location**: Where the work happens → tracked in `step.stationId` + `step.workLocation`
 
-export interface BenchTopLineBuild {
-  // Identity
-  id: BuildId;
-
-  // Canonical: builds are keyed by the item they produce.
-  // For MVP, this may be an 80* menu item OR a prepared component item that is treated like a "menu item" for prep purposes.
-  itemId: ItemId;
-
-  // Back-compat: retained for legacy/POC compatibility.
-  // NOTE: In future revisions, migrate consumers to itemId.
-  menuItemId?: MenuItemId;
-
-  version: number;               // immutable once created
-  status: BuildStatus;
-
-  // Content (work graph)
-  steps: Step[];                 // required (H6 constrains published)
-
-  // Optional authoring structure
-  operations?: Operation[];      // UX convenience grouping
-  tracks?: TrackDefinition[];    // optional parallel lanes
-
-  // Cross-build composition: prepared components with their own builds.
-  // MVP policy: references published builds only.
-  requiresBuilds?: BuildRef[];
-
-  // Optional artifact flow (material graph). This is distinct from dependsOn (work ordering).
-  artifacts?: Artifact[];
-  primaryOutputArtifactId?: string;
-
-  // Customization DAG support
-  customizationGroups?: CustomizationGroup[];
-
-  // Validation audit trail (policy layer; see HARD-RULES.md)
-  validationOverrides?: ValidationOverride[];
-
-  // Metadata
-  createdAt: string;             // ISO timestamp
-  updatedAt: string;             // ISO timestamp
-  authorId?: string;
-  changeLog?: string;
+Example:
+```typescript
+{
+  id: "add-cheese",
+  stationId: "garnish",
+  workLocation: { type: "work_surface" },  // Work happens at work surface
+  input: [{
+    source: { type: "in_build", assemblyId: "cheese" },
+    from: {                                 // Material comes FROM cold rail
+      stationId: "garnish",
+      sublocation: { type: "cold_rail" }
+    }
+  }]
 }
 ```
 
-### `Step`
+### Assemblies Replace Artifacts
 
-```ts
-export type StepId = string; // UUID
+- Old concept: `artifacts` (deprecated)
+- New concept: `assemblies` (current)
+- Assemblies represent materials that flow through steps
+- Each step has `input: AssemblyRef[]` and `output: AssemblyRef[]`
 
-// NOTE: Step.kind is primarily a UX/display hint.
-// Canonical semantics should be derived from action.family.
-export type StepKind = "action" | "quality_check" | "meta";
+---
 
-export interface Step {
-  // Identity & ordering
-  id: StepId;                     // unique within build (H7)
-  orderIndex: number;             // required + unique in scope (H2)
-  trackId?: string;               // if present, orderIndex uniqueness is within track scope
-  operationId?: string;           // optional grouping
+## Schema Structure Overview
 
-  // Semantic meaning (required)
-  // MECE guidance:
-  // - kind="quality_check" should only be used with action.family=CHECK
-  // - kind="meta" should only be used with action.family=OTHER
-  kind: StepKind;
-  action: StepAction;             // required (H1)
+See TypeScript files for complete definitions. High-level structure:
 
-  // What is being acted on? (strongly recommended)
-  target?: StepTarget;            // constrained by H4 and action-specific patterns
+### `BenchTopLineBuild` (see `build.ts`)
 
-  // Execution details (optional, often inferable)
-  stationId?: StationId;
-  toolId?: ToolId;
-  equipment?: StepEquipment;       // required for HEAT (H15)
-  time?: StepTime;                // required for HEAT unless notes non-empty (H22)
+**Required fields:**
+- `id: BuildId` - unique identifier
+- `itemId: ItemId` - catalog item reference (80* menu items)
+- `version: number` - immutable once created
+- `status: "draft" | "published" | "archived"`
+- `steps: Step[]` - array of steps (H6 constrains published)
+- `createdAt: string` - ISO timestamp
+- `updatedAt: string` - ISO timestamp
 
-  // Phase semantics (recommended; tracked by metrics)
-  cookingPhase?: CookingPhase;
+**Optional fields:**
+- `name?: string` - human-readable name
+- `menuItemId?: MenuItemId` - legacy alias for itemId
+- `operations?: Operation[]` - UX grouping
+- `tracks?: TrackDefinition[]` - parallel lanes
+- `bom?: BomEntry[]` - Bill of Materials
+- `assemblies?: Assembly[]` - **Material flow tracking (replaces artifacts)**
+- `primaryOutputAssemblyId?: string` - main output
+- `requiresBuilds?: BuildRef[]` - prepared component builds
+- `customizationGroups?: CustomizationGroup[]` - customization DAG
+- `validationOverrides?: ValidationOverride[]` - validation audit trail
+- `authorId?: string`, `changeLog?: string` - metadata
 
-  // Container / packaging (recommended; required for VEND unless packaging target) (H16)
-  container?: StepContainer;
+### `Step` (see `step.ts`)
 
-  // Negation / exclusion (OPTIONAL_SUBTRACTION pattern)
-  exclude?: boolean;
+**⚠️ Material flow is tracked via `input[]` and `output[]` arrays, NOT via from/to on steps.**
 
-  // Pre-service prep (P1.9)
-  prepType?: PrepType;            // default: "order_execution"
-  storageLocation?: StorageLocation; // required when prepType="pre_service" (H17)
-  bulkPrep?: boolean;             // implies prepType="pre_service" (H18)
+**Required fields:**
+- `id: StepId` - unique within build (H7)
+- `orderIndex: number` - ordering within track (H2)
+- `action: StepAction` - action family + technique (H1)
+- `input: AssemblyRef[]` - input materials (default `[]`)
+- `output: AssemblyRef[]` - output materials (default `[]`)
 
-  // Quantity / amount (EXTRA_REQUESTS, portions)
-  quantity?: StepQuantity;        // if present, value must be > 0 (H10)
+**Optional but important:**
+- `stationId?: StationId` - where work happens
+- `workLocation?: StepSublocation` - **where within station** (NOT from/to)
+- `equipment?: StepEquipment` - required for HEAT (H15)
+- `time?: StepTime` - cook time (H22 for HEAT)
+- `toolId?: ToolId` - tool used
+- `quantity?: StepQuantity` - amount (H24 for PORTION, H10 for value > 0)
+- `target?: StepTarget` - what is being acted on
+- `instruction?: string` - human-readable text
+- `notes?: string` - escape hatch (H5)
+- `dependsOn?: DependencyRef[]` - work dependencies (H8, H9)
+- `trackId?: string`, `operationId?: string` - grouping
 
-  // Human-executable instruction text (recommended).
-  // If omitted, consumers may fall back to `notes` or derive a display string from structured fields.
-  instruction?: string;
+**Key removals from legacy schema:**
+- ❌ `from`, `to` - removed from steps, now only on AssemblyRef
+- ❌ `sublocation` - renamed to `workLocation` for clarity
+- ❌ `kind` - removed, use `action.family` instead
 
-  // Escape hatch (always allowed) (H5)
+### `AssemblyRef` (see `assembly.ts`)
+
+**Material flow is tracked here:**
+
+```typescript
+interface AssemblyRef {
+  source: AssemblySource;          // which assembly
+  from?: LocationRef;              // ✅ where material comes FROM
+  to?: LocationRef;                // ✅ where material goes TO
+  quantity?: StepQuantity;         // amount
+  role?: "base" | "added";         // for merge steps
+  onAssembly?: AssemblyId;         // relative placement
   notes?: string;
-
-  // Data quality tracking (optional)
-  provenance?: StepProvenance;
-
-  // Artifact flow (optional): what this step consumes/produces.
-  // This models parallel component paths and joins (e.g., multiple components merge at assembly/packaging).
-  consumes?: ArtifactRef[];
-  produces?: ArtifactRef[];
-
-  // Extension points (optional)
-  // Conditions: inclusion/existence gating (step in/out of resolved build)
-  conditions?: StepCondition;
-  // Overlays: mutation (step remains but fields change under scenario/customization)
-  overlays?: StepOverlay[];
-
-  // Work-order graph edges
-  dependsOn?: StepId[];            // dependency edges (if present: H8 + H9 apply)
 }
+```
 
+### `LocationRef` (see `step.ts`)
+
+```typescript
+interface LocationRef {
+  stationId?: StationId;
+  sublocation?: {
+    type: SublocationId;
+    equipmentId?: ApplianceId;     // when type="equipment"
+  };
+}
 ```
 
 ---
@@ -160,13 +156,84 @@ export type StationId =
   | "prep"          // general prep area
   | "garnish"       // garnish / cold assembly station
   | "expo"          // expeditor / pass window
-  | "vending"       // vending / packaging station
+  | "vending"       // vending station (pickup / staging)
   | "pass"          // pass to next station (handoff point)
   | "other";        // escape hatch + detail in notes
 
 // Note: In some legacy data, "station" was conflated with equipment (e.g., "Turbo", "Fryer").
 // The canonical model separates these: station = where, equipment = what appliance.
 ```
+
+#### Station POD Types (Temperature Classification)
+
+Each station/equipment type is classified as Hot, Cold, or Vending for operational grouping:
+
+| Station/Equipment | POD Type |
+| :--- | :--- |
+| Fryer | Hot |
+| Waterbath | Hot |
+| Turbo | Hot |
+| Clamshell Grill | Hot |
+| Pizza | Hot |
+| Microwave | Hot |
+| Garnish | Cold |
+| Press | Cold |
+| Toaster | Cold |
+| Speed Line | Cold |
+| Vending | Vending |
+
+This classification is used for swimlane visualization and handoff complexity scoring.
+
+### `SublocationId` + location references (Where within a station)
+
+Sublocations describe **where within a station** the component/work is happening. These are used for:
+- transfer/staging modeling (window/shelf)
+- retrieval-effort scoring (rail vs cold storage)
+- equipment-as-location modeling (equipment is a sublocation type)
+
+```ts
+export type SublocationId =
+  | "work_surface"
+  | "cold_rail"
+  | "dry_rail"
+  | "cold_storage"
+  | "packaging"
+  | "kit_storage"
+  | "window_shelf"
+  | "equipment";
+
+export interface StepSublocation {
+  type: SublocationId;
+  // Required when type === "equipment"
+  equipmentId?: ApplianceId;
+}
+
+export interface LocationRef {
+  stationId?: StationId;
+  sublocation?: StepSublocation;
+}
+```
+
+#### Sublocation Capabilities (Mental Model)
+
+> **Note:** This is a working mental model, not enforced validation rules. Needs SME validation before hardening.
+
+Each sublocation tends to be used as a **source** (retrieve from) or **sink** (place to):
+
+| Sublocation | Typical Source? | Typical Sink? | Notes |
+| :--- | :--- | :--- | :--- |
+| `work_surface` | Yes | Yes | Bidirectional; active work area |
+| `equipment` | Yes | Yes | Bidirectional; equipment-specific work space |
+| `window_shelf` | Yes | Yes | **Universal conceptual location**; staging between stations |
+| `cold_rail` | Yes | Rare | Primarily retrieve; occasionally restock |
+| `dry_rail` | Yes | Rare | Primarily retrieve |
+| `cold_storage` | Yes | Yes* | Primarily source; *sink for put-back flows (reseal, return excess) |
+| `packaging` | Yes | Rare | Primarily retrieve packaging materials |
+| `kit_storage` | Yes | Rare | Primarily retrieve pre-assembled kits |
+
+**Cold storage put-back flow:** The primary sublocation that supports a "return" operation. Used when:
+- Excess ingredient is resealed and returned
+- Pre-portioned component needs refrigeration between prep and service
 
 ### `ToolId` (Hand Tools)
 
@@ -233,8 +300,8 @@ export enum ActionFamily {
   ASSEMBLE = "ASSEMBLE",  // build final product
   PORTION = "PORTION",    // measure quantity
   CHECK = "CHECK",        // QA/temp check
-  VEND = "VEND",          // package/handoff
-  OTHER = "OTHER",        // escape hatch (track usage; goal <10%)
+  PACKAGING = "PACKAGING", // containerize/seal (pack, lid, sleeve, wrap)
+  OTHER = "OTHER",         // escape hatch (track usage; goal <10%)
 }
 ```
 
@@ -275,30 +342,51 @@ export interface BuildRef {
 
 ## Artifact Flow (Material Graph)
 
-The schema optionally supports a material-flow graph so multiple components can move in parallel and then **join** at assembly/packaging.
+The schema supports a material-flow graph so multiple components can move in parallel and then **join** at assembly/packaging.
 
 This is distinct from `dependsOn`:
 - `dependsOn` = work ordering constraints (work graph)
-- `consumes`/`produces` = material flow constraints (material graph)
+- `input`/`output` = material flow constraints (material graph)
+
+### Versioned Artifacts & Grouping
+
+To model how an item changes over time (e.g., adding ingredients to a tortilla), we use **versioned artifacts** tied together by a `groupId`.
 
 ```ts
 export type ArtifactId = string;
 
-export type ArtifactType =
-  | "intermediate"
-  | "final"
-  | "packaging"
-  | "free_text"
-  | "bom_usage"
-  | "bom_component";
-
 export interface Artifact {
-  id: ArtifactId;
+  id: ArtifactId;                // unique version ID (e.g., quesadilla_v1)
   name?: string;
   type?: ArtifactType;
   bomUsageId?: BomUsageId;
   bomComponentId?: BomComponentId;
   notes?: string;
+
+  // NEW: Logical grouping for versions
+  groupId?: string;              // stable group ID (e.g., quesadilla_main)
+
+  // NEW: Component membership tracking
+  components?: BomEntryId[];     // list of BOM components in this version
+}
+```
+
+### Precise Location Tracking
+
+Locations are tracked **per component** via `from` and `to` on the artifact reference.
+
+```ts
+export interface ArtifactRef {
+  source: ArtifactSource;
+  quantity?: StepQuantity;
+  notes?: string;
+
+  // NEW: Precise routing for this component
+  from?: LocationRef;            // source station/sublocation
+  to?: LocationRef;              // destination station/sublocation
+
+  // NEW: Component-relative placement
+  onArtifact?: ArtifactId;       // e.g., "place cheese ON the tortilla"
 }
 
 export type ArtifactSource =
@@ -309,16 +397,13 @@ export type ArtifactSource =
       version?: number | "latest_published";
       artifactId?: ArtifactId; // optional; default is external build's primaryOutputArtifactId
     };
-
-export interface ArtifactRef {
-  source: ArtifactSource;
-  quantity?: StepQuantity;
-  notes?: string;
-}
 ```
 
-**Primary output assumption:** each build should have exactly one primary output. When `artifacts` is used, set:
-- `primaryOutputArtifactId` to the artifact representing the build's canonical output.
+### Derived Dependencies (Work vs. Material)
+
+The CLI implements **automatic dependency derivation**:
+- If **Step B** takes an artifact as input that **Step A** produced as output, the system adds a dependency **A → B**.
+- These derived edges are merged into the `dependsOn` array during normalization.
 
 ---
 
@@ -579,7 +664,7 @@ export interface StepProvenance {
 - If `step.action.family === "HEAT"`:
   - `step.equipment` required (H15)
   - `step.time` required **OR** `step.notes` non-empty (H22)
-- If `step.action.family === "VEND"`:
+- If `step.action.family === "PACKAGING"`:
   - `step.container` required **OR** `step.target.type === "packaging"` (H16)
 - If `step.prepType === "pre_service"`:
   - `step.storageLocation` required (H17)

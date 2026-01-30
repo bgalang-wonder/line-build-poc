@@ -1,0 +1,157 @@
+{
+  "buildId": "taco-beef-barbacoa-barrio-8006860",
+  "itemId": "8006860",
+  "timestamp": "2026-01-28T17:39:57.524Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "salsa-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "taco-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "taco-5",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "taco-8",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "taco-17",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "taco-19",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "S16a",
+      "message": "S16a: grouping bouncing detected for 'hot_side' in track 'taco'. The build leaves this kitchen area and returns to it later, which is inefficient.",
+      "stepId": "taco-6",
+      "fieldPath": "groupingId"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "S16a",
+      "message": "S16a: grouping bouncing detected for 'cold_side' in track 'taco'. The build leaves this kitchen area and returns to it later, which is inefficient.",
+      "stepId": "taco-7",
+      "fieldPath": "groupingId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S16b",
+      "message": "S16b: station bouncing detected for station 'waterbath' in track 'taco'. The build leaves this station and returns to it later within the same grouping.",
+      "stepId": "taco-3",
+      "fieldPath": "stationId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S16b",
+      "message": "S16b: station bouncing detected for station 'garnish' in track 'taco'. The build leaves this station and returns to it later within the same grouping.",
+      "stepId": "taco-4",
+      "fieldPath": "stationId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S20",
+      "message": "S20: step has dependsOn but no input[]. Confirm this is a work-only dependency (not missing material flow).",
+      "stepId": "taco-8",
+      "fieldPath": "dependsOn|input"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S20",
+      "message": "S20: step has dependsOn but no input[]. Confirm this is a work-only dependency (not missing material flow).",
+      "stepId": "taco-17",
+      "fieldPath": "dependsOn|input"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S22",
+      "message": "S22: input assembly 'tacos_in_container_v1' has sublocation mismatch at garnish (expected: work_surface, got: packaging). This may be an error.",
+      "stepId": "taco-19",
+      "fieldPath": "input[0].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S22",
+      "message": "S22: input assembly 'tacos_with_lime_v1' has sublocation mismatch at garnish (expected: work_surface, got: packaging). This may be an error.",
+      "stepId": "taco-20",
+      "fieldPath": "input[0].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S23",
+      "message": "S23: step at 'expo' inputs from 'garnish'. This hides a transfer inside the step. Fix: set input.from.stationId='expo' to trigger derived transfer.",
+      "stepId": "taco-22",
+      "fieldPath": "input[0].from.stationId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "taco-11",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "taco-12",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "taco-13",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "taco-14",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "taco-15",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "taco-16",
+      "fieldPath": "output[].from"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "buildId": "cheese-fries-burger-baby-8009068",
+  "itemId": "8009068",
+  "timestamp": "2026-01-28T17:39:57.544Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "ketchup-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "cheese_sauce-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "cheese_sauce-2",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "default-2",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "default-3",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "S16a",
+      "message": "S16a: grouping bouncing detected for 'hot_side' in track 'cheese-sauce'. The build leaves this kitchen area and returns to it later, which is inefficient.",
+      "stepId": "cheese_sauce-3",
+      "fieldPath": "groupingId"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "S16a",
+      "message": "S16a: grouping bouncing detected for 'cold_side' in track 'cheese-sauce'. The build leaves this kitchen area and returns to it later, which is inefficient.",
+      "stepId": "cheese_sauce-4",
+      "fieldPath": "groupingId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "H26",
+      "message": "H26: graph appears under-specified (only 67% of steps have dependsOn). Confirm which steps truly can start immediately.",
+      "fieldPath": "steps[].dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S22",
+      "message": "S22: input assembly 'cheese_cup_lid' has no producing step. Ensure this is intentional.",
+      "stepId": "cheese_sauce-6",
+      "fieldPath": "input[1].source"
+    }
+  ]
+}

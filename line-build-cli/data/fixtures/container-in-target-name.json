@@ -1,0 +1,69 @@
+{
+  "id": "fixture-container-in-target",
+  "itemId": "ITEM_CONTAINER_TARGET",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "action": { "family": "PREP", "techniqueId": "retrieve" },
+      "instruction": "Grab salad from cold rail.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "salad_base" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "action": { "family": "ASSEMBLE" },
+      "dependsOn": ["s1"],
+      "target": { "type": "free_text", "name": "clamshell container" },
+      "instruction": "Place salad in clamshell container (H4: container-like target.name without container field).",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "salad_base" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "salad_ready" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "action": { "family": "PACKAGING" },
+      "dependsOn": ["s2"],
+      "container": { "type": "clamshell" },
+      "instruction": "Send to expo.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "salad_ready" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "salad_packaged" },
+          "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

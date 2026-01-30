@@ -283,26 +283,26 @@ function validateS2(step: Step): ValidationResult {
 
 ---
 
-### S4: VEND Steps Should Reference Container or Packaging
+### S4: PACKAGING Steps Should Reference Container or Packaging
 
-**Rule:** If `step.action.family === "VEND"`, then `step.container` or `step.target.type === "packaging"` should exist.
+**Rule:** If `step.action.family === "PACKAGING"`, then `step.container` or `step.target.type === "packaging"` should exist.
 
 **Rationale:**
-- VEND steps involve final packaging
+- PACKAGING steps involve final packaging
 - Container/packaging info supports packaging complexity scoring
-- Legacy VEND steps have ~52% structured rate (best of all activity types)
+- Legacy VEND (now PACKAGING) steps have ~52% structured rate (best of all activity types)
 
 **Validation:**
 ```typescript
 function validateS3(step: Step): ValidationResult {
-  if (step.action.family === ActionFamily.VEND) {
+  if (step.action.family === ActionFamily.PACKAGING) {
     const hasContainer = !!step.container;
     const hasPackagingTarget = step.target?.type === "packaging";
     
     if (!hasContainer && !hasPackagingTarget) {
       return {
         valid: true,
-        warning: `S3: VEND step ${step.id} missing container or packaging target`
+        warning: `S3: PACKAGING step ${step.id} missing container or packaging target`
       };
     }
   }

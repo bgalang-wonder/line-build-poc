@@ -1,0 +1,51 @@
+{
+  "buildId": "derived-test-build",
+  "itemId": "test-item",
+  "timestamp": "2026-01-24T06:34:21.265Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'retrieve' belongs to TRANSFER, not PREP",
+      "stepId": "step-1",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "H26",
+      "message": "H26: graph appears under-specified (only 50% of steps have dependsOn). Confirm which steps truly can start immediately.",
+      "fieldPath": "steps[].dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S17",
+      "message": "S17: sublocation 'cold_storage' was derived (review recommended)",
+      "stepId": "step-1",
+      "fieldPath": "sublocation"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S17",
+      "message": "S17: sublocation 'equipment' was derived (review recommended)",
+      "stepId": "step-2",
+      "fieldPath": "sublocation"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S18",
+      "message": "S18: output destination was derived (review recommended)",
+      "stepId": "step-1",
+      "fieldPath": "to"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S18",
+      "message": "S18: output destination was derived (review recommended)",
+      "stepId": "step-2",
+      "fieldPath": "to"
+    }
+  ]
+}

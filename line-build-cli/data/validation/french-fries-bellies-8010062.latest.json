@@ -1,0 +1,23 @@
+{
+  "buildId": "french-fries-bellies-8010062",
+  "itemId": "8010062",
+  "timestamp": "2026-01-28T17:39:57.548Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "ketchup-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "fries-4",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": []
+}

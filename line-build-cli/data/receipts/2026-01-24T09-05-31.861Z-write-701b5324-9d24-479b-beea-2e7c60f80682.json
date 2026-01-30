@@ -1,0 +1,15 @@
+{
+  "id": "701b5324-9d24-479b-beea-2e7c60f80682",
+  "command": "write",
+  "timestamp": "2026-01-24T09:05:31.861Z",
+  "inputs": {
+    "buildId": "general-tsos-chicken-kin-house-8009007"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/general-tsos-chicken-kin-house-8009007.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/general-tsos-chicken-kin-house-8009007.json"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "buildId": "fixture-parallel-join",
+  "itemId": "ITEM_PARALLEL_JOIN",
+  "timestamp": "2026-01-23T21:58:59.617Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H31",
+      "message": "H31: output[0] (a_componentA) requires to.stationId",
+      "stepId": "p1",
+      "fieldPath": "output[0].to.stationId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H31",
+      "message": "H31: output[0] (a_componentB) requires to.stationId",
+      "stepId": "p2",
+      "fieldPath": "output[0].to.stationId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H31",
+      "message": "H31: input[0] (a_componentA) requires from.stationId",
+      "stepId": "p3",
+      "fieldPath": "input[0].from.stationId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H31",
+      "message": "H31: input[1] (a_componentB) requires from.stationId",
+      "stepId": "p3",
+      "fieldPath": "input[1].from.stationId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H31",
+      "message": "H31: output[0] (a_joined) requires to.stationId",
+      "stepId": "p3",
+      "fieldPath": "output[0].to.stationId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H31",
+      "message": "H31: input[0] (a_joined) requires from.stationId",
+      "stepId": "p4",
+      "fieldPath": "input[0].from.stationId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H31",
+      "message": "H31: output[0] (a_final) requires to.stationId",
+      "stepId": "p4",
+      "fieldPath": "output[0].to.stationId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H31",
+      "message": "H31: input[0] (a_final) requires from.stationId",
+      "stepId": "p5",
+      "fieldPath": "input[0].from.stationId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'cut_diced' is not in the controlled vocabulary",
+      "stepId": "p1",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "H26",
+      "message": "H26: graph appears under-specified (only 60% of steps have dependsOn). Confirm which steps truly can start immediately.",
+      "fieldPath": "steps[].dependsOn"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "p3",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H30",
+      "message": "H30: 1:1 transformation output 'a_final' should have lineage.evolvesFrom='a_joined'",
+      "stepId": "p4",
+      "fieldPath": "components[].lineage.evolvesFrom"
+    }
+  ]
+}

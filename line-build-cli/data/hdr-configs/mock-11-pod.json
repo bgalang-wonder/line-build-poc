@@ -1,0 +1,83 @@
+{
+  "hdrId": "mock-11-pod",
+  "name": "Mock 11-Pod Layout",
+  "pods": [
+    {
+      "podId": "Cold_Pod_1A",
+      "podType": "COLD",
+      "equipment": ["PRESS", "TOASTER"]
+    },
+    {
+      "podId": "Cold_Pod_2A",
+      "podType": "COLD",
+      "equipment": ["PRESS", "TOASTER"]
+    },
+    {
+      "podId": "Cold_Pod_3A",
+      "podType": "COLD",
+      "equipment": ["PRESS", "TOASTER"]
+    },
+    {
+      "podId": "Hot_Pod_1A",
+      "podType": "HOT",
+      "equipment": ["TURBO_OVEN", "TURBO_OVEN", "TURBO_OVEN", "TURBO_OVEN"]
+    },
+    {
+      "podId": "Hot_Pod_2A",
+      "podType": "HOT",
+      "equipment": ["WATER_BATH", "WATER_BATH", "MICROWAVE", "MICROWAVE"]
+    },
+    {
+      "podId": "Hot_Pod_3A",
+      "podType": "HOT",
+      "equipment": ["FRYER", "FRYER"]
+    },
+    {
+      "podId": "Hybrid_Pod_1C",
+      "podType": "HYBRID",
+      "equipment": ["WATER_BATH", "PRESS", "RICE_COOKER", "TURBO_OVEN"]
+    },
+    {
+      "podId": "Hybrid_Pod_1D",
+      "podType": "HYBRID",
+      "equipment": ["TURBO_OVEN", "TURBO_OVEN", "WATER_BATH"]
+    },
+    {
+      "podId": "Hybrid_Pod_2C",
+      "podType": "HYBRID",
+      "equipment": ["PRESS", "WATER_BATH", "TURBO_OVEN"]
+    },
+    {
+      "podId": "Expo_Pod_1",
+      "podType": "EXPO",
+      "equipment": []
+    },
+    {
+      "podId": "Vending_Pod_1A",
+      "podType": "VENDING",
+      "equipment": ["VENDING"]
+    }
+  ],
+  "stationPodDefaults": {
+    "fryer": "HOT",
+    "waterbath": "HOT",
+    "turbo": "HOT",
+    "microwave": "HOT",
+    "clamshell_grill": "CLAMSHELL",
+    "press": "COLD",
+    "toaster": "COLD",
+    "garnish": "COLD",
+    "pizza": "PIZZA",
+    "expo": "EXPO",
+    "prep": "COLD",
+    "vending": "VENDING",
+    "speed_line": "COLD"
+  },
+  "stationLocations": {
+    "garnish": "Cold_Pod_1A",
+    "speed_line": "Cold_Pod_2A",
+    "prep": "Cold_Pod_3A",
+    "expo": "Expo_Pod_1",
+    "vending": "Vending_Pod_1A"
+  }
+}

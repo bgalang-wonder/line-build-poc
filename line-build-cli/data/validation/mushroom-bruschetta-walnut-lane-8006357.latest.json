@@ -1,0 +1,94 @@
+{
+  "buildId": "mushroom-bruschetta-walnut-lane-8006357",
+  "itemId": "8006357",
+  "timestamp": "2026-01-28T17:39:57.518Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "crostini-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "mushrooms-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "crostini-4",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "crostini-6",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "mushrooms-6",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "assembly-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "assembly-4",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "soft",
+      "ruleId": "S20",
+      "message": "S20: step has dependsOn but no input[]. Confirm this is a work-only dependency (not missing material flow).",
+      "stepId": "assembly-4",
+      "fieldPath": "dependsOn|input"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S23",
+      "message": "S23: step at 'expo' inputs from 'garnish'. This hides a transfer inside the step. Fix: set input.from.stationId='expo' to trigger derived transfer.",
+      "stepId": "assembly-12",
+      "fieldPath": "input[0].from.stationId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "mushrooms-4",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "assembly-2",
+      "fieldPath": "output[].from"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "assembly-7",
+      "fieldPath": "output[].from"
+    }
+  ]
+}

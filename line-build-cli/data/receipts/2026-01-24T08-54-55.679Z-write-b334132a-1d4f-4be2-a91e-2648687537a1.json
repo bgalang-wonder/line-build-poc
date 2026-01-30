@@ -1,0 +1,15 @@
+{
+  "id": "b334132a-1d4f-4be2-a91e-2648687537a1",
+  "command": "write",
+  "timestamp": "2026-01-24T08:54:55.679Z",
+  "inputs": {
+    "buildId": "classic-red-top-pizza-detroit-8008698"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/classic-red-top-pizza-detroit-8008698.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/classic-red-top-pizza-detroit-8008698.json"
+  ]
+}

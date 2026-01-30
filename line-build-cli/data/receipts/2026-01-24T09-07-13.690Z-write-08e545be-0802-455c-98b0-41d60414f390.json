@@ -1,0 +1,15 @@
+{
+  "id": "08e545be-0802-455c-98b0-41d60414f390",
+  "command": "write",
+  "timestamp": "2026-01-24T09:07:13.690Z",
+  "inputs": {
+    "buildId": "pulled-pork-sandwich-tejas-8008642"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/pulled-pork-sandwich-tejas-8008642.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/pulled-pork-sandwich-tejas-8008642.json"
+  ]
+}

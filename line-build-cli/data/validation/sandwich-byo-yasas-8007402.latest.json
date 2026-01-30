@@ -1,0 +1,31 @@
+{
+  "buildId": "sandwich-byo-yasas-8007402",
+  "itemId": "8007402",
+  "timestamp": "2026-01-28T17:39:57.534Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "default-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "dressing-1",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "S16a",
+      "message": "S16a: grouping bouncing detected for 'cold_side' in track 'default'. The build leaves this kitchen area and returns to it later, which is inefficient.",
+      "stepId": "default-5",
+      "fieldPath": "groupingId"
+    }
+  ]
+}

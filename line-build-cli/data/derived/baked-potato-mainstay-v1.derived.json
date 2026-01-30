@@ -1,0 +1,122 @@
+{
+  "buildId": "baked-potato-mainstay-v1",
+  "computedAt": "2026-01-29T19:31:06.218Z",
+  "derivationVersion": "transfers/v2",
+  "sourceHash": "a6faea4cb38276b3",
+  "transfers": [
+    {
+      "id": "transfer-step-1__step-2",
+      "action": {
+        "family": "TRANSFER",
+        "techniqueId": "place"
+      },
+      "transferType": "intra_station",
+      "assemblyId": "potato_pouch_positioned",
+      "from": {
+        "stationId": "waterbath",
+        "sublocation": {
+          "type": "work_surface"
+        }
+      },
+      "to": {
+        "stationId": "waterbath",
+        "sublocation": {
+          "type": "equipment",
+          "equipmentId": "waterbath"
+        }
+      },
+      "complexityScore": 1,
+      "estimatedTimeSeconds": 5,
+      "derived": true,
+      "producerStepId": "step-1",
+      "consumerStepId": "step-2",
+      "fromPodId": "Hot_Pod_2A",
+      "toPodId": "Hot_Pod_2A"
+    },
+    {
+      "id": "transfer-step-2__step-4",
+      "action": {
+        "family": "TRANSFER",
+        "techniqueId": "pass"
+      },
+      "transferType": "inter_pod",
+      "assemblyId": "potato_cooked",
+      "from": {
+        "stationId": "waterbath",
+        "sublocation": {
+          "type": "equipment",
+          "equipmentId": "waterbath"
+        }
+      },
+      "to": {
+        "stationId": "garnish",
+        "sublocation": {
+          "type": "work_surface"
+        }
+      },
+      "complexityScore": 5,
+      "estimatedTimeSeconds": 30,
+      "derived": true,
+      "producerStepId": "step-2",
+      "consumerStepId": "step-4",
+      "fromPodId": "Hot_Pod_2A",
+      "toPodId": "Cold_Pod_1A"
+    },
+    {
+      "id": "transfer-step-12__step-13",
+      "action": {
+        "family": "TRANSFER",
+        "techniqueId": "handoff"
+      },
+      "transferType": "inter_pod",
+      "assemblyId": "sour_cream_ready",
+      "from": {
+        "stationId": "vending",
+        "sublocation": {
+          "type": "work_surface"
+        }
+      },
+      "to": {
+        "stationId": "expo",
+        "sublocation": {
+          "type": "window_shelf"
+        }
+      },
+      "complexityScore": 5,
+      "estimatedTimeSeconds": 30,
+      "derived": true,
+      "producerStepId": "step-12",
+      "consumerStepId": "step-13",
+      "fromPodId": "Vending_Pod_1A",
+      "toPodId": "Expo_Pod_1"
+    },
+    {
+      "id": "transfer-step-10__step-11",
+      "action": {
+        "family": "TRANSFER",
+        "techniqueId": "handoff"
+      },
+      "transferType": "inter_pod",
+      "assemblyId": "potato_packaged",
+      "from": {
+        "stationId": "garnish",
+        "sublocation": {
+          "type": "work_surface"
+        }
+      },
+      "to": {
+        "stationId": "expo",
+        "sublocation": {
+          "type": "window_shelf"
+        }
+      },
+      "complexityScore": 5,
+      "estimatedTimeSeconds": 30,
+      "derived": true,
+      "producerStepId": "step-10",
+      "consumerStepId": "step-11",
+      "fromPodId": "Cold_Pod_1A",
+      "toPodId": "Expo_Pod_1"
+    }
+  ]
+}

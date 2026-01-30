@@ -1,0 +1,15 @@
+{
+  "id": "316630e4-28a5-4d07-80ed-e8602f93be0b",
+  "command": "write",
+  "timestamp": "2026-01-24T09:04:34.053Z",
+  "inputs": {
+    "buildId": "pad-thai-chicken-sri-8009813"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/pad-thai-chicken-sri-8009813.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/pad-thai-chicken-sri-8009813.json"
+  ]
+}

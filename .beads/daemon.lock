@@ -1,7 +1,7 @@
 {
-  "pid": 49983,
-  "parent_pid": 49974,
+  "pid": 82349,
+  "parent_pid": 82305,
   "database": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/.beads/beads.db",
   "version": "0.46.0",
-  "started_at": "2026-01-08T02:11:29.939267Z"
+  "started_at": "2026-01-24T10:24:01.35771Z"
 }

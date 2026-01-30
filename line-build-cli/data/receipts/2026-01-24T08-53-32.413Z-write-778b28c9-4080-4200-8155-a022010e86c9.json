@@ -1,0 +1,15 @@
+{
+  "id": "778b28c9-4080-4200-8155-a022010e86c9",
+  "command": "write",
+  "timestamp": "2026-01-24T08:53:32.413Z",
+  "inputs": {
+    "buildId": "french-fries-bellies-8010062"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/french-fries-bellies-8010062.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/french-fries-bellies-8010062.json"
+  ]
+}

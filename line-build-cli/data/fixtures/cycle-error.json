@@ -1,0 +1,58 @@
+{
+  "id": "fixture-cycle-error",
+  "itemId": "ITEM_CYCLE_ERROR",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "c1",
+      "orderIndex": 1,
+      "stationId": "garnish",
+      "action": { "family": "OTHER" },
+      "dependsOn": ["c3"],
+      "instruction": "Cycle node 1.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        { "source": { "type": "in_build", "assemblyId": "a3" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "assemblyId": "a1" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ]
+    },
+    {
+      "id": "c2",
+      "orderIndex": 2,
+      "stationId": "garnish",
+      "action": { "family": "OTHER" },
+      "dependsOn": ["c1"],
+      "instruction": "Cycle node 2.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        { "source": { "type": "in_build", "assemblyId": "a1" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "assemblyId": "a2" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ]
+    },
+    {
+      "id": "c3",
+      "orderIndex": 3,
+      "stationId": "garnish",
+      "action": { "family": "OTHER" },
+      "dependsOn": ["c2"],
+      "instruction": "Cycle node 3.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        { "source": { "type": "in_build", "assemblyId": "a2" }, "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ],
+      "output": [
+        { "source": { "type": "in_build", "assemblyId": "a3" }, "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } } }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

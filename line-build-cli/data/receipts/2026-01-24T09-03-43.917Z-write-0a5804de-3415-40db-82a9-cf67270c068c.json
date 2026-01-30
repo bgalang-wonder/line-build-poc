@@ -1,0 +1,15 @@
+{
+  "id": "0a5804de-3415-40db-82a9-cf67270c068c",
+  "command": "write",
+  "timestamp": "2026-01-24T09:03:43.917Z",
+  "inputs": {
+    "buildId": "mushroom-bruschetta-walnut-lane-8006357"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/mushroom-bruschetta-walnut-lane-8006357.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/mushroom-bruschetta-walnut-lane-8006357.json"
+  ]
+}

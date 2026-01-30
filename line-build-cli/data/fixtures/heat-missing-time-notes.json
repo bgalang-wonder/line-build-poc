@@ -1,0 +1,72 @@
+{
+  "id": "fixture-heat-missing-time-notes",
+  "itemId": "ITEM_HEAT_NO_TIME",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "s1",
+      "orderIndex": 1,
+      "stationId": "prep",
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open soup pouch.",
+      "from": { "stationId": "prep", "sublocation": { "type": "cold_storage" } },
+      "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "soup_pouch" },
+          "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "orderIndex": 2,
+      "stationId": "waterbath",
+      "action": { "family": "HEAT" },
+      "dependsOn": ["s1"],
+      "equipment": { "applianceId": "waterbath" },
+      "instruction": "Heat soup in waterbath (missing time and notes to trigger H22).",
+      "from": { "stationId": "waterbath", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "waterbath", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "soup_pouch" },
+          "from": { "stationId": "waterbath", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "soup_hot" },
+          "to": { "stationId": "waterbath", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "orderIndex": 3,
+      "stationId": "expo",
+      "action": { "family": "PACKAGING" },
+      "dependsOn": ["s2"],
+      "container": { "type": "bowl" },
+      "instruction": "Pour into bowl and serve.",
+      "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "soup_hot" },
+          "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "soup_served" },
+          "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

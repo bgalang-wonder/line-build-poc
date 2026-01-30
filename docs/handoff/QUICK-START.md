@@ -37,7 +37,7 @@ Step {
   equipment?: StepEquipment   // If HEAT
   time?: StepTime             // If HEAT
   cookingPhase?: Phase        // Recommended
-  container?: StepContainer   // If VEND
+  container?: StepContainer   // If PACKAGING
   conditions?: StepCondition  // Extension: equipment filtering
   overlays?: StepOverlay[]    // Extension: conditional overrides
   dependsOn?: StepId[]        // Extension: DAG dependencies

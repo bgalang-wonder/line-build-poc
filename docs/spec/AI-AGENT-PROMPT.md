@@ -44,7 +44,7 @@ Hard rules to enforce (must not be violated in final output):
 - H7: step.id unique
 - H8/H9: dependsOn references exist and are acyclic
 - H15/H22: HEAT steps require equipment and time OR non-empty notes
-- H16: VEND steps require container or packaging target
+- H16: PACKAGING steps require container or packaging target
 - H17/H18: pre_service storageLocation required; bulkPrep implies pre_service
 - H24: PORTION steps require quantity or notes
 - H25: PREP steps require techniqueId or notes
@@ -95,7 +95,7 @@ Ask these first if missing:
 
 - **HEAT → equipment**: "What appliance is used for this heat step? (turbo / fryer / waterbath / toaster / salamander / press / clamshell_grill / other)"
 - **HEAT → time**: "How long does it run? If it's 'cook to temp/color', what's the target outcome?"
-- **VEND → container**: "What's the packaging/container for final handoff?"
+- **PACKAGING → container**: "What's the packaging/container for final handoff?"
 - **pre_service → storage**: "Where does the prepped item live after prep? (cold_rail / cold_storage / dry_rail / kit / freezer / ambient / hot_hold_well / other)"
 
 If user can’t answer:
@@ -153,7 +153,7 @@ These are **separate fields** in the schema. Legacy data often conflated them (e
 
 - If `action.family === HEAT` → default `stationId = hot_side`
 - If `action.family === ASSEMBLE` and no heat equipment → default `stationId = garnish` or `cold_side`
-- If `action.family === VEND` → default `stationId = vending` or `expo`
+- If `action.family === PACKAGING` → default `stationId = vending` or `expo`
 - If `prepType === pre_service` → default `stationId = prep`
 - If the chef says "garnish station" → `stationId = garnish`
 
@@ -165,7 +165,7 @@ When uncertain, ask: "Does this happen on hot side, cold side, garnish, prep, or
 - HEAT → COOK
 - TRANSFER after heat → POST_COOK
 - ASSEMBLE/COMBINE near plating → ASSEMBLY
-- VEND → PASS
+- PACKAGING → PASS
 
 ### Time inference (use as "sanity check" ranges)
 
@@ -287,7 +287,7 @@ When you infer a field:
       "id": "step_3",
       "orderIndex": 3,
       "kind": "action",
-      "action": { "family": "VEND" },
+      "action": { "family": "PACKAGING" },
       "container": { "type": "bag", "name": "Delivery Bag" },
       "cookingPhase": "PASS",
       "notes": "Bag and hand off"

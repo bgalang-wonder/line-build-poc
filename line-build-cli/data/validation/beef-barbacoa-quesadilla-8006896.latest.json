@@ -1,0 +1,169 @@
+{
+  "buildId": "beef-barbacoa-quesadilla-8006896",
+  "itemId": "8006896",
+  "timestamp": "2026-01-28T17:39:57.528Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "default-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "default-2",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "default-3",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "default-5",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "choose_your_salsa-1",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "default-7",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "default-9",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "default-10",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "default-11",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "default-15",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "default-16",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "default-17",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H29",
+      "message": "H29: merge step has 2 inputs but 2 are missing role (base/added)",
+      "stepId": "default-18",
+      "fieldPath": "input[].role"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H30",
+      "message": "H30: 1:1 transformation output 'press_prepared' should have lineage.evolvesFrom='vegalene'",
+      "stepId": "default-4",
+      "fieldPath": "assemblies[].lineage.evolvesFrom"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H30",
+      "message": "H30: 1:1 transformation output 'brisket_cooked' should have lineage.evolvesFrom='brisket_raw'",
+      "stepId": "default-6",
+      "fieldPath": "assemblies[].lineage.evolvesFrom"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H30",
+      "message": "H30: 1:1 transformation output 'brisket_opened' should have lineage.evolvesFrom='brisket_cooked'",
+      "stepId": "default-8",
+      "fieldPath": "assemblies[].lineage.evolvesFrom"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H30",
+      "message": "H30: 1:1 transformation output 'quesadilla_folded' should have lineage.evolvesFrom='quesadilla_v3'",
+      "stepId": "default-12",
+      "fieldPath": "assemblies[].lineage.evolvesFrom"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H30",
+      "message": "H30: 1:1 transformation output 'quesadilla_pressed' should have lineage.evolvesFrom='quesadilla_folded'",
+      "stepId": "default-13",
+      "fieldPath": "assemblies[].lineage.evolvesFrom"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "H30",
+      "message": "H30: 1:1 transformation output 'quesadilla_cut' should have lineage.evolvesFrom='quesadilla_pressed'",
+      "stepId": "default-14",
+      "fieldPath": "assemblies[].lineage.evolvesFrom"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "S16a",
+      "message": "S16a: grouping bouncing detected for 'hot_side' in track 'default'. The build leaves this kitchen area and returns to it later, which is inefficient.",
+      "stepId": "default-4",
+      "fieldPath": "groupingId"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "S16a",
+      "message": "S16a: grouping bouncing detected for 'cold_side' in track 'default'. The build leaves this kitchen area and returns to it later, which is inefficient.",
+      "stepId": "default-5",
+      "fieldPath": "groupingId"
+    },
+    {
+      "severity": "strong",
+      "ruleId": "S6",
+      "message": "Primary output assembly should be set when using assemblies (primaryOutputAssemblyId missing)",
+      "fieldPath": "primaryOutputAssemblyId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "H26",
+      "message": "H26: graph appears under-specified (only 73% of steps have dependsOn). Confirm which steps truly can start immediately.",
+      "fieldPath": "steps[].dependsOn"
+    }
+  ]
+}

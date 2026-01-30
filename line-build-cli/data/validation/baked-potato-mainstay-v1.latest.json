@@ -1,0 +1,57 @@
+{
+  "buildId": "baked-potato-mainstay-v1",
+  "itemId": "8008281",
+  "timestamp": "2026-01-29T17:14:23.872Z",
+  "valid": true,
+  "hardErrors": [],
+  "warnings": [
+    {
+      "severity": "strong",
+      "ruleId": "S6",
+      "message": "Primary output assembly should be set when using assemblies (primaryOutputAssemblyId missing)",
+      "fieldPath": "primaryOutputAssemblyId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S16b",
+      "message": "S16b: station bouncing detected for station 'expo' in track 'default'. The build leaves this station and returns to it later within the same grouping.",
+      "stepId": "step-13",
+      "fieldPath": "stationId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S22",
+      "message": "S22: input assembly 'container_7in_bg' has no producing step. Ensure this is intentional.",
+      "stepId": "step-3",
+      "fieldPath": "input[0].source"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S22",
+      "message": "S22: input assembly 'lid_7in' has no producing step. Ensure this is intentional.",
+      "stepId": "step-10",
+      "fieldPath": "input[1].source"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S23",
+      "message": "S23: step at 'garnish' inputs from 'waterbath'. This hides a transfer inside the step. Fix: set input.from.stationId='garnish' to trigger derived transfer.",
+      "stepId": "step-4",
+      "fieldPath": "input[0].from.stationId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S23",
+      "message": "S23: step at 'expo' inputs from 'garnish'. This hides a transfer inside the step. Fix: set input.from.stationId='expo' to trigger derived transfer.",
+      "stepId": "step-11",
+      "fieldPath": "input[0].from.stationId"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S23",
+      "message": "S23: step at 'expo' inputs from 'vending'. This hides a transfer inside the step. Fix: set input.from.stationId='expo' to trigger derived transfer.",
+      "stepId": "step-13",
+      "fieldPath": "input[0].from.stationId"
+    }
+  ]
+}

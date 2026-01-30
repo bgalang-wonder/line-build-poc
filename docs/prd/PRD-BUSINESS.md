@@ -89,7 +89,7 @@ Every step falls into one of these categories:
 | **ASSEMBLE** | Build the final product | Stack, wrap, layer |
 | **PORTION** | Measure quantity | Scoop 2oz, weigh 150g |
 | **CHECK** | Quality verification | Temp check, visual QA |
-| **VEND** | Package and hand off | Bag, label, pass to runner |
+| **PACKAGING** | Package and hand off | Bag, label, pass to runner |
 | **OTHER** | Doesn't fit above | Special instructions |
 
 **Goal:** Less than 10% of steps should need "OTHER"
@@ -267,7 +267,7 @@ This document explains the "what" and "why." For technical implementation detail
 `│ Target: Chicken Breast │`\
 `│ Notes: "Place chicken, add pickles, top bun" │`\
 `│ │`\
-`│ Step 8: VEND │`\
+`│ Step 8: PACKAGING │`\
 `│ Container: Foil Wrapper + Delivery Bag │`\
 `│ Notes: "Wrap, bag, pass to runner" │`\
 `│ │`\
@@ -291,7 +291,7 @@ This document explains the "what" and "why." For technical implementation detail
 | **Target** | The ingredient or item being worked on | Most steps — strongly recommended |
 | **Equipment** | The appliance used | HEAT steps — required |
 | **Time** | How long the step takes | When timing matters |
-| **Container** | The vessel or packaging | TRANSFER and VEND steps |
+| **Container** | The vessel or packaging | TRANSFER and PACKAGING steps |
 | **Phase** | When in cooking process | HEAT steps — recommended |
 | **Exclude** | "Do NOT include this" | "No onions" type instructions |
 | **Notes** | Free text for anything else | Always allowed |

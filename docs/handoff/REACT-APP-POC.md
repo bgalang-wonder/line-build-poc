@@ -40,13 +40,13 @@ This POC validates the core hypothesis: **structured line build data can be auth
 │  Quick Add:    │        ▼        │               │   ┌──────────────────┐   │
 │  [+HEAT]       │   ┌─────────┐   │               │   │ 01 PREP          │   │
 │  [+ASSEMBLE]   │   │  HEAT   │   │               │   │ Chicken Cutlet   │   │
-│  [+VEND]       │   │ Chicken │───┤               │   ├──────────────────┤   │
+│  [+PACKAGING]  │   │ Chicken │───┤               │   ├──────────────────┤   │
 │  [+PREP]       │   │ 240s 🔥 │   │               │   │ Asset: [BOM ▼]   │   │
 │                │   └─────────┘   │               │   │ Action: [PREP ▼] │   │
 │  ┌──────────┐  │        │        │               │   │ Dependencies:    │   │
 │  │ Type...  │  │        ▼        ▼               │   │ [ST1] [ST2]      │   │
 │  └──────────┘  │   ┌─────────┐  ┌─────────┐      │   │ Tags: [+ Add]    │   │
-│                │   │ASSEMBLE │  │  VEND   │      │   └──────────────────┘   │
+│                │   │ASSEMBLE │  │ PACKAGING │      │   └──────────────────┘   │
 │                │   │ Arugula │─▶│ Dome Lid│      │                          │
 │                │   └─────────┘  └─────────┘      │   [+ Add Step]           │
 │                │                                 │                          │
@@ -152,7 +152,7 @@ type ActionFamily =
   | "ASSEMBLE"  // Building the dish
   | "PORTION"   // Dividing into servings
   | "CHECK"     // Quality checks
-  | "VEND"      // Final packaging/serving
+  | "PACKAGING" // Final packaging/serving
   | "OTHER";    // Escape hatch
 
 // Visual styling per action
@@ -164,7 +164,7 @@ const ACTION_COLORS = {
   ASSEMBLE: 'bg-green-100 border-green-300 text-green-800',
   PORTION: 'bg-teal-100 border-teal-300 text-teal-800',
   CHECK: 'bg-gray-100 border-gray-300 text-gray-800',
-  VEND: 'bg-blue-200 border-blue-400 text-blue-900',
+  PACKAGING: 'bg-blue-200 border-blue-400 text-blue-900',
   OTHER: 'bg-white border-gray-200 text-gray-700'
 };
 ```
@@ -274,7 +274,7 @@ function computeBOMCoverage(build, bom) {
 | **H1** | Action family required | `!!step.action?.family` |
 | **H3** | Time fields consistency | `!step.time \|\| (step.time.durationSeconds > 0 && typeof step.time.isActive === 'boolean')` |
 | **H15** | HEAT requires equipment | `step.action?.family !== "HEAT" \|\| !!step.equipment?.applianceId` |
-| **H16** | VEND requires container | `step.action?.family !== "VEND" \|\| (!!step.container \|\| step.target?.type === 'packaging')` |
+| **H16** | PACKAGING requires container | `step.action?.family !== "PACKAGING" \|\| (!!step.container \|\| step.target?.type === 'packaging')` |
 
 ### Build Validators (Implemented)
 
@@ -526,7 +526,7 @@ const initialSteps = [
   { 
     id: "step-4", 
     orderIndex: 4, 
-    action: { family: "VEND" }, 
+    action: { family: "PACKAGING" }, 
     container: { type: "lid", name: "Dome Lid" }, 
     cookingPhase: "PASS", 
     dependsOn: ["step-3"], 

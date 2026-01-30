@@ -1,0 +1,117 @@
+{
+  "id": "fixture-parallel-join",
+  "itemId": "ITEM_PARALLEL_JOIN",
+  "version": 1,
+  "status": "draft",
+  "steps": [
+    {
+      "id": "p1",
+      "orderIndex": 1,
+      "stationId": "prep",
+      "action": { "family": "PREP", "techniqueId": "dice" },
+      "instruction": "Dice component A.",
+      "from": { "stationId": "prep", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "a_componentA" },
+          "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "orderIndex": 2,
+      "stationId": "prep",
+      "action": { "family": "PREP", "techniqueId": "wash" },
+      "instruction": "Wash component B.",
+      "from": { "stationId": "prep", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "a_componentB" },
+          "to": { "stationId": "prep", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "orderIndex": 3,
+      "stationId": "garnish",
+      "action": { "family": "COMBINE" },
+      "dependsOn": ["p1", "p2"],
+      "instruction": "Combine components A and B.",
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "a_componentA" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+          "role": "base"
+        },
+        {
+          "source": { "type": "in_build", "assemblyId": "a_componentB" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+          "role": "added"
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "a_joined" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+    },
+    {
+      "id": "p4",
+      "orderIndex": 4,
+      "stationId": "turbo",
+      "action": { "family": "HEAT" },
+      "dependsOn": ["p3"],
+      "equipment": { "applianceId": "turbo", "presetId": "program_2" },
+      "time": { "durationSeconds": 120, "isActive": false },
+      "instruction": "Heat joined mixture until hot.",
+      "from": { "stationId": "turbo", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "turbo", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "a_joined" },
+          "from": { "stationId": "turbo", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "a_final" },
+          "to": { "stationId": "turbo", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "orderIndex": 5,
+      "stationId": "expo",
+      "action": { "family": "PACKAGING" },
+      "dependsOn": ["p4"],
+      "container": { "type": "clamshell", "name": "Standard clamshell" },
+      "instruction": "Package and hand off.",
+      "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "a_final" },
+          "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "a_final" },
+          "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

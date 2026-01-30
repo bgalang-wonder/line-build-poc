@@ -1,0 +1,15 @@
+{
+  "id": "099e741d-1e75-44b1-a838-4300cb35c5ba",
+  "command": "write",
+  "timestamp": "2026-01-24T09:02:54.127Z",
+  "inputs": {
+    "buildId": "bbq-chicken-pizza-detroit-8008707"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/bbq-chicken-pizza-detroit-8008707.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/bbq-chicken-pizza-detroit-8008707.json"
+  ]
+}

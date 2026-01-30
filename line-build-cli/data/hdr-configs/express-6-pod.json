@@ -1,0 +1,58 @@
+{
+  "hdrId": "express-6-pod",
+  "name": "Express 6-Pod Layout",
+  "pods": [
+    {
+      "podId": "Cold_Pod_1",
+      "podType": "COLD",
+      "equipment": ["PRESS", "PRESS", "TOASTER"]
+    },
+    {
+      "podId": "Hot_Pod_1",
+      "podType": "HOT",
+      "equipment": ["TURBO_OVEN", "TURBO_OVEN", "WATER_BATH"]
+    },
+    {
+      "podId": "Hot_Pod_2",
+      "podType": "HOT",
+      "equipment": ["FRYER", "MICROWAVE"]
+    },
+    {
+      "podId": "Hybrid_Pod_1",
+      "podType": "HYBRID",
+      "equipment": ["WATER_BATH", "PRESS", "TURBO_OVEN"]
+    },
+    {
+      "podId": "Expo_Pod",
+      "podType": "EXPO",
+      "equipment": []
+    },
+    {
+      "podId": "Vending_Pod",
+      "podType": "VENDING",
+      "equipment": ["VENDING"]
+    }
+  ],
+  "stationPodDefaults": {
+    "fryer": "HOT",
+    "waterbath": "HOT",
+    "turbo": "HOT",
+    "microwave": "HOT",
+    "clamshell_grill": "CLAMSHELL",
+    "press": "COLD",
+    "toaster": "COLD",
+    "garnish": "COLD",
+    "pizza": "PIZZA",
+    "expo": "EXPO",
+    "prep": "COLD",
+    "vending": "VENDING",
+    "speed_line": "COLD"
+  },
+  "stationLocations": {
+    "garnish": "Cold_Pod_1",
+    "speed_line": "Cold_Pod_1",
+    "prep": "Cold_Pod_1",
+    "expo": "Expo_Pod",
+    "vending": "Vending_Pod"
+  }
+}

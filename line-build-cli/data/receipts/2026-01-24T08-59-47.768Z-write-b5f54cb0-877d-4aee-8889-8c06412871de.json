@@ -1,0 +1,15 @@
+{
+  "id": "b5f54cb0-877d-4aee-8889-8c06412871de",
+  "command": "write",
+  "timestamp": "2026-01-24T08:59:47.768Z",
+  "inputs": {
+    "buildId": "chips-corn-salsa-limesalt-8005118"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/chips-corn-salsa-limesalt-8005118.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/chips-corn-salsa-limesalt-8005118.json"
+  ]
+}

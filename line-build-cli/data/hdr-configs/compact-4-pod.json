@@ -1,0 +1,48 @@
+{
+  "hdrId": "compact-4-pod",
+  "name": "Compact 4-Pod Layout",
+  "pods": [
+    {
+      "podId": "Main_Pod_1",
+      "podType": "HYBRID",
+      "equipment": ["TURBO_OVEN", "WATER_BATH", "PRESS", "TOASTER"]
+    },
+    {
+      "podId": "Main_Pod_2",
+      "podType": "HYBRID",
+      "equipment": ["FRYER", "MICROWAVE", "PRESS"]
+    },
+    {
+      "podId": "Expo_Pod",
+      "podType": "EXPO",
+      "equipment": []
+    },
+    {
+      "podId": "Vending_Pod",
+      "podType": "VENDING",
+      "equipment": ["VENDING"]
+    }
+  ],
+  "stationPodDefaults": {
+    "fryer": "HYBRID",
+    "waterbath": "HYBRID",
+    "turbo": "HYBRID",
+    "microwave": "HYBRID",
+    "clamshell_grill": "HYBRID",
+    "press": "HYBRID",
+    "toaster": "HYBRID",
+    "garnish": "HYBRID",
+    "pizza": "HYBRID",
+    "expo": "EXPO",
+    "prep": "HYBRID",
+    "vending": "VENDING",
+    "speed_line": "HYBRID"
+  },
+  "stationLocations": {
+    "garnish": "Main_Pod_1",
+    "speed_line": "Main_Pod_1",
+    "prep": "Main_Pod_2",
+    "expo": "Expo_Pod",
+    "vending": "Vending_Pod"
+  }
+}

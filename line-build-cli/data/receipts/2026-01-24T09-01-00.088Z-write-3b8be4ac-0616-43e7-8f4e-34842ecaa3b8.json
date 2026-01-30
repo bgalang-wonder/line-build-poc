@@ -1,0 +1,15 @@
+{
+  "id": "3b8be4ac-0616-43e7-8f4e-34842ecaa3b8",
+  "command": "write",
+  "timestamp": "2026-01-24T09:01:00.088Z",
+  "inputs": {
+    "buildId": "taco-beef-barbacoa-barrio-8006860"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/taco-beef-barbacoa-barrio-8006860.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/taco-beef-barbacoa-barrio-8006860.json"
+  ]
+}

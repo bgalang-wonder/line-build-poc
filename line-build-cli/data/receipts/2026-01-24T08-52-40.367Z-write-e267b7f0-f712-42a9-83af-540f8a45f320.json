@@ -1,0 +1,15 @@
+{
+  "id": "e267b7f0-f712-42a9-83af-540f8a45f320",
+  "command": "write",
+  "timestamp": "2026-01-24T08:52:40.367Z",
+  "inputs": {
+    "buildId": "popcorn-shrimp-bankside-8009685"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/popcorn-shrimp-bankside-8009685.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/popcorn-shrimp-bankside-8009685.json"
+  ]
+}

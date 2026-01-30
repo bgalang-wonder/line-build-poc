@@ -1,0 +1,87 @@
+{
+  "id": "fixture-external-consume",
+  "itemId": "ITEM_EXTERNAL_CONSUME",
+  "version": 1,
+  "status": "draft",
+  "requiresBuilds": [
+    {
+      "itemId": "ITEM_COMPONENT_SAUCE",
+      "version": "latest_published",
+      "role": "prepared_component",
+      "notes": "Prepared component sauce"
+    }
+  ],
+  "steps": [
+    {
+      "id": "e1",
+      "orderIndex": 1,
+      "stationId": "garnish",
+      "action": { "family": "PREP", "techniqueId": "open_pack" },
+      "instruction": "Open prepared sauce component package.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "sauce_component_opened" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "orderIndex": 2,
+      "stationId": "garnish",
+      "action": { "family": "COMBINE" },
+      "dependsOn": ["e1"],
+      "instruction": "Add prepared sauce component to the assembly.",
+      "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } },
+      "input": [
+        {
+          "source": {
+            "type": "external_build",
+            "itemId": "ITEM_COMPONENT_SAUCE",
+            "version": "latest_published"
+          },
+          "from": { "stationId": "garnish", "sublocation": { "type": "cold_rail" } }
+        },
+        {
+          "source": { "type": "in_build", "assemblyId": "sauce_component_opened" },
+          "from": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "assembly_with_sauce" },
+          "to": { "stationId": "garnish", "sublocation": { "type": "work_surface" } }
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "orderIndex": 3,
+      "stationId": "expo",
+      "action": { "family": "PACKAGING" },
+      "dependsOn": ["e2"],
+      "container": { "type": "clamshell", "name": "Standard clamshell" },
+      "instruction": "Package and hand off.",
+      "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } },
+      "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } },
+      "input": [
+        {
+          "source": { "type": "in_build", "assemblyId": "assembly_with_sauce" },
+          "from": { "stationId": "expo", "sublocation": { "type": "work_surface" } }
+        }
+      ],
+      "output": [
+        {
+          "source": { "type": "in_build", "assemblyId": "assembly_packaged" },
+          "to": { "stationId": "expo", "sublocation": { "type": "window_shelf" } }
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-01-10T00:00:00.000Z",
+  "updatedAt": "2026-01-10T00:00:00.000Z"
+}

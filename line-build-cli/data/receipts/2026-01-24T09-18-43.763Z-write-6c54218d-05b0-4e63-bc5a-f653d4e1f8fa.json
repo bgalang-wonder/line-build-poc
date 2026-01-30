@@ -1,0 +1,15 @@
+{
+  "id": "6c54218d-05b0-4e63-bc5a-f653d4e1f8fa",
+  "command": "write",
+  "timestamp": "2026-01-24T09:18:43.763Z",
+  "inputs": {
+    "buildId": "byo-spicy-poke-bowl-hanu-poke-8010500"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/byo-spicy-poke-bowl-hanu-poke-8010500.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/byo-spicy-poke-bowl-hanu-poke-8010500.json"
+  ]
+}

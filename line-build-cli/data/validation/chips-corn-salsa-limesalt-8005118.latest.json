@@ -1,0 +1,37 @@
+{
+  "buildId": "chips-corn-salsa-limesalt-8005118",
+  "itemId": "8005118",
+  "timestamp": "2026-01-28T17:39:57.513Z",
+  "valid": false,
+  "hardErrors": [
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "salsa-1",
+      "fieldPath": "action.techniqueId"
+    },
+    {
+      "severity": "hard",
+      "ruleId": "H33",
+      "message": "H33: techniqueId 'get' is not in the controlled vocabulary",
+      "stepId": "chips-1",
+      "fieldPath": "action.techniqueId"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "soft",
+      "ruleId": "H26",
+      "message": "H26: graph appears under-specified (only 71% of steps have dependsOn). Confirm which steps truly can start immediately.",
+      "fieldPath": "steps[].dependsOn"
+    },
+    {
+      "severity": "soft",
+      "ruleId": "S45",
+      "message": "S45: instruction mentions ingredient source but output[].from is missing. Add output[].from to enable tributary edges in viewer.",
+      "stepId": "salsa-2",
+      "fieldPath": "output[].from"
+    }
+  ]
+}

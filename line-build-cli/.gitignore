@@ -1,0 +1,25 @@
+node_modules/
+.vite/
+dist/
+coverage/
+*.log
+.DS_Store
+
+# Viewer control state (local only)
+data/viewer/selection.json
+
+# Beads (bd) local state (do not commit)
+.beads/*.db
+.beads/*.db-*
+.beads/.local_version
+.beads/daemon.lock
+.beads/daemon.pid
+.beads/last-touched
+.beads/sync-state.json
+.beads/beads.left.jsonl
+.beads/beads.left.meta.json
+.beads/beads.base.jsonl
+.beads/beads.base.meta.json
+
+# Active HDR selection (local only)
+data/hdr-configs/.active

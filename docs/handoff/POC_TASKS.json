@@ -192,7 +192,7 @@
           "ASSEMBLE",
           "PORTION",
           "CHECK",
-          "VEND",
+          "PACKAGING",
           "OTHER"
         ],
         "notes": "StepKind is not part of the PoC contract (removed). Semantic classification is via action.family."

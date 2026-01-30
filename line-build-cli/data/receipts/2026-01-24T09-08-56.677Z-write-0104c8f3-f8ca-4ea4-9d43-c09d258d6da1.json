@@ -1,0 +1,15 @@
+{
+  "id": "0104c8f3-f8ca-4ea4-9d43-c09d258d6da1",
+  "command": "write",
+  "timestamp": "2026-01-24T09:08:56.677Z",
+  "inputs": {
+    "buildId": "seared-pork-chops-mainstay-8007151"
+  },
+  "outputs": {
+    "path": "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/seared-pork-chops-mainstay-8007151.json",
+    "valid": true
+  },
+  "touchedFiles": [
+    "/Users/brandongalang/Documents/01_Projects/line-build-redesign/poc/line-build-cli/data/line-builds/seared-pork-chops-mainstay-8007151.json"
+  ]
+}
